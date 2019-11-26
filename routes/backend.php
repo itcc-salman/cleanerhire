@@ -13,6 +13,7 @@
 
 Route::get('/', 'HomeController@index')->name('backend.dashboard');
 Route::get('cleaners', 'CleanerController@index')->name('backend.cleaners');
+Route::get('cleaner/add', 'CleanerController@add')->name('backend.cleaner.add');
 
 
 Route::prefix('ajax')->group(function () {

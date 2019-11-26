@@ -35,9 +35,14 @@
     <link rel="shortcut icon" href="{{ asset('assets/media/logos/favicon.ico') }}" />
 
 </head>
-<body class="kt-quick-panel--right kt-demo-panel--right kt-offcanvas-panel--right kt-header--fixed kt-header-mobile--fixed kt-subheader--enabled kt-subheader--transparent kt-aside--enabled kt-aside--fixed kt-page--loading">
+<body class="kt-page--loading-enabled kt-quick-panel--right kt-demo-panel--right kt-offcanvas-panel--right kt-header--fixed kt-header-mobile--fixed kt-subheader--enabled kt-subheader--transparent kt-aside--enabled kt-aside--fixed kt-page--loading">
+    <!-- begin::Page loader -->
+    <div class="kt-page-loader kt-page-loader--logo">
+        <img alt="Logo" src="{{ asset('assets/media/logos/logo-light.png') }}">
+        <div class="kt-spinner kt-spinner--danger"></div>
+    </div>
+    <!-- end::Page Loader -->
     <!-- begin:: Page -->
-
         <!-- begin:: Header Mobile -->
         <div id="kt_header_mobile" class="kt-header-mobile  kt-header-mobile--fixed ">
             <div class="kt-header-mobile__logo">

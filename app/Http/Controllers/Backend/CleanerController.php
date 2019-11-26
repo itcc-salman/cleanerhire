@@ -26,13 +26,18 @@ class CleanerController extends Controller
         return view('backend.cleaners.index');
     }
 
+    public function add(Request $request)
+    {
+        return view('backend.blank');
+    }
+
     public function getAllCleaners(Request $request)
     {
         $data = array();
         $cleaners = Cleaner::all();
 
         $data['code'] = 200;
-        $data['cleaners'] = $cleaners;
+        $data['data'] = $cleaners;
         return response()->json($data);
     }
 

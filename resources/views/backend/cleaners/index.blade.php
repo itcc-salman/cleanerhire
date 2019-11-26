@@ -21,7 +21,7 @@
                     </a>
                     &nbsp;
                     <div class="dropdown dropdown-inline">
-                        <a href="#" class="btn btn-brand btn-icon-sm">
+                        <a href="{{ route('backend.cleaner.add') }}" class="btn btn-brand btn-icon-sm">
                             <i class="flaticon2-plus"></i> Add New
                         </a>
                     </div>
@@ -156,7 +156,7 @@ var KTDatatableRemoteAjaxDemo = function() {
             // columns definition
             columns: [
                 {
-                    field: 'RecordID',
+                    field: 'id',
                     title: '#',
                     sortable: 'asc',
                     width: 30,
@@ -164,24 +164,13 @@ var KTDatatableRemoteAjaxDemo = function() {
                     selector: false,
                     textAlign: 'center',
                 }, {
-                    field: 'OrderID',
-                    title: 'Order ID',
+                    field: 'first_name',
+                    title: 'First Name',
                 }, {
-                    field: 'Country',
-                    title: 'Country',
-                    template: function(row) {
-                        return row.Country + ' ' + row.ShipCountry;
-                    },
+                    field: 'last_name',
+                    title: 'Last Name',
                 }, {
-                    field: 'ShipDate',
-                    title: 'Ship Date',
-                    type: 'date',
-                    format: 'MM/DD/YYYY',
-                }, {
-                    field: 'CompanyName',
-                    title: 'Company Name',
-                }, {
-                    field: 'Status',
+                    field: 'status',
                     title: 'Status',
                     // callback function support for column rendering
                     template: function(row) {
@@ -194,21 +183,7 @@ var KTDatatableRemoteAjaxDemo = function() {
                             6: {'title': 'Danger', 'class': ' kt-badge--danger'},
                             7: {'title': 'Warning', 'class': ' kt-badge--warning'},
                         };
-                        return '<span class="kt-badge ' + status[row.Status].class + ' kt-badge--inline kt-badge--pill">' + status[row.Status].title + '</span>';
-                    },
-                }, {
-                    field: 'Type',
-                    title: 'Type',
-                    autoHide: false,
-                    // callback function support for column rendering
-                    template: function(row) {
-                        var status = {
-                            1: {'title': 'Online', 'state': 'danger'},
-                            2: {'title': 'Retail', 'state': 'primary'},
-                            3: {'title': 'Direct', 'state': 'success'},
-                        };
-                        return '<span class="kt-badge kt-badge--' + status[row.Type].state + ' kt-badge--dot"></span>&nbsp;<span class="kt-font-bold kt-font-' + status[row.Type].state + '">' +
-                                status[row.Type].title + '</span>';
+                        return '<span class="kt-badge ' + status[row.status].class + ' kt-badge--inline kt-badge--pill">' + status[row.status].title + '</span>';
                     },
                 }, {
                     field: 'Actions',
@@ -219,18 +194,8 @@ var KTDatatableRemoteAjaxDemo = function() {
                     autoHide: false,
                     template: function() {
                         return '\
-                        <div class="dropdown">\
-                            <a href="javascript:;" class="btn btn-sm btn-clean btn-icon btn-icon-sm" data-toggle="dropdown">\
-                                <i class="flaticon2-gear"></i>\
-                            </a>\
-                            <div class="dropdown-menu dropdown-menu-right">\
-                                <a class="dropdown-item" href="#"><i class="la la-edit"></i> Edit Details</a>\
-                                <a class="dropdown-item" href="#"><i class="la la-leaf"></i> Update Status</a>\
-                                <a class="dropdown-item" href="#"><i class="la la-print"></i> Generate Report</a>\
-                            </div>\
-                        </div>\
                         <a href="javascript:;" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="Edit details">\
-                            <i class="flaticon2-paper"></i>\
+                            <i class="flaticon2-edit"></i>\
                         </a>\
                         <a href="javascript:;" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="Delete">\
                             <i class="flaticon2-trash"></i>\
