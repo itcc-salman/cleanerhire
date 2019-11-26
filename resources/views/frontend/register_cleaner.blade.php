@@ -90,11 +90,13 @@
 
                                 <!--begin::Form-->
                                 <form class="kt-form" action="" novalidate="novalidate" id="kt_login_form">
-                                    <div class="form-group">
+                                    <div class="form-group validate is-invalid">
                                         <input class="form-control" type="text" placeholder="Username" name="username" autocomplete="off">
+                                        <div id="username-error" class="error invalid-feedback">This field is required.</div>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group validate is-invalid">
                                         <input class="form-control" type="password" placeholder="Password" name="password" autocomplete="off">
+                                        <div id="username-error" class="error invalid-feedback">This field is required.</div>
                                     </div>
 
                                     <!--begin::Action-->
@@ -122,7 +124,7 @@
                                 <!--end::Divider-->
 
                                 <!--begin::Options-->
-                                <div class="kt-login__options">
+                                {{-- <div class="kt-login__options">
                                     <a href="#" class="btn btn-primary kt-btn">
                                         <i class="fab fa-facebook-f"></i>
                                         Facebook
@@ -135,7 +137,7 @@
                                         <i class="fab fa-google"></i>
                                         Google
                                     </a>
-                                </div>
+                                </div> --}}
 
                                 <!--end::Options-->
                             </div>
