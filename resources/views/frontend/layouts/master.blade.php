@@ -34,11 +34,11 @@
                     <div class="modal-body">
                         <div class="hire_login_tab">
                             <label>Email</label>
-                            <input type="text" required="required">
+                            <input type="email" required autocomplete="username">
                         </div>
                         <div class="hire_login_tab">
                             <label>Password</label>
-                            <input type="password" required="required">
+                            <input type="password" required autocomplete="new-password">
                             <a href="#" class="forgot_pass">Forgot Password?</a>
                         </div>
                         <div class="hire_login_tab">
@@ -48,11 +48,9 @@
                             <h5><span class="line"></span> or login with <span class="line"></span></h5>
                         </div>
                         <div class="hire_login_socials">
-                            <a href="#" class="facebook"><img src="images/fb_icon.png" alt="" /><span>Facebook</span></a>
-                            <a href="#" class="google"><img src="images/google_icon.png" alt="" /><span>Google</span></a>
+                            <a href="#" class="facebook"><img src="{{ asset('front/images/fb_icon.png') }}" alt=""><span>Facebook</span></a>
+                            <a href="#" class="google"><img src="{{ asset('front/images/google_icon.png') }}" alt=""><span>Google</span></a>
                         </div>
-                    </div>
-                    <div class="modal-footer">
                         <div class="hire_login_footer">
                             <label>Don't have an account ?</label>
                             <a href="#" class="btn_sign_up">Sign up</a>
@@ -74,11 +72,11 @@
                     <div class="modal-body">
                         <div class="hire_login_tab">
                             <label>Email</label>
-                            <input type="text" required="required">
+                            <input type="email" required autocomplete="username">
                         </div>
                         <div class="hire_login_tab">
                             <label>Password</label>
-                            <input type="password" required="required">
+                            <input type="password" required autocomplete="new-password">
                             <a href="#" class="forgot_pass">Forgot Password?</a>
                         </div>
                         <div class="hire_login_tab">
@@ -88,11 +86,16 @@
                             <h5><span class="line"></span> or sign up with <span class="line"></span></h5>
                         </div>
                         <div class="hire_login_socials">
-                            <a href="#" class="facebook"><img src="images/fb_icon.png" alt="" /><span>Facebook</span></a>
-                            <a href="#" class="google"><img src="images/google_icon.png" alt="" /><span>Google</span></a>
+                            <a href="#" class="facebook"><img src="{{ asset('front/images/fb_icon.png') }}" alt=""><span>Facebook</span></a>
+                            <a href="#" class="google"><img src="{{ asset('front/images/google_icon.png') }}" alt=""><span>Google</span></a>
                         </div>
-                    </div>
-                    <div class="modal-footer">
+                        <div class="hire_login_checkbox">
+                            <input type="checkbox" >
+                            <span>Please don't send me tips or marketing via email or sms.</span>
+                        </div>
+                        <div class="hire_login_condition">
+                            <p>By signing up, I agree to CleanerHire <a href="#">Terms &amp; Conditions</a>, and <a href="#">Community Guidelines</a>. <a href="#">Privacy Policy</a>. </p>
+                        </div>
                         <div class="hire_login_footer">
                             <label>Already have an account ?</label>
                             <a href="#" class="btn_sign_up">Log in</a>
