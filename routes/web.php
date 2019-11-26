@@ -11,7 +11,13 @@
 |
 */
 
-Route::get('/', 'HomeController@index')->name('home');
-
 Auth::routes();
+Route::get('/', 'HomeController@index')->name('backend.dashboard');
+Route::get('cleaners', 'CleanerController@index')->name('backend.cleaners');
+
+
+Route::prefix('ajax')->group(function () {
+    Route::get('cleaners', 'CleanerController@getAllCleaners')->name('backend.ajax.cleaners');
+});
+
 

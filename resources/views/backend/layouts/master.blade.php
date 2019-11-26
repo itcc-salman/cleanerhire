@@ -15,24 +15,24 @@
     <!--end::Fonts -->
 
     <!--begin::Page Vendors Styles(used by this page) -->
-    <link href="assets/plugins/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/plugins/custom/fullcalendar/fullcalendar.bundle.css') }}" rel="stylesheet" type="text/css" />
 
     <!--end::Page Vendors Styles -->
 
     <!--begin::Global Theme Styles(used by all pages) -->
-    <link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
 
     <!--end::Global Theme Styles -->
 
     <!--begin::Layout Skins(used by all pages) -->
-    <link href="assets/css/skins/header/base/light.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/skins/header/menu/light.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/skins/brand/dark.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/skins/aside/dark.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/css/skins/header/base/light.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/css/skins/header/menu/light.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/css/skins/brand/dark.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/css/skins/aside/dark.css') }}" rel="stylesheet" type="text/css" />
 
     <!--end::Layout Skins -->
-    <link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
+    <link rel="shortcut icon" href="{{ asset('assets/media/logos/favicon.ico') }}" />
 
 </head>
 <body class="kt-quick-panel--right kt-demo-panel--right kt-offcanvas-panel--right kt-header--fixed kt-header-mobile--fixed kt-subheader--enabled kt-subheader--transparent kt-aside--enabled kt-aside--fixed kt-page--loading">
@@ -41,8 +41,8 @@
         <!-- begin:: Header Mobile -->
         <div id="kt_header_mobile" class="kt-header-mobile  kt-header-mobile--fixed ">
             <div class="kt-header-mobile__logo">
-                <a href="{{ route('home') }}">
-                    <img alt="Logo" src="assets/media/logos/logo-light.png" />
+                <a href="{{ route('backend.dashboard') }}">
+                    <img alt="Logo" src="{{ asset('assets/media/logos/logo-light.png') }}" />
                 </a>
             </div>
             <div class="kt-header-mobile__toolbar">
@@ -120,21 +120,22 @@
         <!-- end::Global Config -->
 
         <!--begin::Global Theme Bundle(used by all pages) -->
-        <script src="assets/plugins/global/plugins.bundle.js" type="text/javascript"></script>
-        <script src="assets/js/scripts.bundle.js" type="text/javascript"></script>
+        <script src="{{ asset('assets/plugins/global/plugins.bundle.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('assets/js/scripts.bundle.js') }}" type="text/javascript"></script>
 
         <!--end::Global Theme Bundle -->
 
         <!--begin::Page Vendors(used by this page) -->
-        <script src="assets/plugins/custom/fullcalendar/fullcalendar.bundle.js" type="text/javascript"></script>
-        <script src="//maps.google.com/maps/api/js?key=AIzaSyBTGnKT7dt597vo9QgeQ7BFhvSRP4eiMSM" type="text/javascript"></script>
-        <script src="assets/plugins/custom/gmaps/gmaps.js" type="text/javascript"></script>
+        <script src="{{ asset('assets/plugins/custom/fullcalendar/fullcalendar.bundle.js') }}" type="text/javascript"></script>
+        {{-- <script src="//maps.google.com/maps/api/js?key=AIzaSyBTGnKT7dt597vo9QgeQ7BFhvSRP4eiMSM" type="text/javascript"></script> --}}
+        {{-- <script src="{{ asset('assets/plugins/custom/gmaps/gmaps.js') }}" type="text/javascript"></script> --}}
 
         <!--end::Page Vendors -->
 
         <!--begin::Page Scripts(used by this page) -->
-        <script src="assets/js/pages/dashboard.js" type="text/javascript"></script>
+        <script src="{{ asset('assets/js/pages/dashboard.js') }}" type="text/javascript"></script>
 
+        @stack('scripts')
         <!--end::Page Scripts -->
     </body>
 
