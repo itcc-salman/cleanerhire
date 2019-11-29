@@ -84,7 +84,7 @@
                     <!--begin: Form Wizard Form-->
                     <form class="kt-form kt-padding-t-0" id="kt_form">
                         @csrf
-                        <input type="hidden" name="current_step" id="current_step" value="1">
+                        <input type="hidden" name="last_step" id="last_step" value="1">
 
                         <!--begin: Form Wizard Step 1-->
                         <div class="kt-wizard-v1__content" data-ktwizard-type="step-content" data-ktwizard-state="current">
@@ -146,8 +146,8 @@
                                     <div class="form-group">
                                         <label>Are you an individual or an agency?</label>
                                         <div class="kt-radio-inline">
-                                            <label class="kt-radio"><input type="radio" value="cleaner" name="user_type"> Individual <span></span></label>
-                                            <label class="kt-radio"><input type="radio" value="agency" name="user_type"> Agency <span></span></label>
+                                            <label class="kt-radio"><input type="radio" value="cleaner" name="role"> Individual <span></span></label>
+                                            <label class="kt-radio"><input type="radio" value="agency" name="role"> Agency <span></span></label>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -157,15 +157,15 @@
                                             <label class="kt-radio"><input type="radio" id="radio_tfn" value="tfn" name="tfn_or_abn"> TFN <span></span></label>
                                         </div>
                                         <div class="">
-                                            <input type="text" class="form-control tfn_number d-none" id="tfn_number" name="tfn_number" placeholder="TFN Number">
-                                            <input type="text" class="form-control abn_number d-none" id="abn_number" name="abn_number" placeholder="ABN Number">
+                                            <input type="text" class="form-control d-none" id="tfn" name="tfn" placeholder="TFN">
+                                            <input type="text" class="form-control d-none" id="abn" name="abn" placeholder="ABN">
                                         </div>
                                     </div>
                                     <div class="form-group d-none" id="super_account">
                                         <label>Do you have a Super Account ?</label>
                                         <div class="kt-radio-inline">
-                                            <label class="kt-radio"><input type="radio" id="radio_abn" value="yes" name="super_account" > Yes <span></span></label>
-                                            <label class="kt-radio"><input type="radio" id="radio_tfn" value="no" name="super_account"> No <span></span></label>
+                                            <label class="kt-radio"><input type="radio" value="yes" name="super_account" > Yes <span></span></label>
+                                            <label class="kt-radio"><input type="radio" value="no" name="super_account"> No <span></span></label>
                                         </div>
                                     </div>
                                     <div class="form-group row d-none"  id="super_account_details">
@@ -175,14 +175,18 @@
                                         </div>
                                         <div class="col-4">
                                             <label>Member Number</label>
-                                            <input type="text" class="form-control" name="member_number" placeholder="Member Number">
+                                            <input type="text" class="form-control" name="super_member_number" placeholder="Member Number">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label>Are you an Australian / NZ Citizen or a Permanent Resident?</label>
                                         <div class="kt-radio-inline">
-                                            <label class="kt-radio"><input type="radio" value="yes" name="visa_status"> Yes <span></span></label>
-                                            <label class="kt-radio"><input type="radio" value="no" name="visa_status"> No <span></span></label>
+                                            <label class="kt-radio"><input type="radio" value="citizen" name="visa_status"> Australian / NZ Citizen <span></span></label>
+                                            <label class="kt-radio"><input type="radio" value="pr" name="visa_status"> Permanent Resident <span></span></label>
+                                            <label class="kt-radio"><input type="radio" value="other" name="visa_status"> Other (Please Specify) <span></span></label>
+                                        </div>
+                                        <div class="">
+                                            <input type="text" class="form-control d-none" id="visa_status_other" name="visa_status_other" placeholder="State/Country">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -328,45 +332,6 @@
                             <div class="kt-heading kt-heading--md">Verify and Submit</div>
                             <div class="kt-form__section kt-form__section--first">
                                 <div class="kt-wizard-v1__review">
-                                    <div class="kt-wizard-v1__review-item">
-                                        <div class="kt-wizard-v1__review-title">
-                                            Current Address
-                                        </div>
-                                        <div class="kt-wizard-v1__review-content">
-                                            Address Line 1<br />
-                                            Address Line 2<br />
-                                            Melbourne 3000, VIC, Australia
-                                        </div>
-                                    </div>
-                                    <div class="kt-wizard-v1__review-item">
-                                        <div class="kt-wizard-v1__review-title">
-                                            Delivery Details
-                                        </div>
-                                        <div class="kt-wizard-v1__review-content">
-                                            Package: Complete Workstation (Monitor, Computer, Keyboard & Mouse)<br />
-                                            Weight: 25kg<br />
-                                            Dimensions: 110cm (w) x 90cm (h) x 150cm (L)
-                                        </div>
-                                    </div>
-                                    <div class="kt-wizard-v1__review-item">
-                                        <div class="kt-wizard-v1__review-title">
-                                            Delivery Service Type
-                                        </div>
-                                        <div class="kt-wizard-v1__review-content">
-                                            Overnight Delivery with Regular Packaging<br />
-                                            Preferred Morning (8:00AM - 11:00AM) Delivery
-                                        </div>
-                                    </div>
-                                    <div class="kt-wizard-v1__review-item">
-                                        <div class="kt-wizard-v1__review-title">
-                                            Delivery Address
-                                        </div>
-                                        <div class="kt-wizard-v1__review-content">
-                                            Address Line 1<br />
-                                            Address Line 2<br />
-                                            Preston 3072, VIC, Australia
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -402,7 +367,7 @@
 @push('scripts')
 
 <script>
-$('input[type=radio][name=user_type]').change(function() {
+$('input[type=radio][name=role]').change(function() {
     if (this.value == 'cleaner') {
         $("#radio_tfn").prop("disabled", false);
         $("#radio_tfn").parent().removeClass('kt-radio--disabled');
@@ -416,13 +381,15 @@ $('input[type=radio][name=user_type]').change(function() {
 $('input[type=radio][name=tfn_or_abn]').change(function() {
     if (this.value == 'abn') {
         $("#super_account").addClass('d-none');
-        $("#abn_number").removeClass('d-none');
-        $("#tfn_number").addClass('d-none');
+        $("#abn").removeClass('d-none');
+        $("#tfn").val('');
+        $("#tfn").addClass('d-none');
     }
     else if (this.value == 'tfn') {
         $("#super_account").removeClass('d-none');
-        $("#tfn_number").removeClass('d-none');
-        $("#abn_number").addClass('d-none');
+        $("#tfn").removeClass('d-none');
+        $("#abn").val('');
+        $("#abn").addClass('d-none');
     }
 });
 $('input[type=radio][name=super_account]').change(function() {
@@ -441,6 +408,14 @@ $('input[type=radio][name=driver_license]').change(function() {
         $("#driver_license_state").removeClass('d-none');
     }
 });
+$('input[type=radio][name=visa_status]').change(function() {
+    if (this.value != 'citizen' && this.value != 'pr') {
+        $("#visa_status_other").removeClass('d-none');
+    }else{
+        $("#visa_status_other").addClass('d-none');
+    }
+});
+
 </script>
 
 <script>
@@ -462,7 +437,7 @@ $('input[type=radio][name=driver_license]').change(function() {
 
             // Validation before going to next page
             wizard.on('beforeNext', function(wizardObj) {
-                $("#current_step").val(wizardObj.currentStep);
+                $("#last_step").val(wizardObj.currentStep);
                 if (validator.form() !== true) {
                     wizardObj.stop();  // don't go to the next step
                 }
@@ -480,7 +455,7 @@ $('input[type=radio][name=driver_license]').change(function() {
                     KTUtil.scrollTop();
                 }, 500);
             });
-            console.log(wizard.goNext());
+            // wizard.goNext();
         }
 
         var initValidation = function() {
@@ -580,45 +555,39 @@ $('input[type=radio][name=driver_license]').change(function() {
         };
     }();
 
-    jQuery(document).ready(function() {
+    $(document).ready(function() {
         KTWizard1.init();
     });
-</script>
-<script>
-    var demo3 = function() {
-        $('#kt_repeater_3').repeater({
-            initEmpty: false,
 
-            defaultValues: {
-                'text-input': 'foo'
-            },
+    $('#kt_repeater_3').repeater({
+        initEmpty: false,
 
-            show: function() {
-                $(this).slideDown();
-            },
+        defaultValues: {
+            'text-input': 'foo'
+        },
 
-            hide: function(deleteElement) {
-                if(confirm('Are you sure you want to delete this element?')) {
-                    $(this).slideUp(deleteElement);
-                }
+        show: function() {
+            $(this).slideDown();
+        },
+
+        hide: function(deleteElement) {
+            if(confirm('Are you sure you want to delete this element?')) {
+                $(this).slideUp(deleteElement);
             }
-        });
-    }
-    var demo4 = function(){
-        $('#kt_datepicker_1, #kt_datepicker_1_validate').datepicker({
-            clearBtn: true,
-            todayBtn: true,
-            todayHighlight: true,
-            orientation: "bottom left",
-            endDate: new Date,
-            templates: {
-                leftArrow: '<i class="la la-angle-left"></i>',
-                rightArrow: '<i class="la la-angle-right"></i>'
-            }
-        });
-    }
-    demo3();
-    demo4();
+        }
+    });
+
+    $('#kt_datepicker_1, #kt_datepicker_1_validate').datepicker({
+        clearBtn: true,
+        todayBtn: true,
+        todayHighlight: true,
+        orientation: "bottom left",
+        endDate: new Date,
+        templates: {
+            leftArrow: '<i class="la la-angle-left"></i>',
+            rightArrow: '<i class="la la-angle-right"></i>'
+        }
+    });
 
 </script>
 @endpush

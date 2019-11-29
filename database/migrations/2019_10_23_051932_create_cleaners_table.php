@@ -16,7 +16,7 @@ class CreateCleanersTable extends Migration
         Schema::create('cleaners', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('user_id')->unsigned();
-            $table->integer('agency_id')->unsigned()->nullable();
+            $table->integer('parent_id')->unsigned()->nullable();
             $table->string('first_name');
             $table->string('last_name')->nullable();
             $table->string('phone')->nullable();
@@ -34,47 +34,51 @@ class CreateCleanersTable extends Migration
 
             $table->string('tfn')->nullable();
             $table->string('abn')->nullable();
+            $table->string('super_account')->nullable();
+            $table->string('super_fund_name')->nullable();
+            $table->string('super_member_number')->nullable();
             $table->string('visa_status')->nullable();
-            $table->tinyInteger('police_check')->nullable()->comment('Yes - 1, No - 0');
-            $table->tinyInteger('own_car')->nullable()->comment('Yes - 1, No - 0');
-            $table->tinyInteger('driver_license')->nullable()->comment('Yes - 1, No - 0');
-            $table->tinyInteger('driver_license_state')->nullable();
+            $table->string('visa_status_other')->nullable();
+            $table->string('police_check')->nullable();
+            $table->string('own_car')->nullable();
+            $table->string('driver_license')->nullable();
+            $table->string('driver_license_state')->nullable();
             $table->string('nationality')->nullable();
             $table->text('language')->nullable();
             $table->string('gender')->nullable();
-            $table->string('date_of_birth')->nullable();
+            $table->date('date_of_birth')->nullable();
 
             $table->string('bank_name')->nullable();
             $table->string('bsb')->nullable();
             $table->string('account_no')->nullable();
             $table->string('account_name')->nullable();
 
-            $table->text('path_driving_licence')->nullable();
-            $table->text('status_driving_licence')->nullable();
-            $table->text('comment_driving_licence')->nullable();
-            $table->text('path_medicare_card')->nullable();
-            $table->text('status_medicare_card')->nullable();
-            $table->text('comment_medicare_card')->nullable();
-            $table->text('path_passport')->nullable();
-            $table->text('status_passport')->nullable();
-            $table->text('comment_passport')->nullable();
-            $table->text('path_bank_statement')->nullable();
-            $table->text('status_bank_statement')->nullable();
-            $table->text('comment_bank_statement')->nullable();
-            $table->text('path_utility_bill')->nullable();
-            $table->text('status_utility_bill')->nullable();
-            $table->text('comment_utility_bill')->nullable();
-            $table->text('path_certifications')->nullable();
-            $table->text('status_certifications')->nullable();
-            $table->text('comment_certifications')->nullable();
-            $table->text('path_police_check')->nullable();
-            $table->text('status_police_check')->nullable();
-            $table->text('comment_police_check')->nullable();
+            $table->text('doc_driving_licence')->nullable();
+            $table->text('doc_driving_licence_status')->nullable();
+            $table->text('doc_driving_licence_comment')->nullable();
+            $table->text('doc_medicare_card')->nullable();
+            $table->text('doc_medicare_card_status')->nullable();
+            $table->text('doc_medicare_card_comment')->nullable();
+            $table->text('doc_passport')->nullable();
+            $table->text('doc_passport_status')->nullable();
+            $table->text('doc_passport_comment')->nullable();
+            $table->text('doc_bank_statement')->nullable();
+            $table->text('doc_bank_statement_status')->nullable();
+            $table->text('doc_bank_statement_comment')->nullable();
+            $table->text('doc_utility_bill')->nullable();
+            $table->text('doc_utility_bill_status')->nullable();
+            $table->text('doc_utility_bill_comment')->nullable();
+            $table->text('doc_certifications')->nullable();
+            $table->text('doc_certifications_status')->nullable();
+            $table->text('doc_certifications_comment')->nullable();
+            $table->text('doc_police_check')->nullable();
+            $table->text('doc_police_check_status')->nullable();
+            $table->text('doc_police_check_comment')->nullable();
 
 
             $table->text('comments')->nullable();
 
-            $table->tinyInteger('status')->comment('Active - 1, Deactive - 0');
+            $table->integer('last_step');
             $table->timestamps();
             $table->integer('created_by');
             $table->integer('updated_by');
