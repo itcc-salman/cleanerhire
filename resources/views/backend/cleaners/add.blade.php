@@ -5,6 +5,9 @@
 .kt-form{
     width: 70% !important;
 }
+.border-left-divider{
+    border-left: 2px solid #e2e5ec;
+}
 </style>
 @endpush
 
@@ -253,26 +256,44 @@
                                         <label>Your Date of Birth?</label>
                                         <input type="text" class="form-control" id="kt_datepicker_1" readonly placeholder="Select date" />
                                     </div>
-                                    <div class="form-group">
-                                        <label for="exampleSelect1">List of Documents</label>
-                                        <select class="form-control" id="exampleSelect1">
-                                            <option>Driving License</option>
-                                            <option>Medical Card</option>
-                                            <option>Passport</option>
-                                            <option>Utility Bill</option>
-                                            <option>Bank Statement</option>
-                                            <option>Police Check</option>
-                                            <option>Certifications</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>File Browser</label>
-                                        <div></div>
-                                        <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="customFile">
-                                            <label class="custom-file-label" for="customFile">Choose file</label>
+
+                                    <div>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label>Upload Documents</label>
+                                                    <select class="form-control">
+                                                        <option>Driving License</option>
+                                                        <option>Medical Card</option>
+                                                        <option>Passport</option>
+                                                        <option>Utility Bill</option>
+                                                        <option>Bank Statement</option>
+                                                        <option>Police Check</option>
+                                                        <option>Certifications</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div></div>
+                                                    <div class="custom-file">
+                                                        <input type="file" class="custom-file-input">
+                                                        <label class="custom-file-label">Choose file</label>
+                                                    </div>
+                                                </div>
+                                                <button type="button" class="btn btn-primary">Upload</button>
+                                            </div>
+                                            <div class="col-6 border-left-divider">
+                                                <label>List of Documents</label>
+                                                <p class="m-0 p-0"><span>1. Driving License</label></p>
+                                                <p class="m-0 p-0"><span>2. Medical Card</span></p>
+                                                <p class="m-0 p-0"><span>3. Passport</span></p>
+                                                <p class="m-0 p-0"><span>4. Utility Bill</span></p>
+                                                <p class="m-0 p-0"><span>5. Bank Statement</span></p>
+                                                <p class="m-0 p-0"><span>6. Police Check</span></p>
+                                                <p class="m-0 p-0"><span>7. Certifications</span></p>
+                                            </div>
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
