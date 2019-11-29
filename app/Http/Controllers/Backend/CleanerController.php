@@ -28,7 +28,7 @@ class CleanerController extends Controller
 
     public function add(Request $request)
     {
-        return view('backend.blank');
+        return view('backend.cleaners.add');
     }
 
     public function getAllCleaners(Request $request)
@@ -44,6 +44,7 @@ class CleanerController extends Controller
     public function postCreate(Request $request)
     {
         $data = array();
+        return response()->json($data);
 
         $user = new User();
         $user->first_name = $request->get('first_name');
@@ -52,7 +53,7 @@ class CleanerController extends Controller
         $user->role = 'cleaner';
         $password = 'cleaner@123';
         $user->password = Hash::make($password);
-        $user->save();
+        // $user->save();
 
         $cleaner = new Cleaner();
         $cleaner->user_id = $user->id;
@@ -91,7 +92,7 @@ class CleanerController extends Controller
         $cleaner->status = $request->has('status') ? $request->get('status') : 1;
         $cleaner->created_by =  $request->user()->id;
         $cleaner->updated_by =  $request->user()->id;
-        $cleaner->save();
+        // $cleaner->save();
 
         $data['code'] = 200;
         $data['cleaner'] = $cleaner;
