@@ -28,6 +28,8 @@ class CleanerController extends Controller
 
     public function add(Request $request)
     {
+        session()->pull('backend');
+        // dd(session()->all());
         return view('backend.cleaners.add');
     }
 
@@ -44,6 +46,7 @@ class CleanerController extends Controller
     public function postCreate(Request $request)
     {
         $data = array();
+        // return response()->json($data);
         $last_step = $request->get('last_step', null);
         if($last_step == 1){
 
@@ -55,7 +58,7 @@ class CleanerController extends Controller
             $user->role = 'cleaner';
             $password = 'cleaner@123';
             $user->password = Hash::make($password);
-            // $user->save();
+            $user->save();
 
             $cleaner = new Cleaner();
             $cleaner->user_id = $user->id;
@@ -72,9 +75,13 @@ class CleanerController extends Controller
             $cleaner->last_step = $last_step;
             $cleaner->created_by =  Auth::Id();
             $cleaner->updated_by =  Auth::Id();
-            // $cleaner->save();
-        }
+            $cleaner->status = 1;
+            $cleaner->save();
 
+            $request->session()->put('backend.last_step', $last_step);
+            $request->session()->put('backend.cleaner_id', $cleaner->id);
+            $request->session()->put('backend.user_id', $cleaner->user_id);
+        }
 
         $data['code'] = 200;
         $data['cleaner'] = $cleaner;
@@ -204,6 +211,7 @@ class CleanerController extends Controller
                 }else if($last_step == 3){
                 }else if($last_step == 4){
                 }else if($last_step == 5){
+                    session()->pull('backend');
                 }
 
                 $cleaner->updated_by =  Auth::Id();

@@ -85,6 +85,11 @@
                     <form class="kt-form kt-padding-t-0" id="kt_form">
                         @csrf
                         <input type="hidden" name="last_step" id="last_step" value="1">
+                        @if(Session::has('backend.cleaner_id'))
+                            <input type="hidden" name="id" id="cleaner_id" value="{{ Session::get('backend.cleaner_id')}}">
+                        @else
+                            <input type="hidden" name="id" id="cleaner_id" value="">
+                        @endif
 
                         <!--begin: Form Wizard Step 1-->
                         <div class="kt-wizard-v1__content" data-ktwizard-type="step-content" data-ktwizard-state="current">
@@ -452,7 +457,7 @@ $('input[type=radio][name=visa_status]').change(function() {
             // Change event
             wizard.on('change', function(wizard) {
                 setTimeout(function() {
-                    KTUtil.scrollTop();
+                    // KTUtil.scrollTop();
                 }, 500);
             });
             // wizard.goNext();
@@ -499,39 +504,40 @@ $('input[type=radio][name=visa_status]').change(function() {
 
         var initSubmit = function() {
             var btn = formEl.find('[data-ktwizard-type="action-next"]');
-            KTUtil.scrollTop();
+            // KTUtil.scrollTop();
             btn.on('click', function(e) {
                 e.preventDefault();
                 if (validator.form()) {
                     // See: src\js\framework\base\app.js
                     KTApp.progress(btn);
                     //KTApp.block(formEl);
+                    console.log(wizard.currentStep);
+                    if((wizard.currentStep - 1) == 1){
 
-                    if(wizard.currentStep == 1){
+                        if($("#cleaner_id").val() == ''){
+                            var url = '{{ route('backend.cleaner.create') }}';
+                        }else{
+                            var url = '{{ route('backend.cleaner.update') }}';
+                        }
                         formEl.ajaxSubmit({
-                            url: '{{ route('backend.cleaner.create') }}',
+                            url: url,
                             method: 'POST',
-                            success: function() {
+                            success: function(response) {
+                                if(response.code == 200){
+                                    $("#cleaner_id").val(response.cleaner.id)
+                                }
                                 KTApp.unprogress(btn);
                                 //KTApp.unblock(formEl);
 
                             }
                         });
-                    }else if(wizard.currentStep == 5){
+                    }else if((wizard.currentStep - 1) > 1 && (wizard.currentStep - 1) < 5){
+                        var url = '{{ route('backend.cleaner.update') }}';
                         formEl.ajaxSubmit({
-                            url: '{{ route('backend.cleaner.create') }}',
+                            url: url,
                             method: 'POST',
-                            success: function() {
-                                KTApp.unprogress(btn);
-                                //KTApp.unblock(formEl);
-
-                            }
-                        });
-                    }else if(wizard.currentStep > 1 && wizard.currentStep < 5){
-                        formEl.ajaxSubmit({
-                            url: '{{ route('backend.cleaner.create') }}',
-                            method: 'POST',
-                            success: function() {
+                            success: function(response) {
+                                console.log(response);
                                 KTApp.unprogress(btn);
                                 //KTApp.unblock(formEl);
                             }
@@ -540,6 +546,27 @@ $('input[type=radio][name=visa_status]').change(function() {
                 }
             });
 
+            var btn1 = formEl.find('[data-ktwizard-type="action-submit"]');
+            btn1.on('click', function(e) {
+                e.preventDefault();
+                if (validator.form()) {
+                    // See: src\js\framework\base\app.js
+                    KTApp.progress(btn1);
+                    //KTApp.block(formEl);
+
+                    var url = '{{ route('backend.cleaner.update') }}';
+                    formEl.ajaxSubmit({
+                        url: url,
+                        method: 'POST',
+                        success: function(response) {
+                            KTApp.unprogress(btn1);
+                            //KTApp.unblock(formEl);
+                            location.href = '{{ route('backend.cleaners') }}';
+                        }
+                    });
+
+                }
+            });
         }
 
         return {

@@ -77,6 +77,7 @@ class CreateCleanersTable extends Migration
 
 
             $table->text('comments')->nullable();
+            $table->tinyInteger('status')->comment('Active - 1, Deactive - 0');
 
             $table->integer('last_step');
             $table->timestamps();
