@@ -254,6 +254,18 @@
                                         <input type="text" class="form-control" id="kt_datepicker_1" readonly placeholder="Select date" />
                                     </div>
                                     <div class="form-group">
+                                        <label for="exampleSelect1">List of Documents</label>
+                                        <select class="form-control" id="exampleSelect1">
+                                            <option>Driving License</option>
+                                            <option>Medical Card</option>
+                                            <option>Passport</option>
+                                            <option>Utility Bill</option>
+                                            <option>Bank Statement</option>
+                                            <option>Police Check</option>
+                                            <option>Certifications</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
                                         <label>File Browser</label>
                                         <div></div>
                                         <div class="custom-file">
@@ -447,6 +459,7 @@ $('input[type=radio][name=driver_license]').change(function() {
                     KTUtil.scrollTop();
                 }, 500);
             });
+            console.log(wizard.goNext());
         }
 
         var initValidation = function() {
@@ -585,5 +598,6 @@ $('input[type=radio][name=driver_license]').change(function() {
     }
     demo3();
     demo4();
+
 </script>
 @endpush
