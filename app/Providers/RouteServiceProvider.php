@@ -87,6 +87,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapFrontRoutes()
     {
         Route::namespace($this->namespace.'\Front')
+            ->middleware('web')
             ->group(base_path('routes/front.php'));
     }
 }

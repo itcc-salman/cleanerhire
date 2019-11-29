@@ -19,6 +19,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'superadmin@mail.com',
             'role' => 'superadmin',
             'password' => Hash::make('123456'),
+            'status' => 1
         ]);
     }
 }

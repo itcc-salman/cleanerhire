@@ -5,9 +5,9 @@
     <head>
         <base href="../../../">
         <meta charset="utf-8" />
-        <title>Metronic | Login Page 1</title>
-        <meta name="description" content="Login page example">
+        <title>{{ config('app.name', 'Cleaner Hire') }}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <!--begin::Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700|Roboto:300,400,500,600,700">
@@ -15,18 +15,18 @@
         <!--end::Fonts -->
 
         <!--begin::Page Custom Styles(used by this page) -->
-        <link href="assets/css/pages/login/login-1.css" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('assets/css/pages/login/login-1.css') }}" rel="stylesheet" type="text/css" />
 
         <!--end::Page Custom Styles -->
 
         <!--begin::Global Theme Styles(used by all pages) -->
         <!-- <link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" /> -->
-        <link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
 
         <!--end::Global Theme Styles -->
 
         <!--end::Layout Skins -->
-        <link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
+        <link rel="shortcut icon" href="{{ asset('assets/media/logos/favicon.ico') }}" />
     </head>
 
     <!-- end::Head -->
@@ -42,25 +42,25 @@
                     <!--begin::Aside-->
                     <div class="kt-grid__item kt-grid__item--order-tablet-and-mobile-2 kt-grid kt-grid--hor kt-login__aside" style="background-image: url(assets/media/bg/bg-4.jpg);">
                         <div class="kt-grid__item">
-                            <a href="#" class="kt-login__logo">
-                                <img src="assets/media/logos/logo-4.png">
+                            <a href="{{ route('front.home') }}" class="kt-login__logo">
+                                <img src="{{ asset('assets/media/logos/logo-4.png') }}">
                             </a>
                         </div>
                         <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--ver">
                             <div class="kt-grid__item kt-grid__item--middle">
-                                <h3 class="kt-login__title">Welcome to Metronic!</h3>
+                                <h3 class="kt-login__title">Welcome to Cleaner Hire!</h3>
                                 <h4 class="kt-login__subtitle">The ultimate Bootstrap & Angular 6 admin theme framework for next generation web apps.</h4>
                             </div>
                         </div>
                         <div class="kt-grid__item">
                             <div class="kt-login__info">
                                 <div class="kt-login__copyright">
-                                    &copy 2018 Metronic
+                                    &copy 2019 Cleaner Hire
                                 </div>
                                 <div class="kt-login__menu">
-                                    <a href="#" class="kt-link">Privacy</a>
-                                    <a href="#" class="kt-link">Legal</a>
-                                    <a href="#" class="kt-link">Contact</a>
+                                    <a href="javascript:void(0)" class="kt-link">Privacy</a>
+                                    <a href="javascript:void(0)" class="kt-link">Legal</a>
+                                    <a href="javascript:void(0)" class="kt-link">Contact</a>
                                 </div>
                             </div>
                         </div>
@@ -73,8 +73,8 @@
 
                         <!--begin::Head-->
                         <div class="kt-login__head">
-                            <span class="kt-login__signup-label">Don't have an account yet?</span>&nbsp;&nbsp;
-                            <a href="#" class="kt-link kt-login__signup-link">Sign Up!</a>
+                            <span class="kt-login__signup-label">Already have an account.</span>&nbsp;&nbsp;
+                            <a href="javascript:void(0)" class="kt-link kt-login__signup-link">Sign In!</a>
                         </div>
 
                         <!--end::Head-->
@@ -85,13 +85,22 @@
                             <!--begin::Signin-->
                             <div class="kt-login__form">
                                 <div class="kt-login__title">
-                                    <h3>Sign In</h3>
+                                    <h3>Sign Up</h3>
                                 </div>
 
                                 <!--begin::Form-->
-                                <form class="kt-form" action="" novalidate="novalidate" id="kt_login_form">
+                                <form class="kt-form" id="kt_login_form">
+                                    @csrf
                                     <div class="form-group validate is-invalid">
-                                        <input class="form-control" type="text" placeholder="Username" name="username" autocomplete="off">
+                                        <input class="form-control" type="text" placeholder="First Name" name="first_name">
+                                        <div id="username-error" class="error invalid-feedback">This field is required.</div>
+                                    </div>
+                                    <div class="form-group validate is-invalid">
+                                        <input class="form-control" type="text" placeholder="Last Name" name="last_name">
+                                        <div id="username-error" class="error invalid-feedback">This field is required.</div>
+                                    </div>
+                                    <div class="form-group validate is-invalid">
+                                        <input class="form-control" type="email" placeholder="Email" name="email">
                                         <div id="username-error" class="error invalid-feedback">This field is required.</div>
                                     </div>
                                     <div class="form-group validate is-invalid">
@@ -101,10 +110,10 @@
 
                                     <!--begin::Action-->
                                     <div class="kt-login__actions">
-                                        <a href="#" class="kt-link kt-login__link-forgot">
+                                        <a href="javascript:void(0)" class="kt-link kt-login__link-forgot">
                                             Forgot Password ?
                                         </a>
-                                        <button id="kt_login_signin_submit" class="btn btn-primary btn-elevate kt-login__btn-primary">Sign In</button>
+                                        <button id="kt_login_signin_submit" type="submit" class="btn btn-primary btn-elevate kt-login__btn-primary">Sign Up</button>
                                     </div>
 
                                     <!--end::Action-->
@@ -113,13 +122,13 @@
                                 <!--end::Form-->
 
                                 <!--begin::Divider-->
-                                <div class="kt-login__divider">
+                                {{-- <div class="kt-login__divider">
                                     <div class="kt-divider">
                                         <span></span>
                                         <span>OR</span>
                                         <span></span>
                                     </div>
-                                </div>
+                                </div> --}}
 
                                 <!--end::Divider-->
 
@@ -154,50 +163,24 @@
         </div>
 
         <!-- end:: Page -->
-
-        <!-- begin::Global Config(global config for global JS sciprts) -->
-        <script>
-            var KTAppOptions = {
-                "colors": {
-                    "state": {
-                        "brand": "#5d78ff",
-                        "dark": "#282a3c",
-                        "light": "#ffffff",
-                        "primary": "#5867dd",
-                        "success": "#34bfa3",
-                        "info": "#36a3f7",
-                        "warning": "#ffb822",
-                        "danger": "#fd3995"
-                    },
-                    "base": {
-                        "label": [
-                            "#c5cbe3",
-                            "#a1a8c3",
-                            "#3d4465",
-                            "#3e4466"
-                        ],
-                        "shape": [
-                            "#f0f3ff",
-                            "#d9dffa",
-                            "#afb4d4",
-                            "#646c9a"
-                        ]
-                    }
-                }
-            };
+        <script src="{{ asset('front/js/jquery.min.js') }}"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                // all js code will go here
+                $("#kt_login_form").on('submit', function(e) {
+                    e.preventDefault();
+                    $.ajax({
+                        url: '{{ route('backend.cleaner.create') }}',
+                        type: "POST",
+                        dataType: "JSON",
+                        data: $("#kt_login_form").serialize(),
+                        success: function(res) {
+                            console.log(res);
+                        }
+                    }); // end ajax
+                });
+            });
         </script>
-
-        <!-- end::Global Config -->
-
-        <!--begin::Global Theme Bundle(used by all pages) -->
-        <script src="assets/plugins/global/plugins.bundle.js" type="text/javascript"></script>
-        <script src="assets/js/scripts.bundle.js" type="text/javascript"></script>
-
-        <!--end::Global Theme Bundle -->
-
-        <!--begin::Page Scripts(used by this page) -->
-        <script src="assets/js/pages/custom/login/login-1.js" type="text/javascript"></script>
-
         <!--end::Page Scripts -->
     </body>
 
