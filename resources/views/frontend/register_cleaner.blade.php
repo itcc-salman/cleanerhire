@@ -91,6 +91,7 @@
                                 <!--begin::Form-->
                                 <form class="kt-form" id="kt_login_form">
                                     @csrf
+                                    <input type="hidden" name="last_step" id="last_step" value="1">
                                     <div class="form-group validate is-invalid">
                                         <input class="form-control" type="text" placeholder="First Name" name="first_name">
                                         <div id="username-error" class="error invalid-feedback">This field is required.</div>
