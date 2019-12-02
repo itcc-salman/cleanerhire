@@ -98,15 +98,15 @@
                                 <div class="kt-wizard-v1__form">
                                     <div class="form-group">
                                         <label>First Name</label>
-                                        <input type="text" class="form-control" name="first_name" placeholder="First Name" value="Test Value">
+                                        <input type="text" class="form-control" name="first_name" placeholder="First Name" value="Vicky">
                                     </div>
                                     <div class="form-group">
                                         <label>Last Name</label>
-                                        <input type="text" class="form-control" name="last_name" placeholder="Last Name" value="Test Value">
+                                        <input type="text" class="form-control" name="last_name" placeholder="Last Name" value="Diyora">
                                     </div>
                                     <div class="form-group">
                                         <label>Email</label>
-                                        <input type="text" class="form-control" name="email" placeholder="Email" value={{'vicky@itccdigital.com'}}>
+                                        <input type="text" class="form-control" name="email" placeholder="Email" value="{{'vicky@itccdigital.com'}}">
                                     </div>
                                     <div class="form-group">
                                         <label>Phone</label>
@@ -227,13 +227,13 @@
                                         <label>Which Languages you speak?</label>
                                         <div id="kt_repeater_3">
                                             <div class="form-group">
-                                                <div data-repeater-list="" class="">
+                                                <div data-repeater-list="language" class="">
                                                     <div data-repeater-item class="row kt-margin-b-10">
                                                         <div class="col-lg-4">
-                                                            <input type="text" class="form-control form-control-danger" placeholder="English">
+                                                            <input type="text" class="form-control form-control-danger" name="lname" placeholder="English">
                                                         </div>
                                                         <div class="col-lg-4">
-                                                            <input type="text" class="form-control form-control-danger" placeholder="Fluent">
+                                                            <input type="text" class="form-control form-control-danger" name="lfluency" placeholder="Fluency">
                                                         </div>
                                                         <div class="col-lg-4">
                                                             <a href="javascript:;" data-repeater-delete="" class="btn btn-danger btn-icon"><i class="la la-remove"></i></a>
@@ -263,7 +263,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Your Date of Birth?</label>
-                                        <input type="text" class="form-control" id="kt_datepicker_1" readonly placeholder="Select date" />
+                                        <input type="text" class="form-control" id="kt_datepicker_1" name="date_of_birth" readonly placeholder="Select date" />
                                     </div>
 
                                     <div>
@@ -586,12 +586,13 @@ $('input[type=radio][name=visa_status]').change(function() {
         KTWizard1.init();
     });
 
-    $('#kt_repeater_3').repeater({
+    var $repeater = $('#kt_repeater_3').repeater({
         initEmpty: false,
 
-        defaultValues: {
-            'text-input': 'foo'
-        },
+        defaultValues: [
+            {"lname":"dgdgd","lfluency":"gfdgdfg"},
+            {"lname":"dgdfg","lfluency":"fdgfdg"}
+        ],
 
         show: function() {
             $(this).slideDown();
@@ -603,6 +604,7 @@ $('input[type=radio][name=visa_status]').change(function() {
             }
         }
     });
+    // $repeater.setList();
 
     $('#kt_datepicker_1, #kt_datepicker_1_validate').datepicker({
         clearBtn: true,

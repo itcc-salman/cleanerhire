@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Backend;
 
-use Auth;
+use App\Http\Controllers\Controller;
 use App\Models\Cleaner;
 use App\Models\User;
+use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
 
 class CleanerController extends Controller
 {
@@ -55,6 +56,7 @@ class CleanerController extends Controller
             $user->last_name = $request->get('last_name');
             $user->email = $request->get('email');
             $user->status = 1;
+            $user->token = Str::random(64);
             $user->role = 'cleaner';
             $password = 'cleaner@123';
             $user->password = Hash::make($password);
@@ -119,6 +121,7 @@ class CleanerController extends Controller
 
     public function postUpdate(Request $request)
     {
+
         $data = array();
         $data['code'] = 400;
         $data['data'] = null;
@@ -195,7 +198,15 @@ class CleanerController extends Controller
                         $cleaner->driver_license_state = $request->get('driver_license_state', $cleaner->driver_license_state);
                     }
                     $cleaner->nationality =  $request->get('nationality', $cleaner->nationality);
-                    $cleaner->language =  $request->has('language') ? $request->get('language') : $cleaner->language;
+
+                    $language = array();
+                    foreach ($request->get('language', $cleaner->language) as $key => $value) {
+                        $tmp = new \stdClass;
+                        $tmp->lname = $value['lname'];
+                        $tmp->lfluency =  $value['lfluency'];
+                        $language[] = $tmp;
+                    }
+                    $cleaner->language =  $language;
 
                     $cleaner->gender =  $request->has('gender') ? $request->get('gender') : $cleaner->gender;
                     $cleaner->date_of_birth =  $request->has('date_of_birth') ? $request->get('date_of_birth') : $cleaner->date_of_birth;
