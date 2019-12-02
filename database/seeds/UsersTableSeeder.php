@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class UsersTableSeeder extends Seeder
 {
@@ -19,6 +20,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'admin@itccdigital.com',
             'role' => 'superadmin',
             'password' => Hash::make('123456'),
+            'token' => Str::random(64),
             'status' => 1
         ]);
     }

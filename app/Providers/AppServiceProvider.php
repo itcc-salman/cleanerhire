@@ -5,7 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema; //Import Schema
 use App\Observers\UserObserver;
-use App\User;
+use App\Models\User;
 
 class AppServiceProvider extends ServiceProvider
 {

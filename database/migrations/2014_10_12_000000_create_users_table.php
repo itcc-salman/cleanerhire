@@ -23,6 +23,10 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
             $table->rememberToken();
+            $table->boolean('activated')->default(false);
+            $table->string('token');
+            $table->ipAddress('signup_ip_address')->nullable();
+            $table->ipAddress('signup_confirmation_ip_address')->nullable();
             $table->timestamps();
         });
     }

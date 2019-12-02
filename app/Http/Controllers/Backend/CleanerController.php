@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Backend;
 
 use Auth;
-use App\Cleaner;
-use App\User;
+use App\Models\Cleaner;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
