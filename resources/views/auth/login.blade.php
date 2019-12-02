@@ -52,7 +52,7 @@
                                 <form class="kt-form" method="POST" action="{{ route('login') }}">
                                     @csrf
                                     <div class="input-group">
-                                        <input class="form-control" type="email" id="email" placeholder="Email" name="email" autocomplete="off" value="{{ old('email') }}"  autofocus>
+                                        <input class="form-control" type="email" id="email" placeholder="Email" name="email" autocomplete="off" value="{{ old('email') }}" autofocus>
                                     </div>
                                     @error('email')
                                         <div class="text-danger" role="alert">

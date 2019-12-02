@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Front;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserStoreRequest;
 
 class HomeController extends Controller
 {
@@ -32,8 +32,11 @@ class HomeController extends Controller
         return view('frontend.become_a_cleaner');
     }
 
-    public function registerCleaner()
+    public function registerCleaner(UserStoreRequest $request)
     {
+        if( $request->method() == 'POST') {
+            // call validation method
+        }
         return view('frontend.register_cleaner');
     }
 }

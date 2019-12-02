@@ -89,24 +89,38 @@
                                 </div>
 
                                 <!--begin::Form-->
-                                <form class="kt-form" id="kt_login_form">
+                                <form class="kt-form" id="kt_login_form" method="POST" action="{{ route('front.register_cleaner') }}">
                                     @csrf
                                     <input type="hidden" name="last_step" id="last_step" value="1">
                                     <div class="form-group validate is-invalid">
-                                        <input class="form-control" type="text" placeholder="First Name" name="first_name">
-                                        <div id="username-error" class="error invalid-feedback">This field is required.</div>
+                                        <input class="form-control" type="text" placeholder="First Name" name="first_name" value="{{ old('first_name') }}" autofocus>
+                                        @error('first_name')
+                                            <div id="username-error" class="error invalid-feedback">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="form-group validate is-invalid">
-                                        <input class="form-control" type="text" placeholder="Last Name" name="last_name">
-                                        <div id="username-error" class="error invalid-feedback">This field is required.</div>
+                                        <input class="form-control" type="text" placeholder="Last Name" name="last_name" value="{{ old('last_name') }}">
+                                        @error('last_name')
+                                            <div id="username-error" class="error invalid-feedback">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="form-group validate is-invalid">
-                                        <input class="form-control" type="email" placeholder="Email" name="email">
-                                        <div id="username-error" class="error invalid-feedback">This field is required.</div>
+                                        <input class="form-control" type="email" placeholder="Email" name="email" value="{{ old('email') }}">
+                                        @error('email')
+                                            <div id="username-error" class="error invalid-feedback">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="form-group validate is-invalid">
                                         <input class="form-control" type="password" placeholder="Password" name="password" autocomplete="off">
-                                        <div id="username-error" class="error invalid-feedback">This field is required.</div>
+                                        @error('password')
+                                            <div id="username-error" class="error invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group validate is-invalid">
+                                        <input class="form-control" type="password" placeholder="Confirm Password" name="password_confirmation" autocomplete="off">
+                                        @error('password_confirmation')
+                                            <div id="username-error" class="error invalid-feedback">{{ $message }}</div>
+                                        @enderror
                                     </div>
 
                                     <!--begin::Action-->
@@ -168,6 +182,7 @@
         <script type="text/javascript">
             $(document).ready(function() {
                 // all js code will go here
+                /*
                 $("#kt_login_form").on('submit', function(e) {
                     e.preventDefault();
                     $.ajax({
@@ -180,6 +195,7 @@
                         }
                     }); // end ajax
                 });
+                */
             });
         </script>
         <!--end::Page Scripts -->

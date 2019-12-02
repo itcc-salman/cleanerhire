@@ -15,4 +15,7 @@ Route::get('/', 'HomeController@index')->name('front.home');
 
 Route::get('/become-a-cleaner', 'HomeController@becomeACleaner')->name('front.become_a_cleaner');
 
-Route::get('/registercleaner', 'HomeController@registerCleaner')->name('front.register_cleaner');
+Route::match(['GET', 'POST'], '/registercleaner', [
+    'uses' => 'HomeController@registerCleaner',
+    'as'   =>  'front.register_cleaner'
+]);
