@@ -43,6 +43,10 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapBackendRoutes();
 
+        $this->mapActivationRoutes();
+
+        $this->mapCleanerRoutes();
+
         //
     }
 
@@ -89,5 +93,20 @@ class RouteServiceProvider extends ServiceProvider
         Route::namespace($this->namespace.'\Front')
             ->middleware('web')
             ->group(base_path('routes/front.php'));
+    }
+
+    protected function mapActivationRoutes()
+    {
+        Route::namespace($this->namespace)
+            ->middleware('web')
+            ->group(base_path('routes/activation.php'));
+    }
+
+    protected function mapCleanerRoutes()
+    {
+        Route::prefix('cleaner')
+             ->middleware('web')
+             ->namespace($this->namespace.'\Cleaner')
+             ->group(base_path('routes/cleaner.php'));
     }
 }

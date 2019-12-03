@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserStoreRequest;
+use App\Services\CleanerService;
+use App\Models\User;
 
 class HomeController extends Controller
 {
@@ -12,9 +14,10 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(CleanerService $cleanerService)
     {
         // $this->middleware('auth');
+        $this->cleanerService = $cleanerService;
     }
 
     /**
@@ -35,7 +38,10 @@ class HomeController extends Controller
     public function registerCleaner(UserStoreRequest $request)
     {
         if( $request->method() == 'POST') {
-            // call validation method
+            $user = $this->cleanerService->registerCleanerFront($request);
+            if( $user ) {
+                return redirect()->route('activate');
+            }
         }
         return view('frontend.register_cleaner');
     }

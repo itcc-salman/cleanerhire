@@ -24,6 +24,7 @@ class User extends Authenticatable
         'token',
         'signup_ip_address',
         'signup_confirmation_ip_address',
+        'status',
     ];
 
     /**
@@ -43,4 +44,18 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function isAdmin()
+    {
+        if( $this->role == 'superadmin' || $this->role == 'admin' )
+            return true;
+        return false;
+    }
+
+    public function isCleaner()
+    {
+        if( $this->role == 'cleaner' )
+            return true;
+        return false;
+    }
 }
