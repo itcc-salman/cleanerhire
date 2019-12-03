@@ -74,7 +74,7 @@
                         <!--begin::Head-->
                         <div class="kt-login__head">
                             <span class="kt-login__signup-label">Already have an account.</span>&nbsp;&nbsp;
-                            <a href="javascript:void(0)" class="kt-link kt-login__signup-link">Sign In!</a>
+                            <a href="{{ route('login') }}" class="kt-link kt-login__signup-link">Sign In!</a>
                         </div>
 
                         <!--end::Head-->
