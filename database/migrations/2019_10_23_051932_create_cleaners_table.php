@@ -16,7 +16,7 @@ class CreateCleanersTable extends Migration
         Schema::create('cleaners', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('user_id')->unsigned();
-            $table->integer('parent_id')->unsigned()->nullable();
+            $table->integer('parent_id')->unsigned()->nullable()->default(0)->comment('NULL - agency,0 - cleaner');
             $table->string('first_name');
             $table->string('last_name')->nullable();
             $table->string('phone')->nullable();

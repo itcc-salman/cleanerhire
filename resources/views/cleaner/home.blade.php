@@ -1,4 +1,4 @@
-@extends('backend.layouts.master')
+@extends('cleaner.layouts.master')
 
 @section('content')
 <!--Begin::Dashboard 5-->
