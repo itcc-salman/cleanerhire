@@ -125,8 +125,8 @@ var KTDatatableRemoteAjaxDemo = function() {
                         map: function(raw) {
                             // sample data mapping
                             var dataSet = raw;
-                            if (typeof raw.data !== 'undefined') {
-                                dataSet = raw.data;
+                            if (typeof raw.cleaners !== 'undefined') {
+                                dataSet = raw.cleaners;
                             }
                             return dataSet;
                         },

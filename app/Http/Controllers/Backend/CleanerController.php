@@ -40,7 +40,7 @@ class CleanerController extends Controller
         $cleaners = Cleaner::all();
 
         $data['code'] = 200;
-        $data['data'] = $cleaners;
+        $data['cleaners'] = $cleaners;
         return response()->json($data);
     }
 
@@ -124,7 +124,7 @@ class CleanerController extends Controller
 
         $data = array();
         $data['code'] = 400;
-        $data['data'] = null;
+        $data['cleaner'] = null;
         $data['message'] = 'Invalid Cleaner';
         $id = $request->get('id', null);
         $last_step = $request->get('last_step', null);
@@ -165,23 +165,6 @@ class CleanerController extends Controller
                         }
                     }
 
-                    if($request->has('super_account')){
-                        if($request->super_account == 'yes'){
-                            $cleaner->super_account = 'yes';
-                            $cleaner->super_fund_name = $request->get('super_fund_name', $cleaner->super_fund_name);
-                            $cleaner->super_member_number = $request->get('super_member_number', $cleaner->super_member_number);
-                        }
-                        if($request->super_account == 'no'){
-                            $cleaner->super_account = 'no';
-                            $cleaner->super_fund_name = null;
-                            $cleaner->super_member_number = null;
-                        }
-                    }else{
-                        $cleaner->super_account = null;
-                        $cleaner->super_fund_name = null;
-                        $cleaner->super_member_number = null;
-                    }
-
                     $cleaner->visa_status =  $request->has('visa_status') ? $request->get('visa_status') : $cleaner->visa_status;
                     if($cleaner->visa_status == 'other'){
                         $cleaner->visa_status_other = $request->get('visa_status_other', $cleaner->visa_status_other);
@@ -194,8 +177,10 @@ class CleanerController extends Controller
                     $cleaner->driver_license = $request->get('driver_license', $cleaner->driver_license);
                     if($cleaner->driver_license != 'yes'){
                         $cleaner->driver_license_state == null;
+                        $cleaner->driver_license_number == null;
                     }else{
                         $cleaner->driver_license_state = $request->get('driver_license_state', $cleaner->driver_license_state);
+                        $cleaner->driver_license_number = $request->get('driver_license_number', $cleaner->driver_license_number);
                     }
                     $cleaner->nationality =  $request->get('nationality', $cleaner->nationality);
 
@@ -246,7 +231,6 @@ class CleanerController extends Controller
 
         if(!$cleaner){
             $data['code'] = 400;
-            $data['data'] = null;
             $data['message'] = 'Invalid Cleaner';
         }else{
             $cleaner->delete();

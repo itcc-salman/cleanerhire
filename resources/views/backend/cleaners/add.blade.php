@@ -166,23 +166,6 @@
                                             <input type="text" class="form-control d-none" id="abn" name="abn" placeholder="ABN">
                                         </div>
                                     </div>
-                                    <div class="form-group d-none" id="super_account">
-                                        <label>Do you have a Super Account ?</label>
-                                        <div class="kt-radio-inline">
-                                            <label class="kt-radio"><input type="radio" value="yes" name="super_account" > Yes <span></span></label>
-                                            <label class="kt-radio"><input type="radio" value="no" name="super_account"> No <span></span></label>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row d-none"  id="super_account_details">
-                                        <div class="col-4">
-                                            <label>Super Fund Name</label>
-                                            <input type="text" class="form-control" name="super_fund_name" placeholder="Super Fund Name">
-                                        </div>
-                                        <div class="col-4">
-                                            <label>Member Number</label>
-                                            <input type="text" class="form-control" name="super_member_number" placeholder="Member Number">
-                                        </div>
-                                    </div>
                                     <div class="form-group">
                                         <label>Are you an Australian / NZ Citizen or a Permanent Resident?</label>
                                         <div class="kt-radio-inline">
@@ -217,7 +200,9 @@
                                         <div class="">
                                             <input type="text" class="form-control driver_license_state d-none" id="driver_license_state" name="driver_license_state" placeholder="Which State/Country ?">
                                         </div>
-
+                                        <div class="">
+                                            <input type="text" class="form-control driver_license_number d-none" id="driver_license_number" name="driver_license_number" placeholder="Driver License Number">
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label>Nationality</label>
@@ -420,32 +405,24 @@ $('input[type=radio][name=role]').change(function() {
 });
 $('input[type=radio][name=tfn_or_abn]').change(function() {
     if (this.value == 'abn') {
-        $("#super_account").addClass('d-none');
         $("#abn").removeClass('d-none');
         $("#tfn").val('');
         $("#tfn").addClass('d-none');
     }
     else if (this.value == 'tfn') {
-        $("#super_account").removeClass('d-none');
         $("#tfn").removeClass('d-none');
         $("#abn").val('');
         $("#abn").addClass('d-none');
     }
 });
-$('input[type=radio][name=super_account]').change(function() {
-    if (this.value == 'no') {
-        $("#super_account_details").addClass('d-none');
-    }
-    else if (this.value == 'yes') {
-        $("#super_account_details").removeClass('d-none');
-    }
-});
 $('input[type=radio][name=driver_license]').change(function() {
     if (this.value == 'no') {
         $("#driver_license_state").addClass('d-none');
+        $("#driver_license_number").addClass('d-none');
     }
     else if (this.value == 'yes') {
         $("#driver_license_state").removeClass('d-none');
+        $("#driver_license_number").removeClass('d-none');
     }
 });
 $('input[type=radio][name=visa_status]').change(function() {

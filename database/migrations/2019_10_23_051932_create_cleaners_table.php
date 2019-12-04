@@ -34,15 +34,13 @@ class CreateCleanersTable extends Migration
 
             $table->string('tfn')->nullable();
             $table->string('abn')->nullable();
-            $table->string('super_account')->nullable();
-            $table->string('super_fund_name')->nullable();
-            $table->string('super_member_number')->nullable();
             $table->string('visa_status')->nullable();
             $table->string('visa_status_other')->nullable();
             $table->string('police_check')->nullable();
             $table->string('own_car')->nullable();
             $table->string('driver_license')->nullable();
             $table->string('driver_license_state')->nullable();
+            $table->string('driver_license_number')->nullable();
             $table->string('nationality')->nullable();
             $table->text('language')->nullable();
             $table->string('gender')->nullable();

@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema; //Import Schema
 use App\Observers\UserObserver;
 use App\Models\User;
+use Debugbar;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,8 +27,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Debugbar::disable();
         Schema::defaultStringLength(191); //Solved by increasing StringLength
-
         User::observe(UserObserver::class);
     }
 }
