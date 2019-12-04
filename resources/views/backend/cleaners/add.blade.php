@@ -50,7 +50,7 @@
                                         <i class="flaticon-responsive"></i>
                                     </div>
                                     <div class="kt-wizard-v1__nav-label">
-                                        3. Cleaning & Equipment Details
+                                        3. Services
                                     </div>
                                 </div>
                             </div>
@@ -151,15 +151,15 @@
                                     <div class="form-group">
                                         <label>Are you an individual or an agency?</label>
                                         <div class="kt-radio-inline">
-                                            <label class="kt-radio"><input type="radio" value="cleaner" name="role"> Individual <span></span></label>
-                                            <label class="kt-radio"><input type="radio" value="agency" name="role"> Agency <span></span></label>
+                                            <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="cleaner" name="role"> Individual <span></span></label>
+                                            <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="agency" name="role"> Agency <span></span></label>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label>Do you want to register as TFN or ABN?</label>
                                         <div class="kt-radio-inline">
-                                            <label class="kt-radio"><input type="radio" id="radio_abn" value="abn" name="tfn_or_abn" > ABN <span></span></label>
-                                            <label class="kt-radio"><input type="radio" id="radio_tfn" value="tfn" name="tfn_or_abn"> TFN <span></span></label>
+                                            <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" id="radio_abn" value="abn" name="tfn_or_abn" > ABN <span></span></label>
+                                            <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" id="radio_tfn" value="tfn" name="tfn_or_abn"> TFN <span></span></label>
                                         </div>
                                         <div class="">
                                             <input type="text" class="form-control d-none" id="tfn" name="tfn" placeholder="TFN">
@@ -169,9 +169,9 @@
                                     <div class="form-group">
                                         <label>Are you an Australian / NZ Citizen or a Permanent Resident?</label>
                                         <div class="kt-radio-inline">
-                                            <label class="kt-radio"><input type="radio" value="citizen" name="visa_status"> Australian / NZ Citizen <span></span></label>
-                                            <label class="kt-radio"><input type="radio" value="pr" name="visa_status"> Permanent Resident <span></span></label>
-                                            <label class="kt-radio"><input type="radio" value="other" name="visa_status"> Other (Please Specify) <span></span></label>
+                                            <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="citizen" name="visa_status"> Australian / NZ Citizen <span></span></label>
+                                            <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="pr" name="visa_status"> Permanent Resident <span></span></label>
+                                            <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="other" name="visa_status"> Other (Please Specify) <span></span></label>
                                         </div>
                                         <div class="">
                                             <input type="text" class="form-control d-none" id="visa_status_other" name="visa_status_other" placeholder="State/Country">
@@ -180,22 +180,22 @@
                                     <div class="form-group">
                                         <label>Do you have a Police Check? (Must be within last 12 months)</label>
                                         <div class="kt-radio-inline">
-                                            <label class="kt-radio"><input type="radio" value="yes" name="police_check"> Yes <span></span></label>
-                                            <label class="kt-radio"><input type="radio" value="no" name="police_check"> No <span></span></label>
+                                            <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="yes" name="police_check"> Yes <span></span></label>
+                                            <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="no" name="police_check"> No <span></span></label>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label>Do you have your own car?</label>
                                         <div class="kt-radio-inline">
-                                            <label class="kt-radio"><input type="radio" value="yes" name="own_car"> Yes <span></span></label>
-                                            <label class="kt-radio"><input type="radio" value="no" name="own_car"> No <span></span></label>
+                                            <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="yes" name="own_car"> Yes <span></span></label>
+                                            <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="no" name="own_car"> No <span></span></label>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label>Do you have a Driver License?</label>
                                         <div class="kt-radio-inline">
-                                            <label class="kt-radio"><input type="radio" value="yes" name="driver_license"> Yes <span></span></label>
-                                            <label class="kt-radio"><input type="radio" value="no" name="driver_license"> No <span></span></label>
+                                            <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="yes" name="driver_license"> Yes <span></span></label>
+                                            <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="no" name="driver_license"> No <span></span></label>
                                         </div>
                                         <div class="">
                                             <input type="text" class="form-control driver_license_state d-none" id="driver_license_state" name="driver_license_state" placeholder="Which State/Country ?">
@@ -241,9 +241,9 @@
                                     <div class="form-group">
                                         <label>Gender?</label>
                                         <div class="kt-radio-inline">
-                                            <label class="kt-radio"><input type="radio" value="male" name="gender"> Male <span></span></label>
-                                            <label class="kt-radio"><input type="radio" value="female" name="gender"> Female <span></span></label>
-                                            <label class="kt-radio"><input type="radio" value="unknown" name="gender"> Do not want to specify <span></span></label>
+                                            <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="male" name="gender"> Male <span></span></label>
+                                            <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="female" name="gender"> Female <span></span></label>
+                                            <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="unknown" name="gender"> Do not want to specify <span></span></label>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -303,9 +303,10 @@
 
                         <!--begin: Form Wizard Step 3-->
                         <div class="kt-wizard-v1__content" data-ktwizard-type="step-content">
-                            <div class="kt-heading kt-heading--md">Cleaning & Equipment Details</div>
+                            <div class="kt-heading kt-heading--md">Services</div>
                             <div class="kt-form__section kt-form__section--first">
-                                <div class="kt-wizard-v1__form">
+                                <div class="kt-wizard-v1__form" id="stepThreeWizardDiv">
+
                                 </div>
                             </div>
                         </div>
@@ -364,74 +365,99 @@
 @push('scripts')
 <script type="text/javascript">
 
-function fileupload(){
-    var fd = new FormData();
-    var files = $('#file')[0].files[0];
-    fd.append('file', files);
-    $.ajax({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        url: '/admin/uploadfile',
-        type: 'post',
-        data: fd,
-        contentType: false,
-        processData: false,
-        success: function(response){
-            if(response.code == 200){
-                var selectedValue = '#'+$('#fileUploadSelect').val();
-                $(selectedValue).val(response.data);
-                $(selectedValue+'_file_name').html(": "+response.data);
-                $('#file').val('');
-                $('.custom-file-label').removeClass("selected").html("Choose file");
-            }
-        },
-    });
-}
+    function getStep3Services(){
+        $.ajax({
+            url: '{{ route('backend.ajax.services') }}',
+            type: 'get',
+            success: function(response){
+                if(response.code == 200){
+                    var htmlstring = '<div class="form-group"><div class="kt-checkbox-list">';
+                    $.each(response.services, function(index, el) {
+                        htmlstring = htmlstring + '<label class="kt-checkbox kt-checkbox--tick kt-checkbox--brand"><input class="cleaner-services-checkbox" name="cleaner_services[]" value="'+ el.id +'" type="checkbox">' + el.name + '<span></span></label>';
+                        htmlstring = htmlstring + '<div class="form-group kt-margin-b-5 d-none" id="service_'+ el.id +'"><label>Do you have relevant equipments?</label><div class="kt-radio-inline"><label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="1" name="has_equipment_'+el.id+'"> Yes <span></span></label><label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="0" name="has_equipment_'+el.id+'"> No <span></span></label></div></div>'
+                    });
+                    htmlstring = htmlstring +  '</div></div>';
+                }else{
+                    var htmlstring = 'No Services Found';
+                }
+
+                $("#stepThreeWizardDiv").html(htmlstring);
+            },
+        });
+    }
+    function fileupload(){
+        var fd = new FormData();
+        var files = $('#file')[0].files[0];
+        fd.append('file', files);
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: '/admin/uploadfile',
+            type: 'post',
+            data: fd,
+            contentType: false,
+            processData: false,
+            success: function(response){
+                if(response.code == 200){
+                    var selectedValue = '#'+$('#fileUploadSelect').val();
+                    $(selectedValue).val(response.data);
+                    $(selectedValue+'_file_name').html(": "+response.data);
+                    $('#file').val('');
+                    $('.custom-file-label').removeClass("selected").html("Choose file");
+                }
+            },
+        });
+    }
 
 </script>
 
 <script>
-$('input[type=radio][name=role]').change(function() {
-    if (this.value == 'cleaner') {
-        $("#radio_tfn").prop("disabled", false);
-        $("#radio_tfn").parent().removeClass('kt-radio--disabled');
-    }
-    else if (this.value == 'agency') {
-        $("#radio_tfn").prop("disabled", true);
-        $("#radio_tfn").parent().addClass('kt-radio--disabled');
-        $("#radio_abn").prop("checked", true);
-    }
-});
-$('input[type=radio][name=tfn_or_abn]').change(function() {
-    if (this.value == 'abn') {
-        $("#abn").removeClass('d-none');
-        $("#tfn").val('');
-        $("#tfn").addClass('d-none');
-    }
-    else if (this.value == 'tfn') {
-        $("#tfn").removeClass('d-none');
-        $("#abn").val('');
-        $("#abn").addClass('d-none');
-    }
-});
-$('input[type=radio][name=driver_license]').change(function() {
-    if (this.value == 'no') {
-        $("#driver_license_state").addClass('d-none');
-        $("#driver_license_number").addClass('d-none');
-    }
-    else if (this.value == 'yes') {
-        $("#driver_license_state").removeClass('d-none');
-        $("#driver_license_number").removeClass('d-none');
-    }
-});
-$('input[type=radio][name=visa_status]').change(function() {
-    if (this.value != 'citizen' && this.value != 'pr') {
-        $("#visa_status_other").removeClass('d-none');
-    }else{
-        $("#visa_status_other").addClass('d-none');
-    }
-});
+
+    // Step 2
+    $('input[type=radio][name=role]').change(function() {
+        if (this.value == 'cleaner') {
+            $("#radio_tfn").prop("disabled", false);
+            $("#radio_tfn").parent().removeClass('kt-radio--disabled');
+        }
+        else if (this.value == 'agency') {
+            $("#radio_tfn").prop("disabled", true);
+            $("#radio_tfn").parent().addClass('kt-radio--disabled');
+            $("#radio_abn").prop("checked", true);
+        }
+    });
+
+    $('input[type=radio][name=tfn_or_abn]').change(function() {
+        if (this.value == 'abn') {
+            $("#abn").removeClass('d-none');
+            $("#tfn").val('');
+            $("#tfn").addClass('d-none');
+        }
+        else if (this.value == 'tfn') {
+            $("#tfn").removeClass('d-none');
+            $("#abn").val('');
+            $("#abn").addClass('d-none');
+        }
+    });
+
+    $('input[type=radio][name=driver_license]').change(function() {
+        if (this.value == 'no') {
+            $("#driver_license_state").addClass('d-none');
+            $("#driver_license_number").addClass('d-none');
+        }
+        else if (this.value == 'yes') {
+            $("#driver_license_state").removeClass('d-none');
+            $("#driver_license_number").removeClass('d-none');
+        }
+    });
+
+    $('input[type=radio][name=visa_status]').change(function() {
+        if (this.value != 'citizen' && this.value != 'pr') {
+            $("#visa_status_other").removeClass('d-none');
+        }else{
+            $("#visa_status_other").addClass('d-none');
+        }
+    });
 
 </script>
 
@@ -596,36 +622,46 @@ $('input[type=radio][name=visa_status]').change(function() {
 
     $(document).ready(function() {
         KTWizard1.init();
-    });
 
-    var $repeater = $('#kt_repeater_3').repeater({
-        initEmpty: false,
+        var $repeater = $('#kt_repeater_3').repeater({
+            initEmpty: false,
 
-        defaultValues: [],
+            defaultValues: [],
 
-        show: function() {
-            $(this).slideDown();
-        },
+            show: function() {
+                $(this).slideDown();
+            },
 
-        hide: function(deleteElement) {
-            if(confirm('Are you sure you want to delete this element?')) {
-                $(this).slideUp(deleteElement);
+            hide: function(deleteElement) {
+                if(confirm('Are you sure you want to delete this element?')) {
+                    $(this).slideUp(deleteElement);
+                }
             }
-        }
-    });
-    // $repeater.setList();
+        });
+        // $repeater.setList();
 
-    $('#kt_datepicker_1, #kt_datepicker_1_validate').datepicker({
-        clearBtn: true,
-        todayBtn: true,
-        todayHighlight: true,
-        orientation: "bottom left",
-        endDate: new Date,
-        templates: {
-            leftArrow: '<i class="la la-angle-left"></i>',
-            rightArrow: '<i class="la la-angle-right"></i>'
-        }
-    });
+        $('#kt_datepicker_1').datepicker({
+            clearBtn: true,
+            todayBtn: true,
+            todayHighlight: true,
+            orientation: "bottom left",
+            endDate: new Date,
+            templates: {
+                leftArrow: '<i class="la la-angle-left"></i>',
+                rightArrow: '<i class="la la-angle-right"></i>'
+            }
+        });
 
+        getStep3Services();
+
+        // Step 3
+        $(document).on('change', '.cleaner-services-checkbox', function(event) {
+            if(this.checked) {
+                $('#service_'+this.value).removeClass("d-none");
+            }else{
+                $('#service_'+this.value).addClass("d-none");
+            }
+        });
+    });
 </script>
 @endpush
