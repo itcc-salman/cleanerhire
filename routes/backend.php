@@ -22,3 +22,5 @@ Route::prefix('ajax')->group(function () {
     Route::get('cleaners', 'CleanerController@getAllCleaners')->name('backend.ajax.cleaners');
     Route::get('cleaner/get-cleaner-by-id', 'CleanerController@get-cleaner-by-id')->name('backend.ajax.cleaner.get_cleaner_by_id');
 });
+
+Route::post('uploadfile','CleanerController@showUploadFile');
