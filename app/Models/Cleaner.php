@@ -18,4 +18,12 @@ class Cleaner extends Model
         'user_id',
     ];
 
+    /**
+     * Get all of the services for the cleaner.
+     */
+    public function services()
+    {
+        return $this->belongsToMany('App\Models\CleaningServices', 'cleaner_service_mappings', 'cleaner_id', 'cleaning_service_id');
+    }
+
 }

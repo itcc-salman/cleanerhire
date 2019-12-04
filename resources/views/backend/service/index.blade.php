@@ -125,8 +125,8 @@ var KTDatatableRemoteAjaxDemo = function() {
                         map: function(raw) {
                             // sample data mapping
                             var dataSet = raw;
-                            if (typeof raw.data !== 'undefined') {
-                                dataSet = raw.data;
+                            if (typeof raw.services !== 'undefined') {
+                                dataSet = raw.services;
                             }
                             return dataSet;
                         },
@@ -174,7 +174,7 @@ var KTDatatableRemoteAjaxDemo = function() {
                             1: {'title': 'Yes', 'class': 'kt-badge--success'},
                             0: {'title': 'No', 'class': ' kt-badge--danger'},
                         };
-                        return '<span class="kt-badge ' + status[row.status].class + ' kt-badge--inline kt-badge--pill">' + status[row.status].title + '</span>';
+                        return '<span class="kt-badge ' + status[row.individual].class + ' kt-badge--inline kt-badge--pill">' + status[row.individual].title + '</span>';
                     },
                 }, {
                     field: 'agency',
@@ -184,7 +184,7 @@ var KTDatatableRemoteAjaxDemo = function() {
                             1: {'title': 'Yes', 'class': 'kt-badge--success'},
                             0: {'title': 'No', 'class': ' kt-badge--danger'},
                         };
-                        return '<span class="kt-badge ' + status[row.status].class + ' kt-badge--inline kt-badge--pill">' + status[row.status].title + '</span>';
+                        return '<span class="kt-badge ' + status[row.agency].class + ' kt-badge--inline kt-badge--pill">' + status[row.agency].title + '</span>';
                     },
                 }, {
                     field: 'status',

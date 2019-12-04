@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\CleaningServiceStoreRequest;
 use App\Http\Controllers\Controller;
 use App\Models\CleaningServices;
 
@@ -47,7 +48,7 @@ class CleaningServiceController extends Controller
         return response()->json($data);
     }
 
-    public function create()
+    public function create(CleaningServiceStoreRequest $request)
     {
         return view('backend.service.create');
     }
