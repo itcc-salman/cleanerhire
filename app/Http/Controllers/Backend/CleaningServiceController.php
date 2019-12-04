@@ -43,7 +43,7 @@ class CleaningServiceController extends Controller
         }
 
         $data['code'] = 200;
-        $data['data'] = $cleaningServices;
+        $data['services'] = $cleaningServices;
         return response()->json($data);
     }
 

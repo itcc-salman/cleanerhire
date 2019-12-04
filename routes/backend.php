@@ -19,10 +19,7 @@ Route::post('cleaner/update', 'CleanerController@postUpdate')->name('backend.cle
 
 Route::prefix('services')->group(function () {
     Route::get('/', 'CleaningServiceController@index')->name('backend.services');
-    Route::match(['GET', 'POST'], '/create', [
-        'uses' => 'CleaningServiceController@create',
-        'as'   =>  'backend.sevice.create'
-    ]);
+    Route::match(['GET', 'POST'], '/create', 'CleaningServiceController@create')->name('backend.sevice.create');
 });
 
 
