@@ -256,4 +256,23 @@ class CleanerController extends Controller
         return response()->json($data);
     }
 
+    public function showUploadFile(Request $request) {
+        $file = $request->file('file');
+
+        //Move Uploaded File
+        $destinationPath = public_path('backend\uploads');
+        $fileName = time().$file->getClientOriginalName();
+
+        $data = array();
+        if($file->move($destinationPath,$fileName)){
+            $data['code'] = 200;
+            $data['data'] = $fileName;
+            $data['message'] = 'File uploaded successfully..!';
+        }else{
+            $data['code'] = 400;
+            $data['data'] = null;
+            $data['message'] = 'Something went wrong..!';
+        }
+        return response()->json($data);
+    }
 }

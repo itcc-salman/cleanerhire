@@ -271,34 +271,41 @@
                                             <div class="col-6">
                                                 <div class="form-group">
                                                     <label>Upload Documents</label>
-                                                    <select class="form-control">
-                                                        <option>Driving License</option>
-                                                        <option>Medical Card</option>
-                                                        <option>Passport</option>
-                                                        <option>Utility Bill</option>
-                                                        <option>Bank Statement</option>
-                                                        <option>Police Check</option>
-                                                        <option>Certifications</option>
+                                                    <select id="fileUploadSelect" class="form-control">
+                                                        <option value="doc_driving_licence">Driving License</option>
+                                                        <option value="doc_medicare_card">Medical Card</option>
+                                                        <option value="doc_passport">Passport</option>
+                                                        <option value="doc_bank_statement">Utility Bill</option>
+                                                        <option value="doc_utility_bill">Bank Statement</option>
+                                                        <option value="doc_certifications">Police Check</option>
+                                                        <option value="doc_police_check">Certifications</option>
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
                                                     <div></div>
                                                     <div class="custom-file">
-                                                        <input type="file" class="custom-file-input">
+                                                        <input type="file" id="file" name="file" class="custom-file-input">
                                                         <label class="custom-file-label">Choose file</label>
                                                     </div>
                                                 </div>
-                                                <button type="button" class="btn btn-primary">Upload</button>
+                                                <button type="button" onclick="fileupload();" class="btn btn-primary">Upload</button>
                                             </div>
                                             <div class="col-6 border-left-divider">
                                                 <label>List of Documents</label>
-                                                <p class="m-0 p-0"><span>1. Driving License</label></p>
-                                                <p class="m-0 p-0"><span>2. Medical Card</span></p>
-                                                <p class="m-0 p-0"><span>3. Passport</span></p>
-                                                <p class="m-0 p-0"><span>4. Utility Bill</span></p>
-                                                <p class="m-0 p-0"><span>5. Bank Statement</span></p>
-                                                <p class="m-0 p-0"><span>6. Police Check</span></p>
-                                                <p class="m-0 p-0"><span>7. Certifications</span></p>
+                                                <input type="hidden" name="doc_driving_licence" id="doc_driving_licence">
+                                                <input type="hidden" name="doc_medicare_card" id="doc_medicare_card">
+                                                <input type="hidden" name="doc_passport" id="doc_passport">
+                                                <input type="hidden" name="doc_bank_statement" id="doc_bank_statement">
+                                                <input type="hidden" name="doc_utility_bill" id="doc_utility_bill">
+                                                <input type="hidden" name="doc_certifications" id="doc_certifications">
+                                                <input type="hidden" name="doc_police_check" id="doc_police_check">
+                                                <p class="m-0 p-0"><span>1. Driving License</span><span id="doc_driving_licence_file_name"></span></p>
+                                                <p class="m-0 p-0"><span>2. Medical Card</span><span id="doc_medicare_card_file_name"></span></p>
+                                                <p class="m-0 p-0"><span>3. Passport</span><span id="doc_passport_file_name"></span></p>
+                                                <p class="m-0 p-0"><span>4. Utility Bill</span><span id="doc_bank_statement_file_name"></span></p>
+                                                <p class="m-0 p-0"><span>5. Bank Statement</span><span id="doc_utility_bill_file_name"></span></p>
+                                                <p class="m-0 p-0"><span>6. Police Check</span><span id="doc_certifications_file_name"></span></p>
+                                                <p class="m-0 p-0"><span>7. Certifications</span><span id="doc_police_check_file_name"></span></p>
                                             </div>
                                         </div>
                                     </div>
@@ -370,6 +377,34 @@
 @endsection
 
 @push('scripts')
+<script type="text/javascript">
+
+function fileupload(){
+    var fd = new FormData();
+    var files = $('#file')[0].files[0];
+    fd.append('file', files);
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: '/admin/uploadfile',
+        type: 'post',
+        data: fd,
+        contentType: false,
+        processData: false,
+        success: function(response){
+            if(response.code == 200){
+                var selectedValue = '#'+$('#fileUploadSelect').val();
+                $(selectedValue).val(response.data);
+                $(selectedValue+'_file_name').html(": "+response.data);
+                $('#file').val('');
+                $('.custom-file-label').removeClass("selected").html("Choose file");
+            }
+        },
+    });
+}
+
+</script>
 
 <script>
 $('input[type=radio][name=role]').change(function() {
@@ -589,10 +624,7 @@ $('input[type=radio][name=visa_status]').change(function() {
     var $repeater = $('#kt_repeater_3').repeater({
         initEmpty: false,
 
-        defaultValues: [
-            {"lname":"dgdgd","lfluency":"gfdgdfg"},
-            {"lname":"dgdfg","lfluency":"fdgfdg"}
-        ],
+        defaultValues: [],
 
         show: function() {
             $(this).slideDown();
