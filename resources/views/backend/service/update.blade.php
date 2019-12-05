@@ -9,13 +9,13 @@
                 <div class="kt-portlet__head">
                     <div class="kt-portlet__head-label">
                         <h3 class="kt-portlet__head-title">
-                            Create Service
+                            Update Service
                         </h3>
                     </div>
                 </div>
 
                 <!--begin::Form-->
-                <form class="kt-form" method="POST" action="{{ route('backend.sevice.create') }}">
+                <form class="kt-form" method="POST" action="{{ route('backend.sevice.update', $cleaningService->id) }}">
                     @csrf
                     <div class="kt-portlet__body">
 
@@ -25,11 +25,11 @@
                                     <label>@lang('labels.cleSerResidentialOrCommercial')</label>
                                     <div class="kt-checkbox-inline">
                                         <label class="kt-checkbox kt-checkbox--tick kt-checkbox--brand kt-margin-0">
-                                            <input name="residential" value="1" type="checkbox">@lang('labels.cleSerResidential')<span></span>
+                                            <input name="residential" value="1" {{ $cleaningService->residential ? 'checked' : '' }} type="checkbox">@lang('labels.cleSerResidential')<span></span>
                                         </label>
                                         &nbsp;
                                         <label class="kt-checkbox kt-checkbox--tick kt-checkbox--brand kt-margin-0">
-                                            <input name="commercial" value="1" type="checkbox">@lang('labels.cleSerCommercial')<span></span>
+                                            <input name="commercial" value="1" {{ $cleaningService->commercial ? 'checked' : '' }} type="checkbox">@lang('labels.cleSerCommercial')<span></span>
                                         </label>
                                     </div>
                                 </div>
@@ -42,11 +42,11 @@
                                     <label>@lang('labels.cleSerOnceoffOrRegular')</label>
                                     <div class="kt-checkbox-inline">
                                         <label class="kt-checkbox kt-checkbox--tick kt-checkbox--brand kt-margin-0">
-                                            <input name="once_off" value="1" type="checkbox">@lang('labels.cleSerOnceoff')<span></span>
+                                            <input name="once_off" value="1" {{ $cleaningService->once_off ? 'checked' : '' }} type="checkbox">@lang('labels.cleSerOnceoff')<span></span>
                                         </label>
                                         &nbsp;
                                         <label class="kt-checkbox kt-checkbox--tick kt-checkbox--brand kt-margin-0">
-                                            <input name="regular" value="1" type="checkbox">@lang('labels.cleSerRegular')<span></span>
+                                            <input name="regular" value="1" {{ $cleaningService->regular ? 'checked' : '' }} type="checkbox">@lang('labels.cleSerRegular')<span></span>
                                         </label>
                                     </div>
                                 </div>
@@ -59,11 +59,11 @@
                                     <label>@lang('labels.cleSerIndividualOrAgency')</label>
                                     <div class="kt-checkbox-inline">
                                         <label class="kt-checkbox kt-checkbox--tick kt-checkbox--brand kt-margin-0">
-                                            <input name="individual" value="1" type="checkbox">@lang('labels.cleSerIndividual')<span></span>
+                                            <input name="individual" value="1" {{ $cleaningService->individual ? 'checked' : '' }} type="checkbox">@lang('labels.cleSerIndividual')<span></span>
                                         </label>
                                         &nbsp;
                                         <label class="kt-checkbox kt-checkbox--tick kt-checkbox--brand kt-margin-0">
-                                            <input name="agency" value="1" type="checkbox">@lang('labels.cleSerAgency')<span></span>
+                                            <input name="agency" value="1" {{ $cleaningService->agency ? 'checked' : '' }} type="checkbox">@lang('labels.cleSerAgency')<span></span>
                                         </label>
                                     </div>
                                 </div>
@@ -72,17 +72,16 @@
 
                         <div class="form-group validated">
                             <label>Name</label>
-                            <input type="text" name="name" class="form-control @error('name') {{ 'is-invalid' }} @enderror" placeholder="Name">
+                            <input type="text" name="name" value="{{ $cleaningService->name }}" class="form-control @error('name') {{ 'is-invalid' }} @enderror" placeholder="Name">
                             @error('name')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-
                         <div class="form-group validated">
                             <label>Status</label>
                             <div class="kt-radio-inline">
-                                <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="1" name="status"> Active <span></span></label>
-                                <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="0" name="status"> Deactive <span></span></label>
+                                <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="1" {{ $cleaningService->status ? 'checked' : '' }} name="status"> Active <span></span></label>
+                                <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="0" {{ !$cleaningService->status ? 'checked' : '' }} name="status"> Deactive <span></span></label>
                             </div>
                             @error('status')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -92,8 +91,8 @@
                     </div>
                     <div class="kt-portlet__foot">
                         <div class="kt-form__actions">
-                            <button type="submit" class="btn btn-success">Submit</button>
-                            <button type="reset" class="btn btn-secondary">Cancel</button>
+                            <button type="submit" class="btn btn-success">Update</button>
+                            <a href="{{ route('backend.services') }}" class="btn btn-secondary">Cancel</a>
                         </div>
                     </div>
                 </form>
@@ -106,3 +105,7 @@
     </div>
 </div>
 @endsection
+@push('scripts')
+<script>
+</script>
+@endpush

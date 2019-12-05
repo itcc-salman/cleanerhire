@@ -20,6 +20,7 @@ Route::post('cleaner/update', 'CleanerController@postUpdate')->name('backend.cle
 Route::prefix('services')->group(function () {
     Route::get('/', 'CleaningServiceController@index')->name('backend.services');
     Route::match(['GET', 'POST'], '/create', 'CleaningServiceController@create')->name('backend.sevice.create');
+    Route::match(['GET', 'POST'], '/update/{id?}', 'CleaningServiceController@update')->name('backend.sevice.update');
 });
 
 
@@ -29,6 +30,7 @@ Route::prefix('ajax')->group(function () {
 
     // Services
     Route::get('services', 'CleaningServiceController@getAllServices')->name('backend.ajax.services');
+    Route::post('service/delete', 'CleaningServiceController@delete')->name('backend.ajax.service.delete');
 });
 
 Route::post('uploadfile','CleanerController@showUploadFile');

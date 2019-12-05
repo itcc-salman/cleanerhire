@@ -28,7 +28,8 @@ class CleaningServiceStoreRequest extends FormRequest
             case 'GET': return []; break;
             case 'POST':
                 return [
-                    'name'                  => 'required',
+                    'name'      => 'required',
+                    'status'    => 'required',
                 ];
             break;
             default: break;
@@ -44,6 +45,7 @@ class CleaningServiceStoreRequest extends FormRequest
     {
         return [
             'name.required' => 'Name is required',
+            'status.required' => 'Status is required',
         ];
     }
 }

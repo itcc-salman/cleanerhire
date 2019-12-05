@@ -204,12 +204,12 @@ var KTDatatableRemoteAjaxDemo = function() {
                     width: 110,
                     overflow: 'visible',
                     autoHide: false,
-                    template: function() {
+                    template: function(row) {
                         return '\
-                        <a href="javascript:;" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="Edit details">\
+                        <a href="{{ route('backend.sevice.update') }}/'+row.id+'" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="Edit details">\
                             <i class="flaticon2-edit"></i>\
                         </a>\
-                        <a href="javascript:;" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="Delete">\
+                        <a href="javascript:;" class="btn btn-sm btn-clean btn-icon btn-icon-sm deleteme" data-delete_id="'+row.id+'" title="Delete">\
                             <i class="flaticon2-trash"></i>\
                         </a>\
                     ';
@@ -240,6 +240,49 @@ var KTDatatableRemoteAjaxDemo = function() {
 
 jQuery(document).ready(function() {
     KTDatatableRemoteAjaxDemo.init();
+
+    $(document).on('click', '.deleteme', function (e) {
+        e.preventDefault();
+        let _delete_id = $(this).data('delete_id');
+        swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!'
+        }).then(function(result) {
+            if (result.value) {
+                // call ajax function to delete it
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    type: "POST",
+                    url: '{{ route('backend.ajax.service.delete') }}',
+                    cache: false,
+                    dataType: "JSON",
+                    data: {
+                        delete_id: _delete_id
+                    },
+                    success: function(data) {
+                        if( data.status == false ) {
+                            showToast(data.msg, 0);
+                        } else {
+                            swal.fire({
+                                title: 'Deleted!',
+                                text: 'Record has been deleted.',
+                                type: 'success'
+                            }).then(function(result) {
+                                location.reload();
+                            });
+                        }
+                    }
+                });
+            }
+        });
+    });
 });
 </script>
 

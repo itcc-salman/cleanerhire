@@ -26,7 +26,8 @@
     <div id="hire_login" class="modal fade">
         <div class="modal-dialog modal-login">
             <div class="modal-content">
-                <form action="#" method="post">
+                <form method="POST" action="{{ route('login') }}" id="login_form">
+                    @csrf
                     <div class="modal-header">
                         <h4 class="modal-title">Log In</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -34,12 +35,12 @@
                     <div class="modal-body">
                         <div class="hire_login_tab">
                             <label>Email</label>
-                            <input type="email" required autocomplete="username">
+                            <input type="email" required name="email" autocomplete="off">
                         </div>
                         <div class="hire_login_tab">
                             <label>Password</label>
-                            <input type="password" required autocomplete="new-password">
-                            <a href="#" class="forgot_pass">Forgot Password?</a>
+                            <input type="password" required name="password" autocomplete="current-password">
+                            <a href="javascript:void(0)" class="forgot_pass">Forgot Password?</a>
                         </div>
                         <div class="hire_login_tab">
                             <input type="submit" class="btn_login" value="Login">
@@ -134,7 +135,7 @@
     <script>
     $('.carousel').carousel({
       interval: 10000
-    })
+    });
     $(document).ready(function(){
         $("#testimonial-slider").owlCarousel({
             items:2,
@@ -143,6 +144,24 @@
             itemsTablet:[768,1],
             pagination:true,
             autoPlay:false
+        });
+
+        $(document).on('submit', '#login_form', function(e) {
+            e.preventDefault();
+            // check for validation
+            $.ajax({
+                type: "POST",
+                url: '{{ route('login') }}',
+                dataType: "JSON",
+                data: $(this).serialize(),
+                success: function(data) {
+                    console.log(data);
+                    if( data.message ) {
+                        alert(data.message);
+                        return;
+                    }
+                }
+            })
         });
     });
     </script>
