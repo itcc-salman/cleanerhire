@@ -9,7 +9,7 @@
         <div class="kt-widget kt-widget--user-profile-3">
             <div class="kt-widget__top">
                 <div class="kt-widget__media kt-hidden-">
-                    <img src="assets/media/users/100_1.jpg" alt="image">
+                    <img src="{{ asset('assets/media/users/default.jpg') }}" alt="image">
                 </div>
                 <div class="kt-widget__pic kt-widget__pic--danger kt-font-danger kt-font-boldest kt-font-light kt-hidden">
                     JM
@@ -17,7 +17,7 @@
                 <div class="kt-widget__content">
                     <div class="kt-widget__head">
                         <a href="#" class="kt-widget__username">
-                            Jason Muller
+                            {{ ucfirst($cleaner->first_name) }} {{ ucfirst($cleaner->last_name) }}
                             <i class="flaticon2-correct kt-font-success"></i>
                         </a>
                         <div class="kt-widget__action">
@@ -26,9 +26,9 @@
                         </div>
                     </div>
                     <div class="kt-widget__subhead">
-                        <a href="#"><i class="flaticon2-new-email"></i>jason@siastudio.com</a>
-                        <a href="#"><i class="flaticon2-calendar-3"></i>PR Manager </a>
-                        <a href="#"><i class="flaticon2-placeholder"></i>Melbourne</a>
+                        <a href="javascript:void(0)"><i class="flaticon2-new-email"></i>{{ $cleaner->email }}</a>
+                        <a href="javascript:void(0)"><i class="flaticon2-calendar-3"></i>{{ ucfirst($cleaner->user->role) }}</a>
+                        <a href="javascript:void(0)"><i class="flaticon2-placeholder"></i>{{ $cleaner->city }}</a>
                     </div>
                     <div class="kt-widget__info">
                         <div class="kt-widget__desc">

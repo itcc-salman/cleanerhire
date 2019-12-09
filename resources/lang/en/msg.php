@@ -27,5 +27,6 @@ return [
      * Cleaner
      *
      */
-
+    'clsPerInfoUpdated' => 'Cleaner Persoanl Information Updated Successfully',
+    'clsPerInfoNotFound' => 'Cleaner Not Found',
 ];

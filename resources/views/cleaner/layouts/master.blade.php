@@ -46,7 +46,7 @@
         <!-- begin:: Header Mobile -->
         <div id="kt_header_mobile" class="kt-header-mobile  kt-header-mobile--fixed ">
             <div class="kt-header-mobile__logo">
-                <a href="{{ route('backend.dashboard') }}">
+                <a href="{{ route('cleaner.home') }}">
                     <img alt="Logo" src="{{ asset('assets/media/logos/logo-light.png') }}" />
                 </a>
             </div>
@@ -140,7 +140,29 @@
         <!--begin::Page Scripts(used by this page) -->
         <script src="{{ asset('assets/js/pages/dashboard.js') }}" type="text/javascript"></script>
 
+        <script>
+            function showToast(msg,type) {
+                toastr.options.closeButton = true;
+                if( type == 1 ) {
+                    toastr.success(msg, 'Success');
+                } else {
+                    toastr.error(msg, 'Error');
+                }
+            }
+        </script>
+
         @stack('scripts')
+
+        <script>
+            @if(Session::has('notify-success'))
+                toastr.options.closeButton = true;
+                toastr.success('{{ Session::get('notify-success') }}', 'Success');
+            @endif
+            @if(Session::has('notify-error'))
+                toastr.options.closeButton = true;
+                toastr.error('{{ Session::get('notify-error') }}', 'Error');
+            @endif
+        </script>
         <!--end::Page Scripts -->
     </body>
 

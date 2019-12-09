@@ -12,6 +12,14 @@
 */
 
 Route::get('/', 'HomeController@index')->name('cleaner.home');
+Route::get('/calendar', 'HomeController@calendar')->name('cleaner.calendar');
+Route::get('/profile', 'HomeController@profile')->name('cleaner.profile');
+
+Route::prefix('ajax')->group(function () {
+    Route::post('profile/partial', 'HomeController@profile')->name('cleaner.ajax.profile.partial');
+    Route::post('profile/personal_info', 'HomeController@personal_info')->name('cleaner.ajax.profile.personal_info');
+
+});
 
 // Route::get('/become-a-cleaner', 'HomeController@becomeACleaner')->name('front.become_a_cleaner');
 

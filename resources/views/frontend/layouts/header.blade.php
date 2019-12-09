@@ -9,7 +9,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ route('front.home') }}"><img src="front/images/logo.png" alt="" /></a>
+                <a class="navbar-brand" href="{{ route('front.home') }}"><img src="{{ asset('front/images/logo.png') }}" alt="" /></a>
             </div>
             <div class="collapse navbar-collapse" id="top_menu">
                 <ul class="nav navbar-nav">

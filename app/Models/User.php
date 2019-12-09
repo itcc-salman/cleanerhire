@@ -45,6 +45,17 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    /**
+     * Set the post title.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function setEmailAttribute($value)
+    {
+        $this->attributes['email'] = strtolower($value);
+    }
+
     public function isAdmin()
     {
         if( $this->role == 'superadmin' || $this->role == 'admin' )

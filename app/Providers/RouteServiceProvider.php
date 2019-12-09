@@ -67,7 +67,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapBackendRoutes()
     {
         Route::prefix('admin')
-             ->middleware('web')
+             ->middleware(['web','adminAuth'])
              ->namespace($this->namespace.'\Backend')
              ->group(base_path('routes/backend.php'));
     }
@@ -104,7 +104,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapCleanerRoutes()
     {
         Route::prefix('cleaner')
-             ->middleware('web')
+             ->middleware(['web','cleanerAuth'])
              ->namespace($this->namespace.'\Cleaner')
              ->group(base_path('routes/cleaner.php'));
     }

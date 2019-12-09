@@ -19,11 +19,38 @@ class Cleaner extends Model
     ];
 
     /**
+     * Get the phone number.
+     *
+     * @param  string  $value
+     * @return string
+    */
+    public function getPhoneAttribute($value)
+    {
+        return !empty($value) ?: '-';
+    }
+
+    /**
+     * Get the city.
+     *
+     * @param  string  $value
+     * @return string
+    */
+    public function getCityAttribute($value)
+    {
+        return !empty($value) ?: '-';
+    }
+
+    /**
      * Get all of the services for the cleaner.
      */
     public function services()
     {
         return $this->belongsToMany('App\Models\CleaningServices', 'cleaner_service_mappings', 'cleaner_id', 'cleaning_service_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
     }
 
 }

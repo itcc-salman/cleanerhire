@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Activation;
 use App\Models\User;
+use App\Models\Cleaner;
 use App\Traits\ActivationTrait;
 use App\Traits\CaptureIpTrait;
 use Auth;
@@ -199,6 +200,10 @@ class ActivateController extends Controller
         $user->activated = true;
         $user->signup_confirmation_ip_address = $ipAddress->getClientIp();
         $user->save();
+
+        $cleaner = Cleaner::where('user_id', $user->id)->first();
+        $cleaner->status = 1;
+        $cleaner->save();
 
         $allActivations = Activation::where('user_id', $user->id)->get();
         foreach ($allActivations as $anActivation) {
