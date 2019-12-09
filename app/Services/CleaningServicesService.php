@@ -3,7 +3,9 @@
 namespace App\Services;
 
 use App\Models\CleaningServices;
+use App\Models\CleanerServiceMapping;
 use Auth;
+use App\Models\Cleaner;
 
 class CleaningServicesService
 {
@@ -18,6 +20,29 @@ class CleaningServicesService
     public function getCleaningServiceById($id)
     {
         return $this->cleaningService_model->find($id);
+    }
+
+    public function getLogedInRoleWiseCleaningServices()
+    {
+        $user_type = Auth::user()->role;
+        if( $user_type == 'agency' ) {
+            return $this->cleaningService_model->where('agency', 1)->get();
+        } else {
+            return $this->cleaningService_model->where('individual', 1)->get();
+        }
+    }
+
+    public function getLogedInCleanerServices()
+    {
+        $cleanerService = new CleanerServiceMapping;
+        return $cleanerService->where('cleaner_id', Auth::Id())->get();
+    }
+
+    public function getLogedInCleanerServicesIds()
+    {
+        $cleanerService = new CleanerServiceMapping;
+        $cleaner = Cleaner::select('id')->where('user_id', Auth::Id())->first();
+        return $cleanerService->where('cleaner_id', $cleaner->id )->pluck('cleaning_service_id')->toArray();
     }
 
     public function registerCleaningServiceBackend($data)

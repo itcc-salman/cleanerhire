@@ -18,6 +18,7 @@ Route::get('/profile', 'HomeController@profile')->name('cleaner.profile');
 Route::prefix('ajax')->group(function () {
     Route::post('profile/partial', 'HomeController@profile')->name('cleaner.ajax.profile.partial');
     Route::post('profile/personal_info', 'HomeController@personal_info')->name('cleaner.ajax.profile.personal_info');
+    Route::post('profile/account_info', 'HomeController@account_info')->name('cleaner.ajax.profile.account_info');
 
 });
 

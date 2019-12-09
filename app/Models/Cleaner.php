@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Carbon\Carbon;
 
 class Cleaner extends Model
 {
@@ -26,7 +27,7 @@ class Cleaner extends Model
     */
     public function getPhoneAttribute($value)
     {
-        return !empty($value) ?: '-';
+        return !empty($value) ? $value : '-';
     }
 
     /**
@@ -37,7 +38,34 @@ class Cleaner extends Model
     */
     public function getCityAttribute($value)
     {
-        return !empty($value) ?: '-';
+        return !empty($value) ? $value : '-';
+    }
+
+    /**
+     * Get the date of birth.
+     *
+     * @param  string  $value
+     * @return string
+    */
+    public function getDateOfBirthAttribute($value)
+    {
+        if( !empty($value) ) {
+            return Carbon::createFromFormat('Y-m-d', $value)->format('m/d/Y');
+        }
+        return $value;
+    }
+
+    /**
+     * Set the cleaner's Date of Birth.
+     *
+     * @param  string  $value
+     * @return void
+     */
+    public function setDateOfBirthAttribute($value)
+    {
+        if( !empty($value) ) {
+            $this->attributes['date_of_birth'] = Carbon::createFromFormat('m/d/Y', $value)->format('Y-m-d');
+        }
     }
 
     /**

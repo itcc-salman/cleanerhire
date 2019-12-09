@@ -69,4 +69,9 @@ class User extends Authenticatable
             return true;
         return false;
     }
+
+    public function cleaner()
+    {
+        $this->hasOne('App\Models\Cleaner', 'user_id');
+    }
 }

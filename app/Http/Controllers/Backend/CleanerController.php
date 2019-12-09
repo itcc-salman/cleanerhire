@@ -248,11 +248,11 @@ class CleanerController extends Controller
         $fileName = time().$file->getClientOriginalName();
 
         $data = array();
-        if($file->move($destinationPath,$fileName)){
+        if( $file->move($destinationPath,$fileName) ){
             $data['code'] = 200;
             $data['data'] = $fileName;
             $data['message'] = 'File uploaded successfully..!';
-        }else{
+        } else {
             $data['code'] = 400;
             $data['data'] = null;
             $data['message'] = 'Something went wrong..!';

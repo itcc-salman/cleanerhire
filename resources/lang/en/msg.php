@@ -28,5 +28,6 @@ return [
      *
      */
     'clsPerInfoUpdated' => 'Cleaner Persoanl Information Updated Successfully',
-    'clsPerInfoNotFound' => 'Cleaner Not Found',
+    'clsNotFound' => 'Cleaner Not Found',
+    'clsAccInfoUpdated' => 'Cleaner Account Information Updated Successfully',
 ];

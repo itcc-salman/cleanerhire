@@ -3,7 +3,7 @@
         <div class="kt-portlet">
             <div class="kt-portlet__head">
                 <div class="kt-portlet__head-label">
-                    <h3 class="kt-portlet__head-title">Visa & Documents <small>update your documents</small></h3>
+                    <h3 class="kt-portlet__head-title">Availability <small>update your time</small></h3>
                 </div>
             </div>
             <form class="kt-form kt-form--label-right" id="visa_documents">

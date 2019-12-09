@@ -37,7 +37,9 @@ class HomeController extends Controller
             $partial_view_name = $request->get('partial_view_name');
             $data = $this->cleanerService->getPartialViewData($partial_view_name);
             $view = view('cleaner.partial.'.$partial_view_name, compact('data'))->render();
-            $data = [ 'code' => 200, 'status' => true, 'html' => $view ];
+            $extra_data = [];
+            if( $partial_view_name == 'account_info' ) { $extra_data = json_decode($data->language); }
+            $data = [ 'code' => 200, 'status' => true, 'html' => $view, 'extra_data' => $extra_data ];
             return response()->json($data);
         }
         $cleaner = $this->cleanerService->getLogedInCleaner();
@@ -51,7 +53,19 @@ class HomeController extends Controller
         if( $cleaner ) {
             $data = [ 'status' => true, 'msg' => trans('msg.clsPerInfoUpdated') ];
         } else {
-            $data = [ 'status' => false, 'msg' => trans('msg.clsPerInfoNotFound') ];
+            $data = [ 'status' => false, 'msg' => trans('msg.clsNotFound') ];
+        }
+        return response()->json($data);
+    }
+
+    public function account_info(Request $request)
+    {
+        $cleaner = $this->cleanerService->updateCleanerAccountInfo($request);
+        $data['code'] = 200;
+        if( $cleaner ) {
+            $data = [ 'status' => true, 'msg' => trans('msg.clsAccInfoUpdated') ];
+        } else {
+            $data = [ 'status' => false, 'msg' => trans('msg.clsNotFound') ];
         }
         return response()->json($data);
     }

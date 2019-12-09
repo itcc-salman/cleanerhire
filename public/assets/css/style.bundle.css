@@ -15352,7 +15352,7 @@ canvas {
   -ms-user-select: none; }
 
 /* Customize website's scrollbar like Mac OS */
-/* 
+/*
 ::-webkit-scrollbar {
     background-color:#f6f6f6;
     width:14px;
@@ -36569,3 +36569,6 @@ body {
     padding: 0.5rem 0.25rem; }
     .my-custom-style .my-custom-element {
       margin-left: 0.5rem; } }
+
+.wd-100 { width: 100%; }
+.kt-aside__brand-logo img { width: 100%; }

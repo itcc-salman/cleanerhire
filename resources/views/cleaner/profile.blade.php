@@ -152,6 +152,21 @@
                                     </span>
                                 </span>
                             </a>
+                            <a href="javascript:void(0)" class="kt-widget__item change_tab" partial_view="account_info">
+                                <span class="kt-widget__section">
+                                    <span class="kt-widget__icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
+                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <rect x="0" y="0" width="24" height="24" />
+                                                <path d="M2.56066017,10.6819805 L4.68198052,8.56066017 C5.26776695,7.97487373 6.21751442,7.97487373 6.80330086,8.56066017 L8.9246212,10.6819805 C9.51040764,11.267767 9.51040764,12.2175144 8.9246212,12.8033009 L6.80330086,14.9246212 C6.21751442,15.5104076 5.26776695,15.5104076 4.68198052,14.9246212 L2.56066017,12.8033009 C1.97487373,12.2175144 1.97487373,11.267767 2.56066017,10.6819805 Z M14.5606602,10.6819805 L16.6819805,8.56066017 C17.267767,7.97487373 18.2175144,7.97487373 18.8033009,8.56066017 L20.9246212,10.6819805 C21.5104076,11.267767 21.5104076,12.2175144 20.9246212,12.8033009 L18.8033009,14.9246212 C18.2175144,15.5104076 17.267767,15.5104076 16.6819805,14.9246212 L14.5606602,12.8033009 C13.9748737,12.2175144 13.9748737,11.267767 14.5606602,10.6819805 Z" fill="#000000" opacity="0.3" />
+                                                <path d="M8.56066017,16.6819805 L10.6819805,14.5606602 C11.267767,13.9748737 12.2175144,13.9748737 12.8033009,14.5606602 L14.9246212,16.6819805 C15.5104076,17.267767 15.5104076,18.2175144 14.9246212,18.8033009 L12.8033009,20.9246212 C12.2175144,21.5104076 11.267767,21.5104076 10.6819805,20.9246212 L8.56066017,18.8033009 C7.97487373,18.2175144 7.97487373,17.267767 8.56066017,16.6819805 Z M8.56066017,4.68198052 L10.6819805,2.56066017 C11.267767,1.97487373 12.2175144,1.97487373 12.8033009,2.56066017 L14.9246212,4.68198052 C15.5104076,5.26776695 15.5104076,6.21751442 14.9246212,6.80330086 L12.8033009,8.9246212 C12.2175144,9.51040764 11.267767,9.51040764 10.6819805,8.9246212 L8.56066017,6.80330086 C7.97487373,6.21751442 7.97487373,5.26776695 8.56066017,4.68198052 Z" fill="#000000" />
+                                            </g>
+                                        </svg> </span>
+                                    <span class="kt-widget__desc">
+                                        Account Information
+                                    </span>
+                                </span>
+                            </a>
                             <a href="javascript:void(0)" class="kt-widget__item change_tab" partial_view="visa_documents">
                                 <span class="kt-widget__section">
                                     <span class="kt-widget__icon">
@@ -290,7 +305,80 @@
 @endsection
 @push('scripts')
     <script>
+
+        function fileupload() {
+            var fd = new FormData();
+            var files = $('#file')[0].files[0];
+            fd.append('file', files);
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: '/admin/uploadfile',
+                type: 'post',
+                data: fd,
+                contentType: false,
+                processData: false,
+                success: function(response){
+                    if(response.code == 200){
+                        var selectedValue = '#'+$('#fileUploadSelect').val();
+                        $(selectedValue).val(response.data);
+                        $(selectedValue+'_file_name').html(": "+response.data);
+                        $('#file').val('');
+                        $('.custom-file-label').removeClass("selected").html("Choose file");
+                    }
+                },
+            });
+        }
+
         $(document).ready(function() {
+
+            // Account Information Start
+            $('body').on('change', 'input[type=radio][name=role]', function() {
+                if (this.value == 'cleaner') {
+                    $("#radio_tfn").prop("disabled", false);
+                    $("#radio_tfn").parent().removeClass('kt-radio--disabled');
+                }
+                else if (this.value == 'agency') {
+                    $("#radio_tfn").prop("disabled", true);
+                    $("#radio_tfn").parent().addClass('kt-radio--disabled');
+                    $("#radio_abn").prop("checked", true);
+                }
+            });
+
+            $('body').on('change', 'input[type=radio][name=tfn_or_abn]', function() {
+                if (this.value == 'abn') {
+                    $("#abn").removeClass('d-none');
+                    $("#tfn").val('');
+                    $("#tfn").addClass('d-none');
+                }
+                else if (this.value == 'tfn') {
+                    $("#tfn").removeClass('d-none');
+                    $("#abn").val('');
+                    $("#abn").addClass('d-none');
+                }
+            });
+
+            $('body').on('change', 'input[type=radio][name=driver_license]', function() {
+                if (this.value == 'no') {
+                    $("#driver_license_state").addClass('d-none');
+                    $("#driver_license_number").addClass('d-none');
+                }
+                else if (this.value == 'yes') {
+                    $("#driver_license_state").removeClass('d-none');
+                    $("#driver_license_number").removeClass('d-none');
+                }
+            });
+
+            $('body').on('change', 'input[type=radio][name=visa_status]', function() {
+                if (this.value != 'citizen' && this.value != 'pr') {
+                    $("#visa_status_other").removeClass('d-none');
+                }else{
+                    $("#visa_status_other").addClass('d-none');
+                }
+            });
+            // Account Information End
+
             $(document).on('click', '.change_tab', function(e) {
                 e.preventDefault();
                 let _this = $(this);
@@ -299,6 +387,7 @@
                 $.ajax({
                     url: '{{ route('cleaner.ajax.profile.partial') }}',
                     type: "POST",
+                    dataType: "JSON",
                     data: {
                         partial_view_name: _partial_view_name
                     },
@@ -306,21 +395,80 @@
                         $('#partial_view').empty().html(res.html);
                         $('.change_tab').removeClass('kt-widget__item--active');
                         _this.addClass('kt-widget__item--active');
+                        if( _partial_view_name == 'account_info' ) {
+                            var $repeater = $('#kt_repeater_3').repeater({
+                                initEmpty: false,
+                                defaultValues: [],
+                                show: function() {
+                                    $(this).slideDown();
+                                },
+                                hide: function(deleteElement) {
+                                    if(confirm('Are you sure you want to delete this element?')) {
+                                        $(this).slideUp(deleteElement);
+                                    }
+                                },
+                                isFirstItemUndeletable: true
+                            });
+                            $repeater.setList(res.extra_data);
+                            // $repeater.setList();
+
+                            $('#kt_datepicker_1').datepicker({
+                                clearBtn: true,
+                                todayBtn: true,
+                                todayHighlight: true,
+                                orientation: "bottom left",
+                                endDate: new Date,
+                                templates: {
+                                    leftArrow: '<i class="la la-angle-left"></i>',
+                                    rightArrow: '<i class="la la-angle-right"></i>'
+                                }
+                            });
+                        }
                     }
                 }); // end ajax
             });
 
             $(document).on('submit', '#personal_info', function(e) {
                 e.preventDefault();
+                var btn = $('#update_personal_info');
+                KTApp.progress(btn);
                 $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
                 $.ajax({
                     url: '{{ route('cleaner.ajax.profile.personal_info') }}',
                     type: "POST",
                     data: $(this).serialize(),
                     success: function(res) {
+                        KTApp.unprogress(btn);
                         showToast(res.msg, res.status);
                     },
                     error: function(err) {
+                        KTApp.unprogress(btn);
+                        if( err.status == 422 ) {
+                            // display errors on each form field
+                            $.each(err.responseJSON.errors, function (i, error) {
+                                showToast(error[0], 0);
+                                return;
+                            });
+                        }
+                    }
+                }); // end ajax
+            });
+
+            $(document).on('submit', '#account_info', function(e) {
+                e.preventDefault();
+                var btn = $('#update_account_info');
+                KTApp.progress(btn);
+                $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
+                $.ajax({
+                    url: '{{ route('cleaner.ajax.profile.account_info') }}',
+                    type: "POST",
+                    data: $(this).serialize(),
+                    success: function(res) {
+                        KTApp.unprogress(btn);
+                        showToast(res.msg, res.status);
+                    },
+                    error: function(err) {
+                        KTApp.unprogress(btn);
                         if( err.status == 422 ) {
                             // display errors on each form field
                             $.each(err.responseJSON.errors, function (i, error) {
