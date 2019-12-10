@@ -1,123 +1,105 @@
 <div class="kt-wizard-v1__form">
-    <div class="form-group row">
-        <label class="col-3 col-form-label">Sunday</label>
-        <div class="col-9">
-            <span class="kt-switch kt-switch--outline kt-switch--icon kt-switch--primary">
-                <label>
-                    <input type="checkbox" name="avail_sunday" id="avail_sunday" value="sunday" class="switch_days">
-                    <span></span>
-                </label>
-            </span>
-
-            <select class="form-control col-3 from_hours d-none" id="select_from_sunday">
-               <option value="24">24 hours</option><option value="00:00">12:00 am</option><option value="00:30">12:30 am</option><option value="01:00">1:00 am</option><option value="01:30">1:30 am</option><option value="02:00">2:00 am</option><option value="02:30">2:30 am</option><option value="03:00">3:00 am</option><option value="03:30">3:30 am</option><option value="04:00">4:00 am</option><option value="04:30">4:30 am</option><option value="05:00">5:00 am</option><option value="05:30">5:30 am</option><option value="06:00">6:00 am</option><option value="06:30">6:30 am</option><option value="07:00">7:00 am</option><option value="07:30">7:30 am</option><option value="08:00">8:00 am</option><option value="08:30">8:30 am</option><option value="09:00">9:00 am</option><option value="09:30">9:30 am</option><option value="10:00">10:00 am</option><option value="10:30">10:30 am</option><option value="11:00">11:00 am</option><option value="11:30">11:30 am</option><option value="12:00">12:00 pm</option><option value="12:30">12:30 pm</option><option value="13:00">1:00 pm</option><option value="13:30">1:30 pm</option><option value="14:00">2:00 pm</option><option value="14:30">2:30 pm</option><option value="15:00">3:00 pm</option><option value="15:30">3:30 pm</option><option value="16:00">4:00 pm</option><option value="16:30">4:30 pm</option><option value="17:00">5:00 pm</option><option value="17:30">5:30 pm</option><option value="18:00">6:00 pm</option><option value="18:30">6:30 pm</option><option value="19:00">7:00 pm</option><option value="19:30">7:30 pm</option><option value="20:00">8:00 pm</option><option value="20:30">8:30 pm</option><option value="21:00">9:00 pm</option><option value="21:30">9:30 pm</option><option value="22:00">10:00 pm</option><option value="22:30">10:30 pm</option><option value="23:00">11:00 pm</option><option value="23:30">11:30 pm</option>
-            </select>
-
-            <select class="form-control col-3 to_hours d-none" id="select_to_sunday">
-               <option value="24">24 hours</option><option value="00:00">12:00 am</option><option value="00:30">12:30 am</option><option value="01:00">1:00 am</option><option value="01:30">1:30 am</option><option value="02:00">2:00 am</option><option value="02:30">2:30 am</option><option value="03:00">3:00 am</option><option value="03:30">3:30 am</option><option value="04:00">4:00 am</option><option value="04:30">4:30 am</option><option value="05:00">5:00 am</option><option value="05:30">5:30 am</option><option value="06:00">6:00 am</option><option value="06:30">6:30 am</option><option value="07:00">7:00 am</option><option value="07:30">7:30 am</option><option value="08:00">8:00 am</option><option value="08:30">8:30 am</option><option value="09:00">9:00 am</option><option value="09:30">9:30 am</option><option value="10:00">10:00 am</option><option value="10:30">10:30 am</option><option value="11:00">11:00 am</option><option value="11:30">11:30 am</option><option value="12:00">12:00 pm</option><option value="12:30">12:30 pm</option><option value="13:00">1:00 pm</option><option value="13:30">1:30 pm</option><option value="14:00">2:00 pm</option><option value="14:30">2:30 pm</option><option value="15:00">3:00 pm</option><option value="15:30">3:30 pm</option><option value="16:00">4:00 pm</option><option value="16:30">4:30 pm</option><option value="17:00">5:00 pm</option><option value="17:30">5:30 pm</option><option value="18:00">6:00 pm</option><option value="18:30">6:30 pm</option><option value="19:00">7:00 pm</option><option value="19:30">7:30 pm</option><option value="20:00">8:00 pm</option><option value="20:30">8:30 pm</option><option value="21:00">9:00 pm</option><option value="21:30">9:30 pm</option><option value="22:00">10:00 pm</option><option value="22:30">10:30 pm</option><option value="23:00">11:00 pm</option><option value="23:30">11:30 pm</option>
-            </select>
+    @foreach( getDays() as $day )
+    <div class="row">
+        <div class="col-3">
+            <div class="form-group">
+                <label class="col-form-label">{{ ucfirst($day) }} </label>
+                <span class="kt-switch kt-switch--outline kt-switch--icon kt-switch--primary">
+                    <label>
+                        <input type="checkbox" name="avail[]" id="avail_{{ $day }}" opened_day="{{ $day }}" value="{{ $day }}" class="switch_days">
+                        <span></span>
+                    </label>
+                </span>
+            </div>
         </div>
-        <label class="col-3 col-form-label">Monday</label>
-        <div class="col-9">
-            <span class="kt-switch kt-switch--outline kt-switch--icon kt-switch--brand">
-                <label>
-                    <input type="checkbox" name="avail_monday" id="avail_monday" value="monday" class="switch_days">
-                    <span></span>
-                </label>
-            </span>
-
-            <select class="form-control col-3 from_hours d-none" id="select_from_monday">
-               <option value="24">24 hours</option><option value="00:00">12:00 am</option><option value="00:30">12:30 am</option><option value="01:00">1:00 am</option><option value="01:30">1:30 am</option><option value="02:00">2:00 am</option><option value="02:30">2:30 am</option><option value="03:00">3:00 am</option><option value="03:30">3:30 am</option><option value="04:00">4:00 am</option><option value="04:30">4:30 am</option><option value="05:00">5:00 am</option><option value="05:30">5:30 am</option><option value="06:00">6:00 am</option><option value="06:30">6:30 am</option><option value="07:00">7:00 am</option><option value="07:30">7:30 am</option><option value="08:00">8:00 am</option><option value="08:30">8:30 am</option><option value="09:00">9:00 am</option><option value="09:30">9:30 am</option><option value="10:00">10:00 am</option><option value="10:30">10:30 am</option><option value="11:00">11:00 am</option><option value="11:30">11:30 am</option><option value="12:00">12:00 pm</option><option value="12:30">12:30 pm</option><option value="13:00">1:00 pm</option><option value="13:30">1:30 pm</option><option value="14:00">2:00 pm</option><option value="14:30">2:30 pm</option><option value="15:00">3:00 pm</option><option value="15:30">3:30 pm</option><option value="16:00">4:00 pm</option><option value="16:30">4:30 pm</option><option value="17:00">5:00 pm</option><option value="17:30">5:30 pm</option><option value="18:00">6:00 pm</option><option value="18:30">6:30 pm</option><option value="19:00">7:00 pm</option><option value="19:30">7:30 pm</option><option value="20:00">8:00 pm</option><option value="20:30">8:30 pm</option><option value="21:00">9:00 pm</option><option value="21:30">9:30 pm</option><option value="22:00">10:00 pm</option><option value="22:30">10:30 pm</option><option value="23:00">11:00 pm</option><option value="23:30">11:30 pm</option>
-            </select>
-
-            <select class="form-control col-3 to_hours d-none" id="select_to_monday">
-               <option value="24">24 hours</option><option value="00:00">12:00 am</option><option value="00:30">12:30 am</option><option value="01:00">1:00 am</option><option value="01:30">1:30 am</option><option value="02:00">2:00 am</option><option value="02:30">2:30 am</option><option value="03:00">3:00 am</option><option value="03:30">3:30 am</option><option value="04:00">4:00 am</option><option value="04:30">4:30 am</option><option value="05:00">5:00 am</option><option value="05:30">5:30 am</option><option value="06:00">6:00 am</option><option value="06:30">6:30 am</option><option value="07:00">7:00 am</option><option value="07:30">7:30 am</option><option value="08:00">8:00 am</option><option value="08:30">8:30 am</option><option value="09:00">9:00 am</option><option value="09:30">9:30 am</option><option value="10:00">10:00 am</option><option value="10:30">10:30 am</option><option value="11:00">11:00 am</option><option value="11:30">11:30 am</option><option value="12:00">12:00 pm</option><option value="12:30">12:30 pm</option><option value="13:00">1:00 pm</option><option value="13:30">1:30 pm</option><option value="14:00">2:00 pm</option><option value="14:30">2:30 pm</option><option value="15:00">3:00 pm</option><option value="15:30">3:30 pm</option><option value="16:00">4:00 pm</option><option value="16:30">4:30 pm</option><option value="17:00">5:00 pm</option><option value="17:30">5:30 pm</option><option value="18:00">6:00 pm</option><option value="18:30">6:30 pm</option><option value="19:00">7:00 pm</option><option value="19:30">7:30 pm</option><option value="20:00">8:00 pm</option><option value="20:30">8:30 pm</option><option value="21:00">9:00 pm</option><option value="21:30">9:30 pm</option><option value="22:00">10:00 pm</option><option value="22:30">10:30 pm</option><option value="23:00">11:00 pm</option><option value="23:30">11:30 pm</option>
-            </select>
-        </div>
-        <label class="col-3 col-form-label">Tuesday</label>
-        <div class="col-9">
-            <span class="kt-switch kt-switch--outline kt-switch--icon kt-switch--brand">
-                <label>
-                    <input type="checkbox" name="avail_tuesday" id="avail_tuesday" value="tuesday" class="switch_days">
-                    <span></span>
-                </label>
-            </span>
-
-            <select class="form-control col-3 from_hours d-none" id="select_from_tuesday">
-               <option value="24">24 hours</option><option value="00:00">12:00 am</option><option value="00:30">12:30 am</option><option value="01:00">1:00 am</option><option value="01:30">1:30 am</option><option value="02:00">2:00 am</option><option value="02:30">2:30 am</option><option value="03:00">3:00 am</option><option value="03:30">3:30 am</option><option value="04:00">4:00 am</option><option value="04:30">4:30 am</option><option value="05:00">5:00 am</option><option value="05:30">5:30 am</option><option value="06:00">6:00 am</option><option value="06:30">6:30 am</option><option value="07:00">7:00 am</option><option value="07:30">7:30 am</option><option value="08:00">8:00 am</option><option value="08:30">8:30 am</option><option value="09:00">9:00 am</option><option value="09:30">9:30 am</option><option value="10:00">10:00 am</option><option value="10:30">10:30 am</option><option value="11:00">11:00 am</option><option value="11:30">11:30 am</option><option value="12:00">12:00 pm</option><option value="12:30">12:30 pm</option><option value="13:00">1:00 pm</option><option value="13:30">1:30 pm</option><option value="14:00">2:00 pm</option><option value="14:30">2:30 pm</option><option value="15:00">3:00 pm</option><option value="15:30">3:30 pm</option><option value="16:00">4:00 pm</option><option value="16:30">4:30 pm</option><option value="17:00">5:00 pm</option><option value="17:30">5:30 pm</option><option value="18:00">6:00 pm</option><option value="18:30">6:30 pm</option><option value="19:00">7:00 pm</option><option value="19:30">7:30 pm</option><option value="20:00">8:00 pm</option><option value="20:30">8:30 pm</option><option value="21:00">9:00 pm</option><option value="21:30">9:30 pm</option><option value="22:00">10:00 pm</option><option value="22:30">10:30 pm</option><option value="23:00">11:00 pm</option><option value="23:30">11:30 pm</option>
-            </select>
-
-            <select class="form-control col-3 to_hours d-none" id="select_to_tuesday">
-               <option value="24">24 hours</option><option value="00:00">12:00 am</option><option value="00:30">12:30 am</option><option value="01:00">1:00 am</option><option value="01:30">1:30 am</option><option value="02:00">2:00 am</option><option value="02:30">2:30 am</option><option value="03:00">3:00 am</option><option value="03:30">3:30 am</option><option value="04:00">4:00 am</option><option value="04:30">4:30 am</option><option value="05:00">5:00 am</option><option value="05:30">5:30 am</option><option value="06:00">6:00 am</option><option value="06:30">6:30 am</option><option value="07:00">7:00 am</option><option value="07:30">7:30 am</option><option value="08:00">8:00 am</option><option value="08:30">8:30 am</option><option value="09:00">9:00 am</option><option value="09:30">9:30 am</option><option value="10:00">10:00 am</option><option value="10:30">10:30 am</option><option value="11:00">11:00 am</option><option value="11:30">11:30 am</option><option value="12:00">12:00 pm</option><option value="12:30">12:30 pm</option><option value="13:00">1:00 pm</option><option value="13:30">1:30 pm</option><option value="14:00">2:00 pm</option><option value="14:30">2:30 pm</option><option value="15:00">3:00 pm</option><option value="15:30">3:30 pm</option><option value="16:00">4:00 pm</option><option value="16:30">4:30 pm</option><option value="17:00">5:00 pm</option><option value="17:30">5:30 pm</option><option value="18:00">6:00 pm</option><option value="18:30">6:30 pm</option><option value="19:00">7:00 pm</option><option value="19:30">7:30 pm</option><option value="20:00">8:00 pm</option><option value="20:30">8:30 pm</option><option value="21:00">9:00 pm</option><option value="21:30">9:30 pm</option><option value="22:00">10:00 pm</option><option value="22:30">10:30 pm</option><option value="23:00">11:00 pm</option><option value="23:30">11:30 pm</option>
-            </select>
-        </div>
-        <label class="col-3 col-form-label">Wednesday</label>
-        <div class="col-9">
-            <span class="kt-switch kt-switch--outline kt-switch--icon kt-switch--brand">
-                <label>
-                    <input type="checkbox" name="avail_wednesday" id="avail_wednesday" value="wednesday" class="switch_days">
-                    <span></span>
-                </label>
-            </span>
-
-            <select class="form-control col-3 from_hours d-none" id="select_from_wednesday">
-               <option value="24">24 hours</option><option value="00:00">12:00 am</option><option value="00:30">12:30 am</option><option value="01:00">1:00 am</option><option value="01:30">1:30 am</option><option value="02:00">2:00 am</option><option value="02:30">2:30 am</option><option value="03:00">3:00 am</option><option value="03:30">3:30 am</option><option value="04:00">4:00 am</option><option value="04:30">4:30 am</option><option value="05:00">5:00 am</option><option value="05:30">5:30 am</option><option value="06:00">6:00 am</option><option value="06:30">6:30 am</option><option value="07:00">7:00 am</option><option value="07:30">7:30 am</option><option value="08:00">8:00 am</option><option value="08:30">8:30 am</option><option value="09:00">9:00 am</option><option value="09:30">9:30 am</option><option value="10:00">10:00 am</option><option value="10:30">10:30 am</option><option value="11:00">11:00 am</option><option value="11:30">11:30 am</option><option value="12:00">12:00 pm</option><option value="12:30">12:30 pm</option><option value="13:00">1:00 pm</option><option value="13:30">1:30 pm</option><option value="14:00">2:00 pm</option><option value="14:30">2:30 pm</option><option value="15:00">3:00 pm</option><option value="15:30">3:30 pm</option><option value="16:00">4:00 pm</option><option value="16:30">4:30 pm</option><option value="17:00">5:00 pm</option><option value="17:30">5:30 pm</option><option value="18:00">6:00 pm</option><option value="18:30">6:30 pm</option><option value="19:00">7:00 pm</option><option value="19:30">7:30 pm</option><option value="20:00">8:00 pm</option><option value="20:30">8:30 pm</option><option value="21:00">9:00 pm</option><option value="21:30">9:30 pm</option><option value="22:00">10:00 pm</option><option value="22:30">10:30 pm</option><option value="23:00">11:00 pm</option><option value="23:30">11:30 pm</option>
-            </select>
-
-            <select class="form-control col-3 to_hours d-none" id="select_to_wednesday">
-               <option value="24">24 hours</option><option value="00:00">12:00 am</option><option value="00:30">12:30 am</option><option value="01:00">1:00 am</option><option value="01:30">1:30 am</option><option value="02:00">2:00 am</option><option value="02:30">2:30 am</option><option value="03:00">3:00 am</option><option value="03:30">3:30 am</option><option value="04:00">4:00 am</option><option value="04:30">4:30 am</option><option value="05:00">5:00 am</option><option value="05:30">5:30 am</option><option value="06:00">6:00 am</option><option value="06:30">6:30 am</option><option value="07:00">7:00 am</option><option value="07:30">7:30 am</option><option value="08:00">8:00 am</option><option value="08:30">8:30 am</option><option value="09:00">9:00 am</option><option value="09:30">9:30 am</option><option value="10:00">10:00 am</option><option value="10:30">10:30 am</option><option value="11:00">11:00 am</option><option value="11:30">11:30 am</option><option value="12:00">12:00 pm</option><option value="12:30">12:30 pm</option><option value="13:00">1:00 pm</option><option value="13:30">1:30 pm</option><option value="14:00">2:00 pm</option><option value="14:30">2:30 pm</option><option value="15:00">3:00 pm</option><option value="15:30">3:30 pm</option><option value="16:00">4:00 pm</option><option value="16:30">4:30 pm</option><option value="17:00">5:00 pm</option><option value="17:30">5:30 pm</option><option value="18:00">6:00 pm</option><option value="18:30">6:30 pm</option><option value="19:00">7:00 pm</option><option value="19:30">7:30 pm</option><option value="20:00">8:00 pm</option><option value="20:30">8:30 pm</option><option value="21:00">9:00 pm</option><option value="21:30">9:30 pm</option><option value="22:00">10:00 pm</option><option value="22:30">10:30 pm</option><option value="23:00">11:00 pm</option><option value="23:30">11:30 pm</option>
-            </select>
-        </div>
-        <label class="col-3 col-form-label">Thursday</label>
-        <div class="col-9">
-            <span class="kt-switch kt-switch--outline kt-switch--icon kt-switch--brand">
-                <label>
-                    <input type="checkbox" name="avail_thursday" id="avail_thursday" value="thursday" class="switch_days">
-                    <span></span>
-                </label>
-            </span>
-
-            <select class="form-control col-3 from_hours d-none" id="select_from_thursday">
-               <option value="24">24 hours</option><option value="00:00">12:00 am</option><option value="00:30">12:30 am</option><option value="01:00">1:00 am</option><option value="01:30">1:30 am</option><option value="02:00">2:00 am</option><option value="02:30">2:30 am</option><option value="03:00">3:00 am</option><option value="03:30">3:30 am</option><option value="04:00">4:00 am</option><option value="04:30">4:30 am</option><option value="05:00">5:00 am</option><option value="05:30">5:30 am</option><option value="06:00">6:00 am</option><option value="06:30">6:30 am</option><option value="07:00">7:00 am</option><option value="07:30">7:30 am</option><option value="08:00">8:00 am</option><option value="08:30">8:30 am</option><option value="09:00">9:00 am</option><option value="09:30">9:30 am</option><option value="10:00">10:00 am</option><option value="10:30">10:30 am</option><option value="11:00">11:00 am</option><option value="11:30">11:30 am</option><option value="12:00">12:00 pm</option><option value="12:30">12:30 pm</option><option value="13:00">1:00 pm</option><option value="13:30">1:30 pm</option><option value="14:00">2:00 pm</option><option value="14:30">2:30 pm</option><option value="15:00">3:00 pm</option><option value="15:30">3:30 pm</option><option value="16:00">4:00 pm</option><option value="16:30">4:30 pm</option><option value="17:00">5:00 pm</option><option value="17:30">5:30 pm</option><option value="18:00">6:00 pm</option><option value="18:30">6:30 pm</option><option value="19:00">7:00 pm</option><option value="19:30">7:30 pm</option><option value="20:00">8:00 pm</option><option value="20:30">8:30 pm</option><option value="21:00">9:00 pm</option><option value="21:30">9:30 pm</option><option value="22:00">10:00 pm</option><option value="22:30">10:30 pm</option><option value="23:00">11:00 pm</option><option value="23:30">11:30 pm</option>
-            </select>
-
-            <select class="form-control col-3 to_hours d-none" id="select_to_thursday">
-               <option value="24">24 hours</option><option value="00:00">12:00 am</option><option value="00:30">12:30 am</option><option value="01:00">1:00 am</option><option value="01:30">1:30 am</option><option value="02:00">2:00 am</option><option value="02:30">2:30 am</option><option value="03:00">3:00 am</option><option value="03:30">3:30 am</option><option value="04:00">4:00 am</option><option value="04:30">4:30 am</option><option value="05:00">5:00 am</option><option value="05:30">5:30 am</option><option value="06:00">6:00 am</option><option value="06:30">6:30 am</option><option value="07:00">7:00 am</option><option value="07:30">7:30 am</option><option value="08:00">8:00 am</option><option value="08:30">8:30 am</option><option value="09:00">9:00 am</option><option value="09:30">9:30 am</option><option value="10:00">10:00 am</option><option value="10:30">10:30 am</option><option value="11:00">11:00 am</option><option value="11:30">11:30 am</option><option value="12:00">12:00 pm</option><option value="12:30">12:30 pm</option><option value="13:00">1:00 pm</option><option value="13:30">1:30 pm</option><option value="14:00">2:00 pm</option><option value="14:30">2:30 pm</option><option value="15:00">3:00 pm</option><option value="15:30">3:30 pm</option><option value="16:00">4:00 pm</option><option value="16:30">4:30 pm</option><option value="17:00">5:00 pm</option><option value="17:30">5:30 pm</option><option value="18:00">6:00 pm</option><option value="18:30">6:30 pm</option><option value="19:00">7:00 pm</option><option value="19:30">7:30 pm</option><option value="20:00">8:00 pm</option><option value="20:30">8:30 pm</option><option value="21:00">9:00 pm</option><option value="21:30">9:30 pm</option><option value="22:00">10:00 pm</option><option value="22:30">10:30 pm</option><option value="23:00">11:00 pm</option><option value="23:30">11:30 pm</option>
-            </select>
-        </div>
-        <label class="col-3 col-form-label">Friday</label>
-        <div class="col-9">
-            <span class="kt-switch kt-switch--outline kt-switch--icon kt-switch--brand">
-                <label>
-                    <input type="checkbox" name="avail_friday" id="avail_friday" value="friday" class="switch_days">
-                    <span></span>
-                </label>
-            </span>
-
-            <select class="form-control col-3 from_hours d-none" id="select_from_friday">
-               <option value="24">24 hours</option><option value="00:00">12:00 am</option><option value="00:30">12:30 am</option><option value="01:00">1:00 am</option><option value="01:30">1:30 am</option><option value="02:00">2:00 am</option><option value="02:30">2:30 am</option><option value="03:00">3:00 am</option><option value="03:30">3:30 am</option><option value="04:00">4:00 am</option><option value="04:30">4:30 am</option><option value="05:00">5:00 am</option><option value="05:30">5:30 am</option><option value="06:00">6:00 am</option><option value="06:30">6:30 am</option><option value="07:00">7:00 am</option><option value="07:30">7:30 am</option><option value="08:00">8:00 am</option><option value="08:30">8:30 am</option><option value="09:00">9:00 am</option><option value="09:30">9:30 am</option><option value="10:00">10:00 am</option><option value="10:30">10:30 am</option><option value="11:00">11:00 am</option><option value="11:30">11:30 am</option><option value="12:00">12:00 pm</option><option value="12:30">12:30 pm</option><option value="13:00">1:00 pm</option><option value="13:30">1:30 pm</option><option value="14:00">2:00 pm</option><option value="14:30">2:30 pm</option><option value="15:00">3:00 pm</option><option value="15:30">3:30 pm</option><option value="16:00">4:00 pm</option><option value="16:30">4:30 pm</option><option value="17:00">5:00 pm</option><option value="17:30">5:30 pm</option><option value="18:00">6:00 pm</option><option value="18:30">6:30 pm</option><option value="19:00">7:00 pm</option><option value="19:30">7:30 pm</option><option value="20:00">8:00 pm</option><option value="20:30">8:30 pm</option><option value="21:00">9:00 pm</option><option value="21:30">9:30 pm</option><option value="22:00">10:00 pm</option><option value="22:30">10:30 pm</option><option value="23:00">11:00 pm</option><option value="23:30">11:30 pm</option>
-            </select>
-
-            <select class="form-control col-3 to_hours d-none" id="select_to_friday">
-               <option value="24">24 hours</option><option value="00:00">12:00 am</option><option value="00:30">12:30 am</option><option value="01:00">1:00 am</option><option value="01:30">1:30 am</option><option value="02:00">2:00 am</option><option value="02:30">2:30 am</option><option value="03:00">3:00 am</option><option value="03:30">3:30 am</option><option value="04:00">4:00 am</option><option value="04:30">4:30 am</option><option value="05:00">5:00 am</option><option value="05:30">5:30 am</option><option value="06:00">6:00 am</option><option value="06:30">6:30 am</option><option value="07:00">7:00 am</option><option value="07:30">7:30 am</option><option value="08:00">8:00 am</option><option value="08:30">8:30 am</option><option value="09:00">9:00 am</option><option value="09:30">9:30 am</option><option value="10:00">10:00 am</option><option value="10:30">10:30 am</option><option value="11:00">11:00 am</option><option value="11:30">11:30 am</option><option value="12:00">12:00 pm</option><option value="12:30">12:30 pm</option><option value="13:00">1:00 pm</option><option value="13:30">1:30 pm</option><option value="14:00">2:00 pm</option><option value="14:30">2:30 pm</option><option value="15:00">3:00 pm</option><option value="15:30">3:30 pm</option><option value="16:00">4:00 pm</option><option value="16:30">4:30 pm</option><option value="17:00">5:00 pm</option><option value="17:30">5:30 pm</option><option value="18:00">6:00 pm</option><option value="18:30">6:30 pm</option><option value="19:00">7:00 pm</option><option value="19:30">7:30 pm</option><option value="20:00">8:00 pm</option><option value="20:30">8:30 pm</option><option value="21:00">9:00 pm</option><option value="21:30">9:30 pm</option><option value="22:00">10:00 pm</option><option value="22:30">10:30 pm</option><option value="23:00">11:00 pm</option><option value="23:30">11:30 pm</option>
-            </select>
-        </div>
-        <label class="col-3 col-form-label">Saturday</label>
-        <div class="col-9">
-            <span class="kt-switch kt-switch--outline kt-switch--icon kt-switch--brand">
-                <label>
-                    <input type="checkbox" name="avail_saturday" id="avail_saturday" value="saturday" class="switch_days">
-                    <span></span>
-                </label>
-            </span>
-
-            <select class="form-control col-3 from_hours d-none" id="select_from_saturday">
-               <option value="24">24 hours</option><option value="00:00">12:00 am</option><option value="00:30">12:30 am</option><option value="01:00">1:00 am</option><option value="01:30">1:30 am</option><option value="02:00">2:00 am</option><option value="02:30">2:30 am</option><option value="03:00">3:00 am</option><option value="03:30">3:30 am</option><option value="04:00">4:00 am</option><option value="04:30">4:30 am</option><option value="05:00">5:00 am</option><option value="05:30">5:30 am</option><option value="06:00">6:00 am</option><option value="06:30">6:30 am</option><option value="07:00">7:00 am</option><option value="07:30">7:30 am</option><option value="08:00">8:00 am</option><option value="08:30">8:30 am</option><option value="09:00">9:00 am</option><option value="09:30">9:30 am</option><option value="10:00">10:00 am</option><option value="10:30">10:30 am</option><option value="11:00">11:00 am</option><option value="11:30">11:30 am</option><option value="12:00">12:00 pm</option><option value="12:30">12:30 pm</option><option value="13:00">1:00 pm</option><option value="13:30">1:30 pm</option><option value="14:00">2:00 pm</option><option value="14:30">2:30 pm</option><option value="15:00">3:00 pm</option><option value="15:30">3:30 pm</option><option value="16:00">4:00 pm</option><option value="16:30">4:30 pm</option><option value="17:00">5:00 pm</option><option value="17:30">5:30 pm</option><option value="18:00">6:00 pm</option><option value="18:30">6:30 pm</option><option value="19:00">7:00 pm</option><option value="19:30">7:30 pm</option><option value="20:00">8:00 pm</option><option value="20:30">8:30 pm</option><option value="21:00">9:00 pm</option><option value="21:30">9:30 pm</option><option value="22:00">10:00 pm</option><option value="22:30">10:30 pm</option><option value="23:00">11:00 pm</option><option value="23:30">11:30 pm</option>
-            </select>
-
-            <select class="form-control col-3 to_hours d-none" id="select_to_saturday">
-               <option value="24">24 hours</option><option value="00:00">12:00 am</option><option value="00:30">12:30 am</option><option value="01:00">1:00 am</option><option value="01:30">1:30 am</option><option value="02:00">2:00 am</option><option value="02:30">2:30 am</option><option value="03:00">3:00 am</option><option value="03:30">3:30 am</option><option value="04:00">4:00 am</option><option value="04:30">4:30 am</option><option value="05:00">5:00 am</option><option value="05:30">5:30 am</option><option value="06:00">6:00 am</option><option value="06:30">6:30 am</option><option value="07:00">7:00 am</option><option value="07:30">7:30 am</option><option value="08:00">8:00 am</option><option value="08:30">8:30 am</option><option value="09:00">9:00 am</option><option value="09:30">9:30 am</option><option value="10:00">10:00 am</option><option value="10:30">10:30 am</option><option value="11:00">11:00 am</option><option value="11:30">11:30 am</option><option value="12:00">12:00 pm</option><option value="12:30">12:30 pm</option><option value="13:00">1:00 pm</option><option value="13:30">1:30 pm</option><option value="14:00">2:00 pm</option><option value="14:30">2:30 pm</option><option value="15:00">3:00 pm</option><option value="15:30">3:30 pm</option><option value="16:00">4:00 pm</option><option value="16:30">4:30 pm</option><option value="17:00">5:00 pm</option><option value="17:30">5:30 pm</option><option value="18:00">6:00 pm</option><option value="18:30">6:30 pm</option><option value="19:00">7:00 pm</option><option value="19:30">7:30 pm</option><option value="20:00">8:00 pm</option><option value="20:30">8:30 pm</option><option value="21:00">9:00 pm</option><option value="21:30">9:30 pm</option><option value="22:00">10:00 pm</option><option value="22:30">10:30 pm</option><option value="23:00">11:00 pm</option><option value="23:30">11:30 pm</option>
-            </select>
+        <div class="col-9 d-none" id="main_{{ $day }}">
+            <div class="form-group row">
+                <div class="col-5">
+                    <select class="form-control from_hours" day="{{ $day }}" count="0" id="select_from_{{ $day }}_0" name="select_from_{{ $day }}[]">
+                        @foreach( getHours() as $hourKey => $hour )
+                            <option value="{{ $hourKey }}">{{ $hour }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-5 d-none" id="to_hours_div_{{ $day }}_0">
+                    <select class="form-control to_hours" id="select_to_{{ $day }}_0" name="select_to_{{ $day }}[]">
+                        @foreach( getHours() as $hourKey => $hour )
+                            <option value="{{ $hourKey }}">{{ $hour }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-1 d-none" id="add_btn_div_{{ $day }}_0">
+                    <span class="btn btn-brand add_hours" main="{{ $day }}" count="1">+</span>
+                </div>
+            </div>
         </div>
     </div>
+    @endforeach
 </div>
+@push('scripts')
+<script>
+    $(document).ready(function() {
+        // Availability
+        $('body').on('change', '.switch_days', function(e) {
+            let _opened_day = $(this).attr('opened_day');
+            if(this.checked) {
+                // show dropdown for hours
+                $('#main_'+_opened_day).removeClass('d-none');
+            } else {
+                // hide dropdown for hours
+                $('#main_'+_opened_day).addClass('d-none');
+            }
+        });
+
+        $('body').on('change', '.from_hours', function(e) {
+            let _val = $(this).val();
+            let _day = $(this).attr('day');
+            let _count = $(this).attr('count');
+            if( _val != '24' ) {
+                $('#to_hours_div_'+_day+'_'+_count).removeClass('d-none');
+                $('#add_btn_div_'+_day+'_'+_count).removeClass('d-none');
+            } else {
+                $('#to_hours_div_'+_day+'_'+_count).addClass('d-none');
+                $('#add_btn_div_'+_day+'_'+_count).addClass('d-none');
+            }
+        });
+
+        $('body').on('click', '.add_hours', function(e) {
+            e.preventDefault();
+            let _main = $(this).attr('main');
+            let _count = $(this).attr('count');
+            $('#main_'+_main).append(`<div id="added_div_`+_main+`_`+_count+`">
+                <div class="form-group row">
+                    <div class="col-5">
+                        <select class="form-control from_hours" day="`+_main+`" count="`+_count+`" id="select_from_`+_main+`_`+_count+`" name="select_from_`+_main+`[]">
+                            @foreach( getHours() as $hourKey => $hour )
+                                <option value="{{ $hourKey }}">{{ $hour }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-5 d-none" id="to_hours_div_`+_main+`_`+_count+`">
+                        <select class="form-control to_hours" id="select_to_`+_main+`_`+_count+`" name="select_to_`+_main+`[]">
+                            @foreach( getHours() as $hourKey => $hour )
+                                <option value="{{ $hourKey }}">{{ $hour }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-1 d-none" id="add_btn_div_`+_main+`_`+_count+`">
+                        <span class="btn btn-danger remove_hours" main="`+_main+`" count="`+_count+`">-</span>
+                    </div>
+                </div>
+            </div>`);
+            _count++;
+            $(this).attr('count', _count);
+        });
+
+        $('body').on('click', '.remove_hours', function(e) {
+            e.preventDefault();
+            let _main = $(this).attr('main');
+            let _count = $(this).attr('count');
+            $('#added_div_'+_main+'_'+_count).remove();
+        });
+    });
+
+</script>
+@endpush
