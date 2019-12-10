@@ -70,6 +70,35 @@ class HomeController extends Controller
         return response()->json($data);
     }
 
+    public function visa_documents(Request $request)
+    {
+        //
+    }
+
+    public function update_services(Request $request)
+    {
+        $cleaner = $this->cleanerService->updateCleanerServices($request);
+        $data['code'] = 200;
+        if( $cleaner ) {
+            $data = [ 'status' => true, 'msg' => trans('msg.clsAccServicesUpdated') ];
+        } else {
+            $data = [ 'status' => false, 'msg' => trans('msg.clsNotFound') ];
+        }
+        return response()->json($data);
+    }
+
+    public function update_availability(Request $request)
+    {
+        $cleaner = $this->cleanerService->updateCleanerAvailability($request);
+        $data['code'] = 200;
+        if( $cleaner ) {
+            $data = [ 'status' => true, 'msg' => trans('msg.clsAccAvailUpdated') ];
+        } else {
+            $data = [ 'status' => false, 'msg' => trans('msg.clsNotFound') ];
+        }
+        return response()->json($data);
+    }
+
     public function calendar()
     {
         return view('cleaner.calendar');

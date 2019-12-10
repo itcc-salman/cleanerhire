@@ -6,57 +6,53 @@
                     <h3 class="kt-portlet__head-title">Availability <small>update your time</small></h3>
                 </div>
             </div>
-            <form class="kt-form kt-form--label-right" id="visa_documents">
+            <form class="kt-form kt-form--label-right" id="availability">
                 <div class="kt-portlet__body">
                     <div class="kt-section kt-section--first">
                         <div class="kt-section__body">
                             <div class="row">
                                 <label class="col-xl-3"></label>
                                 <div class="col-lg-9 col-xl-6">
-                                    <h3 class="kt-section__title kt-section__title-sm">Documents:</h3>
+                                    <h3 class="kt-section__title kt-section__title-sm">Hours:</h3>
                                 </div>
                             </div>
+
+                            @foreach( getDays() as $day )
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-3">
                                     <div class="form-group">
-                                        <label>Upload Documents</label>
-                                        <select id="fileUploadSelect" class="form-control">
-                                            <option value="doc_driving_licence">Driving License</option>
-                                            <option value="doc_medicare_card">Medical Card</option>
-                                            <option value="doc_passport">Passport</option>
-                                            <option value="doc_bank_statement">Utility Bill</option>
-                                            <option value="doc_utility_bill">Bank Statement</option>
-                                            <option value="doc_certifications">Police Check</option>
-                                            <option value="doc_police_check">Certifications</option>
-                                        </select>
+                                        <label class="col-form-label">{{ ucfirst($day) }} </label>
+                                        <span class="kt-switch kt-switch--outline kt-switch--icon kt-switch--primary">
+                                            <label>
+                                                <input type="checkbox" name="avail[]" id="avail_{{ $day }}" opened_day="{{ $day }}" value="{{ $day }}" class="switch_days">
+                                                <span></span>
+                                            </label>
+                                        </span>
                                     </div>
-                                    <div class="form-group">
-                                        <div></div>
-                                        <div class="custom-file">
-                                            <input type="file" id="file" name="file" class="custom-file-input">
-                                            <label class="custom-file-label">Choose file</label>
+                                </div>
+                                <div class="col-9 d-none" id="main_{{ $day }}">
+                                    <div class="form-group row">
+                                        <div class="col-5">
+                                            <select class="form-control from_hours" day="{{ $day }}" count="0" id="select_from_{{ $day }}_0" name="select_from_{{ $day }}[]">
+                                                @foreach( getHours() as $hourKey => $hour )
+                                                    <option value="{{ $hourKey }}">{{ $hour }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-5 d-none" id="to_hours_div_{{ $day }}_0">
+                                            <select class="form-control to_hours" id="select_to_{{ $day }}_0" name="select_to_{{ $day }}[]">
+                                                @foreach( getHours() as $hourKey => $hour )
+                                                    <option value="{{ $hourKey }}">{{ $hour }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-1 d-none" id="add_btn_div_{{ $day }}_0">
+                                            <span class="btn btn-brand add_hours" main="{{ $day }}" count="1">+</span>
                                         </div>
                                     </div>
-                                    <button type="button" onclick="fileupload();" class="btn btn-primary">Upload</button>
-                                </div>
-                                <div class="col-6 border-left-divider">
-                                    <label>List of Documents</label>
-                                    <input type="hidden" name="doc_driving_licence" id="doc_driving_licence">
-                                    <input type="hidden" name="doc_medicare_card" id="doc_medicare_card">
-                                    <input type="hidden" name="doc_passport" id="doc_passport">
-                                    <input type="hidden" name="doc_bank_statement" id="doc_bank_statement">
-                                    <input type="hidden" name="doc_utility_bill" id="doc_utility_bill">
-                                    <input type="hidden" name="doc_certifications" id="doc_certifications">
-                                    <input type="hidden" name="doc_police_check" id="doc_police_check">
-                                    <p class="m-0 p-0"><span>1. Driving License</span><span id="doc_driving_licence_file_name"></span></p>
-                                    <p class="m-0 p-0"><span>2. Medical Card</span><span id="doc_medicare_card_file_name"></span></p>
-                                    <p class="m-0 p-0"><span>3. Passport</span><span id="doc_passport_file_name"></span></p>
-                                    <p class="m-0 p-0"><span>4. Utility Bill</span><span id="doc_bank_statement_file_name"></span></p>
-                                    <p class="m-0 p-0"><span>5. Bank Statement</span><span id="doc_utility_bill_file_name"></span></p>
-                                    <p class="m-0 p-0"><span>6. Police Check</span><span id="doc_certifications_file_name"></span></p>
-                                    <p class="m-0 p-0"><span>7. Certifications</span><span id="doc_police_check_file_name"></span></p>
                                 </div>
                             </div>
+                            @endforeach
 
                         </div>
                     </div>
@@ -67,7 +63,7 @@
                             <div class="col-lg-3 col-xl-3">
                             </div>
                             <div class="col-lg-9 col-xl-9">
-                                <button type="submit" class="btn btn-success">Update</button>&nbsp;
+                                <button type="submit" id="update_availability" class="btn btn-success">Update</button>&nbsp;
                                 {{-- <button type="reset" class="btn btn-secondary">Cancel</button> --}}
                             </div>
                         </div>

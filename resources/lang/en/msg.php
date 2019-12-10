@@ -30,4 +30,6 @@ return [
     'clsPerInfoUpdated' => 'Cleaner Persoanl Information Updated Successfully',
     'clsNotFound' => 'Cleaner Not Found',
     'clsAccInfoUpdated' => 'Cleaner Account Information Updated Successfully',
+    'clsAccServicesUpdated' => 'Cleaner Services Updated Successfully',
+    'clsAccAvailUpdated' => 'Cleaner Availability Updated Successfully',
 ];

@@ -24,16 +24,28 @@
                                         <div class="kt-checkbox-list">
                                             <div class="kt-option kt-p10 col-12 d-block">
                                                 <label class="kt-checkbox kt-checkbox--tick kt-checkbox--brand kt-margin-0">
-                                                    <input class="cleaner-services-checkbox" name="cleaner_services[]" {{ in_array($service->id, $data['cleaner_services']) ? 'checked' : '' }} value="{{ $service->id }}" type="checkbox">{{ $service->name }}<span></span>
+                                                    <input class="cleaner-services-checkbox" name="cleaner_services[]" {{ $data['cleaner_services']->contains(function($value, $key) use ($service) {
+                                                        if( $value['cleaning_service_id'] == $service->id ) { return true; }
+                                                        return false;
+                                                    }) ? 'checked' : '' }} value="{{ $service->id }}" type="checkbox">{{ $service->name }}<span></span>
                                                 </label>
-                                                <div class="form-group kt-mb-5 kt-mt-5 d-none" id="service_'+ el.id +'">
+                                                <div class="form-group kt-mb-5 kt-mt-5 {{ $data['cleaner_services']->contains(function($value, $key) use ($service) {
+                                                        if( $value['cleaning_service_id'] == $service->id ) { return true; }
+                                                        return false;
+                                                    }) ? '' : 'd-none' }}" id="service_{{ $service->id }}">
                                                     <label>Do you have relevant equipments?</label>
                                                     <div class="kt-radio-inline">
                                                         <label class="kt-radio kt-radio--tick kt-radio--brand">
-                                                            <input type="radio" value="1" name="has_equipment_'+el.id+'"> Yes <span></span>
+                                                            <input type="radio" value="1" {{ $data['cleaner_services']->contains(function($value, $key) use ($service) {
+                                                        if( $value['cleaning_service_id'] == $service->id && $value['has_equipments'] ) { return true; }
+                                                        return false;
+                                                    }) ? 'checked' : '' }} name="has_equipment_{{ $service->id }}"> Yes <span></span>
                                                         </label>
                                                         <label class="kt-radio kt-radio--tick kt-radio--brand">
-                                                            <input type="radio" value="0" name="has_equipment_'+el.id+'"> No <span></span>
+                                                            <input type="radio" value="0" {{ $data['cleaner_services']->contains(function($value, $key) use ($service) {
+                                                        if( $value['cleaning_service_id'] == $service->id && !$value['has_equipments'] ) { return true; }
+                                                        return false;
+                                                    }) ? 'checked' : '' }} name="has_equipment_{{ $service->id }}"> No <span></span>
                                                         </label>
                                                     </div>
                                                 </div>
@@ -53,7 +65,7 @@
                             <div class="col-lg-3 col-xl-3">
                             </div>
                             <div class="col-lg-9 col-xl-9">
-                                <button type="submit" class="btn btn-success">Update</button>&nbsp;
+                                <button type="submit" id="update_services" class="btn btn-success">Update</button>&nbsp;
                                 {{-- <button type="reset" class="btn btn-secondary">Cancel</button> --}}
                             </div>
                         </div>

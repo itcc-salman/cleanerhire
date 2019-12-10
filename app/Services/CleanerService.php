@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Cleaner;
 use App\Models\User;
+use App\Models\CleanerServiceMapping;
 use App\Traits\CaptureIpTrait;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -73,6 +74,13 @@ class CleanerService
                 $services = new CleaningServicesService;
                 $data['services'] = $services->getLogedInRoleWiseCleaningServices();
                 $data['cleaner_services'] = $services->getLogedInCleanerServicesIds();
+                /*
+                foreach( $data['services'] as $service ) {
+                    $data['cleaner_services']->tap(function($collection) use ($service) {
+                        $collection = $collection->where('cleaning_service_id', $service->id);
+                        if( !$collection->isEmpty() ) { return true; } else { return false; }
+                    });
+                } */
                 return $data;
             break;
             default: return []; break;
@@ -158,5 +166,26 @@ class CleanerService
             return true;
         }
         return false;
+    }
+
+    public function updateCleanerServices($request)
+    {
+        // delete all data first
+        CleanerServiceMapping::where('cleaner_id', \Auth::id())->delete();
+        if( $request->has('cleaner_services') ) {
+            foreach ($request->get('cleaner_services') as $key => $value) {
+                $cleanerServiceMapping = new CleanerServiceMapping;
+                $cleanerServiceMapping->cleaner_id = \Auth::id();
+                $cleanerServiceMapping->cleaning_service_id = $value;
+                $cleanerServiceMapping->has_equipments = $request->get("has_equipment_".$value, 0);
+                $cleanerServiceMapping->save();
+            }
+        }
+        return true;
+    }
+
+    public function updateCleanerAvailability($request)
+    {
+        dd($request);
     }
 }

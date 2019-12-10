@@ -333,6 +333,67 @@
 
         $(document).ready(function() {
 
+            // Availability
+            $('body').on('change', '.switch_days', function(e) {
+                let _opened_day = $(this).attr('opened_day');
+                if(this.checked) {
+                    // show dropdown for hours
+                    $('#main_'+_opened_day).removeClass('d-none');
+                } else {
+                    // hide dropdown for hours
+                    $('#main_'+_opened_day).addClass('d-none');
+                }
+            });
+
+            $('body').on('change', '.from_hours', function(e) {
+                let _val = $(this).val();
+                let _day = $(this).attr('day');
+                let _count = $(this).attr('count');
+                if( _val != '24' ) {
+                    $('#to_hours_div_'+_day+'_'+_count).removeClass('d-none');
+                    $('#add_btn_div_'+_day+'_'+_count).removeClass('d-none');
+                } else {
+                    $('#to_hours_div_'+_day+'_'+_count).addClass('d-none');
+                    $('#add_btn_div_'+_day+'_'+_count).addClass('d-none');
+                }
+            });
+
+            $('body').on('click', '.add_hours', function(e) {
+                e.preventDefault();
+                let _main = $(this).attr('main');
+                let _count = $(this).attr('count');
+                $('#main_'+_main).append(`<div id="added_div_`+_main+`_`+_count+`">
+                    <div class="form-group row">
+                        <div class="col-5">
+                            <select class="form-control from_hours" day="`+_main+`" count="`+_count+`" id="select_from_`+_main+`_`+_count+`" name="select_from_`+_main+`[]">
+                                @foreach( getHours() as $hourKey => $hour )
+                                    <option value="{{ $hourKey }}">{{ $hour }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-5 d-none" id="to_hours_div_`+_main+`_`+_count+`">
+                            <select class="form-control to_hours" id="select_to_`+_main+`_`+_count+`" name="select_to_`+_main+`[]">
+                                @foreach( getHours() as $hourKey => $hour )
+                                    <option value="{{ $hourKey }}">{{ $hour }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-1 d-none" id="add_btn_div_`+_main+`_`+_count+`">
+                            <span class="btn btn-danger remove_hours" main="`+_main+`" count="`+_count+`">-</span>
+                        </div>
+                    </div>
+                </div>`);
+                _count++;
+                $(this).attr('count', _count);
+            });
+
+            $('body').on('click', '.remove_hours', function(e) {
+                e.preventDefault();
+                let _main = $(this).attr('main');
+                let _count = $(this).attr('count');
+                $('#added_div_'+_main+'_'+_count).remove();
+            });
+
             // Account Information Start
             $('body').on('change', 'input[type=radio][name=role]', function() {
                 if (this.value == 'cleaner') {
@@ -378,6 +439,15 @@
                 }
             });
             // Account Information End
+
+            // Services
+            $(document).on('change', '.cleaner-services-checkbox', function(event) {
+                if(this.checked) {
+                    $('#service_'+this.value).removeClass("d-none");
+                } else {
+                    $('#service_'+this.value).addClass("d-none");
+                }
+            });
 
             $(document).on('click', '.change_tab', function(e) {
                 e.preventDefault();
@@ -461,6 +531,58 @@
                 $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
                 $.ajax({
                     url: '{{ route('cleaner.ajax.profile.account_info') }}',
+                    type: "POST",
+                    data: $(this).serialize(),
+                    success: function(res) {
+                        KTApp.unprogress(btn);
+                        showToast(res.msg, res.status);
+                    },
+                    error: function(err) {
+                        KTApp.unprogress(btn);
+                        if( err.status == 422 ) {
+                            // display errors on each form field
+                            $.each(err.responseJSON.errors, function (i, error) {
+                                showToast(error[0], 0);
+                                return;
+                            });
+                        }
+                    }
+                }); // end ajax
+            });
+
+            $(document).on('submit', '#services', function(e) {
+                e.preventDefault();
+                var btn = $('#update_services');
+                KTApp.progress(btn);
+                $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
+                $.ajax({
+                    url: '{{ route('cleaner.ajax.profile.update_services') }}',
+                    type: "POST",
+                    data: $(this).serialize(),
+                    success: function(res) {
+                        KTApp.unprogress(btn);
+                        showToast(res.msg, res.status);
+                    },
+                    error: function(err) {
+                        KTApp.unprogress(btn);
+                        if( err.status == 422 ) {
+                            // display errors on each form field
+                            $.each(err.responseJSON.errors, function (i, error) {
+                                showToast(error[0], 0);
+                                return;
+                            });
+                        }
+                    }
+                }); // end ajax
+            });
+
+            $(document).on('submit', '#availability', function(e) {
+                e.preventDefault();
+                var btn = $('#update_availability');
+                KTApp.progress(btn);
+                $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
+                $.ajax({
+                    url: '{{ route('cleaner.ajax.profile.update_availability') }}',
                     type: "POST",
                     data: $(this).serialize(),
                     success: function(res) {

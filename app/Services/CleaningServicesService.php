@@ -41,8 +41,9 @@ class CleaningServicesService
     public function getLogedInCleanerServicesIds()
     {
         $cleanerService = new CleanerServiceMapping;
-        $cleaner = Cleaner::select('id')->where('user_id', Auth::Id())->first();
-        return $cleanerService->where('cleaner_id', $cleaner->id )->pluck('cleaning_service_id')->toArray();
+        $cleaner = Cleaner::where('user_id', Auth::Id())->first();
+        // return $cleaner;
+        return $cleanerService->where('cleaner_id', $cleaner->id )->get(['cleaning_service_id','has_equipments']);
     }
 
     public function registerCleaningServiceBackend($data)
