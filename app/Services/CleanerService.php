@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Cleaner;
 use App\Models\User;
 use App\Models\CleanerServiceMapping;
+use App\Models\CleanerTiming;
 use App\Traits\CaptureIpTrait;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -61,6 +62,15 @@ class CleanerService
         return $this->cleaner_model->with('user')->where('user_id', \Auth::id())->first();
     }
 
+    public function getCleanerTimings($cleaner_id = NULL)
+    {
+        if( $cleaner_id ) {
+            return CleanerTiming::where('cleaner_id', $cleaner_id)->get();
+        } else {
+            return CleanerTiming::where('cleaner_id', \Auth::id())->get();
+        }
+    }
+
     public function getPartialViewData($view_name)
     {
         switch ($view_name) {
@@ -74,14 +84,10 @@ class CleanerService
                 $services = new CleaningServicesService;
                 $data['services'] = $services->getLogedInRoleWiseCleaningServices();
                 $data['cleaner_services'] = $services->getLogedInCleanerServicesIds();
-                /*
-                foreach( $data['services'] as $service ) {
-                    $data['cleaner_services']->tap(function($collection) use ($service) {
-                        $collection = $collection->where('cleaning_service_id', $service->id);
-                        if( !$collection->isEmpty() ) { return true; } else { return false; }
-                    });
-                } */
                 return $data;
+            break;
+            case 'availability':
+                return $this->getCleanerTimings();
             break;
             default: return []; break;
         }
@@ -186,6 +192,43 @@ class CleanerService
 
     public function updateCleanerAvailability($request)
     {
-        dd($request);
+        // delete all data first
+        CleanerTiming::where('cleaner_id', \Auth::id())->delete();
+        if( $request->has('avail') ) {
+            foreach ($request->get('avail') as $key => $value) {
+                $_has_24hours = false;
+                // check for time now
+                foreach ($request->get('select_from_'.$value) as $k => $from) {
+                    if( $from == '24' ) { $_has_24hours = true; }
+                }
+                if( !$_has_24hours ) {
+                    foreach ($request->get('select_to_'.$value) as $ke => $to) {
+                        if( $to == '24' ) { $_has_24hours = true; }
+                    }
+                }
+                if( $_has_24hours ) {
+                    $cleanerTiming = new CleanerTiming;
+                    $cleanerTiming->cleaner_id = \Auth::id();
+                    $cleanerTiming->day = $value;
+                    $cleanerTiming->start_hours = "24";
+                    $cleanerTiming->is_opened = 1;
+                    $cleanerTiming->save();
+                } else {
+                    // it has proper timing do entry for all
+                    $c = 0;
+                    foreach ($request->get('select_from_'.$value) as $k => $from) {
+                        $cleanerTiming = new CleanerTiming;
+                        $cleanerTiming->cleaner_id = \Auth::id();
+                        $cleanerTiming->day = $value;
+                        $cleanerTiming->start_hours = $from;
+                        $cleanerTiming->end_hours = $request->get('select_to_'.$value)[$c];
+                        $cleanerTiming->is_opened = 1;
+                        $cleanerTiming->save();
+                        $c++;
+                    }
+                }
+            }
+        }
+        return true;
     }
 }

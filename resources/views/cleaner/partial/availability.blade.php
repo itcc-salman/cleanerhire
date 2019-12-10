@@ -18,39 +18,60 @@
                             </div>
 
                             @foreach( getDays() as $day )
+                            @php $days_count = 0 @endphp
                             <div class="row">
                                 <div class="col-3">
                                     <div class="form-group">
                                         <label class="col-form-label">{{ ucfirst($day) }} </label>
                                         <span class="kt-switch kt-switch--outline kt-switch--icon kt-switch--primary">
                                             <label>
-                                                <input type="checkbox" name="avail[]" id="avail_{{ $day }}" opened_day="{{ $day }}" value="{{ $day }}" class="switch_days">
+                                                <input type="checkbox" {{ $data->contains(function($value, $key) use ($day) {
+                                                    if( $value['day'] == $day ) { return true; }
+                                                    return false;
+                                                }) ? 'checked' : '' }} name="avail[]" id="avail_{{ $day }}" opened_day="{{ $day }}" value="{{ $day }}" class="switch_days">
                                                 <span></span>
                                             </label>
                                         </span>
                                     </div>
                                 </div>
-                                <div class="col-9 d-none" id="main_{{ $day }}">
+                                @foreach($data as $d)
+                                @if( $d->day == $day )
+                                @php $days_count++ @endphp
+                                <div class="col-9 {{ $d->day == $day ? '' : 'd-none' }}" id="main_{{ $day }}">
                                     <div class="form-group row">
                                         <div class="col-5">
                                             <select class="form-control from_hours" day="{{ $day }}" count="0" id="select_from_{{ $day }}_0" name="select_from_{{ $day }}[]">
                                                 @foreach( getHours() as $hourKey => $hour )
-                                                    <option value="{{ $hourKey }}">{{ $hour }}</option>
+                                                    <option value="{{ $hourKey }}" {{ $data->contains(function($value, $key) use ($day,$hourKey) {
+                                                    if( $value['day'] == $day && $value['start_hours'] == $hourKey ) { return true; }
+                                                    return false;
+                                                }) ? 'selected' : '' }}>{{ $hour }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="col-5 d-none" id="to_hours_div_{{ $day }}_0">
+                                        <div class="col-5 {{ $data->contains(function($value, $key) use ($day,$hourKey) {
+                                                    if( $value['day'] == $day && $value['start_hours'] != 24 ) { return true; }
+                                                    return false;
+                                                }) ? '' : 'd-none' }}" id="to_hours_div_{{ $day }}_0">
                                             <select class="form-control to_hours" id="select_to_{{ $day }}_0" name="select_to_{{ $day }}[]">
                                                 @foreach( getHours() as $hourKey => $hour )
-                                                    <option value="{{ $hourKey }}">{{ $hour }}</option>
+                                                    <option value="{{ $hourKey }}" {{ $data->contains(function($value, $key) use ($day,$hourKey) {
+                                                    if( $value['day'] == $day && $value['end_hours'] == $hourKey ) { return true; }
+                                                    return false;
+                                                }) ? 'selected' : '' }}>{{ $hour }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="col-1 d-none" id="add_btn_div_{{ $day }}_0">
+                                        <div class="col-1 {{ $data->contains(function($value, $key) use ($day,$hourKey) {
+                                                    if( $value['day'] == $day && $value['start_hours'] != 24 ) { return true; }
+                                                    return false;
+                                                }) ? '' : 'd-none' }}" id="add_btn_div_{{ $day }}_0">
                                             <span class="btn btn-brand add_hours" main="{{ $day }}" count="1">+</span>
                                         </div>
                                     </div>
                                 </div>
+                                @endif
+                                @endforeach
                             </div>
                             @endforeach
 
