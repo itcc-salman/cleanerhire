@@ -147,3 +147,111 @@
     </div>
 
 </div>
+
+@push('scripts')
+
+<script>
+
+    function fileupload(){
+        var fd = new FormData();
+        var files = $('#file')[0].files[0];
+        fd.append('file', files);
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: '/admin/uploadfile',
+            type: 'post',
+            data: fd,
+            contentType: false,
+            processData: false,
+            success: function(response){
+                if(response.code == 200){
+                    var selectedValue = '#'+$('#fileUploadSelect').val();
+                    $(selectedValue).val(response.data);
+                    $(selectedValue+'_file_name').html(": "+response.data);
+                    $('#file').val('');
+                    $('.custom-file-label').removeClass("selected").html("Choose file");
+                }
+            },
+        });
+    }
+
+    $(document).ready(function() {
+
+        $('#kt_datepicker_1').datepicker({
+            clearBtn: true,
+            todayBtn: true,
+            todayHighlight: true,
+            orientation: "bottom left",
+            endDate: new Date,
+            templates: {
+                leftArrow: '<i class="la la-angle-left"></i>',
+                rightArrow: '<i class="la la-angle-right"></i>'
+            }
+        });
+
+        var $repeater = $('#kt_repeater_3').repeater({
+            initEmpty: false,
+
+            defaultValues: [],
+
+            show: function() {
+                $(this).slideDown();
+            },
+
+            hide: function(deleteElement) {
+                if(confirm('Are you sure you want to delete this element?')) {
+                    $(this).slideUp(deleteElement);
+                }
+            }
+        });
+        // $repeater.setList();
+    });
+
+    $(document).on('change', 'input[type=radio][name=role]', function() {
+        if (this.value == 'cleaner') {
+            $("#radio_tfn").prop("disabled", false);
+            $("#radio_tfn").parent().removeClass('kt-radio--disabled');
+        }
+        else if (this.value == 'agency') {
+            $("#radio_tfn").prop("disabled", true);
+            $("#radio_tfn").parent().addClass('kt-radio--disabled');
+            $("#radio_abn").prop("checked", true);
+        }
+    });
+
+    $(document).on('change', 'input[type=radio][name=tfn_or_abn]', function() {
+        if (this.value == 'abn') {
+            $("#abn").removeClass('d-none');
+            $("#tfn").val('');
+            $("#tfn").addClass('d-none');
+        }
+        else if (this.value == 'tfn') {
+            $("#tfn").removeClass('d-none');
+            $("#abn").val('');
+            $("#abn").addClass('d-none');
+        }
+    });
+
+    $(document).on('change', 'input[type=radio][name=driver_license]', function() {
+        if (this.value == 'no') {
+            $("#driver_license_state").addClass('d-none');
+            $("#driver_license_number").addClass('d-none');
+        }
+        else if (this.value == 'yes') {
+            $("#driver_license_state").removeClass('d-none');
+            $("#driver_license_number").removeClass('d-none');
+        }
+    });
+
+    $(document).on('change', 'input[type=radio][name=visa_status]', function() {
+        if (this.value != 'citizen' && this.value != 'pr') {
+            $("#visa_status_other").removeClass('d-none');
+        }else{
+            $("#visa_status_other").addClass('d-none');
+        }
+    });
+
+</script>
+@endpush
