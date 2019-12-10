@@ -1,19 +1,17 @@
 <div class="kt-wizard-v1__form">
     @foreach( getDays() as $day )
-    <div class="row">
-        <div class="col-3">
-            <div class="form-group">
-                <label class="col-form-label">{{ ucfirst($day) }} </label>
-                <span class="kt-switch kt-switch--outline kt-switch--icon kt-switch--primary">
-                    <label>
-                        <input type="checkbox" name="avail[]" id="avail_{{ $day }}" opened_day="{{ $day }}" value="{{ $day }}" class="switch_days">
-                        <span></span>
-                    </label>
-                </span>
-            </div>
-        </div>
+    <div class="row form-group">
+
+        <label class="col-2 col-form-label">{{ ucfirst($day) }} </label>
+        <span class="kt-switch kt-switch--outline kt-switch--icon kt-switch--primary">
+            <label>
+                <input type="checkbox" name="avail[]" id="avail_{{ $day }}" opened_day="{{ $day }}" value="{{ $day }}" class="switch_days">
+                <span></span>
+            </label>
+        </span>
+
         <div class="col-9 d-none" id="main_{{ $day }}">
-            <div class="form-group row">
+            <div class="row">
                 <div class="col-5">
                     <select class="form-control from_hours" day="{{ $day }}" count="0" id="select_from_{{ $day }}_0" name="select_from_{{ $day }}[]">
                         @foreach( getHours() as $hourKey => $hour )

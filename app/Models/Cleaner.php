@@ -76,6 +76,11 @@ class Cleaner extends Model
         return $this->belongsToMany('App\Models\CleaningServices', 'cleaner_service_mappings', 'cleaner_id', 'cleaning_service_id');
     }
 
+    public function cleanerServices()
+    {
+        return $this->hasMany('App\Models\CleanerServiceMapping');
+    }
+
     public function user()
     {
         return $this->belongsTo('App\Models\User');

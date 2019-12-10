@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cleaner;
+use App\Models\CleanerServiceMapping;
 use App\Models\User;
 use Auth;
 use Illuminate\Http\Request;
@@ -200,6 +201,15 @@ class CleanerController extends Controller
                     $cleaner->doc_police_check =  $request->get('doc_police_check', $cleaner->doc_police_check);
 
                 }else if($last_step == 3){
+                    $cleaner->cleanerServices()->delete();
+                    $cleaner_services = $request->get('cleaner_services',null);
+                    foreach ($cleaner_services as $key => $service) {
+                        $csm = new CleanerServiceMapping();
+                        $csm->cleaner_id = $cleaner->id;
+                        $csm->cleaning_service_id = $service;
+                        $csm->has_equipments = $request->get('has_equipment_'.$key, 0);
+                        $csm->save();
+                    }
                 }else if($last_step == 4){
                 }else if($last_step == 5){
                     session()->pull('backend');
