@@ -190,9 +190,10 @@ var KTDatatableRemoteAjaxDemo = function() {
                     width: 110,
                     overflow: 'visible',
                     autoHide: false,
-                    template: function() {
+                    template: function(row) {
+                        console.log(row.id);
                         return '\
-                        <a href="javascript:;" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="Edit details">\
+                        <a href="/admin/cleaner/edit/'+ row.id +'" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="Edit details">\
                             <i class="flaticon2-edit"></i>\
                         </a>\
                         <a href="javascript:;" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="Delete">\

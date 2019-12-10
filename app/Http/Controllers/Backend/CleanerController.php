@@ -107,16 +107,11 @@ class CleanerController extends Controller
 
     public function edit(Request $request)
     {
-        $data = array();
         $cleaner = Cleaner::find($request->id);
         if(!$cleaner){
-            $data['code'] = 400;
-            $data['cleaner'] = null;
-            $data['message'] = 'Cleaner not Found..!';
+            return back();
         }
-        $data['code'] = 200;
-        $data['cleaner'] = $cleaner;
-        return response()->json($data);
+       return view('backend.cleaners.edit')->with('cleaner',$cleaner);
     }
 
     public function postUpdate(Request $request)

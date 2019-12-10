@@ -2,62 +2,62 @@
     <div class="form-group">
         <label>Are you an individual or an agency?</label>
         <div class="kt-radio-inline">
-            <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="cleaner" name="role"> Individual <span></span></label>
-            <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="agency" name="role"> Agency <span></span></label>
+            <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="cleaner" {{ isset($cleaner) && $cleaner->user->role == 'cleaner' ? 'checked' : '' }} name="role"> Individual <span></span></label>
+            <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="agency" {{ isset($cleaner) && $cleaner->user->role == 'agency' ? 'checked' : '' }} name="role"> Agency <span></span></label>
         </div>
     </div>
     <div class="form-group">
         <label>Do you want to register as TFN or ABN?</label>
         <div class="kt-radio-inline">
-            <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" id="radio_abn" value="abn" name="tfn_or_abn" > ABN <span></span></label>
-            <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" id="radio_tfn" value="tfn" name="tfn_or_abn"> TFN <span></span></label>
+            <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" id="radio_abn" value="abn" {{ isset($cleaner->abn) ? 'checked' : '' }} name="tfn_or_abn" > ABN <span></span></label>
+            <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" id="radio_tfn" value="tfn" {{ isset($cleaner->tfn) ? 'checked' : '' }} name="tfn_or_abn"> TFN <span></span></label>
         </div>
         <div class="">
-            <input type="text" class="form-control d-none" id="tfn" name="tfn" placeholder="TFN">
-            <input type="text" class="form-control d-none" id="abn" name="abn" placeholder="ABN">
+            <input type="text" class="form-control {{ !empty($cleaner->tfn) ?: 'd-none' }}" id="tfn" name="tfn" placeholder="TFN" value="{{ $cleaner->tfn ?? ''}}">
+            <input type="text" class="form-control {{ !empty($cleaner->abn) ?: 'd-none' }}" id="abn" name="abn" placeholder="ABN" value="{{ $cleaner->abn ?? ''}}">
         </div>
     </div>
     <div class="form-group">
         <label>Are you an Australian / NZ Citizen or a Permanent Resident?</label>
         <div class="kt-radio-inline">
-            <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="citizen" name="visa_status"> Australian / NZ Citizen <span></span></label>
-            <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="pr" name="visa_status"> Permanent Resident <span></span></label>
-            <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="other" name="visa_status"> Other (Please Specify) <span></span></label>
+            <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio"  {{ isset($cleaner) && $cleaner->visa_status == 'citizen' ? 'checked' : '' }} value="citizen" name="visa_status"> Australian / NZ Citizen <span></span></label>
+            <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio"  {{ isset($cleaner) && $cleaner->visa_status == 'pr' ? 'checked' : '' }} value="pr" name="visa_status"> Permanent Resident <span></span></label>
+            <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio"  {{ isset($cleaner) && $cleaner->visa_status == 'other' ? 'checked' : '' }} value="other" name="visa_status"> Other (Please Specify) <span></span></label>
         </div>
         <div class="">
-            <input type="text" class="form-control d-none" id="visa_status_other" name="visa_status_other" placeholder="State/Country">
+            <input type="text" class="form-control {{ !empty($cleaner->visa_status_other) ?: 'd-none' }}" id="visa_status_other" name="visa_status_other" placeholder="State/Country" value="{{$cleaner->visa_status_other ?? ''}}">
         </div>
     </div>
     <div class="form-group">
         <label>Do you have a Police Check? (Must be within last 12 months)</label>
         <div class="kt-radio-inline">
-            <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="yes" name="police_check"> Yes <span></span></label>
-            <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="no" name="police_check"> No <span></span></label>
+            <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="yes" {{ isset($cleaner) && $cleaner->police_check == 'yes' ? 'checked' : '' }}  name="police_check"> Yes <span></span></label>
+            <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="no"  {{ isset($cleaner) && $cleaner->police_check == 'no' ? 'checked' : '' }} name="police_check"> No <span></span></label>
         </div>
     </div>
     <div class="form-group">
         <label>Do you have your own car?</label>
         <div class="kt-radio-inline">
-            <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="yes" name="own_car"> Yes <span></span></label>
-            <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="no" name="own_car"> No <span></span></label>
+            <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="yes" {{ isset($cleaner) && $cleaner->own_car == 'yes' ? 'checked' : '' }} name="own_car"> Yes <span></span></label>
+            <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="no" {{ isset($cleaner) && $cleaner->own_car == 'no' ? 'checked' : '' }} name="own_car"> No <span></span></label>
         </div>
     </div>
     <div class="form-group">
         <label>Do you have a Driver License?</label>
         <div class="kt-radio-inline">
-            <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="yes" name="driver_license"> Yes <span></span></label>
-            <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="no" name="driver_license"> No <span></span></label>
+            <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="yes" {{ isset($cleaner) && $cleaner->driver_license == 'yes' ? 'checked' : '' }} name="driver_license"> Yes <span></span></label>
+            <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="no" {{ isset($cleaner) && $cleaner->driver_license == 'no' ? 'checked' : '' }} name="driver_license"> No <span></span></label>
         </div>
         <div class="">
-            <input type="text" class="form-control driver_license_state d-none" id="driver_license_state" name="driver_license_state" placeholder="Which State/Country ?">
+            <input type="text" class="form-control driver_license_state {{ !empty($cleaner->driver_license_state) ?: 'd-none'}}" id="driver_license_state" name="driver_license_state" placeholder="Which State/Country ?" value="{{$cleaner->driver_license_state ?? ''}}">
         </div>
         <div class="">
-            <input type="text" class="form-control driver_license_number d-none" id="driver_license_number" name="driver_license_number" placeholder="Driver License Number">
+            <input type="text" class="form-control driver_license_number {{ !empty($cleaner->driver_license_number) ?: 'd-none'}}" id="driver_license_number" name="driver_license_number" placeholder="Driver License Number" value="{{$cleaner->driver_license_number ?? ''}}">
         </div>
     </div>
     <div class="form-group">
         <label>Nationality</label>
-        <input type="text" class="form-control" name="nationality" placeholder="Nationality">
+        <input type="text" class="form-control" name="nationality" placeholder="Nationality" value="{{$cleaner->nationality ?? ''}}">
     </div>
     <div class="form-group">
         <label>Which Languages you speak?</label>
@@ -92,14 +92,14 @@
     <div class="form-group">
         <label>Gender?</label>
         <div class="kt-radio-inline">
-            <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="male" name="gender"> Male <span></span></label>
-            <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="female" name="gender"> Female <span></span></label>
-            <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="unknown" name="gender"> Do not want to specify <span></span></label>
+            <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="male" {{ isset($cleaner) && $cleaner->gender == 'male' ? 'checked' : '' }} name="gender"> Male <span></span></label>
+            <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="female" {{ isset($cleaner) && $cleaner->gender == 'female' ? 'checked' : '' }} name="gender"> Female <span></span></label>
+            <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="unknown" {{ isset($cleaner) && $cleaner->gender == 'unknown' ? 'checked' : '' }} name="gender"> Do not want to specify <span></span></label>
         </div>
     </div>
     <div class="form-group">
         <label>Your Date of Birth?</label>
-        <input type="text" class="form-control" id="kt_datepicker_1" name="date_of_birth" readonly placeholder="Select date" />
+        <input type="text" class="form-control" id="kt_datepicker_1" name="date_of_birth" readonly placeholder="Select date" value="{{ $cleaner->date_of_birth ?? '' }}"/>
     </div>
 
     <div>
@@ -135,13 +135,13 @@
                 <input type="hidden" name="doc_utility_bill" id="doc_utility_bill">
                 <input type="hidden" name="doc_certifications" id="doc_certifications">
                 <input type="hidden" name="doc_police_check" id="doc_police_check">
-                <p class="m-0 p-0"><span>1. Driving License</span><span id="doc_driving_licence_file_name"></span></p>
-                <p class="m-0 p-0"><span>2. Medical Card</span><span id="doc_medicare_card_file_name"></span></p>
-                <p class="m-0 p-0"><span>3. Passport</span><span id="doc_passport_file_name"></span></p>
-                <p class="m-0 p-0"><span>4. Utility Bill</span><span id="doc_bank_statement_file_name"></span></p>
-                <p class="m-0 p-0"><span>5. Bank Statement</span><span id="doc_utility_bill_file_name"></span></p>
-                <p class="m-0 p-0"><span>6. Police Check</span><span id="doc_certifications_file_name"></span></p>
-                <p class="m-0 p-0"><span>7. Certifications</span><span id="doc_police_check_file_name"></span></p>
+                <p class="m-0 p-0"><span>1. Driving License</span><span id="doc_driving_licence_file_name">{{$cleaner->doc_driving_licence ?? ''}}</span></p>
+                <p class="m-0 p-0"><span>2. Medical Card</span><span id="doc_medicare_card_file_name">{{$cleaner->doc_medicare_card ?? ''}}</span></p>
+                <p class="m-0 p-0"><span>3. Passport</span><span id="doc_passport_file_name">{{$cleaner->doc_passport ?? ''}}</span></p>
+                <p class="m-0 p-0"><span>4. Utility Bill</span><span id="doc_bank_statement_file_name">{{$cleaner->doc_bank_statement ?? ''}}</span></p>
+                <p class="m-0 p-0"><span>5. Bank Statement</span><span id="doc_utility_bill_file_name">{{$cleaner->doc_utility_bill ?? ''}}</span></p>
+                <p class="m-0 p-0"><span>6. Police Check</span><span id="doc_certifications_file_name">{{$cleaner->doc_certifications ?? ''}}</span></p>
+                <p class="m-0 p-0"><span>7. Certifications</span><span id="doc_police_check_file_name">{{$cleaner->doc_police_check ?? ''}}</span></p>
             </div>
         </div>
     </div>

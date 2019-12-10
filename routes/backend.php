@@ -14,6 +14,7 @@
 Route::get('/', 'HomeController@index')->name('backend.dashboard');
 Route::get('cleaners', 'CleanerController@index')->name('backend.cleaners');
 Route::get('cleaner/add', 'CleanerController@add')->name('backend.cleaner.add');
+Route::get('cleaner/edit/{id}', 'CleanerController@edit')->name('backend.cleaner.edit');
 Route::post('cleaner/create', 'CleanerController@postCreate')->name('backend.cleaner.create');
 Route::post('cleaner/update', 'CleanerController@postUpdate')->name('backend.cleaner.update');
 
