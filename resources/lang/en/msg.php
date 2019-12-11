@@ -22,6 +22,9 @@ return [
     'clsSerUpdated' => 'Cleaning Service Updated Successfully',
     'clsSerDeleted' => 'Cleaning Service Deleted Successfully',
     'clsSerError' => 'Some Error Occured. Please try again',
+    'resourceCreated' => 'Resource Created Successfully',
+    'resourceUpdated' => 'Resource Updated Successfully',
+    'resourceDeleted' => 'Resource Deleted Successfully',
 
     /*
      * Cleaner

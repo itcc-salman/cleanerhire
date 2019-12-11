@@ -24,6 +24,13 @@ Route::prefix('services')->group(function () {
     Route::match(['GET', 'POST'], '/update/{id?}', 'CleaningServiceController@update')->name('backend.sevice.update');
 });
 
+Route::prefix('resources')->group(function () {
+    Route::get('/', 'ResourceController@index')->name('backend.resources');
+    Route::match(['GET', 'POST'], '/create', 'ResourceController@create')->name('backend.resource.create');
+    Route::match(['GET', 'POST'], '/update/{id?}', 'ResourceController@update')->name('backend.resource.update');
+    Route::get('resource/view/{id?}', 'ResourceController@view')->name('backend.resource.view');
+});
+
 
 Route::prefix('ajax')->group(function () {
     Route::get('cleaners', 'CleanerController@getAllCleaners')->name('backend.ajax.cleaners');
@@ -32,6 +39,10 @@ Route::prefix('ajax')->group(function () {
     // Services
     Route::get('services', 'CleaningServiceController@getAllServices')->name('backend.ajax.services');
     Route::post('service/delete', 'CleaningServiceController@delete')->name('backend.ajax.service.delete');
+
+    // Resources
+    Route::get('resources', 'ResourceController@getAllResources')->name('backend.ajax.resources');
+    Route::post('resource/delete', 'ResourceController@delete')->name('backend.ajax.resource.delete');
 });
 
 Route::post('uploadfile','CleanerController@showUploadFile');

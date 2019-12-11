@@ -28,6 +28,8 @@ return [
     'cleSerIndividual' => 'Individual',
     'cleSerAgency' => 'Agency',
 
+    'docName' => 'Document Name',
+
     /*
      * Cleaner
      *
