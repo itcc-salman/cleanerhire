@@ -206,7 +206,7 @@
                 }
             }
         });
-        @if($cleaner->language != '')
+        @if(isset($cleaner) && $cleaner->language != '')
         $repeater.setList({!! json_encode($cleaner->language) !!});
         @endif
     });
