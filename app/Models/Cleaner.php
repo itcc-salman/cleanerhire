@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
+use App\Models\CleanerServiceMapping;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Carbon\Carbon;
 
 class Cleaner extends Model
 {
@@ -79,6 +80,26 @@ class Cleaner extends Model
     public function cleanerServices()
     {
         return $this->hasMany('App\Models\CleanerServiceMapping');
+    }
+
+    public function isServiceAvailable($serviceId)
+    {
+        $csm = CleanerServiceMapping::where('cleaner_id', $this->id)->where('cleaning_service_id',$serviceId)->first();
+        if($csm){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function isServiceEquipmentAvailable($serviceId)
+    {
+        $csm = CleanerServiceMapping::where('cleaner_id', $this->id)->where('cleaning_service_id',$serviceId)->first();
+        if($csm && $csm->has_equipments == 1){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     public function user()

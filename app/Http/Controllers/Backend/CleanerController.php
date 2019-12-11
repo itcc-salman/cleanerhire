@@ -30,7 +30,7 @@ class CleanerController extends Controller
 
     public function add(Request $request)
     {
-        session()->pull('backend');
+        // session()->pull('backend');
         // dd(session()->all());
         return view('backend.cleaners.add');
     }
@@ -81,9 +81,9 @@ class CleanerController extends Controller
             $cleaner->status = 1;
             $cleaner->save();
 
-            $request->session()->put('backend.last_step', $last_step);
-            $request->session()->put('backend.cleaner_id', $cleaner->id);
-            $request->session()->put('backend.user_id', $cleaner->user_id);
+            // $request->session()->put('backend.last_step', $last_step);
+            // $request->session()->put('backend.cleaner_id', $cleaner->id);
+            // $request->session()->put('backend.user_id', $cleaner->user_id);
         }
 
         $data['code'] = 200;
@@ -207,12 +207,12 @@ class CleanerController extends Controller
                         $csm = new CleanerServiceMapping();
                         $csm->cleaner_id = $cleaner->id;
                         $csm->cleaning_service_id = $service;
-                        $csm->has_equipments = $request->get('has_equipment_'.$key, 0);
+                        $csm->has_equipments = $request->get('has_equipment_'.($service), 0);
                         $csm->save();
                     }
                 }else if($last_step == 4){
                 }else if($last_step == 5){
-                    session()->pull('backend');
+                    // session()->pull('backend');
                 }
 
                 $cleaner->updated_by =  Auth::Id();

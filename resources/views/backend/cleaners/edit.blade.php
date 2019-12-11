@@ -85,8 +85,8 @@
                     <form class="kt-form kt-padding-t-0" id="kt_form">
                         @csrf
                         <input type="hidden" name="last_step" id="last_step" value="1">
-                        @if(Session::has('backend.cleaner_id'))
-                            <input type="hidden" name="id" id="cleaner_id" value="{{ Session::get('backend.cleaner_id')}}">
+                        @if(isset($cleaner))
+                            <input type="hidden" name="id" id="cleaner_id" value="{{$cleaner->id}}">
                         @else
                             <input type="hidden" name="id" id="cleaner_id" value="">
                         @endif
