@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Notifications\PasswordReset;
 
 class User extends Authenticatable
 {
@@ -74,4 +75,13 @@ class User extends Authenticatable
     {
         $this->hasOne('App\Models\Cleaner', 'user_id');
     }
+
+    public static function boot() {
+        parent::boot();
+        User::created(function ($model) {
+            $token = app('auth.password.broker')->createToken($model);
+            $model->notify(new PasswordReset($token));
+        });
+    }
+
 }
