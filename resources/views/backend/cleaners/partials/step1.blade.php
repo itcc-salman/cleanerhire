@@ -1,15 +1,16 @@
 <div class="kt-wizard-v1__form">
     <div class="form-group">
         <label>First Name</label>
-        <input type="text" class="form-control" name="first_name" placeholder="First Name" value="{{ $cleaner->first_name ?? 'Vicky' }}">
+        <input type="text" class="form-control" name="first_name" placeholder="First Name" value="{{ $cleaner->first_name ?? '' }}">
     </div>
     <div class="form-group">
         <label>Last Name</label>
-        <input type="text" class="form-control" name="last_name" placeholder="Last Name" value="{{ $cleaner->last_name ?? 'Vicky' }}">
+        <input type="text" class="form-control" name="last_name" placeholder="Last Name" value="{{ $cleaner->last_name ?? '' }}">
     </div>
     <div class="form-group">
         <label>Email</label>
-        <input type="text" class="form-control" name="email" placeholder="Email" value="{{ $cleaner->email ?? 'itcc@itcc.com' }}">
+        <input type="text" class="form-control" name="email" placeholder="Email" value="{{ $cleaner->email ?? '' }}">
+        {{-- cleaner@itccdigital.com --}}
     </div>
     <div class="form-group">
         <label>Phone</label>
