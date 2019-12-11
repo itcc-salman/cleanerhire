@@ -21,11 +21,11 @@
     </div>
     <div class="form-group">
         <label>Address Line 1</label>
-        <input type="text" class="form-control" name="address1" placeholder="Address Line 1" value="{{ $cleaner->address1 ?? '' }}">
+        <input type="text" class="form-control" name="address_line_1" placeholder="Address Line 1" value="{{ $cleaner->address_line_1 ?? '' }}">
     </div>
     <div class="form-group">
         <label>Address Line 2</label>
-        <input type="text" class="form-control" name="address2" placeholder="Address Line 2" value="{{ $cleaner->address2 ?? '' }}">
+        <input type="text" class="form-control" name="address_line_2" placeholder="Address Line 2" value="{{ $cleaner->address2 ?? '' }}">
     </div>
     <div class="form-group">
         <label>Postcode</label>
