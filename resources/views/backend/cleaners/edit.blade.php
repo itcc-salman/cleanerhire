@@ -134,8 +134,8 @@
                         <!--begin: Form Wizard Step 5-->
                         <div class="kt-wizard-v1__content" data-ktwizard-type="step-content">
                             <div class="kt-heading kt-heading--md">Verify and Submit</div>
-                            <div class="kt-form__section kt-form__section--first">
-                                @include('backend.cleaners.partials.step5')
+                            <div class="kt-form__section kt-form__section--first" id="stepFiveWizardDiv">
+                                {{-- @include('backend.cleaners.partials.step5') --}}
                             </div>
                         </div>
 
@@ -254,40 +254,24 @@
                 e.preventDefault();
                 if (validator.form()) {
                     // See: src\js\framework\base\app.js
-                    KTApp.progress(btn);
-                    //KTApp.block(formEl);
                     console.log(wizard.currentStep);
-                    if((wizard.currentStep - 1) == 1){
-
-                        if($("#cleaner_id").val() == ''){
-                            var url = '{{ route('backend.cleaner.create') }}';
-                        }else{
-                            var url = '{{ route('backend.cleaner.update') }}';
+                    KTApp.progress(btn);
+                    KTApp.block(formEl);
+                    console.log(wizard.currentStep);
+                    var url = '{{ route('backend.cleaner.update') }}';
+                    formEl.ajaxSubmit({
+                        url: url,
+                        method: 'POST',
+                        success: function(response) {
+                            // console.log(response);
+                            if(response.code == 200 && response.html != ''){
+                                $("#stepFiveWizardDiv").html(response.html);
+                            }
+                            KTApp.unprogress(btn);
+                            KTApp.unblock(formEl);
                         }
-                        formEl.ajaxSubmit({
-                            url: url,
-                            method: 'POST',
-                            success: function(response) {
-                                if(response.code == 200){
-                                    $("#cleaner_id").val(response.cleaner.id)
-                                }
-                                KTApp.unprogress(btn);
-                                //KTApp.unblock(formEl);
+                    });
 
-                            }
-                        });
-                    }else if((wizard.currentStep - 1) > 1 && (wizard.currentStep - 1) < 5){
-                        var url = '{{ route('backend.cleaner.update') }}';
-                        formEl.ajaxSubmit({
-                            url: url,
-                            method: 'POST',
-                            success: function(response) {
-                                console.log(response);
-                                KTApp.unprogress(btn);
-                                //KTApp.unblock(formEl);
-                            }
-                        });
-                    }
                 }
             });
 
@@ -329,7 +313,6 @@
 
     $(document).ready(function() {
         KTWizard1.init();
-
     });
 </script>
 @endpush

@@ -19,7 +19,6 @@ class Cleaner extends Model
     protected $fillable = [
         'user_id',
     ];
-
     /**
      * Get the phone number.
      *
@@ -37,10 +36,10 @@ class Cleaner extends Model
      * @param  string  $value
      * @return string
     */
-    // public function getCityAttribute($value)
-    // {
-    //     return !empty($value) ? $value : '-';
-    // }
+    public function getLanguageAttribute($value)
+    {
+        return !empty($value) ? json_decode($value) : null;
+    }
 
     /**
      * Get the date of birth.
@@ -80,6 +79,11 @@ class Cleaner extends Model
     public function cleanerServices()
     {
         return $this->hasMany('App\Models\CleanerServiceMapping');
+    }
+
+    public function cleanerTimings()
+    {
+        return $this->hasMany('App\Models\CleanerTiming');
     }
 
     public function isServiceAvailable($serviceId)

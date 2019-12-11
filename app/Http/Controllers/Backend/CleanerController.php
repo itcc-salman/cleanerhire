@@ -127,7 +127,7 @@ class CleanerController extends Controller
         $last_step = $request->get('last_step', null);
 
         if($id){
-            $cleaner = Cleaner::find($id);
+            $cleaner = Cleaner::with(['cleanerServices','cleanerTimings'])->find($id);
             if($cleaner){
                 $user = User::find($cleaner->user_id);
                 if($last_step == 1){
@@ -255,9 +255,10 @@ class CleanerController extends Controller
                 $cleaner->updated_by =  Auth::Id();
                 $cleaner->last_step =  $request->has('last_step') ? $request->get('last_step') : $cleaner->last_step;
                 $cleaner->save();
-
+                $cleaner->refresh();
                 $data['code'] = 200;
                 $data['cleaner'] = $cleaner;
+                $data['html'] =  view('backend.cleaners.partials.step5')->with('cleaner',$cleaner)->with('user',$user)->render();
                 $data['message'] = 'Cleaner updated successfully..!';
             }
         }
