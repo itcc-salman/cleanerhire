@@ -206,7 +206,9 @@
                 }
             }
         });
-        // $repeater.setList();
+        @if(isset($cleaner) && $cleaner->language != '')
+        $repeater.setList({!! json_encode($cleaner->language) !!});
+        @endif
     });
 
     $(document).on('change', 'input[type=radio][name=role]', function() {

@@ -11,8 +11,12 @@ if( !function_exists('setflashmsg') ) {
 }
 
 if( !function_exists('getDays') ) {
-    function getDays() {
-        return [ 'sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday' ];
+    function getDays($_blank = NULL) {
+        if( $_blank ) {
+            return [ 'sunday' => [], 'monday' => [], 'tuesday' => [], 'wednesday' => [], 'thursday' => [], 'friday' => [], 'saturday' => [] ];
+        } else {
+            return [ 'sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday' ];
+        }
     }
 }
 
