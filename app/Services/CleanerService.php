@@ -19,13 +19,11 @@ class CleanerService
 
     protected $cleaner_model;
     protected $user_model;
-    protected $cleaner;
 
     public function __construct()
     {
         $this->cleaner_model = new Cleaner;
         $this->user_model = new User;
-        $this->cleaner = $this->cleaner_model->where('user_id', Auth::id())->first();
     }
 
     public function registerCleanerFront($data)
@@ -70,7 +68,8 @@ class CleanerService
         if( $cleaner_id ) {
             return CleanerTiming::where('cleaner_id', $cleaner_id)->get();
         } else {
-            return CleanerTiming::where('cleaner_id', $this->cleaner->id)->get();
+            $cleaner = $this->cleaner_model->where('user_id', Auth::id())->first();
+            return CleanerTiming::where('cleaner_id', $cleaner->id)->get();
         }
     }
 
@@ -90,7 +89,18 @@ class CleanerService
                 return $data;
             break;
             case 'availability':
-                return $this->getCleanerTimings();
+                $data = [];
+                $timings = $this->getCleanerTimings()->toArray();
+                // dd($timings);
+                foreach (getDays() as $key => $day) {
+                    $data[$day] = [];
+                    foreach ($timings as $key => $value) {
+                        if( $value['day'] == $day ) {
+                            array_push($data[$day], $value);
+                        }
+                    }
+                }
+                return $data;
             break;
             default: return []; break;
         }
@@ -104,7 +114,7 @@ class CleanerService
 
     public function updateCleanerPersonalInfo($data)
     {
-        $cleaner = $this->cleaner;
+        $cleaner = $this->cleaner_model->where('user_id', Auth::id())->first();
         if( $cleaner ) {
             $cleaner->first_name = $data->get('first_name');
             $cleaner->last_name = $data->get('last_name');
@@ -123,7 +133,7 @@ class CleanerService
 
     public function updateCleanerAccountInfo($request)
     {
-        $cleaner = $this->cleaner;
+        $cleaner = $this->cleaner_model->where('user_id', Auth::id())->first();
         if( $cleaner ) {
             // update role
             $user = $this->user_model->find(Auth::id());
@@ -180,7 +190,7 @@ class CleanerService
     public function updateCleanerServices($request)
     {
         // delete all data first
-        $cleaner = $this->cleaner;
+        $cleaner = $this->cleaner_model->where('user_id', Auth::id())->first();
         CleanerServiceMapping::where('cleaner_id', $cleaner->id)->delete();
         if( $request->has('cleaner_services') ) {
             foreach ($request->get('cleaner_services') as $key => $value) {
@@ -197,7 +207,7 @@ class CleanerService
     public function updateCleanerAvailability($request)
     {
         // delete all data first
-        $cleaner = $this->cleaner;
+        $cleaner = $this->cleaner_model->where('user_id', Auth::id())->first();
         CleanerTiming::where('cleaner_id', $cleaner->id)->delete();
         if( $request->has('avail') ) {
             foreach ($request->get('avail') as $key => $value) {
