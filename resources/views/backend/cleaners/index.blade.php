@@ -10,12 +10,12 @@
                     <i class="kt-font-brand flaticon2-line-chart"></i>
                 </span>
                 <h3 class="kt-portlet__head-title">
-                    Remote Datasource
+                    Cleaners
                 </h3>
             </div>
             <div class="kt-portlet__head-toolbar">
                 <div class="kt-portlet__head-wrapper">
-                    <a href="#" class="btn btn-clean btn-icon-sm">
+                    <a href="{{ route('backend.dashboard') }}" class="btn btn-clean btn-icon-sm">
                         <i class="la la-long-arrow-left"></i>
                         Back
                     </a>
@@ -43,7 +43,7 @@
                                     </span>
                                 </div>
                             </div>
-                            <div class="col-md-4 kt-margin-b-20-tablet-and-mobile">
+                            <div class="col-md-4 kt-margin-b-20-tablet-and-mobile d-none">
                                 <div class="kt-form__group kt-form__group--inline">
                                     <div class="kt-form__label">
                                         <label>Status:</label>
@@ -61,7 +61,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4 kt-margin-b-20-tablet-and-mobile">
+                            <div class="col-md-4 kt-margin-b-20-tablet-and-mobile d-none">
                                 <div class="kt-form__group kt-form__group--inline">
                                     <div class="kt-form__label">
                                         <label>Type:</label>
