@@ -26,10 +26,10 @@ class Cleaner extends Model
      * @param  string  $value
      * @return string
     */
-    public function getPhoneAttribute($value)
-    {
-        return !empty($value) ? $value : '-';
-    }
+    // public function getPhoneAttribute($value)
+    // {
+    //     return !empty($value) ? $value : '-';
+    // }
 
     /**
      * Get the city.
@@ -37,10 +37,10 @@ class Cleaner extends Model
      * @param  string  $value
      * @return string
     */
-    public function getCityAttribute($value)
-    {
-        return !empty($value) ? $value : '-';
-    }
+    // public function getCityAttribute($value)
+    // {
+    //     return !empty($value) ? $value : '-';
+    // }
 
     /**
      * Get the date of birth.

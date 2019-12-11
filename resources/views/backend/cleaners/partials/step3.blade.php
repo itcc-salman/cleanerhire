@@ -17,7 +17,6 @@
                         const cleanerServicesYesEquipememtIds = cleanerServices.filter(cleanerService => cleanerService.has_equipments).map(cleanerService => cleanerService.cleaning_service_id);
                         const cleanerServicesNoEquipememtIds = cleanerServices.filter(cleanerService => !cleanerService.has_equipments).map(cleanerService => cleanerService.cleaning_service_id);
 
-                        console.log(cleanerServicesNoEquipememtIds);
                         $.each(response.services, function(index, el) {
                             if($.inArray(el.id, cleanerServicesIds) !== -1){
                                 var checked = 'checked';

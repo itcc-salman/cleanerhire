@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Cleaner;
 use App\Models\CleanerServiceMapping;
+use App\Models\CleanerTiming;
 use App\Models\User;
 use Auth;
 use Illuminate\Http\Request;
@@ -161,7 +162,7 @@ class CleanerController extends Controller
                         }
                     }
 
-                    $cleaner->visa_status =  $request->has('visa_status') ? $request->get('visa_status') : $cleaner->visa_status;
+                    $cleaner->visa_status =  $request->get('visa_status', $cleaner->visa_status);
                     if($cleaner->visa_status == 'other'){
                         $cleaner->visa_status_other = $request->get('visa_status_other', $cleaner->visa_status_other);
                     }else{
@@ -189,8 +190,8 @@ class CleanerController extends Controller
                     }
                     $cleaner->language =  $language;
 
-                    $cleaner->gender =  $request->has('gender') ? $request->get('gender') : $cleaner->gender;
-                    $cleaner->date_of_birth =  $request->has('date_of_birth') ? $request->get('date_of_birth') : $cleaner->date_of_birth;
+                    $cleaner->gender =  $request->get('gender', $cleaner->gender);
+                    $cleaner->date_of_birth =  $request->get('date_of_birth', $cleaner->date_of_birth);
 
                     $cleaner->doc_driving_licence =  $request->get('doc_driving_licence', $cleaner->doc_driving_licence);
                     $cleaner->doc_medicare_card =  $request->get('doc_medicare_card', $cleaner->doc_medicare_card);
@@ -211,6 +212,42 @@ class CleanerController extends Controller
                         $csm->save();
                     }
                 }else if($last_step == 4){
+                    CleanerTiming::where('cleaner_id', $cleaner->id)->delete();
+                    if( $request->has('avail') ) {
+                        foreach ($request->get('avail') as $key => $value) {
+                            $_has_24hours = false;
+                            // check for time now
+                            foreach ($request->get('select_from_'.$value) as $k => $from) {
+                                if( $from == '24' ) { $_has_24hours = true; }
+                            }
+                            if( !$_has_24hours ) {
+                                foreach ($request->get('select_to_'.$value) as $ke => $to) {
+                                    if( $to == '24' ) { $_has_24hours = true; }
+                                }
+                            }
+                            if( $_has_24hours ) {
+                                $cleanerTiming = new CleanerTiming;
+                                $cleanerTiming->cleaner_id = $cleaner->id;
+                                $cleanerTiming->day = $value;
+                                $cleanerTiming->start_hours = "24";
+                                $cleanerTiming->is_opened = 1;
+                                $cleanerTiming->save();
+                            } else {
+                                // it has proper timing do entry for all
+                                $c = 0;
+                                foreach ($request->get('select_from_'.$value) as $k => $from) {
+                                    $cleanerTiming = new CleanerTiming;
+                                    $cleanerTiming->cleaner_id = $cleaner->id;
+                                    $cleanerTiming->day = $value;
+                                    $cleanerTiming->start_hours = $from;
+                                    $cleanerTiming->end_hours = $request->get('select_to_'.$value)[$c];
+                                    $cleanerTiming->is_opened = 1;
+                                    $cleanerTiming->save();
+                                    $c++;
+                                }
+                            }
+                        }
+                    }
                 }else if($last_step == 5){
                     // session()->pull('backend');
                 }
