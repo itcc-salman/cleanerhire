@@ -11,7 +11,7 @@
         </span>
 
         <div class="col-9 d-none" id="main_{{ $day }}">
-            <div class="row">
+            <div class="row form-group">
                 <div class="col-5">
                     <select class="form-control from_hours" day="{{ $day }}" count="0" id="select_from_{{ $day }}_0" name="select_from_{{ $day }}[]">
                         @foreach( getHours() as $hourKey => $hour )
