@@ -19,6 +19,11 @@ class ResourceService
         return $this->resource_model->all();
     }
 
+    public function getAllActive()
+    {
+        return $this->resource_model->where('status', 1)->get();
+    }
+
     public function getResourceById($id)
     {
         return $this->resource_model->findOrFail($id);

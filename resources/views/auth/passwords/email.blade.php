@@ -26,7 +26,7 @@
         <!--end::Global Theme Styles -->
 
         <!--end::Layout Skins -->
-        <link rel="shortcut icon" href="{{ asset('assets/media/logos/favicon.ico') }}" />
+        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
     </head>
 
     <!-- end::Head -->
@@ -41,8 +41,8 @@
                     <div class="kt-grid__item kt-grid__item--fluid kt-login__wrapper">
                         <div class="kt-login__container">
                             <div class="kt-login__logo">
-                                <a href="#">
-                                    <img src="assets/media/logos/logo-mini-2-md.png">
+                                <a href="{{ route('front.home') }}">
+                                    <img src="{{ asset('assets/media/logos/logo-180.png') }}">
                                 </a>
                             </div>
                             @if (session('status'))
