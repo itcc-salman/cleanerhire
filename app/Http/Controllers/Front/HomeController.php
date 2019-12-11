@@ -35,6 +35,11 @@ class HomeController extends Controller
         return view('frontend.become_a_cleaner');
     }
 
+    public function bookACleaningJob()
+    {
+        return view('frontend.book_a_cleaning_job');
+    }
+
     public function registerCleaner(UserStoreRequest $request)
     {
         if( $request->method() == 'POST') {

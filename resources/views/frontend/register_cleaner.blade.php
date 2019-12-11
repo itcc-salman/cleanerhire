@@ -26,7 +26,7 @@
         <!--end::Global Theme Styles -->
 
         <!--end::Layout Skins -->
-        <link rel="shortcut icon" href="{{ asset('assets/media/logos/favicon.ico') }}" />
+        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
     </head>
 
     <!-- end::Head -->
@@ -43,7 +43,7 @@
                     <div class="kt-grid__item kt-grid__item--order-tablet-and-mobile-2 kt-grid kt-grid--hor kt-login__aside" style="background-image: url(assets/media/bg/bg-4.jpg);">
                         <div class="kt-grid__item">
                             <a href="{{ route('front.home') }}" class="kt-login__logo">
-                                <img src="{{ asset('assets/media/logos/logo-4.png') }}">
+                                <img src="{{ asset('front/images/logo.png') }}">
                             </a>
                         </div>
                         <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--ver">

@@ -13,13 +13,16 @@
             </div>
             <div class="collapse navbar-collapse" id="top_menu">
                 <ul class="nav navbar-nav">
-                    <li><a href="book-a-cleaning-jobs.html">Book a Cleaning Jobs</a></li>
+                    {{-- <li><a href="book-a-cleaning-jobs.html">Book a Cleaning Jobs</a></li> --}}
+                    <li><a href="{{ route('front.book_a_cleaning_job') }}">Book a Cleaning Jobs</a></li>
                     <li><a href="#">Services</a></li>
                     <li><a href="#">How it works</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#hire_register" class="trigger-btn" data-toggle="modal">Sign up</a></li>
-                    <li><a href="#hire_login" class="trigger-btn" data-toggle="modal">Log in</a></li>
+                    {{-- <li><a href="#hire_register" class="trigger-btn" data-toggle="modal">Sign up</a></li>
+                    <li><a href="#hire_login" class="trigger-btn" data-toggle="modal">Log in</a></li> --}}
+                    <li><a href="{{ route('front.register_cleaner') }}" class="trigger-btn">Sign up</a></li>
+                    <li><a href="{{ route('login') }}" class="trigger-btn" data-toggle="modal">Log in</a></li>
                     <li><a href="{{ route('front.become_a_cleaner') }}" class="head_btn">Become a Cleaner</a></li>
                 </ul>
             </div>

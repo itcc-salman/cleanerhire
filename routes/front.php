@@ -14,6 +14,7 @@
 Route::get('/', 'HomeController@index')->name('front.home');
 
 Route::get('/become-a-cleaner', 'HomeController@becomeACleaner')->name('front.become_a_cleaner');
+Route::get('/book-a-cleaning-job', 'HomeController@bookACleaningJob')->name('front.book_a_cleaning_job');
 
 Route::match(['GET', 'POST'], '/registercleaner', [
     'uses' => 'HomeController@registerCleaner',
