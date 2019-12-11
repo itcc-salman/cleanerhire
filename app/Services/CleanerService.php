@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Traits\ActivationTrait;
 use App\Services\CleaningServicesService;
+use Auth;
 
 class CleanerService
 {
@@ -18,11 +19,13 @@ class CleanerService
 
     protected $cleaner_model;
     protected $user_model;
+    protected $cleaner;
 
     public function __construct()
     {
         $this->cleaner_model = new Cleaner;
         $this->user_model = new User;
+        $this->cleaner = $this->cleaner_model->where('user_id', Auth::id())->first();
     }
 
     public function registerCleanerFront($data)
@@ -53,13 +56,13 @@ class CleanerService
 
         // send email for activation or verification
         $this->initiateEmailActivation($user);
-        \Auth::loginUsingId($user->id);
+        Auth::loginUsingId($user->id);
         return $user;
     }
 
     public function getLogedInCleaner()
     {
-        return $this->cleaner_model->with('user')->where('user_id', \Auth::id())->first();
+        return $this->cleaner_model->with('user')->where('user_id', Auth::id())->first();
     }
 
     public function getCleanerTimings($cleaner_id = NULL)
@@ -67,7 +70,7 @@ class CleanerService
         if( $cleaner_id ) {
             return CleanerTiming::where('cleaner_id', $cleaner_id)->get();
         } else {
-            return CleanerTiming::where('cleaner_id', \Auth::id())->get();
+            return CleanerTiming::where('cleaner_id', $this->cleaner->id)->get();
         }
     }
 
@@ -101,7 +104,7 @@ class CleanerService
 
     public function updateCleanerPersonalInfo($data)
     {
-        $cleaner = $this->cleaner_model->where('user_id', \Auth::id())->first();
+        $cleaner = $this->cleaner;
         if( $cleaner ) {
             $cleaner->first_name = $data->get('first_name');
             $cleaner->last_name = $data->get('last_name');
@@ -120,10 +123,10 @@ class CleanerService
 
     public function updateCleanerAccountInfo($request)
     {
-        $cleaner = $this->cleaner_model->where('user_id', \Auth::id())->first();
+        $cleaner = $this->cleaner;
         if( $cleaner ) {
             // update role
-            $user = $this->user_model->find(\Auth::id());
+            $user = $this->user_model->find(Auth::id());
             $user->role = $request->get('role', $user->role);
             $user->save();
 
@@ -177,11 +180,12 @@ class CleanerService
     public function updateCleanerServices($request)
     {
         // delete all data first
-        CleanerServiceMapping::where('cleaner_id', \Auth::id())->delete();
+        $cleaner = $this->cleaner;
+        CleanerServiceMapping::where('cleaner_id', $cleaner->id)->delete();
         if( $request->has('cleaner_services') ) {
             foreach ($request->get('cleaner_services') as $key => $value) {
                 $cleanerServiceMapping = new CleanerServiceMapping;
-                $cleanerServiceMapping->cleaner_id = \Auth::id();
+                $cleanerServiceMapping->cleaner_id = $cleaner->id;
                 $cleanerServiceMapping->cleaning_service_id = $value;
                 $cleanerServiceMapping->has_equipments = $request->get("has_equipment_".$value, 0);
                 $cleanerServiceMapping->save();
@@ -193,7 +197,8 @@ class CleanerService
     public function updateCleanerAvailability($request)
     {
         // delete all data first
-        CleanerTiming::where('cleaner_id', \Auth::id())->delete();
+        $cleaner = $this->cleaner;
+        CleanerTiming::where('cleaner_id', $cleaner->id)->delete();
         if( $request->has('avail') ) {
             foreach ($request->get('avail') as $key => $value) {
                 $_has_24hours = false;
@@ -208,7 +213,7 @@ class CleanerService
                 }
                 if( $_has_24hours ) {
                     $cleanerTiming = new CleanerTiming;
-                    $cleanerTiming->cleaner_id = \Auth::id();
+                    $cleanerTiming->cleaner_id = $cleaner->id;
                     $cleanerTiming->day = $value;
                     $cleanerTiming->start_hours = "24";
                     $cleanerTiming->is_opened = 1;
@@ -218,7 +223,7 @@ class CleanerService
                     $c = 0;
                     foreach ($request->get('select_from_'.$value) as $k => $from) {
                         $cleanerTiming = new CleanerTiming;
-                        $cleanerTiming->cleaner_id = \Auth::id();
+                        $cleanerTiming->cleaner_id = $cleaner->id;
                         $cleanerTiming->day = $value;
                         $cleanerTiming->start_hours = $from;
                         $cleanerTiming->end_hours = $request->get('select_to_'.$value)[$c];

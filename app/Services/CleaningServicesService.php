@@ -11,10 +11,12 @@ class CleaningServicesService
 {
 
     protected $cleaningService_model;
+    protected $cleaner_model;
 
     public function __construct()
     {
         $this->cleaningService_model = new CleaningServices;
+        $this->cleaner_model = new Cleaner;
     }
 
     public function getCleaningServiceById($id)
@@ -35,7 +37,8 @@ class CleaningServicesService
     public function getLogedInCleanerServices()
     {
         $cleanerService = new CleanerServiceMapping;
-        return $cleanerService->where('cleaner_id', Auth::Id())->get();
+        $cleaner = $this->cleaner_model->where('user_id', Auth::id())->first();
+        return $cleanerService->where('cleaner_id', $cleaner->id)->get();
     }
 
     public function getLogedInCleanerServicesIds()
