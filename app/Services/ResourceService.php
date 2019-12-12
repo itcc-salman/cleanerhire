@@ -38,7 +38,7 @@ class ResourceService
             $filename = time().$uploadedFile->getClientOriginalName();
 
             Storage::disk('public_uploads')->putFileAs(
-                config('resources'),
+                config('uploadpath.resources'),
                 $uploadedFile,
                 $filename
             );

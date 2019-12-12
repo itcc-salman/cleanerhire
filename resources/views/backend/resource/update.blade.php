@@ -30,7 +30,7 @@
                         <div class="form-group">
                             <label>@lang('labels.docName')</label>
                             <div class="custom-file">
-                                <input type="file" id="document_name" name="document_name" class="custom-file-input">
+                                <input type="file" id="document_name" name="document_name" accept="application/pdf" class="custom-file-input">
                                 <label class="custom-file-label">Choose file</label>
                             </div>
                             <span class="form-text text-muted">Only PDF allowed</span>
