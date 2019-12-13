@@ -66,13 +66,13 @@ class CheckIsUserActivated
                     Log::info('Activated user attempted to visit '.$currentRoute.'. ', [$user]);
 
                     if ($user->isAdmin()) {
-                        return redirect('backend.dashboard');
+                        return redirect()->route('backend.dashboard');
                     }
                     if ($user->isCleaner()) {
-                        return redirect('cleaner.home');
+                        return redirect()->route('cleaner.home');
                     }
 
-                    return redirect('front.home');
+                    return redirect()->route('front.home');
                 }
 
                 if (!$user) {

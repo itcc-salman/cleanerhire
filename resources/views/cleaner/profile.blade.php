@@ -151,6 +151,11 @@
                                         Personal Information
                                     </span>
                                 </span>
+                                @if($tasks['personal_info'])
+                                <span class="kt-badge kt-badge--unified-success kt-badge--sm kt-badge--rounded kt-badge--bolder"><i class="fa fa-check"></i></span>
+                                @else
+                                <span class="kt-badge kt-badge--unified-danger kt-badge--sm kt-badge--rounded kt-badge--bolder"><i class="fa fa-times"></i></span>
+                                @endif
                             </a>
                             <a href="javascript:void(0)" class="kt-widget__item change_tab" partial_view="account_info">
                                 <span class="kt-widget__section">
@@ -166,6 +171,11 @@
                                         Account Information
                                     </span>
                                 </span>
+                                @if($tasks['account_info'])
+                                <span class="kt-badge kt-badge--unified-success kt-badge--sm kt-badge--rounded kt-badge--bolder"><i class="fa fa-check"></i></span>
+                                @else
+                                <span class="kt-badge kt-badge--unified-danger kt-badge--sm kt-badge--rounded kt-badge--bolder"><i class="fa fa-times"></i></span>
+                                @endif
                             </a>
                             <a href="javascript:void(0)" class="kt-widget__item change_tab" partial_view="visa_documents">
                                 <span class="kt-widget__section">
@@ -181,6 +191,11 @@
                                         Visa & Documents
                                     </span>
                                 </span>
+                                @if($tasks['visa_documents'])
+                                <span class="kt-badge kt-badge--unified-success kt-badge--sm kt-badge--rounded kt-badge--bolder"><i class="fa fa-check"></i></span>
+                                @else
+                                <span class="kt-badge kt-badge--unified-danger kt-badge--sm kt-badge--rounded kt-badge--bolder"><i class="fa fa-times"></i></span>
+                                @endif
                             </a>
                             <a href="javascript:void(0)" class="kt-widget__item change_tab" partial_view="services">
                                 <span class="kt-widget__section">
@@ -202,7 +217,11 @@
                                         Services
                                     </span>
                                 </span>
-                                {{-- <span class="kt-badge kt-badge--unified-danger kt-badge--sm kt-badge--rounded kt-badge--bolder">5</span> --}}
+                                @if($tasks['services'])
+                                <span class="kt-badge kt-badge--unified-success kt-badge--sm kt-badge--rounded kt-badge--bolder"><i class="fa fa-check"></i></span>
+                                @else
+                                <span class="kt-badge kt-badge--unified-danger kt-badge--sm kt-badge--rounded kt-badge--bolder"><i class="fa fa-times"></i></span>
+                                @endif
                             </a>
                             <a href="javascript:void(0)" class="kt-widget__item change_tab" partial_view="availability">
                                 <span class="kt-widget__section">
@@ -218,6 +237,11 @@
                                         Availability
                                     </span>
                                 </span>
+                                @if($tasks['availability'])
+                                <span class="kt-badge kt-badge--unified-success kt-badge--sm kt-badge--rounded kt-badge--bolder"><i class="fa fa-check"></i></span>
+                                @else
+                                <span class="kt-badge kt-badge--unified-danger kt-badge--sm kt-badge--rounded kt-badge--bolder"><i class="fa fa-times"></i></span>
+                                @endif
                             </a>
                             <a href="javascript:void(0)" class="kt-widget__item change_tab" partial_view="change_password">
                                 <span class="kt-widget__section">
@@ -446,6 +470,14 @@
                     $('#service_'+this.value).removeClass("d-none");
                 } else {
                     $('#service_'+this.value).addClass("d-none");
+                }
+            });
+
+            $(document).on('change', '.cleaner-services-checkbox-commercial', function(event) {
+                if(this.checked) {
+                    $('#service_commercial_'+this.value).removeClass("d-none");
+                } else {
+                    $('#service_commercial_'+this.value).addClass("d-none");
                 }
             });
 

@@ -1,20 +1,20 @@
 <div class="kt-wizard-v1__form">
     <div class="form-group">
-        <label>Are you an individual or an agency?</label>
+        <label>Are you a @lang('labels.cleaner') or a @lang('labels.company')?</label>
         <div class="kt-radio-inline">
-            <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="cleaner" {{ isset($cleaner) && $cleaner->user->role == 'cleaner' ? 'checked' : '' }} name="role"> Individual <span></span></label>
-            <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="agency" {{ isset($cleaner) && $cleaner->user->role == 'agency' ? 'checked' : '' }} name="role"> Agency <span></span></label>
+            <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="cleaner" {{ isset($cleaner) && $cleaner->user->role == 'cleaner' ? 'checked' : '' }} name="role"> @lang('labels.cleaner') <span></span></label>
+            <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="agency" {{ isset($cleaner) && $cleaner->user->role == 'agency' ? 'checked' : '' }} name="role"> @lang('labels.company') <span></span></label>
         </div>
     </div>
     <div class="form-group">
-        <label>Do you want to register as TFN or ABN?</label>
+        <label>Do you want to register as @lang('labels.tfn') or @lang('labels.abn_acn')?</label>
         <div class="kt-radio-inline">
-            <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" id="radio_abn" value="abn" {{ isset($cleaner->abn) ? 'checked' : '' }} name="tfn_or_abn" > ABN <span></span></label>
-            <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" id="radio_tfn" value="tfn" {{ isset($cleaner->tfn) ? 'checked' : '' }} name="tfn_or_abn"> TFN <span></span></label>
+            <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" id="radio_abn" value="abn" {{ isset($cleaner->abn) ? 'checked' : '' }} name="tfn_or_abn" > @lang('labels.abn_acn') <span></span></label>
+            <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" id="radio_tfn" value="tfn" {{ isset($cleaner->tfn) ? 'checked' : '' }} name="tfn_or_abn"> @lang('labels.tfn') <span></span></label>
         </div>
         <div class="">
-            <input type="text" class="form-control {{ !empty($cleaner->tfn) ?: 'd-none' }}" id="tfn" name="tfn" placeholder="TFN" value="{{ $cleaner->tfn ?? ''}}">
-            <input type="text" class="form-control {{ !empty($cleaner->abn) ?: 'd-none' }}" id="abn" name="abn" placeholder="ABN" value="{{ $cleaner->abn ?? ''}}">
+            <input type="text" class="form-control {{ !empty($cleaner->tfn) ?: 'd-none' }}" id="tfn" name="tfn" placeholder="@lang('labels.tfn')" value="{{ $cleaner->tfn ?? ''}}">
+            <input type="text" class="form-control {{ !empty($cleaner->abn) ?: 'd-none' }}" id="abn" name="abn" placeholder="@lang('labels.abn_acn')" value="{{ $cleaner->abn ?? ''}}">
         </div>
     </div>
     <div class="form-group">
@@ -219,7 +219,7 @@
         else if (this.value == 'agency') {
             $("#radio_tfn").prop("disabled", true);
             $("#radio_tfn").parent().addClass('kt-radio--disabled');
-            $("#radio_abn").prop("checked", true);
+            $("#radio_abn").prop("checked", true).trigger('change');
         }
     });
 

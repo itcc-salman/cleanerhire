@@ -77,7 +77,7 @@
            <div class="cleaner_output">
                 <div class="cleaner_output_tab">
                     <label class="two">Are you an individual or an agency?</label>
-                    @if($user->role == 'cleaner')
+                    @if($cleaner->user->role == 'cleaner')
                         <span>Individual</span>
                     @else
                         <span>Agency</span>

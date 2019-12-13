@@ -27,10 +27,3 @@ Route::prefix('ajax')->group(function () {
     Route::get('resources/list', 'ResourceController@getAllResources')->name('cleaner.ajax.resources');
 
 });
-
-// Route::get('/become-a-cleaner', 'HomeController@becomeACleaner')->name('front.become_a_cleaner');
-
-// Route::match(['GET', 'POST'], '/registercleaner', [
-//     'uses' => 'HomeController@registerCleaner',
-//     'as'   =>  'front.register_cleaner'
-// ]);

@@ -66,7 +66,7 @@ class User extends Authenticatable
 
     public function isCleaner()
     {
-        if( $this->role == 'cleaner' )
+        if( $this->role == 'cleaner' || $this->role == 'agency' )
             return true;
         return false;
     }

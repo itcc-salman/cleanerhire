@@ -38,12 +38,13 @@ class HomeController extends Controller
             $data = $this->cleanerService->getPartialViewData($partial_view_name);
             $view = view('cleaner.partial.'.$partial_view_name, compact('data'))->render();
             $extra_data = [];
-            if( $partial_view_name == 'account_info' ) { $extra_data = json_decode($data->language); }
+            if( $partial_view_name == 'account_info' ) { $extra_data = json_decode($data->getOriginal('language')); }
             $data = [ 'code' => 200, 'status' => true, 'html' => $view, 'extra_data' => $extra_data ];
             return response()->json($data);
         }
         $cleaner = $this->cleanerService->getLogedInCleaner();
-        return view('cleaner.profile', compact('cleaner'));
+        $tasks = $this->cleanerService->checkCleanerProfileStatus($cleaner->id);
+        return view('cleaner.profile', compact('cleaner','tasks'));
     }
 
     public function personal_info(CleanerPersonalInfoStoreRequest $request)

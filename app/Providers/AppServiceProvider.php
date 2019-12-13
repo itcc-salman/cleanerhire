@@ -27,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if( !env('APP_DEBUG') ) Debugbar::disable();
+        if( env('APP_DEBUG') ) Debugbar::disable();
         Schema::defaultStringLength(191); //Solved by increasing StringLength
         User::observe(UserObserver::class);
     }

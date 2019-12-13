@@ -135,7 +135,7 @@
                         <div class="kt-wizard-v1__content" data-ktwizard-type="step-content">
                             <div class="kt-heading kt-heading--md">Verify and Submit</div>
                             <div class="kt-form__section kt-form__section--first" id="stepFiveWizardDiv">
-                                {{-- @include('backend.cleaners.partials.step5') --}}
+                                @include('backend.cleaners.partials.step5')
                             </div>
                         </div>
 

@@ -168,7 +168,7 @@ var KTDatatableRemoteAjaxDemo = function() {
                     title: 'Name',
                 }, {
                     field: 'individual',
-                    title: 'Individual',
+                    title: 'Cleaner',
                     template: function(row) {
                         var status = {
                             1: {'title': 'Yes', 'class': 'kt-badge--success'},
@@ -178,7 +178,7 @@ var KTDatatableRemoteAjaxDemo = function() {
                     },
                 }, {
                     field: 'agency',
-                    title: 'Agency',
+                    title: 'Company',
                     template: function(row) {
                         var status = {
                             1: {'title': 'Yes', 'class': 'kt-badge--success'},

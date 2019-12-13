@@ -17,6 +17,7 @@ class CreateCleanerServiceMappingsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('cleaner_id')->unsigned();
             $table->integer('cleaning_service_id')->unsigned();
+            $table->string('service_for');
             $table->boolean('has_equipments')->default(0);
             $table->timestamps();
 

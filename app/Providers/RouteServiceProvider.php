@@ -104,7 +104,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapCleanerRoutes()
     {
         Route::prefix('cleaner')
-             ->middleware(['web','cleanerAuth'])
+             ->middleware(['web','cleanerAuth','activated', 'checkProfile'])
              ->namespace($this->namespace.'\Cleaner')
              ->group(base_path('routes/cleaner.php'));
     }

@@ -63,6 +63,74 @@ class CleanerService
         return $this->cleaner_model->with('user')->where('user_id', Auth::id())->first();
     }
 
+    public function checkCleanerProfileStatus($cleaner_id = NULL)
+    {
+        if( !$cleaner_id ) {
+            $cleaner = $this->cleaner_model->where('user_id', Auth::id())->first();
+        } else {
+            $cleaner = $this->cleaner_model->find($cleaner_id);
+        }
+        // check what data is completed and not completed
+        // return [ 'personal_info' => true, 'account_info' => true, 'visa_documents' => true, 'services' => true, 'availability' => true, ];
+        $tasks = [
+            'personal_info' => false,
+            'account_info' => false,
+            'visa_documents' => false,
+            'services' => false,
+            'availability' => false,
+        ];
+        if( $cleaner ) {
+            // for personal info
+            $tasks['personal_info'] = $this->checkPersonalInfo($cleaner);
+            // for account info
+            $tasks['account_info'] = $this->checkAccountInfo($cleaner);
+            // for services
+            $tasks['services'] = $this->checkServices($cleaner);
+            // for availability
+            $tasks['availability'] = $this->checkAvailability($cleaner);
+        }
+        return $tasks;
+    }
+
+    public function checkPersonalInfo(Cleaner $cleaner)
+    {
+        if( empty($cleaner->phone) ) { return false; }
+        if( empty($cleaner->address_line_1) ) { return false; }
+        if( empty($cleaner->city) ) { return false; }
+        if( empty($cleaner->state) ) { return false; }
+        if( empty($cleaner->postcode) ) { return false; }
+        return true;
+    }
+
+    public function checkAccountInfo(Cleaner $cleaner)
+    {
+        if( empty($cleaner->tfn) && empty($cleaner->abn)) { return false; }
+        if( empty($cleaner->visa_status) ) { return false; }
+        if( !empty($cleaner->visa_status) && $cleaner->visa_status == 'other' && empty($cleaner->visa_status_other) ) { return false; }
+        if( empty($cleaner->police_check) ) { return false; }
+        if( empty($cleaner->own_car) ) { return false; }
+        if( empty($cleaner->driver_license) ) { return false; }
+        if( !empty($cleaner->driver_license) && empty($cleaner->driver_license_state) || empty($cleaner->driver_license_number) ) { return false; }
+        if( empty($cleaner->nationality) ) { return false; }
+        if( empty($cleaner->gender) ) { return false; }
+        if( empty($cleaner->date_of_birth) ) { return false; }
+        return true;
+    }
+
+    public function checkServices(Cleaner $cleaner)
+    {
+        $cleanerServices = CleanerServiceMapping::where('cleaner_id', $cleaner->id)->get();
+        if( $cleanerServices->isEmpty() ) { return false; }
+        return true;
+    }
+
+    public function checkAvailability(Cleaner $cleaner)
+    {
+        $cleanerAvailability = $this->getCleanerTimings($cleaner->id);
+        if( $cleanerAvailability->isEmpty() ) { return false; }
+        return true;
+    }
+
     public function getCleanerTimings($cleaner_id = NULL)
     {
         if( $cleaner_id ) {
@@ -106,12 +174,6 @@ class CleanerService
         }
     }
 
-    public function calculateCleanerProgress()
-    {
-        // get cleaner data
-        $cleaner = $this->getLogedInCleaner();
-    }
-
     public function updateCleanerPersonalInfo($data)
     {
         $cleaner = $this->cleaner_model->where('user_id', Auth::id())->first();
@@ -142,11 +204,11 @@ class CleanerService
 
             if($request->has('tfn_or_abn')) {
                 if($request->tfn_or_abn == 'abn') {
-                    $cleaner->abn =  $request->get('abn', $cleaner->abn);
+                    $cleaner->abn = $request->get('abn', $cleaner->abn);
                     $cleaner->tfn = null;
                 }
                 if($request->tfn_or_abn == 'tfn') {
-                    $cleaner->tfn =  $request->get('tfn', $cleaner->tfn);
+                    $cleaner->tfn = $request->get('tfn', $cleaner->tfn);
                     $cleaner->abn = null;
                 }
             }
@@ -168,19 +230,19 @@ class CleanerService
                 $cleaner->driver_license_state = $request->get('driver_license_state', $cleaner->driver_license_state);
                 $cleaner->driver_license_number = $request->get('driver_license_number', $cleaner->driver_license_number);
             }
-            $cleaner->nationality =  $request->get('nationality', $cleaner->nationality);
+            $cleaner->nationality = $request->get('nationality', $cleaner->nationality);
 
             $language = array();
             foreach ($request->get('language', $cleaner->language) as $key => $value) {
                 $tmp = new \stdClass;
                 $tmp->lname = $value['lname'];
-                $tmp->lfluency =  $value['lfluency'];
+                $tmp->lfluency = $value['lfluency'];
                 $language[] = $tmp;
             }
-            $cleaner->language =  $language;
+            $cleaner->language = $language;
 
-            $cleaner->gender =  $request->has('gender') ? $request->get('gender') : $cleaner->gender;
-            $cleaner->date_of_birth =  $request->has('date_of_birth') ? $request->get('date_of_birth') : $cleaner->date_of_birth;
+            $cleaner->gender = $request->has('gender') ? $request->get('gender') : $cleaner->gender;
+            $cleaner->date_of_birth = $request->has('date_of_birth') ? $request->get('date_of_birth') : $cleaner->date_of_birth;
             $cleaner->save();
             return true;
         }
@@ -192,12 +254,23 @@ class CleanerService
         // delete all data first
         $cleaner = $this->cleaner_model->where('user_id', Auth::id())->first();
         CleanerServiceMapping::where('cleaner_id', $cleaner->id)->delete();
-        if( $request->has('cleaner_services') ) {
-            foreach ($request->get('cleaner_services') as $key => $value) {
+        if( $request->has('cleaner_services_residential') ) {
+            foreach ($request->get('cleaner_services_residential') as $key => $value) {
                 $cleanerServiceMapping = new CleanerServiceMapping;
                 $cleanerServiceMapping->cleaner_id = $cleaner->id;
                 $cleanerServiceMapping->cleaning_service_id = $value;
-                $cleanerServiceMapping->has_equipments = $request->get("has_equipment_".$value, 0);
+                $cleanerServiceMapping->service_for = 'residential';
+                $cleanerServiceMapping->has_equipments = $request->get("has_equipment_residential_".$value, 0);
+                $cleanerServiceMapping->save();
+            }
+        }
+        if( $request->has('cleaner_services_commercial') ) {
+            foreach ($request->get('cleaner_services_commercial') as $key => $value) {
+                $cleanerServiceMapping = new CleanerServiceMapping;
+                $cleanerServiceMapping->cleaner_id = $cleaner->id;
+                $cleanerServiceMapping->cleaning_service_id = $value;
+                $cleanerServiceMapping->service_for = 'commercial';
+                $cleanerServiceMapping->has_equipments = $request->get("has_equipment_commercial_".$value, 0);
                 $cleanerServiceMapping->save();
             }
         }

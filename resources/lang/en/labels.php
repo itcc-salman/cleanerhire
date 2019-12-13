@@ -20,13 +20,13 @@ return [
 
     'cleSerResidentialOrCommercial'  => 'Is this service relevant to Residential and/or Commercial?',
     'cleSerOnceoffOrRegular' => 'Is this service relevant to Once Off and/or Regular?',
-    'cleSerIndividualOrAgency' => 'Is this service relevant to Individual and/or Agency?',
+    'cleSerIndividualOrAgency' => 'Is this service relevant to Cleaner and/or Company?',
     'cleSerResidential' => 'Residential',
     'cleSerCommercial' => 'Commercial',
     'cleSerOnceoff' => 'Once Off',
     'cleSerRegular' => 'Regular',
-    'cleSerIndividual' => 'Individual',
-    'cleSerAgency' => 'Agency',
+    'cleSerIndividual' => 'Cleaner',
+    'cleSerAgency' => 'Company',
 
     'docName' => 'Document Name',
 
@@ -34,5 +34,11 @@ return [
      * Cleaner
      *
      */
+    'cleaner' => 'Cleaner',
+    'company' => 'Company',
+    'abn_acn' => 'ABN/ACN',
+    'tfn' => 'TFN',
+    'residential' => 'Residential',
+    'commercial' => 'Commercial',
 
 ];

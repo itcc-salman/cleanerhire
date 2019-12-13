@@ -27,11 +27,18 @@ class CleaningServicesService
     public function getLogedInRoleWiseCleaningServices()
     {
         $user_type = Auth::user()->role;
-        if( $user_type == 'agency' ) {
-            return $this->cleaningService_model->where('agency', 1)->get();
+        if( $user_type == 'cleaner' ) {
+            $services = [
+                'residential' => $this->cleaningService_model->where('individual', 1)->where('residential', 1)->get(),
+                'commercial' => NULL
+            ];
         } else {
-            return $this->cleaningService_model->where('individual', 1)->get();
+            $services = [
+                'residential' => $this->cleaningService_model->where('agency', 1)->where('residential', 1)->get(),
+                'commercial' => $this->cleaningService_model->where('agency', 1)->where('commercial', 1)->get()
+            ];
         }
+        return $services;
     }
 
     public function getLogedInCleanerServices()
@@ -46,7 +53,7 @@ class CleaningServicesService
         $cleanerService = new CleanerServiceMapping;
         $cleaner = Cleaner::where('user_id', Auth::Id())->first();
         // return $cleaner;
-        return $cleanerService->where('cleaner_id', $cleaner->id )->get(['cleaning_service_id','has_equipments']);
+        return $cleanerService->where('cleaner_id', $cleaner->id )->get(['cleaning_service_id','service_for','has_equipments']);
     }
 
     public function registerCleaningServiceBackend($data)

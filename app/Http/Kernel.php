@@ -42,7 +42,7 @@ class Kernel extends HttpKernel
             'bindings',
         ],
         'activated' => [
-            CheckIsUserActivated::class,
+            \App\Http\Middleware\CheckIsUserActivated::class,
         ],
     ];
 
@@ -63,9 +63,11 @@ class Kernel extends HttpKernel
         'password.confirm' => \Illuminate\Auth\Middleware\RequirePassword::class,
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'activated' => \App\Http\Middleware\CheckIsUserActivated::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'cleanerAuth' => \App\Http\Middleware\CleanerAuthMiddleware::class,
         'adminAuth' => \App\Http\Middleware\AdminAuthMiddleware::class,
+        'checkProfile' => \App\Http\Middleware\CheckIsProfileCompleted::class,
     ];
 
     /**

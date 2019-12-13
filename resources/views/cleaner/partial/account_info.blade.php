@@ -18,23 +18,23 @@
                             </div>
                             <div class="row">
                                 <div class="form-group">
-                                    <label>Are you an individual or an agency?</label>
+                                    <label>Are you a @lang('labels.cleaner') or a @lang('labels.company')?</label>
                                     <div class="kt-radio-inline">
-                                        <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="cleaner" {{ $data->user->role == 'cleaner' ? 'checked' : '' }} name="role"> Individual <span></span></label>
-                                        <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="agency" {{ $data->user->role == 'agency' ? 'checked' : '' }} name="role"> Agency <span></span></label>
+                                        <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="cleaner" {{ $data->user->role == 'cleaner' ? 'checked' : '' }} name="role"> @lang('labels.cleaner') <span></span></label>
+                                        <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="agency" {{ $data->user->role == 'agency' ? 'checked' : '' }} name="role"> @lang('labels.company') <span></span></label>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group wd-100">
-                                    <label>Do you want to register as TFN or ABN?</label>
+                                    <label>Do you want to register as @lang('labels.tfn') or @lang('labels.abn_acn')?</label>
                                     <div class="kt-radio-inline">
-                                        <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" id="radio_abn" {{ empty($data->abn) ?: 'checked' }} value="abn" name="tfn_or_abn"> ABN <span></span></label>
-                                        <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" id="radio_tfn" {{ empty($data->tfn) ?: 'checked' }} value="tfn" name="tfn_or_abn"> TFN <span></span></label>
+                                        <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" id="radio_abn" {{ empty($data->abn) ?: 'checked' }} value="abn" name="tfn_or_abn"> @lang('labels.abn_acn') <span></span></label>
+                                        <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" id="radio_tfn" {{ empty($data->tfn) ?: 'checked' }} value="tfn" name="tfn_or_abn"> @lang('labels.tfn') <span></span></label>
                                     </div>
                                     <div class="">
-                                        <input type="text" class="form-control {{ !empty($data->tfn) ?: 'd-none' }}" id="tfn" name="tfn" value="{{ $data->tfn }}" placeholder="TFN">
-                                        <input type="text" class="form-control {{ !empty($data->abn) ?: 'd-none' }}" id="abn" name="abn" value="{{ $data->abn }}" placeholder="ABN">
+                                        <input type="text" class="form-control {{ !empty($data->tfn) ?: 'd-none' }}" id="tfn" name="tfn" value="{{ $data->tfn }}" placeholder="@lang('labels.tfn')">
+                                        <input type="text" class="form-control {{ !empty($data->abn) ?: 'd-none' }}" id="abn" name="abn" value="{{ $data->abn }}" placeholder="@lang('labels.abn_acn')">
                                     </div>
                                 </div>
                             </div>
