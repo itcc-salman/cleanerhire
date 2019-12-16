@@ -74,7 +74,7 @@
                                     <label>Do you have a Driver License?</label>
                                     <div class="kt-radio-inline">
                                         <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" {{ $data->driver_license == 'yes' ? 'checked' : '' }} value="yes" name="driver_license"> Yes <span></span></label>
-                                        <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" {{ $data->driver_license == 'yes' ? 'checked' : '' }} value="no" name="driver_license"> No <span></span></label>
+                                        <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" {{ $data->driver_license == 'no' ? 'checked' : '' }} value="no" name="driver_license"> No <span></span></label>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">

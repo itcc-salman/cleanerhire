@@ -110,7 +110,7 @@ class CleanerService
         if( empty($cleaner->police_check) ) { return false; }
         if( empty($cleaner->own_car) ) { return false; }
         if( empty($cleaner->driver_license) ) { return false; }
-        if( !empty($cleaner->driver_license) && empty($cleaner->driver_license_state) || empty($cleaner->driver_license_number) ) { return false; }
+        if( !empty($cleaner->driver_license) && $cleaner->driver_license != 'no' && empty($cleaner->driver_license_state) || empty($cleaner->driver_license_number) ) { return false; }
         if( empty($cleaner->nationality) ) { return false; }
         if( empty($cleaner->gender) ) { return false; }
         if( empty($cleaner->date_of_birth) ) { return false; }
