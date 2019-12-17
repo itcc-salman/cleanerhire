@@ -455,3 +455,5 @@ button.switch-month:hover { color:#00adef; }
 .checkmark:after { content:""; position:absolute; display:none; }
 .m_check input:checked ~ .checkmark:after { display:block; }
 .m_check .checkmark:after { left:10px; top:6px; width:5px; height:10px; border:solid white; border-width:0 2px 2px 0; -webkit-transform:rotate(45deg); -ms-transform:rotate(45deg); transform:rotate(45deg); }
+
+input:checked + a { text-decoration:none; color:#00aeef; }

@@ -24,6 +24,15 @@ class CleaningServicesService
         return $this->cleaningService_model->find($id);
     }
 
+    public function getCleaningServicesByType($type)
+    {
+        if( $type == 'residential' ) {
+            return $this->cleaningService_model->where('residential', 1)->where('status', 1)->get();
+        } else {
+            return $this->cleaningService_model->where('commercial', 1)->where('status', 1)->get();
+        }
+    }
+
     public function getLogedInRoleWiseCleaningServices()
     {
         $user_type = Auth::user()->role;

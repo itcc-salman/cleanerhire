@@ -20,3 +20,7 @@ Route::match(['GET', 'POST'], '/registercleaner', [
     'uses' => 'HomeController@registerCleaner',
     'as'   =>  'front.register_cleaner'
 ]);
+
+Route::post('/get_services', 'BookingController@getServices')->name('front.get_services');
+
+Route::post('/registercustomer', 'CustomerController@registerCustomer')->name('front.register_customer');

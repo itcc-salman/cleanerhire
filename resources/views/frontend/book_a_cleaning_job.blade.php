@@ -19,31 +19,28 @@
                 <div class="col-md-8 col-sm-8 col-xs-8">
                     <div class="book_form_left">
                         <div class="book_form_tab " id="tab1">
-                            <label>Which type of cleaning service do you need?</label>
-                            <div class="book_service">
-                                <ul>
-                                    <li><a href="javascript:void(0);"><i class="fa fa-check-circle"></i> <span>Full House Cleaning</span></a></li>
-                                    <li><a href="javascript:void(0);"><i class="fa fa-check-circle"></i> <span>End of Lease Cleaning</span></a></li>
-                                    <li><a href="javascript:void(0);"><i class="fa fa-check-circle"></i> <span>Steam/Carpet Cleaning</span></a></li>
-                                    <li><a href="javascript:void(0);"><i class="fa fa-check-circle"></i> <span>Grout Cleaning</span></a></li>
-                                    <li><a href="javascript:void(0);"><i class="fa fa-check-circle"></i> <span>Window Cleaning</span></a></li>
-                                    <li><a href="javascript:void(0);"><i class="fa fa-check-circle"></i> <span>Oven Cleaning</span></a></li>
-                                    <li><a href="javascript:void(0);"><i class="fa fa-check-circle"></i> <span>Refrigerator Cleaning</span></a></li>
-                                    <li><a href="javascript:void(0);"><i class="fa fa-check-circle"></i> <span>Stripping and Sealing</span></a></li>
-                                    <li><a href="javascript:void(0);"><i class="fa fa-check-circle"></i> <span>Duct Cleaning</span></a></li>
-                                    <li><a href="javascript:void(0);"><i class="fa fa-check-circle"></i> <span>Office Cleaning</span></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="book_form_tab hidden" id="tab2">
                             <label>What type of job is this?</label>
                             <div class="book_job">
                                 <ul>
-                                    <li><a href="javascript:void(0);"><i class="fa fa-home" aria-hidden="true"></i> <span>Residential</span></a></li>
-                                    <li><a href="javascript:void(0);"><i style="font-size:24px;" class="fa fa-industry" aria-hidden="true"></i> <span>Commercial</span></a></li>
+                                    <li>
+                                        <input type="radio" class="service_type_input hidden" id="type_residential" name="service_type" value="residential">
+                                        <a href="javascript:void(0)" class="service_type" type="residential">
+                                            <i class="fa fa-home" aria-hidden="true"></i> <span>Residential</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <input type="radio" class="service_type_input hidden" id="type_commercial" name="service_type" value="commercial">
+                                        <a href="javascript:void(0)" class="service_type" type="commercial">
+                                            <i style="font-size:24px;" class="fa fa-industry" aria-hidden="true"></i> <span>Commercial</span>
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
+
+                        <div class="book_form_tab hidden" id="services_list">
+                        </div>
+
                         <div class="book_form_tab hidden" id="tab3">
                             <label>How many storeys off the ground are these gutters?</label>
                             <div class="quntity_number">
@@ -168,3 +165,54 @@
 </div>
 <!--Web_Innerpage_Section-->
 @endsection
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+
+            $(document).on('click', '.service_type', function(e) {
+                e.preventDefault();
+                let _type = $(this).attr('type');
+                let _val = $("[name='service_type']:checked").val();
+                $('#type_'+_type).prop("checked", true);
+                let _newval = $("[name='service_type']:checked").val();
+                if( _val != _newval ) {
+                    // get services as per selected service
+                    $.ajax({
+                        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                        url: '{{ route('front.get_services') }}',
+                        type: "POST",
+                        dataType: "JSON",
+                        data: {
+                            service_type: _newval
+                        },
+                        success: function(res) {
+                            console.log(res);
+                            if( res.status == true ) {
+                                $('#services_list').empty().html(res.html).removeClass('hidden');
+                            }
+                        }
+                    }); // end ajax
+                }
+            });
+
+            $("#tab2").click(function(event) {
+               $("#tab3").removeClass('hidden');
+            });
+            $("#tab3").click(function(event) {
+               $("#tab4").removeClass('hidden');
+            });
+            $("#tab4").click(function(event) {
+               $("#tab5").removeClass('hidden');
+            });
+            $("#tab5").click(function(event) {
+               $("#tab6").removeClass('hidden');
+            });
+            $("#tab6").click(function(event) {
+               $("#tab7").removeClass('hidden');
+            });
+            $("#tab7").click(function(event) {
+               $("#tab8").removeClass('hidden');
+            });
+        });
+    </script>
+@endpush

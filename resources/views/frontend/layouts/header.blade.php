@@ -19,11 +19,17 @@
                     <li><a href="#">How it works</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    {{-- <li><a href="#hire_register" class="trigger-btn" data-toggle="modal">Sign up</a></li>
-                    <li><a href="#hire_login" class="trigger-btn" data-toggle="modal">Log in</a></li> --}}
-                    <li><a href="{{ route('front.register_cleaner') }}" class="trigger-btn">Sign up</a></li>
-                    <li><a href="{{ route('login') }}" class="trigger-btn" data-toggle="modal">Log in</a></li>
-                    <li><a href="{{ route('front.become_a_cleaner') }}" class="head_btn">Become a Cleaner</a></li>
+                    @if(!Auth::check())
+                        <li><a href="#hire_register" class="trigger-btn" data-toggle="modal">Sign up</a></li>
+                        {{-- <li><a href="#hire_login" class="trigger-btn" data-toggle="modal">Log in</a></li> --}}
+                        {{-- <li><a href="{{ route('front.register_cleaner') }}" class="trigger-btn">Sign up</a></li> --}}
+                        <li><a href="{{ route('login') }}" class="trigger-btn" data-toggle="modal">Log in</a></li>
+                        <li><a href="{{ route('front.become_a_cleaner') }}" class="head_btn">Become a Cleaner</a></li>
+                    @else
+                        <li><a href="javascript:void(0)">Hi, {{ Auth::user()->first_name }}</a></li>
+                        <li><a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="trigger-btn">Logout</a></li>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf</form>
+                    @endif
                 </ul>
             </div>
 

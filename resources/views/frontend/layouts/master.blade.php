@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{{ asset('front/css/owl.carousel.min.css') }}">
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&display=swap" rel="stylesheet">
+    @stack('css')
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
 
 </head>
@@ -28,7 +29,6 @@
         <div class="modal-dialog modal-login">
             <div class="modal-content">
                 <form method="POST" action="{{ route('login') }}" id="login_form">
-                    @csrf
                     <div class="modal-header">
                         <h4 class="modal-title">Log In</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -66,19 +66,35 @@
     <div id="hire_register" class="modal fade">
         <div class="modal-dialog modal-login">
             <div class="modal-content">
-                <form action="#" method="post">
+                <form method="post" id="signup_customer">
                     <div class="modal-header">
                         <h4 class="modal-title">Join us</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     </div>
                     <div class="modal-body">
                         <div class="hire_login_tab">
-                            <label>Email</label>
-                            <input type="email" required autocomplete="username">
+                            <label for="first_name">First Name</label>
+                            <input type="text" name="first_name" id="first_name" required>
                         </div>
                         <div class="hire_login_tab">
-                            <label>Password</label>
-                            <input type="password" required autocomplete="new-password">
+                            <label for="last_name">Last name</label>
+                            <input type="text" name="last_name" id="last_name" required>
+                        </div>
+                        <div class="hire_login_tab">
+                            <label for="phone_number">Phone number</label>
+                            <input type="text" name="phone_number" id="phone_number" required>
+                        </div>
+                        <div class="hire_login_tab">
+                            <label for="email">Email</label>
+                            <input type="email" name="email" id="email" required autocomplete="username">
+                        </div>
+                        <div class="hire_login_tab">
+                            <label for="password">Password</label>
+                            <input type="password" name="password" id="password" required autocomplete="new-password">
+                        </div>
+                        <div class="hire_login_tab">
+                            <label for="confirm_password">Confirm Password</label>
+                            <input type="password" name="confirm_password" id="confirm_password" required autocomplete="new-password">
                             <a href="#" class="forgot_pass">Forgot Password?</a>
                         </div>
                         <div class="hire_login_tab">
@@ -100,7 +116,7 @@
                         </div>
                         <div class="hire_login_footer">
                             <label>Already have an account ?</label>
-                            <a href="#" class="btn_sign_up">Log in</a>
+                            <a href="{{ route('login') }}" class="btn_sign_up">Log in</a>
                         </div>
                     </div>
                 </form>
@@ -151,8 +167,9 @@
             e.preventDefault();
             // check for validation
             $.ajax({
-                type: "POST",
+                headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
                 url: '{{ route('login') }}',
+                type: "POST",
                 dataType: "JSON",
                 data: $(this).serialize(),
                 success: function(data) {
@@ -164,7 +181,36 @@
                 }
             })
         });
+
+        $(document).on('submit', '#signup_customer', function(e) {
+            e.preventDefault();
+            // check for validation
+            $.ajax({
+                headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                url: '{{ route('front.register_customer') }}',
+                type: "POST",
+                dataType: "JSON",
+                data: $(this).serialize(),
+                success: function(res) {
+                    if( res.status == true ) {
+                        location.href = res.redirect;
+                    } else {
+                        alert(res.msg);
+                    }
+                },
+                error: function(err) {
+                    if( err.status == 422 ) {
+                        // display errors on each form field
+                        $.each(err.responseJSON.errors, function (i, error) {
+                            alert(error[0]);
+                            return;
+                        });
+                    }
+                }
+            });
+        });
     });
     </script>
+    @stack('scripts')
 </body>
 </html>

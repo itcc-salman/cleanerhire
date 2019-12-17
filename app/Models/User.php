@@ -20,6 +20,7 @@ class User extends Authenticatable
         'first_name',
         'last_name',
         'email',
+        'role',
         'password',
         'activated',
         'token',
@@ -67,6 +68,13 @@ class User extends Authenticatable
     public function isCleaner()
     {
         if( $this->role == 'cleaner' || $this->role == 'agency' )
+            return true;
+        return false;
+    }
+
+    public function isCustomer()
+    {
+        if( $this->role == 'customer' )
             return true;
         return false;
     }

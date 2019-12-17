@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Activation;
 use App\Models\User;
 use App\Models\Cleaner;
+use App\Models\Customer;
 use App\Traits\ActivationTrait;
 use App\Traits\CaptureIpTrait;
 use Auth;
@@ -18,6 +19,7 @@ class ActivateController extends Controller
     use ActivationTrait;
 
     private static $cleanerHomeRoute = 'cleaner.home';
+    private static $customerHomeRoute = 'front.home';
     private static $adminHomeRoute = 'backend.dashboard';
     private static $activationView = 'auth.activation';
     private static $activationRoute = 'activation-required';
@@ -33,13 +35,18 @@ class ActivateController extends Controller
     }
 
     /**
-     * Gets the user home route.
+     * Gets the cleaner or company home route.
      *
      * @return string
      */
     public static function getCleanerHomeRoute()
     {
         return self::$cleanerHomeRoute;
+    }
+
+    public static function getCustomerHomeRoute()
+    {
+        return self::$customerHomeRoute;
     }
 
     /**
@@ -93,6 +100,11 @@ class ActivateController extends Controller
 
             if ($user->isCleaner()) {
                 return redirect()->route(self::getCleanerHomeRoute())
+                    ->with('status', 'info')
+                    ->with('message', trans('auth.alreadyActivated'));
+            }
+            if( $user->isCustomer() ) {
+                return redirect()->route(self::getCustomerHomeRoute())
                     ->with('status', 'info')
                     ->with('message', trans('auth.alreadyActivated'));
             }
@@ -201,9 +213,17 @@ class ActivateController extends Controller
         $user->signup_confirmation_ip_address = $ipAddress->getClientIp();
         $user->save();
 
-        $cleaner = Cleaner::where('user_id', $user->id)->first();
-        $cleaner->status = 1;
-        $cleaner->save();
+        if( $user->isCleaner() ) {
+            $cleaner = Cleaner::where('user_id', $user->id)->first();
+            $cleaner->status = 1;
+            $cleaner->save();
+        }
+
+        if( $user->isCustomer() ) {
+            $customer = Customer::where('user_id', $user->id)->first();
+            $customer->status = 1;
+            $customer->save();
+        }
 
         $allActivations = Activation::where('user_id', $user->id)->get();
         foreach ($allActivations as $anActivation) {
@@ -220,6 +240,12 @@ class ActivateController extends Controller
 
         if ($user->isCleaner()) {
             return redirect()->route(self::getCleanerHomeRoute())
+                ->with('status', 'info')
+                ->with('message', trans('auth.alreadyActivated'));
+        }
+
+        if( $user->isCustomer() ) {
+            return redirect()->route(self::getCustomerHomeRoute())
                 ->with('status', 'info')
                 ->with('message', trans('auth.alreadyActivated'));
         }
