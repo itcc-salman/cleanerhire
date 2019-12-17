@@ -23,22 +23,22 @@
                             <div class="book_job">
                                 <ul>
                                     <li>
-                                        <input type="radio" class="service_type_input hidden" id="type_residential" name="service_type" value="residential">
-                                        <a href="javascript:void(0)" class="service_type" type="residential">
+                                        <label>
+                                            <input type="radio" class="service_type_input" id="type_residential" name="service_type" value="residential">
                                             <i class="fa fa-home" aria-hidden="true"></i> <span>Residential</span>
-                                        </a>
+                                        </label>
                                     </li>
                                     <li>
-                                        <input type="radio" class="service_type_input hidden" id="type_commercial" name="service_type" value="commercial">
-                                        <a href="javascript:void(0)" class="service_type" type="commercial">
+                                        <label>
+                                            <input type="radio" class="service_type_input" id="type_commercial" name="service_type" value="commercial">
                                             <i style="font-size:24px;" class="fa fa-industry" aria-hidden="true"></i> <span>Commercial</span>
-                                        </a>
+                                        </label>
                                     </li>
                                 </ul>
                             </div>
                         </div>
 
-                        <div class="book_form_tab hidden" id="services_list">
+                        <div id="services_list">
                         </div>
 
                         <div class="book_form_tab hidden" id="tab3">
@@ -169,30 +169,45 @@
     <script>
         $(document).ready(function() {
 
-            $(document).on('click', '.service_type', function(e) {
+            $(document).on('change', "[name='service_type']", function(e) {
                 e.preventDefault();
-                let _type = $(this).attr('type');
                 let _val = $("[name='service_type']:checked").val();
-                $('#type_'+_type).prop("checked", true);
-                let _newval = $("[name='service_type']:checked").val();
-                if( _val != _newval ) {
-                    // get services as per selected service
-                    $.ajax({
-                        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-                        url: '{{ route('front.get_services') }}',
-                        type: "POST",
-                        dataType: "JSON",
-                        data: {
-                            service_type: _newval
-                        },
-                        success: function(res) {
-                            console.log(res);
-                            if( res.status == true ) {
-                                $('#services_list').empty().html(res.html).removeClass('hidden');
-                            }
+                // get services as per selected service
+                $.ajax({
+                    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                    url: '{{ route('front.get_services') }}',
+                    type: "POST",
+                    dataType: "JSON",
+                    data: {
+                        service_type: _val
+                    },
+                    success: function(res) {
+                        console.log(res);
+                        if( res.status == true ) {
+                            $('#services_list').empty().html(res.html);
+                            $("#duration_div").owlCarousel({
+                                items:5,
+                                itemsDesktop:[1000,5],
+                                itemsDesktopSmall:[979,5],
+                                itemsTablet:[768,5],
+                                pagination:true,
+                                autoPlay:false
+                            });
+
+                            $('#datepicker').datepicker({
+                                format: 'dd/mm/yyyy',
+                                numberOfMonths: 2,
+                                inline: true,
+                                showOtherMonths: true,
+                                autoclose : true
+                            }).on('changeDate',function(e){
+                                //on change of date on start datepicker, set end datepicker's date
+                                $('.date-picker-end').datepicker('setStartDate',e.date)
+                            });
+
                         }
-                    }); // end ajax
-                }
+                    }
+                }); // end ajax
             });
 
             $("#tab2").click(function(event) {
