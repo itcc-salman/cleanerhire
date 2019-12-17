@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Backend;
 
-use Illuminate\Http\Request;
-use App\Http\Requests\CleaningServiceStoreRequest;
 use App\Http\Controllers\Controller;
-use App\Services\CleaningServicesService;
+use App\Http\Requests\CleaningServiceStoreRequest;
+use App\Models\Cleaner;
 use App\Models\CleaningServices;
+use App\Models\User;
+use App\Services\CleaningServicesService;
+use Illuminate\Http\Request;
 
 class CleaningServiceController extends Controller
 {
@@ -49,6 +51,46 @@ class CleaningServiceController extends Controller
         $data['services'] = $cleaningServices;
         return response()->json($data);
     }
+
+    public function getRoleBasedServices(Request $request)
+    {
+        $data = array();
+        $services = array();
+        $cs = CleaningServices::latest();
+        $user_type = $request->get('user_type',NULL);
+
+        if( $request->has('cleaner_id') ) {
+            $cleaner = Cleaner::find($request->get('cleaner_id'));
+            $user_type = $cleaner->user->role;
+        }else if( $request->has('user_id') ) {
+            $user = User::find($request->get('user_id'));
+            $user_type = $user->role;
+        }
+
+        if( $user_type == 'cleaner' ) {
+            // cleaner
+            $services = [
+                'residential' => $cs->where('individual', 1)->where('residential', 1)->get(),
+                'commercial' => NULL
+            ];
+        } else if ( $user_type == 'agency' ) {
+            // agency
+            $services = [
+                'residential' => $cs->where('agency', 1)->where('residential', 1)->get(),
+                'commercial' => $cs->where('agency', 1)->where('commercial', 1)->get()
+            ];
+        } else {
+            $services = [
+                'residential' => $cs->where('residential', 1)->get(),
+                'commercial' => $cs->where('commercial', 1)->get()
+            ];
+        }
+
+        $data['code'] = 200;
+        $data['services'] = $services;
+        return response()->json($data);
+    }
+
 
     public function create(CleaningServiceStoreRequest $request)
     {

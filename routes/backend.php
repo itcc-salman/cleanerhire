@@ -34,10 +34,11 @@ Route::prefix('resources')->group(function () {
 
 Route::prefix('ajax')->group(function () {
     Route::get('cleaners', 'CleanerController@getAllCleaners')->name('backend.ajax.cleaners');
-    Route::get('cleaner/get-cleaner-by-id', 'CleanerController@get-cleaner-by-id')->name('backend.ajax.cleaner.get_cleaner_by_id');
+    Route::get('cleaner/get-cleaner-by-id', 'CleanerController@getCleanerById')->name('backend.ajax.cleaner.get_cleaner_by_id');
 
     // Services
     Route::get('services', 'CleaningServiceController@getAllServices')->name('backend.ajax.services');
+    Route::get('service/get-role-based-services', 'CleaningServiceController@getRoleBasedServices')->name('backend.ajax.get_role_based_services');
     Route::post('service/delete', 'CleaningServiceController@delete')->name('backend.ajax.service.delete');
 
     // Resources

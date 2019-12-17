@@ -187,6 +187,7 @@
 
             // Validation before going to next page
             wizard.on('beforeNext', function(wizardObj) {
+
                 $("#last_step").val(wizardObj.currentStep);
                 if (validator.form() !== true) {
                     wizardObj.stop();  // don't go to the next step
@@ -194,6 +195,7 @@
             });
 
             wizard.on('beforePrev', function(wizardObj) {
+
                 if (validator.form() !== true) {
                     wizardObj.stop();  // don't go to the next step
                 }
@@ -201,9 +203,6 @@
 
             // Change event
             wizard.on('change', function(wizard) {
-                setTimeout(function() {
-                    // KTUtil.scrollTop();
-                }, 500);
             });
             // wizard.goNext();
         }
@@ -254,18 +253,19 @@
                 e.preventDefault();
                 if (validator.form()) {
                     // See: src\js\framework\base\app.js
-                    console.log(wizard.currentStep);
                     KTApp.progress(btn);
                     KTApp.block(formEl);
-                    console.log(wizard.currentStep);
                     var url = '{{ route('backend.cleaner.update') }}';
                     formEl.ajaxSubmit({
                         url: url,
                         method: 'POST',
                         success: function(response) {
-                            // console.log(response);
+
                             if(response.code == 200 && response.html != ''){
                                 $("#stepFiveWizardDiv").html(response.html);
+                            }
+                            if($("#last_step").val() == 2){
+                                getStep3Services();
                             }
                             KTApp.unprogress(btn);
                             KTApp.unblock(formEl);
@@ -295,6 +295,11 @@
                     });
 
                 }
+            });
+
+            var btn2 = formEl.find('[data-ktwizard-type="action-prev"]');
+            btn2.on('click', function(e) {
+
             });
         }
 

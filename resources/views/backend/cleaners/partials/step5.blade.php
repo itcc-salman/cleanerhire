@@ -147,11 +147,33 @@
             Services
         </div>
         <div class="kt-wizard-v1__review-content">
+            <div class="kt-wizard-v1__review-title">
+                Residential
+            </div>
             <div class="c_output_service">
-                @foreach($cleaner->services as $service)
+                @foreach($cleaner->cleanerServices as $service)
+                    @if($service->service_for == 'commercial')
+                        @continue
+                    @endif
                     <div class="c_output_service_tab">
-                    <h4>{{$service->name}}</h4>
-                    <label>Do you have relevant equipments?</label>
+                    <h4>{{$service->service->name}}</h4>
+                    <label class="{{$service->has_equipments}}">Do you have relevant equipments?</label>
+                    <span>{{$service->has_equipments==1 ? 'Yes' : 'No' }}</span>
+                    </div>
+                @endforeach
+            </div>
+
+            <div class="kt-wizard-v1__review-title">
+                Commercial
+            </div>
+            <div class="c_output_service">
+                @foreach($cleaner->cleanerServices as $service)
+                    @if($service->service_for == 'residential')
+                        @continue
+                    @endif
+                    <div class="c_output_service_tab">
+                    <h4>{{$service->service->name}}</h4>
+                    <label class="{{$service->has_equipments}}">Do you have relevant equipments?</label>
                     <span>{{$service->has_equipments==1 ? 'Yes' : 'No' }}</span>
                     </div>
                 @endforeach
