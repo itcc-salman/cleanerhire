@@ -203,12 +203,23 @@ class CleanerController extends Controller
 
                 }else if($last_step == 3){
                     $cleaner->cleanerServices()->delete();
-                    $cleaner_services = $request->get('cleaner_services',null);
+
+                    $cleaner_services = $request->get('cleaner_services_residential',[]);
                     foreach ($cleaner_services as $key => $service) {
                         $csm = new CleanerServiceMapping();
                         $csm->cleaner_id = $cleaner->id;
                         $csm->cleaning_service_id = $service;
-                        $csm->has_equipments = $request->get('has_equipment_'.($service), 0);
+                        $csm->service_for = 'residential';
+                        $csm->has_equipments = $request->get('has_equipment_residential_'.($service), 0);
+                        $csm->save();
+                    }
+                    $cleaner_services = $request->get('cleaner_services_commercial',[]);
+                    foreach ($cleaner_services as $key => $service) {
+                        $csm = new CleanerServiceMapping();
+                        $csm->cleaner_id = $cleaner->id;
+                        $csm->cleaning_service_id = $service;
+                        $csm->service_for = 'commercial';
+                        $csm->has_equipments = $request->get('has_equipment_commercial_'.($service), 0);
                         $csm->save();
                     }
                 }else if($last_step == 4){
@@ -255,6 +266,7 @@ class CleanerController extends Controller
                 $cleaner->updated_by =  Auth::Id();
                 $cleaner->last_step =  $request->has('last_step') ? $request->get('last_step') : $cleaner->last_step;
                 $cleaner->save();
+                $user->save();
                 $cleaner->refresh();
                 $data['code'] = 200;
                 $data['cleaner'] = $cleaner;

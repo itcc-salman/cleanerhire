@@ -281,9 +281,11 @@
                             url: url,
                             method: 'POST',
                             success: function(response) {
-                                console.log(response);
                                 if(response.code == 200 && response.html != ''){
                                     $("#stepFiveWizardDiv").html(response.html);
+                                }
+                                if($("#last_step").val() == 2){
+                                    getStep3Services();
                                 }
                                 KTApp.unprogress(btn);
                                 KTApp.unblock(formEl);
