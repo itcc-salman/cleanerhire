@@ -1,4 +1,11 @@
 @extends('frontend.layouts.master')
+@push('css')
+<style>
+   .css-class-to-highlight{
+       background-color: #2e3641 !important;
+   }
+</style>
+@endpush
 @section('content')
 <!--Web_Inner_Banner-->
 <div class="web_innerpage_section">
@@ -18,7 +25,7 @@
             <div class="row">
                 <div class="col-md-8 col-sm-8 col-xs-8">
                     <div class="book_form_left">
-                        <div class="book_form_tab " id="tab1">
+                        <div class="book_form_tab">
                             <label>What type of job is this?</label>
                             <div class="book_job">
                                 <ul>
@@ -93,7 +100,7 @@
                         service_type: _val
                     },
                     success: function(res) {
-                        console.log(res);
+                        // console.log(res);
                         if( res.status == true ) {
                             $('#services_list').empty().html(res.html);
                             $("#duration_div").owlCarousel({
@@ -113,17 +120,28 @@
                                 autoPlay:false
                             });
 
-
-                            $('#datepicker').multiDatesPicker({
+                            var your_dates = [new Date(2019, 12, 15),new Date(2019, 12, 20)]; // just some dates.
+                            $('#datepicker').datepicker({
+                                beforeShowDay: function(date) {
+                                    // check if date is in your array of dates
+                                    if($.inArray(date, your_dates)) {
+                                        console.log(date);
+                                        // if it is return the following.
+                                        return [true, 'css-class-to-highlight', 'tooltip text'];
+                                    } else {
+                                        // default
+                                        return [true, '', ''];
+                                    }
+                                },
                                 format: 'dd/mm/yyyy',
                                 numberOfMonths: 2,
                                 inline: true,
                                 showOtherMonths: true,
                                 closeOnSelect:false,
-                                selectMultiple:true,
                                 minDate: 0,
-                                autoclose : true
+                                autoclose : false
                             }).on('changeDate',function(e){
+                                console.log(e.date);
                                 //on change of date on start datepicker, set end datepicker's date
                                 // $('.date-picker-end').datepicker('setStartDate',e.date)
                             });
