@@ -86,6 +86,8 @@ class CleanerService
             $tasks['account_info'] = $this->checkAccountInfo($cleaner);
             // for services
             $tasks['services'] = $this->checkServices($cleaner);
+            // for visa_documents
+            $tasks['visa_documents'] = $this->checkVisaDocuments($cleaner);
             // for availability
             $tasks['availability'] = $this->checkAvailability($cleaner);
         }
@@ -115,6 +117,19 @@ class CleanerService
         if( empty($cleaner->gender) ) { return false; }
         if( empty($cleaner->date_of_birth) ) { return false; }
         return true;
+    }
+
+    public function checkVisaDocuments(Cleaner $cleaner)
+    {
+        if( empty($cleaner->doc_driving_licence ) ) { return false; }
+        if( empty($cleaner->doc_medicare_card ) ) { return false; }
+        if( empty($cleaner->doc_passport ) ) { return false; }
+        if( empty($cleaner->doc_bank_statement ) ) { return false; }
+        if( empty($cleaner->doc_utility_bill ) ) { return false; }
+        if( empty($cleaner->doc_certifications ) ) { return false; }
+        if( empty($cleaner->doc_police_check ) ) { return false; }
+        return true;
+
     }
 
     public function checkServices(Cleaner $cleaner)
@@ -148,6 +163,9 @@ class CleanerService
                 return $this->getLogedInCleaner();
             break;
             case 'account_info':
+                return $this->getLogedInCleaner();
+            break;
+            case 'visa_documents':
                 return $this->getLogedInCleaner();
             break;
             case 'services':
@@ -318,5 +336,46 @@ class CleanerService
             }
         }
         return true;
+    }
+
+    public function updateCleanerDocuments($data)
+    {
+        $cleaner = $this->cleaner_model->where('user_id', Auth::id())->first();
+        if($cleaner && $data['data'] && $data['doc_type']){
+            switch ($data['doc_type']) {
+                case 'doc_driving_licence':
+                    $cleaner->doc_driving_licence = $data['data'];
+                    break;
+                case 'doc_medicare_card':
+                    $cleaner->doc_medicare_card = $data['data'];
+                    break;
+                case 'doc_passport':
+                    $cleaner->doc_passport = $data['data'];
+                    break;
+                case 'doc_bank_statement':
+                    $cleaner->doc_bank_statement = $data['data'];
+                    break;
+                case 'doc_utility_bill':
+                    $cleaner->doc_utility_bill = $data['data'];
+                    break;
+                case 'doc_certifications':
+                    $cleaner->doc_certifications = $data['data'];
+                    break;
+                case 'doc_police_check':
+                    $cleaner->doc_police_check = $data['data'];
+                    break;
+
+                default:
+                    # code...
+                    break;
+            }
+            $data['message'] = 'File uploaded & updated successfully..!';
+            $cleaner->save();
+        } else {
+            $data['code'] = 400;
+            $data['data'] = null;
+            $data['message'] = 'Something went wrong..!';
+        }
+        return $data;
     }
 }

@@ -28,6 +28,7 @@ class CheckIsProfileCompleted
             'cleaner.ajax.profile.partial',
             'cleaner.ajax.profile.personal_info',
             'cleaner.ajax.profile.account_info',
+            'cleaner.ajax.profile.visa_documents',
             'cleaner.ajax.profile.update_services',
             'cleaner.ajax.profile.update_availability',
             'logout',

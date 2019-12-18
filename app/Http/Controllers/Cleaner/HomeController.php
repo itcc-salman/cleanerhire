@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Cleaner;
 
 use App\Http\Controllers\Controller;
-use App\Services\CleanerService;
-use Illuminate\Http\Request;
 use App\Http\Requests\CleanerPersonalInfoStoreRequest;
+use App\Services\CleanerService;
+use App\Services\CommonService;
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -73,7 +74,14 @@ class HomeController extends Controller
 
     public function visa_documents(Request $request)
     {
-        //
+        $commonService = new CommonService;
+        $data = $commonService->saveUploadedFile($request);
+        if( $data['code'] == 200) {
+            $data['doc_type'] =  $request->doc_type;
+            $data = $this->cleanerService->updateCleanerDocuments($data);
+        }
+
+        return response()->json($data);
     }
 
     public function update_services(Request $request)

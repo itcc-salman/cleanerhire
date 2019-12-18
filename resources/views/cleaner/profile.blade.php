@@ -333,12 +333,14 @@
         function fileupload() {
             var fd = new FormData();
             var files = $('#file')[0].files[0];
+            var doc_type = $('#fileUploadSelect').val();
             fd.append('file', files);
+            fd.append('doc_type', doc_type);
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                url: '/admin/uploadfile',
+                url: '{{ route('cleaner.ajax.profile.visa_documents') }}',
                 type: 'post',
                 data: fd,
                 contentType: false,

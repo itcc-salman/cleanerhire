@@ -46,4 +46,4 @@ Route::prefix('ajax')->group(function () {
     Route::post('resource/delete', 'ResourceController@delete')->name('backend.ajax.resource.delete');
 });
 
-Route::post('uploadfile','CleanerController@showUploadFile');
+Route::post('uploadfile','CleanerController@saveUploadedFile')->name('save_uploaded_file');

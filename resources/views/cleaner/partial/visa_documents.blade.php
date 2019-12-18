@@ -37,7 +37,7 @@
                                             <label class="custom-file-label">Choose file</label>
                                         </div>
                                     </div>
-                                    <button type="button" onclick="fileupload();" class="btn btn-primary">Upload</button>
+                                    <button type="button" onclick="fileupload();" class="btn btn-primary">Upload & Update</button>
                                 </div>
                                 <div class="col-6 border-left-divider">
                                     <label>List of Documents</label>
@@ -48,13 +48,13 @@
                                     <input type="hidden" name="doc_utility_bill" id="doc_utility_bill">
                                     <input type="hidden" name="doc_certifications" id="doc_certifications">
                                     <input type="hidden" name="doc_police_check" id="doc_police_check">
-                                    <p class="m-0 p-0"><span>1. Driving License</span><span id="doc_driving_licence_file_name"></span></p>
-                                    <p class="m-0 p-0"><span>2. Medical Card</span><span id="doc_medicare_card_file_name"></span></p>
-                                    <p class="m-0 p-0"><span>3. Passport</span><span id="doc_passport_file_name"></span></p>
-                                    <p class="m-0 p-0"><span>4. Utility Bill</span><span id="doc_bank_statement_file_name"></span></p>
-                                    <p class="m-0 p-0"><span>5. Bank Statement</span><span id="doc_utility_bill_file_name"></span></p>
-                                    <p class="m-0 p-0"><span>6. Police Check</span><span id="doc_certifications_file_name"></span></p>
-                                    <p class="m-0 p-0"><span>7. Certifications</span><span id="doc_police_check_file_name"></span></p>
+                                    <p class="m-0 p-0"><span>1. Driving License</span><span id="doc_driving_licence_file_name">: {{$data->doc_driving_licence}}</span></p>
+                                    <p class="m-0 p-0"><span>2. Medical Card</span><span id="doc_medicare_card_file_name">: {{$data->doc_medicare_card}}</span></p>
+                                    <p class="m-0 p-0"><span>3. Passport</span><span id="doc_passport_file_name">: {{$data->doc_passport}}</span></p>
+                                    <p class="m-0 p-0"><span>4. Utility Bill</span><span id="doc_bank_statement_file_name">: {{$data->doc_bank_statement}}</span></p>
+                                    <p class="m-0 p-0"><span>5. Bank Statement</span><span id="doc_utility_bill_file_name">: {{$data->doc_utility_bill}}</span></p>
+                                    <p class="m-0 p-0"><span>6. Police Check</span><span id="doc_certifications_file_name">: {{$data->doc_certifications}}</span></p>
+                                    <p class="m-0 p-0"><span>7. Certifications</span><span id="doc_police_check_file_name">: {{$data->doc_police_check}}</span></p>
                                 </div>
                             </div>
 
@@ -63,7 +63,7 @@
                 </div>
                 <div class="kt-portlet__foot">
                     <div class="kt-form__actions">
-                        <div class="row">
+                        <div class="row d-none">
                             <div class="col-lg-3 col-xl-3">
                             </div>
                             <div class="col-lg-9 col-xl-9">
