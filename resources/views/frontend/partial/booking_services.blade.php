@@ -36,8 +36,8 @@
                 <li><i class="fa fa-check" aria-hidden="true"></i><span>No minimum contract period – service only if you’re 100% happy!</span></li>
             </ul>
             <div class="bac_offer_button">
-                <a href="javascript:void(0);" class="active">Weekly</a>
-                <a href="javascript:void(0);">Fortnightly</a>
+                <label class="active"><input type="radio" name="visit_type" value="weekly" checked>Weekly</label>
+                <label ><input type="radio" name="visit_type" value="forthnight">Fortnightly</label>
             </div>
         </div>
         <div class="bac_offer_tab offer_two">
@@ -51,7 +51,7 @@
                 <li><i class="fa fa-check" aria-hidden="true"></i><span>All housekeepers on our platform are rated at least 4.2 stars</span></li>
             </ul>
             <div class="bac_offer_button">
-                <a href="javascript:void(0);">Just once</a>
+                <label><input type="radio" name="visit_type" value="once">Just once</label>
             </div>
         </div>
     </div>
@@ -75,4 +75,69 @@
 <div class="book_form_tab">
     <label>How long should we visit (at $35 per hour)?</label>
     <div id="datepicker" class="ll-skin-melon"></div>
+</div>
+<div class="book_form_tab">
+    <label>And what time?</label>
+    <div id="time_div">
+        @foreach(getTime() as $time)
+            <div>
+                <label>
+                    <input type="radio" name="duration" value="{{ $time['val'] }}">
+                    <span>{{ $time['show'] }}</span>
+                    <strong>{{ $time['am_pm'] }}</strong>
+                </label>
+            </div>
+        @endforeach
+    </div>
+</div>
+
+<div class="bac_footer_step">
+    <div class="bac_comman_tab">
+        <label>Do you prefer a male or female butler?</label>
+        <div class="check_main">
+            <label class="m_check">
+                <span>Male</span>
+                <input type="radio" name="gender_pref" value="male">
+                <span class="checkmark"></span>
+            </label>
+            <label class="m_check">
+                <span>Female</span>
+                <input type="radio" name="gender_pref" value="female">
+                <span class="checkmark"></span>
+            </label>
+            <label class="m_check">
+                <span>No Preference</span>
+                <input type="radio" name="gender_pref" value="none">
+                <span class="checkmark"></span>
+            </label>
+        </div>
+    </div>
+</div>
+
+<div class="bac_footer_step">
+    <div class="bac_comman_tab">
+        <label>Do you have any pets?</label>
+        <div class="check_main">
+            <label class="m_check">
+                <span>Cat</span>
+                <input type="radio" name="has_pet" value="cat">
+                <span class="checkmark"></span>
+            </label>
+            <label class="m_check">
+                <span>Dog</span>
+                <input type="radio" name="has_pet" value="dog">
+                <span class="checkmark"></span>
+            </label>
+            <label class="m_check">
+                <span>None</span>
+                <input type="radio" name="has_pet" value="none">
+                <span class="checkmark"></span>
+            </label>
+        </div>
+        <input type="text" placeholder="Other (Please specify)" id="other_pet" name="has_pet_optional">
+    </div>
+</div>
+
+<div class="bac_footer_step">
+    <a href="javascript:void(0);">Next</a>
 </div>

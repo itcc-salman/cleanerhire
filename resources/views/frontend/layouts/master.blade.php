@@ -131,6 +131,7 @@
     <script src="{{ asset('front/js/jquery.min.js') }}"></script>
     <script src="{{ asset('front/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/jquery-datepicker/jquery-ui.js') }}"></script>
+    <script src="{{ asset('assets/plugins/multiple-dates-picker/jquery-ui.multidatespicker.js') }}"></script>
     <script>
         $(window).on("scroll", function() {
             if($(window).scrollTop() > 42) {
