@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="{{ asset('front/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('front/css/aos.css') }}">
     <link rel="stylesheet" href="{{ asset('front/css/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/jquery-datepicker/jquery-ui.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/jquery-datepicker/melon.datepicker.css') }}">
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&display=swap" rel="stylesheet">
     @stack('css')
@@ -128,6 +130,7 @@
 
     <script src="{{ asset('front/js/jquery.min.js') }}"></script>
     <script src="{{ asset('front/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/jquery-datepicker/jquery-ui.js') }}"></script>
     <script>
         $(window).on("scroll", function() {
             if($(window).scrollTop() > 42) {
