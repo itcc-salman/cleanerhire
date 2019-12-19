@@ -18,6 +18,7 @@ class CreateBookingsTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->integer('customer_id')->unsigned();
             $table->enum('booking_type', ['residential','commercial']);
+            $table->integer('property_id')->unsigned();
             $table->string('services');
             $table->enum('visit_type', ['weekly','fortnight','once'])->default('weekly');
             $table->string('duration')->default('1');
@@ -42,6 +43,7 @@ class CreateBookingsTable extends Migration
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
+            $table->foreign('property_id')->references('id')->on('properties')->onDelete('cascade');
         });
     }
 

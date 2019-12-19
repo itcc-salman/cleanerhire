@@ -17,34 +17,36 @@
         <div class="innerpage_section">
             <div class="row">
                 <div class="col-md-8 col-sm-8 col-xs-8">
-                    <div class="book_form_left">
-                        <div class="book_form_tab">
-                            <label>What type of job is this?</label>
-                            <div class="book_job">
-                                <ul>
-                                    <li>
-                                        <label>
-                                            <input type="radio" class="service_type_input" id="type_residential" name="service_type" value="residential">
-                                            <i class="fa fa-home" aria-hidden="true"></i> <span>Residential</span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label>
-                                            <input type="radio" class="service_type_input" id="type_commercial" name="service_type" value="commercial">
-                                            <i style="font-size:24px;" class="fa fa-industry" aria-hidden="true"></i> <span>Commercial</span>
-                                        </label>
-                                    </li>
-                                </ul>
+                    <form id="booking">
+                        <div class="book_form_left">
+                            <div class="book_form_tab">
+                                <label>What type of job is this?</label>
+                                <div class="book_job">
+                                    <ul>
+                                        <li>
+                                            <label>
+                                                <input type="radio" class="service_type_input" id="type_residential" name="service_type" value="residential">
+                                                <i class="fa fa-home" aria-hidden="true"></i> <span>Residential</span>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label>
+                                                <input type="radio" class="service_type_input" id="type_commercial" name="service_type" value="commercial">
+                                                <i style="font-size:24px;" class="fa fa-industry" aria-hidden="true"></i> <span>Commercial</span>
+                                            </label>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
 
-                        <div id="property_list">
-                        </div>
+                            <div id="property_list">
+                            </div>
 
-                        <div id="services_list">
-                        </div>
+                            <div id="services_list">
+                            </div>
 
-                    </div>
+                        </div>
+                    </form>
                 </div>
                 <div class="col-md-4 col-sm-4 col-xs-4">
                     <div class="bac_booking_summary" id="sticky">
