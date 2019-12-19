@@ -51,9 +51,18 @@ class UsersTableSeeder extends Seeder
                 'regular' => $cs['regular'],
                 'individual' => $cs['individual'],
                 'agency' => $cs['agency'],
-                'created_by' => 0,
-                'updated_by' => 0,
+                'created_by' => 1,
+                'updated_by' => 1,
                 'status' => 1
+            ]);
+        }
+
+        $properties = [ 'office', 'ware house', 'education facility','body & owner corp','sport facility & gym','pubs and restaurant','government and council','child care','medical facility','adge care','industrial' ];
+        foreach ($properties as $p) {
+            DB::table('cleaning_services')->insert([
+                'name' => $p['name'],
+                'created_by' => 1,
+                'updated_by' => 1,
             ]);
         }
     }

@@ -25,6 +25,9 @@ return [
     'resourceCreated' => 'Resource Created Successfully',
     'resourceUpdated' => 'Resource Updated Successfully',
     'resourceDeleted' => 'Resource Deleted Successfully',
+    'propertyCreated'  => 'Property Created Successfully',
+    'propertyUpdated' => 'Property Updated Successfully',
+    'propertyDeleted' => 'Property Deleted Successfully',
 
     /*
      * Cleaner

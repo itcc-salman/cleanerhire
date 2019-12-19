@@ -27,6 +27,13 @@ Route::prefix('services')->group(function () {
     Route::match(['GET', 'POST'], '/update/{id?}', 'CleaningServiceController@update')->name('backend.sevice.update');
 });
 
+// Properties
+Route::prefix('properties')->group(function () {
+    Route::get('/', 'PropertyController@index')->name('backend.properties');
+    Route::match(['GET', 'POST'], '/create', 'PropertyController@create')->name('backend.properties.create');
+    Route::match(['GET', 'POST'], '/update/{id?}', 'PropertyController@update')->name('backend.properties.update');
+});
+
 // Resources
 Route::prefix('resources')->group(function () {
     Route::get('/', 'ResourceController@index')->name('backend.resources');
@@ -47,6 +54,10 @@ Route::prefix('ajax')->group(function () {
     Route::get('services', 'CleaningServiceController@getAllServices')->name('backend.ajax.services');
     Route::get('service/get-role-based-services', 'CleaningServiceController@getRoleBasedServices')->name('backend.ajax.get_role_based_services');
     Route::post('service/delete', 'CleaningServiceController@delete')->name('backend.ajax.service.delete');
+
+    // Properties
+    Route::get('properties', 'PropertyController@getAllProperty')->name('backend.ajax.properties');
+    Route::post('properties/delete', 'PropertyController@delete')->name('backend.ajax.properties.delete');
 
     // Resources
     Route::get('resources', 'ResourceController@getAllResources')->name('backend.ajax.resources');

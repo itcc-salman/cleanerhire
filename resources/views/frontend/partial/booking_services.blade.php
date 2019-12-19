@@ -19,7 +19,52 @@
 </div>
 <div class="book_form_tab">
     <label>Where should we visit?</label>
-    <input type="text" class="form-control" name="address">
+    <input id="autocomplete" class="form-control" placeholder="Search Address" onFocus="geolocate()" type="text"/>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="street_number">Address line 1<span class="text-danger">&nbsp;*</span></label>
+                <input class="form-control" id="street_number" name="address_line_1" placeholder="Address line 1" type="text" value="">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="route">Address line 2<span class="text-danger">&nbsp;*</span></label>
+                <input class="form-control" id="route" name="address_line_2" placeholder="Address line 2" type="text" value="">
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="locality">City<span class="text-danger">&nbsp;*</span></label>
+                <input class="form-control" id="locality" name="city" placeholder="City" type="text" value="">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="administrative_area_level_1">State<span class="text-danger">&nbsp;*</span></label>
+                <input class="form-control" id="administrative_area_level_1" name="state" placeholder="State" type="text" value="">
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="country">Country<span class="text-danger">&nbsp;*</span></label>
+                <input class="form-control" id="country" name="country" placeholder="Country" type="text" value="">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="postal_code">Postal Code<span class="text-danger">&nbsp;*</span></label>
+                <input class="form-control" id="postal_code" name="postal_code" placeholder="Postal Code" type="text" value="">
+            </div>
+        </div>
+    </div>
+    {{-- <input type="text" id="autocomplete" class="form-control" onFocus="geolocate()" name="address"> --}}
 </div>
 <div class="book_form_tab">
     <label>How regularly should we visit?</label>
@@ -30,11 +75,11 @@
                 <label>Regular</label>
                 <span>$35 <small>$/ph</small></span>
             </div>
-            <ul>
+            {{-- <ul>
                 <li><i class="fa fa-check" aria-hidden="true"></i><span>Same, fully vetted housekeeper each visit</span></li>
                 <li><i class="fa fa-check" aria-hidden="true"></i><span>Free cancellation up to 48h before each appointment</span></li>
                 <li><i class="fa fa-check" aria-hidden="true"></i><span>No minimum contract period – service only if you’re 100% happy!</span></li>
-            </ul>
+            </ul> --}}
             <div class="bac_offer_button">
                 <label class="active"><input type="radio" name="visit_type" value="weekly" checked>Weekly</label>
                 <label ><input type="radio" name="visit_type" value="forthnight">Fortnightly</label>
@@ -46,10 +91,10 @@
                 <label>Once-Off</label>
                 <span>$45 <small>$/ph</small></span>
             </div>
-            <ul>
+            {{-- <ul>
                 <li><i class="fa fa-check" aria-hidden="true"></i><span>One-off cleaning</span></li>
                 <li><i class="fa fa-check" aria-hidden="true"></i><span>All housekeepers on our platform are rated at least 4.2 stars</span></li>
-            </ul>
+            </ul> --}}
             <div class="bac_offer_button">
                 <label><input type="radio" name="visit_type" value="once">Just once</label>
             </div>
@@ -73,7 +118,7 @@
 </div>
 
 <div class="book_form_tab">
-    <label>How long should we visit (at $35 per hour)?</label>
+    <label>What date should we visit?</label>
     <div id="datepicker" class="ll-skin-melon"></div>
 </div>
 <div class="book_form_tab">
@@ -141,3 +186,4 @@
 <div class="bac_footer_step">
     <a href="javascript:void(0);">Next</a>
 </div>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYoRdKwSuQGPgOO308PLt-6fJhKPWCz6Y&libraries=places&callback=initAutocomplete"></script>
