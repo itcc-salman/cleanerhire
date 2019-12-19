@@ -19,6 +19,11 @@ class PropertyService
         return $this->property_model->find($id);
     }
 
+    public function getAllProperty()
+    {
+        return $this->property_model->where('status', 1)->get();
+    }
+
     public function registerProperty($data)
     {
         $property = $this->property_model;

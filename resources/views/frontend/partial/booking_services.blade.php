@@ -186,4 +186,4 @@
 <div class="bac_footer_step">
     <a href="javascript:void(0);">Next</a>
 </div>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYoRdKwSuQGPgOO308PLt-6fJhKPWCz6Y&libraries=places&callback=initAutocomplete"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key={{ config('settings.googlePlacesAPIKey') }}&libraries=places&callback=initAutocomplete"></script>

@@ -73,6 +73,11 @@ return [
     'googleMapsAPIKey'    => env('GOOGLEMAPS_API_KEY', 'YOURGOOGLEMAPSkeyHERE'),
 
     /*
+     * Google Place API Key
+     */
+    'googlePlacesAPIKey'    => env('GOOGLEPLACES_API_KEY', ''),
+
+    /*
      * DropZone CDN
      */
     'dropZoneJsCDN'    => env('DROPZONE_JS_CDN', 'https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.4.0/dropzone.js'),

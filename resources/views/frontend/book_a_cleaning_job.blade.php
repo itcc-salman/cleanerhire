@@ -1,11 +1,4 @@
 @extends('frontend.layouts.master')
-@push('css')
-<style>
-   .css-class-to-highlight{
-       background-color: #2e3641 !important;
-   }
-</style>
-@endpush
 @section('content')
 <!--Web_Inner_Banner-->
 <div class="web_innerpage_section">
@@ -43,6 +36,9 @@
                                     </li>
                                 </ul>
                             </div>
+                        </div>
+
+                        <div id="property_list">
                         </div>
 
                         <div id="services_list">
@@ -150,6 +146,40 @@
             });
           }
         }
+
+        function initBookingPage() {
+            $("#duration_div").owlCarousel({
+                items:5,
+                itemsDesktop:[1000,5],
+                itemsDesktopSmall:[979,5],
+                itemsTablet:[768,5],
+                // nav:true,
+                pagination:true,
+                autoPlay:false,
+                // navText : ['<i class="fa fa-angle-left" aria-hidden="true"></i>','<i class="fa fa-angle-right" aria-hidden="true"></i>']
+            });
+            $("#time_div").owlCarousel({
+                items:5,
+                itemsDesktop:[1000,5],
+                itemsDesktopSmall:[979,5],
+                itemsTablet:[768,5],
+                pagination:true,
+                autoPlay:false
+            });
+
+            $('#datepicker').datepicker({
+                format: 'dd/mm/yyyy',
+                inline: true,
+                showOtherMonths: true,
+                closeOnSelect:false,
+                minDate: 0,
+                autoclose : false
+            }).on('changeDate',function(e){
+                // console.log(e.date);
+                //on change of date on start datepicker, set end datepicker's date
+                // $('.date-picker-end').datepicker('setStartDate',e.date)
+            });
+        }
         $(document).ready(function() {
 
             $(document).on('change', "[name='service_type']", function(e) {
@@ -167,38 +197,35 @@
                     success: function(res) {
                         // console.log(res);
                         if( res.status == true ) {
-                            $('#services_list').empty().html(res.html);
-                            $("#duration_div").owlCarousel({
-                                items:5,
-                                itemsDesktop:[1000,5],
-                                itemsDesktopSmall:[979,5],
-                                itemsTablet:[768,5],
-                                nav:true,
-                                pagination:false,
-                                autoPlay:false,
-                                navText : ['<i class="fa fa-angle-left" aria-hidden="true"></i>','<i class="fa fa-angle-right" aria-hidden="true"></i>']
-                            });
-                            $("#time_div").owlCarousel({
-                                items:5,
-                                itemsDesktop:[1000,5],
-                                itemsDesktopSmall:[979,5],
-                                itemsTablet:[768,5],
-                                pagination:true,
-                                autoPlay:false
-                            });
+                            // make all empty
+                            $('#services_list').empty();
+                            $('#property_list').empty();
+                            $('#'+res.where).html(res.html);
+                            if( res.where == 'services_list' ) {
+                                initBookingPage();
+                            }
+                        }
+                    }
+                }); // end ajax
+            });
 
-                            $('#datepicker').datepicker({
-                                format: 'dd/mm/yyyy',
-                                inline: true,
-                                showOtherMonths: true,
-                                closeOnSelect:false,
-                                minDate: 0,
-                                autoclose : false
-                            }).on('changeDate',function(e){
-                                // console.log(e.date);
-                                //on change of date on start datepicker, set end datepicker's date
-                                // $('.date-picker-end').datepicker('setStartDate',e.date)
-                            });
+            $(document).on('change', "[name='properties']", function(e) {
+                e.preventDefault();
+                let _val = $("[name='properties']:checked").val();
+                // get services as per selected service
+                $.ajax({
+                    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                    url: '{{ route('front.get_services') }}',
+                    type: "POST",
+                    dataType: "JSON",
+                    data: {
+                        property_type: _val
+                    },
+                    success: function(res) {
+                        // console.log(res);
+                        if( res.status == true ) {
+                            $('#'+res.where).empty().html(res.html);
+                            initBookingPage();
                         }
                     }
                 }); // end ajax

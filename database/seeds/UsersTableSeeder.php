@@ -56,14 +56,5 @@ class UsersTableSeeder extends Seeder
                 'status' => 1
             ]);
         }
-
-        $properties = [ 'office', 'ware house', 'education facility','body & owner corp','sport facility & gym','pubs and restaurant','government and council','child care','medical facility','adge care','industrial' ];
-        foreach ($properties as $p) {
-            DB::table('cleaning_services')->insert([
-                'name' => $p['name'],
-                'created_by' => 1,
-                'updated_by' => 1,
-            ]);
-        }
     }
 }
