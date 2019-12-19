@@ -43,8 +43,8 @@ class CleaningServicesService
             ];
         } else {
             $services = [
-                'residential' => $this->cleaningService_model->where('agency', 1)->where('residential', 1)->get(),
-                'commercial' => $this->cleaningService_model->where('agency', 1)->where('commercial', 1)->get()
+                'residential' => $this->cleaningService_model->where('company', 1)->where('residential', 1)->get(),
+                'commercial' => $this->cleaningService_model->where('company', 1)->where('commercial', 1)->get()
             ];
         }
         return $services;
@@ -74,7 +74,7 @@ class CleaningServicesService
         $cleaningService->once_off      = $data->get('once_off', 0);
         $cleaningService->regular       = $data->get('regular', 0);
         $cleaningService->individual    = $data->get('individual', 0);
-        $cleaningService->agency        = $data->get('agency', 0);
+        $cleaningService->company        = $data->get('company', 0);
         $cleaningService->status        = $data->get('status', 1);
         $cleaningService->created_by    = Auth::Id();
         $cleaningService->updated_by    = Auth::Id();
@@ -92,7 +92,7 @@ class CleaningServicesService
         $cleaningService->once_off      = $data->get('once_off', 0);
         $cleaningService->regular       = $data->get('regular', 0);
         $cleaningService->individual    = $data->get('individual', 0);
-        $cleaningService->agency        = $data->get('agency', 0);
+        $cleaningService->company        = $data->get('company', 0);
         $cleaningService->status        = $data->get('status', 1);
         $cleaningService->updated_by    = Auth::Id();
         $cleaningService->save();

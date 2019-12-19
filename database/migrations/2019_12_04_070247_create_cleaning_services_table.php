@@ -21,7 +21,7 @@ class CreateCleaningServicesTable extends Migration
             $table->boolean('once_off')->default(0);
             $table->boolean('regular')->default(0);
             $table->boolean('individual')->default(0);
-            $table->boolean('agency')->default(0);
+            $table->boolean('company')->default(0);
             $table->tinyInteger('status')->comment('Active - 1, Deactive - 0')->default(0);
             $table->integer('created_by');
             $table->integer('updated_by');

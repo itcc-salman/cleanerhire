@@ -35,7 +35,7 @@ class CheckIsProfileCompleted
         ];
 
         if (!in_array($currentRoute, $routesAllowed)) {
-            if ($user && ( $user->role == 'cleaner' || $user->role == 'agency' ) ) {
+            if ($user && ( $user->role == 'cleaner' || $user->role == 'company' ) ) {
                 $cleaner = Cleaner::where('user_id', $user->id)->first();
                 if( $cleaner ) {
                     // check for profile

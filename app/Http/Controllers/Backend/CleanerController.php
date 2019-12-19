@@ -152,7 +152,7 @@ class CleanerController extends Controller
                 }else if($last_step == 2){
                     $user->role = $request->get('role', $user->role);
 
-                    if($user->role == 'agency'){
+                    if($user->role == 'company'){
                         $cleaner->company_name = $request->get('company_name', $cleaner->company_name);
                         $cleaner->director_name = $request->get('director_name', $cleaner->director_name);
                         $cleaner->company_address = $request->get('company_address', $cleaner->company_address);

@@ -38,8 +38,8 @@ class CleaningServiceController extends Controller
         $data = array();
         if( $request->has('user_type') ) {
             $user_type = $request->get('user_type');
-            if( $user_type == 'agency' ) {
-                $cleaningServices = CleaningServices::where('agency', 1)->get();
+            if( $user_type == 'company' ) {
+                $cleaningServices = CleaningServices::where('company', 1)->get();
             } else {
                 $cleaningServices = CleaningServices::where('individual', 1)->get();
             }
@@ -73,11 +73,11 @@ class CleaningServiceController extends Controller
                 'residential' => $cs->where('individual', 1)->where('residential', 1)->get(),
                 'commercial' => NULL
             ];
-        } else if ( $user_type == 'agency' ) {
-            // agency
+        } else if ( $user_type == 'company' ) {
+            // company
             $services = [
-                'residential' => $cs->where('agency', 1)->where('residential', 1)->get(),
-                'commercial' => $cs->where('agency', 1)->where('commercial', 1)->get()
+                'residential' => $cs->where('company', 1)->where('residential', 1)->get(),
+                'commercial' => $cs->where('company', 1)->where('commercial', 1)->get()
             ];
         } else {
             $services = [

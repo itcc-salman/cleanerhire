@@ -80,7 +80,7 @@
                                     var equipement_yes_checked = '';
                                     var equipement_no_checked = '';
                                 }
-                                htmlstring = htmlstring + '<div class="col-6"><div class="kt-option kt-p10 col-12 d-block form-group"><label class="kt-checkbox kt-checkbox--tick kt-checkbox--brand kt-margin-0"><input class="cleaner-services-checkbox" name="cleaner_services_residential[]"  value="'+ el.id +'" '+ checked +' type="checkbox" >' + el.name + '<span></span></label>';
+                                htmlstring = htmlstring + '<div class="col-6"><div class="kt-option kt-p10 col-12 d-block form-group"><label class="kt-checkbox kt-checkbox--tick kt-checkbox--brand kt-margin-0"><input class="cleaner-services-checkbox-commercial" name="cleaner_services_commercial[]"  value="'+ el.id +'" '+ checked +' type="checkbox" >' + el.name + '<span></span></label>';
                                 htmlstring = htmlstring + '<div class="form-group kt-mb-5 kt-mt-5 '+ display +'" id="service_commercial_'+ el.id +'"><label>Do you have relevant equipments?</label><div class="kt-radio-inline"><label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" '+equipement_yes_checked+' value="1" name="has_equipment_commercial_'+el.id+'"> Yes <span></span></label><label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="0" '+equipement_no_checked+' name="has_equipment_commercial_'+el.id+'"> No <span></span></label></div></div></div></div>'
                             });
                         }
@@ -91,8 +91,8 @@
 
                         if(response.services.residential){
                             $.each(response.services.residential, function(index, el) {
-                                htmlstring = htmlstring + '<div class="kt-option kt-p10 col-12 d-block"><label class="kt-checkbox kt-checkbox--tick kt-checkbox--brand kt-margin-0"><input class="cleaner-services-checkbox" name="cleaner_services_residential[]" value="'+ el.id +'" type="checkbox">' + el.name + '<span></span></label>';
-                                htmlstring = htmlstring + '<div class="form-group kt-mb-5 kt-mt-5 d-none" id="service_'+ el.id +'"><label>Do you have relevant equipments?</label><div class="kt-radio-inline"><label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="1" name="has_equipment_residential_'+el.id+'"> Yes <span></span></label><label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="0" name="has_equipment_residential_'+el.id+'"> No <span></span></label></div></div></div>'
+                                htmlstring = htmlstring + '<div class="col-6"><div class="kt-option kt-p10 col-12 d-block form-group"><label class="kt-checkbox kt-checkbox--tick kt-checkbox--brand kt-margin-0"><input class="cleaner-services-checkbox" name="cleaner_services_residential[]" value="'+ el.id +'" type="checkbox">' + el.name + '<span></span></label>';
+                                htmlstring = htmlstring + '<div class="form-group kt-mb-5 kt-mt-5 d-none" id="service_'+ el.id +'"><label>Do you have relevant equipments?</label><div class="kt-radio-inline"><label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="1" name="has_equipment_residential_'+el.id+'"> Yes <span></span></label><label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="0" name="has_equipment_residential_'+el.id+'"> No <span></span></label></div></div></div></div>';
                             });
                         }
 
@@ -102,8 +102,8 @@
                         htmlstring = htmlstring + '<div class="kt-checkbox-list row">';
                         if(response.services.commercial){
                             $.each(response.services.commercial, function(index, el) {
-                                htmlstring = htmlstring + '<div class="kt-option kt-p10 col-12 d-block"><label class="kt-checkbox kt-checkbox--tick kt-checkbox--brand kt-margin-0"><input class="cleaner-services-checkbox-commercial" name="cleaner_services_commercial[]" value="'+ el.id +'" type="checkbox">' + el.name + '<span></span></label>';
-                                htmlstring = htmlstring + '<div class="form-group kt-mb-5 kt-mt-5 d-none" id="service_commercial_'+ el.id +'"><label>Do you have relevant equipments?</label><div class="kt-radio-inline"><label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="1" name="has_equipment_commercial_'+el.id+'"> Yes <span></span></label><label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="0" name="has_equipment_commercial_'+el.id+'"> No <span></span></label></div></div></div>'
+                                htmlstring = htmlstring + '<div class="col-6"><div class="kt-option kt-p10 col-12 d-block form-group"><label class="kt-checkbox kt-checkbox--tick kt-checkbox--brand kt-margin-0"><input class="cleaner-services-checkbox-commercial" name="cleaner_services_commercial[]" value="'+ el.id +'" type="checkbox">' + el.name + '<span></span></label>';
+                                htmlstring = htmlstring + '<div class="form-group kt-mb-5 kt-mt-5 d-none" id="service_commercial_'+ el.id +'"><label>Do you have relevant equipments?</label><div class="kt-radio-inline"><label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="1" name="has_equipment_commercial_'+el.id+'"> Yes <span></span></label><label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="0" name="has_equipment_commercial_'+el.id+'"> No <span></span></label></div></div></div></div>';
                             });
                         }
                     @endif

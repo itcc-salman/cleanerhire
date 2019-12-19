@@ -16,14 +16,13 @@ class CreateCleanersTable extends Migration
         Schema::create('cleaners', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('user_id')->unsigned();
-            $table->integer('parent_id')->unsigned()->nullable()->default(0)->comment('NULL - agency,0 - cleaner');
+            $table->integer('parent_id')->unsigned()->nullable()->default(0)->comment('NULL - company,0 - cleaner');
             $table->string('first_name');
             $table->string('last_name')->nullable();
             $table->string('phone')->nullable();
             $table->string('mobile')->nullable();
             $table->string('phone_secondary')->nullable();
             $table->string('email')->nullable();
-            $table->string('company_name')->nullable();
             $table->string('website')->nullable();
             $table->string('address_line_1')->nullable();
             $table->string('address_line_2')->nullable();

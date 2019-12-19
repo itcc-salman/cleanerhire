@@ -21,7 +21,7 @@
                                     <label>Are you a @lang('labels.cleaner') or a @lang('labels.company')?</label>
                                     <div class="kt-radio-inline">
                                         <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="cleaner" {{ $data->user->role == 'cleaner' ? 'checked' : '' }} name="role"> @lang('labels.cleaner') <span></span></label>
-                                        <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="agency" {{ $data->user->role == 'agency' ? 'checked' : '' }} name="role"> @lang('labels.company') <span></span></label>
+                                        <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="company" {{ $data->user->role == 'company' ? 'checked' : '' }} name="role"> @lang('labels.company') <span></span></label>
                                     </div>
                                 </div>
                             </div>

@@ -426,7 +426,7 @@
                     $("#radio_tfn").prop("disabled", false);
                     $("#radio_tfn").parent().removeClass('kt-radio--disabled');
                 }
-                else if (this.value == 'agency') {
+                else if (this.value == 'company') {
                     $("#radio_tfn").prop("disabled", true);
                     $("#radio_tfn").parent().addClass('kt-radio--disabled');
                     $("#radio_abn").prop("checked", true);

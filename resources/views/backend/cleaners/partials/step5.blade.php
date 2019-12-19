@@ -76,11 +76,11 @@
         <div class="kt-wizard-v1__review-content">
            <div class="cleaner_output">
                 <div class="cleaner_output_tab">
-                    <label class="two">Are you an individual or an agency?</label>
+                    <label class="two">Are you an individual or an company?</label>
                     @if($cleaner->user->role == 'cleaner')
                         <span>Individual</span>
                     @else
-                        <span>Agency</span>
+                        <span>Company</span>
                     @endif
                 </div>
                 <div class="cleaner_output_tab">

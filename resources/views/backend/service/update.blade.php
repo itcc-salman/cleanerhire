@@ -56,14 +56,14 @@
                         <div class="form-group">
                             <div class="kt-checkbox-list">
                                 <div class="kt-option kt-p10 col-12 d-block">
-                                    <label>@lang('labels.cleSerIndividualOrAgency')</label>
+                                    <label>@lang('labels.cleSerIndividualOrCompany')</label>
                                     <div class="kt-checkbox-inline">
                                         <label class="kt-checkbox kt-checkbox--tick kt-checkbox--brand kt-margin-0">
                                             <input name="individual" value="1" {{ $cleaningService->individual ? 'checked' : '' }} type="checkbox">@lang('labels.cleSerIndividual')<span></span>
                                         </label>
                                         &nbsp;
                                         <label class="kt-checkbox kt-checkbox--tick kt-checkbox--brand kt-margin-0">
-                                            <input name="agency" value="1" {{ $cleaningService->agency ? 'checked' : '' }} type="checkbox">@lang('labels.cleSerAgency')<span></span>
+                                            <input name="company" value="1" {{ $cleaningService->company ? 'checked' : '' }} type="checkbox">@lang('labels.cleSerCompany')<span></span>
                                         </label>
                                     </div>
                                 </div>

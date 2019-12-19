@@ -15,7 +15,7 @@ class CreateResourcesTable extends Migration
     {
         Schema::create('resources', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('document_for')->default('0')->comment('0 - all,1 - cleaner,2 - agency');
+            $table->string('document_for')->default('0')->comment('0 - all,1 - cleaner,2 - company');
             $table->string('name',255);
             $table->text('document_name');
             $table->tinyInteger('status')->default('1')->comment('Active - 1, Deactive - 0');

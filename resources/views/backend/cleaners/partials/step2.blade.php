@@ -3,7 +3,7 @@
         <label>Are you a @lang('labels.cleaner') or a @lang('labels.company')?</label>
         <div class="kt-radio-inline">
             <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="cleaner" {{ isset($cleaner) && $cleaner->user->role == 'cleaner' ? 'checked' : '' }} name="role"> @lang('labels.cleaner') <span></span></label>
-            <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="agency" {{ isset($cleaner) && $cleaner->user->role == 'agency' ? 'checked' : '' }} name="role"> @lang('labels.company') <span></span></label>
+            <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="company" {{ isset($cleaner) && $cleaner->user->role == 'company' ? 'checked' : '' }} name="role"> @lang('labels.company') <span></span></label>
         </div>
     </div>
     <div class="form-group">
@@ -271,7 +271,7 @@
             $("#radio_tfn").parent().removeClass('kt-radio--disabled');
             $("#companyDetailsDiv").addClass('d-none');
         }
-        else if (_val == 'agency') {
+        else if (_val == 'company') {
             $("#radio_tfn").prop("disabled", true);
             $("#radio_tfn").parent().addClass('kt-radio--disabled');
             $("#radio_abn").prop("checked", true).trigger('change');

@@ -20,13 +20,13 @@ return [
 
     'cleSerResidentialOrCommercial'  => 'Is this service relevant to Residential and/or Commercial?',
     'cleSerOnceoffOrRegular' => 'Is this service relevant to Once Off and/or Regular?',
-    'cleSerIndividualOrAgency' => 'Is this service relevant to Cleaner and/or Company?',
+    'cleSerIndividualOrCompany' => 'Is this service relevant to Cleaner and/or Company?',
     'cleSerResidential' => 'Residential',
     'cleSerCommercial' => 'Commercial',
     'cleSerOnceoff' => 'Once Off',
     'cleSerRegular' => 'Regular',
     'cleSerIndividual' => 'Cleaner',
-    'cleSerAgency' => 'Company',
+    'cleSerCompany' => 'Company',
 
     'docName' => 'Document Name',
 
