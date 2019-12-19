@@ -12,18 +12,22 @@
 */
 
 Route::get('/', 'HomeController@index')->name('backend.dashboard');
+
+// Cleaners
 Route::get('cleaners', 'CleanerController@index')->name('backend.cleaners');
 Route::get('cleaner/add', 'CleanerController@add')->name('backend.cleaner.add');
 Route::get('cleaner/edit/{id}', 'CleanerController@edit')->name('backend.cleaner.edit');
 Route::post('cleaner/create', 'CleanerController@postCreate')->name('backend.cleaner.create');
 Route::post('cleaner/update', 'CleanerController@postUpdate')->name('backend.cleaner.update');
 
+// Services
 Route::prefix('services')->group(function () {
     Route::get('/', 'CleaningServiceController@index')->name('backend.services');
     Route::match(['GET', 'POST'], '/create', 'CleaningServiceController@create')->name('backend.sevice.create');
     Route::match(['GET', 'POST'], '/update/{id?}', 'CleaningServiceController@update')->name('backend.sevice.update');
 });
 
+// Resources
 Route::prefix('resources')->group(function () {
     Route::get('/', 'ResourceController@index')->name('backend.resources');
     Route::match(['GET', 'POST'], '/create', 'ResourceController@create')->name('backend.resource.create');
@@ -31,8 +35,11 @@ Route::prefix('resources')->group(function () {
     Route::get('resource/view/{id?}', 'ResourceController@view')->name('backend.resource.view');
 });
 
+// Bookings
+Route::get('bookings', 'BookingController@index')->name('backend.bookings');
 
 Route::prefix('ajax')->group(function () {
+    // Cleaners
     Route::get('cleaners', 'CleanerController@getAllCleaners')->name('backend.ajax.cleaners');
     Route::get('cleaner/get-cleaner-by-id', 'CleanerController@getCleanerById')->name('backend.ajax.cleaner.get_cleaner_by_id');
 
@@ -44,6 +51,9 @@ Route::prefix('ajax')->group(function () {
     // Resources
     Route::get('resources', 'ResourceController@getAllResources')->name('backend.ajax.resources');
     Route::post('resource/delete', 'ResourceController@delete')->name('backend.ajax.resource.delete');
+
+    // Bookings
+    Route::get('bookings', 'BookingController@getAllBookings')->name('backend.ajax.bookings');
 });
 
 Route::post('uploadfile','CleanerController@saveUploadedFile')->name('save_uploaded_file');

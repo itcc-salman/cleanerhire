@@ -16,9 +16,10 @@ class CreateBookingsTable extends Migration
         Schema::create('bookings', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('user_id')->unsigned();
+            $table->integer('customer_id')->unsigned();
             $table->enum('booking_type', ['residential','commercial']);
             $table->string('services');
-            $table->enum('visit_type', ['weekly','forthnight','once'])->default('weekly');
+            $table->enum('visit_type', ['weekly','fortnight','once'])->default('weekly');
             $table->string('duration')->default('1');
             $table->date('booking_date');
             $table->string('booking_time');
@@ -40,6 +41,7 @@ class CreateBookingsTable extends Migration
             $table->index(['deleted_at']);
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
         });
     }
 
