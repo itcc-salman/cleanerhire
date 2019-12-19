@@ -17,6 +17,54 @@
             <input type="text" class="form-control {{ !empty($cleaner->abn) ?: 'd-none' }}" id="abn" name="abn" placeholder="@lang('labels.abn_acn')" value="{{ $cleaner->abn ?? ''}}">
         </div>
     </div>
+
+    <div id="companyDetailsDiv" class="d-none">
+        <div class="form-group">
+            <label>Company Name</label>
+            <input type="text" class="form-control" name="company_name" placeholder="Company Name" value="{{$cleaner->company_name ?? ''}}">
+        </div>
+        <div class="form-group">
+            <label>Director Name</label>
+            <input type="text" class="form-control" name="director_name" placeholder="Director Name" value="{{$cleaner->director_name ?? ''}}">
+        </div>
+        <div class="form-group">
+            <label>Company Address</label>
+            <input type="text" class="form-control" name="company_address" placeholder="Company Address" value="{{$cleaner->company_address ?? ''}}">
+        </div>
+        <div class="form-group">
+            <label>Company Email</label>
+            <input type="text" class="form-control" name="company_email" placeholder="Company Email" value="{{$cleaner->company_email ?? ''}}">
+        </div>
+        <div class="form-group">
+            <label>Company Phone</label>
+            <input type="text" class="form-control" name="company_phone" placeholder="Company Phone" value="{{$cleaner->company_phone ?? ''}}">
+        </div>
+        <div class="form-group">
+            <label>Company Mobile</label>
+            <input type="text" class="form-control" name="company_mobile" placeholder="Company Mobile" value="{{$cleaner->company_mobile ?? ''}}">
+        </div>
+        <div class="form-group">
+            <label>Insurance Details</label>
+            <input type="text" class="form-control" name="insurance_details" placeholder="Insurance Details" value="{{$cleaner->insurance_details ?? ''}}">
+        </div>
+        <div class="form-group">
+            <label>Workcover Details</label>
+            <input type="text" class="form-control" name="workcover_details" placeholder="Workcover Details" value="{{$cleaner->workcover_details ?? ''}}">
+        </div>
+        <div class="form-group">
+            <label>Registration Details</label>
+            <input type="text" class="form-control" name="registration_details" placeholder="Registration Details" value="{{$cleaner->registration_details ?? ''}}">
+        </div>
+        <div class="form-group">
+            <label>Years in Business ?</label>
+            <input type="text" class="form-control" name="business_years" placeholder="Years in Business ?" value="{{$cleaner->business_years ?? ''}}">
+        </div>
+        <div class="form-group">
+            <label>How many Employees ?</label>
+            <input type="text" class="form-control" name="number_of_employees" placeholder="How many Employees ?" value="{{$cleaner->number_of_employees ?? ''}}">
+        </div>
+    </div>
+
     <div class="form-group">
         <label>Are you an Australian / NZ Citizen or a Permanent Resident?</label>
         <div class="kt-radio-inline">
@@ -207,19 +255,27 @@
             }
         });
         @if(isset($cleaner) && $cleaner->language != '')
-        $repeater.setList({!! json_encode($cleaner->language) !!});
+            $repeater.setList({!! json_encode($cleaner->language) !!});
         @endif
+
+        if($('input[type=radio][name=role]').val() != ''){
+            console.log($('input[type=radio][name=role]').val());
+            $('input[type=radio][name=role]').trigger('change');
+        }
     });
 
     $(document).on('change', 'input[type=radio][name=role]', function() {
-        if (this.value == 'cleaner') {
+        let _val = $("input[type=radio][name=role]:checked").val();
+        if (_val == 'cleaner') {
             $("#radio_tfn").prop("disabled", false);
             $("#radio_tfn").parent().removeClass('kt-radio--disabled');
+            $("#companyDetailsDiv").addClass('d-none');
         }
-        else if (this.value == 'agency') {
+        else if (_val == 'agency') {
             $("#radio_tfn").prop("disabled", true);
             $("#radio_tfn").parent().addClass('kt-radio--disabled');
             $("#radio_abn").prop("checked", true).trigger('change');
+            $("#companyDetailsDiv").removeClass('d-none');
         }
     });
 

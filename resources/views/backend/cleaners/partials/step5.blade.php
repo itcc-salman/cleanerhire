@@ -127,9 +127,11 @@
                 </div>
                 <div class="cleaner_output_tab">
                     <label class="two">Which Languages you speak?</label>
+                    @if(isset($cleaner->language))
                     @foreach($cleaner->language as $language)
                     <span>{{$language->lname}}</span>
                     @endforeach
+                    @endif
                 </div>
                 <div class="cleaner_output_tab">
                     <label class="two">Gender?</label>

@@ -34,6 +34,17 @@ class CreateCleanersTable extends Migration
 
             $table->string('tfn')->nullable();
             $table->string('abn')->nullable();
+            $table->string('company_name')->nullable();
+            $table->string('director_name')->nullable();
+            $table->string('company_address')->nullable();
+            $table->string('company_email')->nullable();
+            $table->string('company_phone')->nullable();
+            $table->string('company_mobile')->nullable();
+            $table->string('insurance_details')->nullable();
+            $table->string('workcover_details')->nullable();
+            $table->string('registration_details')->nullable();
+            $table->string('business_years')->nullable();
+            $table->string('number_of_employees')->nullable();
             $table->string('visa_status')->nullable();
             $table->string('visa_status_other')->nullable();
             $table->string('police_check')->nullable();
