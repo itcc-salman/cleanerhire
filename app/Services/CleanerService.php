@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Traits\ActivationTrait;
 use App\Services\CleaningServicesService;
+use App\Services\PropertyService;
 use Auth;
 
 class CleanerService
@@ -171,8 +172,11 @@ class CleanerService
             break;
             case 'services':
                 $services = new CleaningServicesService;
+                $properties = new PropertyService;
+                $data['cleaner'] = $this->getLogedInCleaner();
                 $data['services'] = $services->getLogedInRoleWiseCleaningServices();
                 $data['cleaner_services'] = $services->getLogedInCleanerServicesIds();
+                $data['cleaner_properties'] = $properties->getAllActiveProperty();
                 return $data;
             break;
             case 'availability':
@@ -293,6 +297,15 @@ class CleanerService
                 $cleanerServiceMapping->save();
             }
         }
+
+        $cleaner_properties = $request->get('cleaner_properties', null);
+        // if($cleaner->user->role == 'company' && $cleaner_properties){}
+        if($cleaner_properties){
+            $cleaner->cleaner_properties = implode(',', $cleaner_properties);
+        }else{
+            $cleaner->cleaner_properties = null;
+        }
+        $cleaner->save();
         return true;
     }
 

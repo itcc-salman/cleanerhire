@@ -21,6 +21,10 @@ class PropertyService
 
     public function getAllProperty()
     {
+        return $this->property_model->all();
+    }
+    public function getAllActiveProperty()
+    {
         return $this->property_model->where('status', 1)->get();
     }
 

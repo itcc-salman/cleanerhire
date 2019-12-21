@@ -100,7 +100,7 @@
                         }
 
                         htmlstring = htmlstring + '</div>';
-
+                        htmlstring = htmlstring + '<div id="propertiesDiv"></div>';
                         if(response.services.commercial){
 
                             htmlstring = htmlstring + '<div class="row"><label class="col-xl-3"></label><div class="col-lg-9 col-xl-6"><h5 class="kt-section__title kt-section__title-sm">Commercial :</h5></div></div>';

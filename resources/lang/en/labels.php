@@ -40,5 +40,6 @@ return [
     'tfn' => 'TFN',
     'residential' => 'Residential',
     'commercial' => 'Commercial',
+    'properties' => 'Properties',
 
 ];
