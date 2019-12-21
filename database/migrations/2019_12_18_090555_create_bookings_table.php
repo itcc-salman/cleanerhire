@@ -18,7 +18,7 @@ class CreateBookingsTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->integer('customer_id')->unsigned();
             $table->enum('booking_type', ['residential','commercial']);
-            $table->integer('property_id')->unsigned();
+            $table->integer('property_id')->unsigned()->nullable();
             $table->string('services');
             $table->enum('visit_type', ['weekly','fortnight','once'])->default('weekly');
             $table->string('duration')->default('1');

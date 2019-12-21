@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\BookingStoreRequest;
 use App\Services\CleaningServicesService;
 use App\Services\PropertyService;
 use App\Models\User;
@@ -60,5 +61,10 @@ class BookingController extends Controller
         }
         $data['html'] = $view;
         return response()->json($data);
+    }
+
+    public function addBooking(BookingStoreRequest $request)
+    {
+        dd($request);
     }
 }
