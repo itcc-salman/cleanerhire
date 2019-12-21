@@ -84,6 +84,8 @@ class CreateCleanersTable extends Migration
             $table->text('doc_police_check_comment')->nullable();
 
 
+            $table->string('cleaner_properties')->nullable();
+
             $table->text('comments')->nullable();
             $table->tinyInteger('status')->comment('Active - 1, Deactive - 0');
 

@@ -39,6 +39,14 @@ class PropertyController extends Controller
         $data['properties'] = $propertyServices;
         return response()->json($data);
     }
+    public function getAllActiveProperty(Request $request)
+    {
+        $data = array();
+        $propertyServices = Property::active()->get();
+        $data['code'] = 200;
+        $data['properties'] = $propertyServices;
+        return response()->json($data);
+    }
 
     public function create(PropertyStoreRequest $request)
     {

@@ -237,6 +237,13 @@ class CleanerController extends Controller
                         $csm->has_equipments = $request->get('has_equipment_commercial_'.($service), 0);
                         $csm->save();
                     }
+
+                    $cleaner_properties = $request->get('cleaner_properties', null);
+                    if($cleaner->user->role == 'company' && $cleaner_properties){
+                        $cleaner->cleaner_properties = implode(',', $cleaner_properties);
+                    }else{
+                        $cleaner->cleaner_properties = null;
+                    }
                 }else if($last_step == 4){
                     CleanerTiming::where('cleaner_id', $cleaner->id)->delete();
                     if( $request->has('avail') ) {

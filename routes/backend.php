@@ -57,6 +57,7 @@ Route::prefix('ajax')->group(function () {
 
     // Properties
     Route::get('properties', 'PropertyController@getAllProperty')->name('backend.ajax.properties');
+    Route::get('active-properties', 'PropertyController@getAllActiveProperty')->name('backend.ajax.active.properties');
     Route::post('properties/delete', 'PropertyController@delete')->name('backend.ajax.properties.delete');
 
     // Resources

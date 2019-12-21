@@ -13,6 +13,7 @@
         $.ajax({
             url: url,
             type: 'get',
+            async: false,
             success: function(response){
                 if(response.code == 200){
                     @if(isset($cleaner))
@@ -57,6 +58,8 @@
 
                         htmlstring = htmlstring + '</div>';
 
+                        htmlstring = htmlstring + '<div id="propertiesDiv"></div>';
+
 
                         if(response.services.commercial){
                         htmlstring = htmlstring + '<div class="row"><label class="col-xl-3"></label><div class="col-lg-9 col-xl-6"><h5 class="kt-section__title kt-section__title-sm">Commercial :</h5></div></div>';
@@ -86,10 +89,10 @@
                         }
                     @else
 
-                        var  htmlstring = '<div class="row"></label><div class=""><h5 class="kt-section__title kt-section__title-sm">Residential :</h5></div></div>';
-                        htmlstring = htmlstring + '<div class="kt-checkbox-list row">';
-
                         if(response.services.residential){
+                            var  htmlstring = '<div class="row"><label class="col-xl-3"></label><div class="col-lg-9 col-xl-6"><h5 class="kt-section__title kt-section__title-sm">Residential :</h5></div></div>';
+                            htmlstring = htmlstring + '<div class="kt-checkbox-list row">';
+
                             $.each(response.services.residential, function(index, el) {
                                 htmlstring = htmlstring + '<div class="col-6"><div class="kt-option kt-p10 col-12 d-block form-group"><label class="kt-checkbox kt-checkbox--tick kt-checkbox--brand kt-margin-0"><input class="cleaner-services-checkbox" name="cleaner_services_residential[]" value="'+ el.id +'" type="checkbox">' + el.name + '<span></span></label>';
                                 htmlstring = htmlstring + '<div class="form-group kt-mb-5 kt-mt-5 d-none" id="service_'+ el.id +'"><label>Do you have relevant equipments?</label><div class="kt-radio-inline"><label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="1" name="has_equipment_residential_'+el.id+'"> Yes <span></span></label><label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="0" name="has_equipment_residential_'+el.id+'"> No <span></span></label></div></div></div></div>';
@@ -98,9 +101,10 @@
 
                         htmlstring = htmlstring + '</div>';
 
-                        htmlstring = htmlstring + '</div><div class="row"></label><div class="mt-5"><h5 class="kt-section__title kt-section__title-sm">Commercial :</h5></div></div>';
-                        htmlstring = htmlstring + '<div class="kt-checkbox-list row">';
                         if(response.services.commercial){
+
+                            htmlstring = htmlstring + '<div class="row"><label class="col-xl-3"></label><div class="col-lg-9 col-xl-6"><h5 class="kt-section__title kt-section__title-sm">Commercial :</h5></div></div>';
+                            htmlstring = htmlstring + '<div class="kt-checkbox-list row">';
                             $.each(response.services.commercial, function(index, el) {
                                 htmlstring = htmlstring + '<div class="col-6"><div class="kt-option kt-p10 col-12 d-block form-group"><label class="kt-checkbox kt-checkbox--tick kt-checkbox--brand kt-margin-0"><input class="cleaner-services-checkbox-commercial" name="cleaner_services_commercial[]" value="'+ el.id +'" type="checkbox">' + el.name + '<span></span></label>';
                                 htmlstring = htmlstring + '<div class="form-group kt-mb-5 kt-mt-5 d-none" id="service_commercial_'+ el.id +'"><label>Do you have relevant equipments?</label><div class="kt-radio-inline"><label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="1" name="has_equipment_commercial_'+el.id+'"> Yes <span></span></label><label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="0" name="has_equipment_commercial_'+el.id+'"> No <span></span></label></div></div></div></div>';
@@ -118,8 +122,47 @@
         });
     }
 
+    function getStep3Properties(){
+        var cleaner_properties = [];
+        @if(isset($cleaner) && $cleaner->cleaner_properties != '')
+            cleaner_properties = '{{ $cleaner->cleaner_properties }}';
+            cleaner_properties = cleaner_properties.split(',').map( Number );
+        @endif
+
+        $.ajax({
+            url: '{{ route('backend.ajax.active.properties') }}',
+            type: 'get',
+            success: function(response){
+                if(response.code == 200){
+
+                    var  htmlstring = '<div class="row"><label class="col-xl-3"></label><div class="col-lg-9 col-xl-6"><h5 class="kt-section__title kt-section__title-sm">Properties :</h5></div></div>';
+                    htmlstring = htmlstring + '<div class="kt-checkbox-list row">';
+
+                    if(response.properties){
+                        $.each(response.properties, function(index, el) {
+
+                            if($.inArray(el.id, cleaner_properties) !== -1){
+                                var checked = 'checked';
+                            }else{
+                                var checked = '';
+                            }
+
+                            htmlstring = htmlstring + '<div class="col-6"><div class="kt-option kt-p10 col-12 d-block form-group"><label class="kt-checkbox kt-checkbox--tick kt-checkbox--brand kt-margin-0"><input class="" '+ checked +' name="cleaner_properties[]" value="'+ el.id +'" type="checkbox">' + el.name + '<span></span></label></div></div>';
+                        });
+                    }
+                    htmlstring = htmlstring +  '</div></div>';
+                }else{
+                    var htmlstring = 'No Properties Available Found';
+                }
+
+                $("#propertiesDiv").html(htmlstring);
+            },
+        });
+    }
+
     $(document).ready(function() {
         getStep3Services();
+        getStep3Properties();
     });
 
     $(document).on('change', '.cleaner-services-checkbox', function(event) {
