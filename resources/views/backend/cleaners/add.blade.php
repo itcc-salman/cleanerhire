@@ -286,6 +286,7 @@
                                 }
                                 if($("#last_step").val() == 2){
                                     getStep3Services();
+                                    getStep3Properties();
                                 }
                                 KTApp.unprogress(btn);
                                 KTApp.unblock(formEl);
