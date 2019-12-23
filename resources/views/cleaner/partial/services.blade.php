@@ -56,6 +56,39 @@
                                 @endforeach
                             </div>
 
+
+                            @if( !is_null($data['cleaner_properties']) )
+                            <div class="row">
+                                <label class="col-xl-3"></label>
+                                <div class="col-lg-9 col-xl-6">
+                                    <h3 class="kt-section__title kt-section__title-sm">@lang('labels.properties'):</h3>
+                                </div>
+                            </div>
+
+                            @php
+                            $cleaner_properties = [];
+                            if($data['cleaner']->cleaner_properties != ''){
+                                $cleaner_properties = explode(',', $data['cleaner']->cleaner_properties);
+                            }
+                            @endphp
+
+                            <div class="row">
+                                @foreach( $data['cleaner_properties'] as $property )
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <div class="kt-checkbox-list">
+                                            <div class="kt-option kt-p10 col-12 d-block">
+                                                <label class="kt-checkbox kt-checkbox--tick kt-checkbox--brand kt-margin-0">
+                                                    <input class="" name="cleaner_properties[]" value="{{ $property->id }}" @if(in_array($property->id, $cleaner_properties) ) checked @endif type="checkbox">{{ $property->name }}<span></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @endforeach
+                            </div>
+                            @endif
+
                             @if( !is_null($data['services']['commercial']) )
                             <div class="row">
                                 <label class="col-xl-3"></label>
