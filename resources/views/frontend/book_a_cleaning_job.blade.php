@@ -17,7 +17,7 @@
         <div class="innerpage_section">
             <div class="row">
                 <div class="col-md-8 col-sm-8 col-xs-8">
-                    <form id="booking">
+                    <form id="booking" method="POST">
                         <div class="book_form_left">
                             <div class="book_form_tab">
                                 <label>What type of job is this?</label>
@@ -175,11 +175,17 @@
                 showOtherMonths: true,
                 closeOnSelect:false,
                 minDate: 0,
-                autoclose : false
-            }).on('changeDate',function(e){
-                // console.log(e.date);
-                //on change of date on start datepicker, set end datepicker's date
-                // $('.date-picker-end').datepicker('setStartDate',e.date)
+                autoclose : false,
+                onSelect: function() {
+                    var date = new Date($(this).val());
+                    if (date) {
+                        var formattedDate = date.getFullYear() + "-" +
+                                            (date.getMonth() + 1) + "-" +
+                                            date.getDate();
+                        // console.log(formattedDate);
+                        $('#booking_date').val(formattedDate);
+                    }
+                }
             });
         }
         $(document).ready(function() {
@@ -236,6 +242,36 @@
             $(document).on('focus', '#other_pet', function(e) {
                 // uncheck the radio button
                 $("[name='has_pet']").prop("checked", false);
+            });
+
+            // submit the form
+            $(document).on('click' , '#booking_submit_btn', function(e) {
+                e.preventDefault();
+                let _data = $('#booking').serialize();
+                $.ajax({
+                    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                    url: '{{ route('front.add_booking') }}',
+                    type: "POST",
+                    dataType: "JSON",
+                    data: _data,
+                    success: function(res) {
+                        if( res.status == true ) {
+                            location.href = res.redirect;
+                        } else {
+                            alert(res.msg);
+                        }
+                    },
+                    error: function(err) {
+                        if( err.status == 422 ) {
+                            // display errors on each form field
+                            $.each(err.responseJSON.errors, function (i, error) {
+                                // showToast(error[0], 0);
+                                alert(error[0]);
+                                return;
+                            });
+                        }
+                    }
+                }); // end ajax
             });
         });
     </script>

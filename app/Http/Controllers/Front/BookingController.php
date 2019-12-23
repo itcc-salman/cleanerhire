@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\BookingStoreRequest;
 use App\Services\CleaningServicesService;
 use App\Services\PropertyService;
+use App\Services\BookingService;
 use App\Models\User;
 
 class BookingController extends Controller
@@ -16,9 +17,10 @@ class BookingController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(BookingService $bookingServices)
     {
         // $this->middleware('auth');
+        $this->bookingServices = $bookingServices;
     }
 
     /**
@@ -65,6 +67,24 @@ class BookingController extends Controller
 
     public function addBooking(BookingStoreRequest $request)
     {
-        dd($request);
+        $bookingServices = $this->bookingServices->registerBooking($request);
+        if( $bookingServices ) {
+            setflashmsg(trans('msg.bookingCreated'),'1');
+            return response()->json(['status' => true, 'redirect' => route('front.booking_confirm') ]);
+        }
+        setflashmsg(trans('msg.bookingFailed'),'0');
+        return response()->json(['status' => false,
+            'msg' => trans('msg.clsSerError'),
+            'redirect' => route('front.booking_failed') ]);
+    }
+
+    public function bookingConfirmed()
+    {
+        dd('confirmed');
+    }
+
+    public function bookingFailed()
+    {
+        dd('failed');
     }
 }

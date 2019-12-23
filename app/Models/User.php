@@ -81,7 +81,12 @@ class User extends Authenticatable
 
     public function cleaner()
     {
-        $this->hasOne('App\Models\Cleaner', 'user_id');
+        return $this->hasOne('App\Models\Cleaner', 'user_id');
+    }
+
+    public function customer()
+    {
+        return $this->hasOne('App\Models\Customer', 'user_id');
     }
 
     public static function boot() {

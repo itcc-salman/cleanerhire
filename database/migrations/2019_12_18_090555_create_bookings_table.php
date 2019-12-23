@@ -26,6 +26,7 @@ class CreateBookingsTable extends Migration
             $table->string('booking_time');
             $table->enum('gender_pref', ['male','female','none'])->default('none');
             $table->string('has_pet');
+            $table->string('has_pet_optional')->nullable();
 
             $table->string('address_line_1')->nullable();
             $table->string('address_line_2')->nullable();

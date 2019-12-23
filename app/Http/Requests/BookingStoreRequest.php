@@ -24,7 +24,12 @@ class BookingStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'service_type'  => 'required',
+            'duration'      => 'required',
+            'booking_date'  => 'required',
+            'booking_time'  => 'required',
+            'gender_pref'   => 'required',
+            'has_pet'       => 'required',
         ];
     }
 
@@ -36,7 +41,9 @@ class BookingStoreRequest extends FormRequest
     public function messages()
     {
         return [
-           //
+            'service_type.required'     => 'Please select job type first',
+            'gender_pref.required'      => 'Please select gender preference for butler',
+            'has_pet.required'          => 'Please select pet option',
         ];
     }
 }

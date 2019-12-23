@@ -28,6 +28,8 @@ return [
     'propertyCreated'  => 'Property Created Successfully',
     'propertyUpdated' => 'Property Updated Successfully',
     'propertyDeleted' => 'Property Deleted Successfully',
+    'bookingCreated' => 'Booking Done Successfully',
+    'bookingFailed' => 'Booking Failed, Please try again',
 
     /*
      * Cleaner

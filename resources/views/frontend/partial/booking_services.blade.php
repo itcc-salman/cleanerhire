@@ -120,6 +120,7 @@
 <div class="book_form_tab">
     <label>What date should we visit?</label>
     <div id="datepicker" class="ll-skin-melon"></div>
+    <input type="hidden" name="booking_date" id="booking_date">
 </div>
 <div class="book_form_tab">
     <label>And what time?</label>
@@ -127,7 +128,7 @@
         @foreach(getTime() as $time)
             <div>
                 <label>
-                    <input type="radio" name="duration" value="{{ $time['val'] }}">
+                    <input type="radio" name="booking_time" value="{{ $time['val'] }}">
                     <span>{{ $time['show'] }}</span>
                     <strong>{{ $time['am_pm'] }}</strong>
                 </label>
@@ -184,6 +185,6 @@
 </div>
 
 <div class="bac_footer_step">
-    <a href="javascript:void(0);">Next</a>
+    <a href="javascript:void(0);" id="booking_submit_btn">Next</a>
 </div>
 <script src="https://maps.googleapis.com/maps/api/js?key={{ config('settings.googlePlacesAPIKey') }}&libraries=places&callback=initAutocomplete"></script>
