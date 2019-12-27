@@ -33,6 +33,19 @@
                                                         if( $value['cleaning_service_id'] == $service->id && $value['service_for'] == 'residential' ) { return true; }
                                                         return false;
                                                     }) ? '' : 'd-none' }}" id="service_{{ $service->id }}">
+                                                    @if( \Auth::user()->role == 'cleaner' )
+                                                    <div class="form-group">
+                                                        <label>Rate per hour</label>
+                                                        <input type="text" name="rate_per_hour_{{ $service->id }}" class="form-control" value="{{ $service->rate_per_hour }}" readonly>
+                                                    </div>
+                                                    @else
+                                                    <div class="form-group">
+                                                        <label>Rate per hour</label>
+                                                        <input type="text" name="rate_per_hour_{{ $service->id }}" class="form-control" value="{{ $data['cleaner_services']->contains(function($value, $key) use ($service) {
+                                                        if( $value['cleaning_service_id'] == $service->id && $value['service_for'] == 'residential' ) { echo $value['rate_per_hour']; }
+                                                    }) }}">
+                                                    </div>
+                                                    @endif
                                                     <label>Do you have relevant equipments?</label>
                                                     <div class="kt-radio-inline">
                                                         <label class="kt-radio kt-radio--tick kt-radio--brand">
@@ -57,7 +70,7 @@
                             </div>
 
 
-                            @if( !is_null($data['cleaner_properties']) )
+                            @if( !is_null($data['cleaner_properties']) && \Auth::user()->role == 'company' )
                             <div class="row">
                                 <label class="col-xl-3"></label>
                                 <div class="col-lg-9 col-xl-6">
@@ -113,6 +126,12 @@
                                                         if( $value['cleaning_service_id'] == $service->id && $value['service_for'] == 'commercial' ) { return true; }
                                                         return false;
                                                     }) ? '' : 'd-none' }}" id="service_commercial_{{ $service->id }}">
+                                                    <div class="form-group">
+                                                        <label>Rate per hour</label>
+                                                        <input type="text" name="rate_per_hour_commercial_{{ $service->id }}" class="form-control" value="{{ $data['cleaner_services']->contains(function($value, $key) use ($service) {
+                                                        if( $value['cleaning_service_id'] == $service->id && $value['service_for'] == 'commercial' ) { echo $value['rate_per_hour']; }
+                                                    }) }}">
+                                                    </div>
                                                     <label>Do you have relevant equipments?</label>
                                                     <div class="kt-radio-inline">
                                                         <label class="kt-radio kt-radio--tick kt-radio--brand">

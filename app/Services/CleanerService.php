@@ -297,6 +297,13 @@ class CleanerService
                 $cleanerServiceMapping->cleaner_id = $cleaner->id;
                 $cleanerServiceMapping->cleaning_service_id = $value;
                 $cleanerServiceMapping->service_for = 'residential';
+                if( Auth::user()->role == 'cleaner' ) {
+                    $services = new CleaningServicesService;
+                    $service = $services->getCleaningServiceById($value);
+                    $cleanerServiceMapping->rate_per_hour = $service->rate_per_hour;
+                } else {
+                    $cleanerServiceMapping->rate_per_hour = $request->get("rate_per_hour_".$value, 0);
+                }
                 $cleanerServiceMapping->has_equipments = $request->get("has_equipment_residential_".$value, 0);
                 $cleanerServiceMapping->save();
             }
@@ -307,6 +314,7 @@ class CleanerService
                 $cleanerServiceMapping->cleaner_id = $cleaner->id;
                 $cleanerServiceMapping->cleaning_service_id = $value;
                 $cleanerServiceMapping->service_for = 'commercial';
+                $cleanerServiceMapping->rate_per_hour = $request->get("rate_per_hour_commercial_".$value, 0);
                 $cleanerServiceMapping->has_equipments = $request->get("has_equipment_commercial_".$value, 0);
                 $cleanerServiceMapping->save();
             }

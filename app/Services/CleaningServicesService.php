@@ -62,7 +62,7 @@ class CleaningServicesService
         $cleanerService = new CleanerServiceMapping;
         $cleaner = Cleaner::where('user_id', Auth::Id())->first();
         // return $cleaner;
-        return $cleanerService->where('cleaner_id', $cleaner->id )->get(['cleaning_service_id','service_for','has_equipments']);
+        return $cleanerService->where('cleaner_id', $cleaner->id )->get(['cleaning_service_id','service_for','rate_per_hour','has_equipments']);
     }
 
     public function registerCleaningServiceBackend($data)
