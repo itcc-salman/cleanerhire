@@ -100,10 +100,10 @@
                                     {{ ucfirst($cleaner->user->role) }}
                                 </span>
                             </div>
-                            <div class="kt-widget__action">
+                            {{-- <div class="kt-widget__action">
                                 <button type="button" class="btn btn-info btn-sm">chat</button>&nbsp;
                                 <button type="button" class="btn btn-success btn-sm">follow</button>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                     <div class="kt-widget__body">

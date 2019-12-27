@@ -93,8 +93,6 @@
                 <div class="kt-portlet__foot">
                     <div class="kt-form__actions">
                         <div class="row">
-                            <div class="col-lg-3 col-xl-3">
-                            </div>
                             <div class="col-lg-9 col-xl-9">
                                 <button type="submit" id="update_availability" class="btn btn-success">Update</button>&nbsp;
                                 {{-- <button type="reset" class="btn btn-secondary">Cancel</button> --}}
