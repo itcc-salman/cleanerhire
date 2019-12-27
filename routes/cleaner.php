@@ -16,6 +16,8 @@ Route::get('/calendar', 'HomeController@calendar')->name('cleaner.calendar');
 Route::get('/profile', 'HomeController@profile')->name('cleaner.profile');
 Route::get('/resources', 'ResourceController@index')->name('cleaner.resources');
 Route::get('resource/view/{id?}', 'ResourceController@view')->name('cleaner.resource.view');
+Route::get('/bookings', 'BookingController@index')->name('cleaner.bookings');
+Route::get('booking/view/{id?}', 'BookingController@view')->name('cleaner.booking.view');
 
 Route::prefix('ajax')->group(function () {
     Route::post('profile/partial', 'HomeController@profile')->name('cleaner.ajax.profile.partial');
@@ -26,6 +28,7 @@ Route::prefix('ajax')->group(function () {
     Route::post('profile/update_availability', 'HomeController@update_availability')->name('cleaner.ajax.profile.update_availability');
 
     Route::get('resources/list', 'ResourceController@getAllResources')->name('cleaner.ajax.resources');
+    Route::get('booking/list', 'BookingController@getAllBookings')->name('cleaner.ajax.bookings');
 
 });
 
