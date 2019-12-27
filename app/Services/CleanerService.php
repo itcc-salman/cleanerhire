@@ -225,6 +225,20 @@ class CleanerService
             $user->role = $request->get('role', $user->role);
             $user->save();
 
+            if($user->role == 'company'){
+                $cleaner->company_name = $request->get('company_name', $cleaner->company_name);
+                $cleaner->director_name = $request->get('director_name', $cleaner->director_name);
+                $cleaner->company_address = $request->get('company_address', $cleaner->company_address);
+                $cleaner->company_email = $request->get('company_email', $cleaner->company_email);
+                $cleaner->company_phone = $request->get('company_phone', $cleaner->company_phone);
+                $cleaner->company_mobile = $request->get('company_mobile', $cleaner->company_mobile);
+                $cleaner->insurance_details = $request->get('insurance_details', $cleaner->insurance_details);
+                $cleaner->workcover_details = $request->get('workcover_details', $cleaner->workcover_details);
+                $cleaner->registration_details = $request->get('registration_details', $cleaner->registration_details);
+                $cleaner->business_years = $request->get('business_years', $cleaner->business_years);
+                $cleaner->number_of_employees = $request->get('number_of_employees', $cleaner->number_of_employees);
+            }
+
             if($request->has('tfn_or_abn')) {
                 if($request->tfn_or_abn == 'abn') {
                     $cleaner->abn = $request->get('abn', $cleaner->abn);

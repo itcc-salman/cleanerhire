@@ -422,14 +422,17 @@
 
             // Account Information Start
             $('body').on('change', 'input[type=radio][name=role]', function() {
-                if (this.value == 'cleaner') {
+                let _val = $("input[type=radio][name=role]:checked").val();
+                if (_val == 'cleaner') {
                     $("#radio_tfn").prop("disabled", false);
                     $("#radio_tfn").parent().removeClass('kt-radio--disabled');
+                    $("#companyDetailsDiv").addClass('d-none');
                 }
-                else if (this.value == 'company') {
+                else if (_val == 'company') {
                     $("#radio_tfn").prop("disabled", true);
                     $("#radio_tfn").parent().addClass('kt-radio--disabled');
                     $("#radio_abn").prop("checked", true);
+                    $("#companyDetailsDiv").removeClass('d-none');
                 }
             });
 
@@ -527,6 +530,10 @@
                                     rightArrow: '<i class="la la-angle-right"></i>'
                                 }
                             });
+
+                            if($('input[type=radio][name=role]').val() != ''){
+                                $('input[type=radio][name=role]').trigger('change');
+                            }
                         }
                     }
                 }); // end ajax

@@ -37,6 +37,9 @@ class HomeController extends Controller
 
     public function bookACleaningJob()
     {
+        if(!\Auth::check()) {
+            return redirect()->route('login');
+        }
         return view('frontend.book_a_cleaning_job');
     }
 

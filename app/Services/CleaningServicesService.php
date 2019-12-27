@@ -69,6 +69,7 @@ class CleaningServicesService
     {
         $cleaningService = $this->cleaningService_model;
         $cleaningService->name          = $data->get('name');
+        $cleaningService->rate_per_hour = $data->get('rate_per_hour');
         $cleaningService->residential   = $data->get('residential', 0);
         $cleaningService->commercial    = $data->get('commercial', 0);
         $cleaningService->once_off      = $data->get('once_off', 0);
@@ -87,6 +88,7 @@ class CleaningServicesService
     {
         $cleaningService = $this->cleaningService_model->find($id);
         $cleaningService->name          = $data->get('name');
+        $cleaningService->rate_per_hour = $data->get('rate_per_hour');
         $cleaningService->residential   = $data->get('residential', 0);
         $cleaningService->commercial    = $data->get('commercial', 0);
         $cleaningService->once_off      = $data->get('once_off', 0);

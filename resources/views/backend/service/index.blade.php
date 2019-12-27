@@ -167,6 +167,12 @@ var KTDatatableRemoteAjaxDemo = function() {
                     field: 'name',
                     title: 'Name',
                 }, {
+                    field: 'rate_per_hour',
+                    title: 'Rate Per Hour',
+                    template: function(row) {
+                        return '$ ' + row.rate_per_hour;
+                    },
+                }, {
                     field: 'individual',
                     title: 'Cleaner',
                     template: function(row) {

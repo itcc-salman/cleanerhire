@@ -16,6 +16,7 @@ class CreateCleaningServicesTable extends Migration
         Schema::create('cleaning_services', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
+            $table->string('rate_per_hour')->default(0);
             $table->boolean('residential')->default(0);
             $table->boolean('commercial')->default(0);
             $table->boolean('once_off')->default(0);

@@ -79,6 +79,14 @@
                         </div>
 
                         <div class="form-group validated">
+                            <label>Rate Per Hour</label>
+                            <input type="text" name="rate_per_hour" class="form-control @error('rate_per_hour') {{ 'is-invalid' }} @enderror" placeholder="$">
+                            @error('rate_per_hour')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group validated">
                             <label>Status</label>
                             <div class="kt-radio-inline">
                                 <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="1" name="status"> Active <span></span></label>
