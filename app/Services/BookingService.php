@@ -25,6 +25,14 @@ class BookingService
         return $this->booking_model->where('status', 1)->get();
     }
 
+    public function getAllBookingOfCleaner($cleanerId = NULL)
+    {
+        if( is_null($cleanerId) ) {
+            return $this->booking_model->where('user_id', Auth::Id())->where('status', 1)->get();
+        }
+        return $this->booking_model->where('user_id', $cleanerId)->where('status', 1)->get();
+    }
+
     public function registerBooking($data)
     {
         if( Auth::user()->isCustomer() ) {

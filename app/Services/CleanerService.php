@@ -137,7 +137,9 @@ class CleanerService
     {
         $cleanerServices = CleanerServiceMapping::where('cleaner_id', $cleaner->id)->get();
         if( $cleanerServices->isEmpty() ) { return false; }
-        if( empty($cleaner->cleaner_properties) ) { return false; }
+        if( $cleaner->user->role == 'company' ) {
+            if( empty($cleaner->cleaner_properties) ) { return false; }
+        }
         return true;
     }
 
