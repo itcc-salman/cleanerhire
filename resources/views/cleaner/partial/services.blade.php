@@ -41,9 +41,14 @@
                                                     @else
                                                     <div class="form-group">
                                                         <label>Rate per hour</label>
-                                                        <input type="text" name="rate_per_hour_{{ $service->id }}" class="form-control" value="{{ $data['cleaner_services']->contains(function($value, $key) use ($service) {
-                                                        if( $value['cleaning_service_id'] == $service->id && $value['service_for'] == 'residential' ) { echo $value['rate_per_hour']; }
-                                                    }) }}">
+                                                        <?php $rate = $service->rate_per_hour;
+                                                        foreach( $data['cleaner_services'] as $cleaner_service ) {
+                                                            if( $cleaner_service['cleaning_service_id'] == $service->id && $cleaner_service['service_for'] == 'residential' && $cleaner_service['rate_per_hour'] > 0 ) {
+                                                                $rate = $cleaner_service['rate_per_hour'];
+                                                            }
+                                                        }
+                                                        ?>
+                                                        <input type="text" name="rate_per_hour_{{ $service->id }}" class="form-control" value="{{ $rate }}">
                                                     </div>
                                                     @endif
                                                     <label>Do you have relevant equipments?</label>
@@ -128,9 +133,14 @@
                                                     }) ? '' : 'd-none' }}" id="service_commercial_{{ $service->id }}">
                                                     <div class="form-group">
                                                         <label>Rate per hour</label>
-                                                        <input type="text" name="rate_per_hour_commercial_{{ $service->id }}" class="form-control" value="{{ $data['cleaner_services']->contains(function($value, $key) use ($service) {
-                                                        if( $value['cleaning_service_id'] == $service->id && $value['service_for'] == 'commercial' ) { echo $value['rate_per_hour']; }
-                                                    }) }}">
+                                                        <?php $rate = $service->rate_per_hour;
+                                                        foreach( $data['cleaner_services'] as $cleaner_service ) {
+                                                            if( $cleaner_service['cleaning_service_id'] == $service->id && $cleaner_service['service_for'] == 'commercial' && $cleaner_service['rate_per_hour'] > 0 ) {
+                                                                $rate = $cleaner_service['rate_per_hour'];
+                                                            }
+                                                        }
+                                                        ?>
+                                                        <input type="text" name="rate_per_hour_commercial_{{ $service->id }}" class="form-control" value="{{ $rate }}">
                                                     </div>
                                                     <label>Do you have relevant equipments?</label>
                                                     <div class="kt-radio-inline">

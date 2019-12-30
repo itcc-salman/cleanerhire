@@ -265,7 +265,11 @@
                                 $("#stepFiveWizardDiv").html(response.html);
                             }
                             if($("#last_step").val() == 2){
-                                getStep3Services();
+                                if($("input[type=radio][name=role]:checked").val() == 'company'){
+                                    getStep3Properties();
+                                }else{
+                                    $("#propertiesDiv").html('');
+                                }
                             }
                             KTApp.unprogress(btn);
                             KTApp.unblock(formEl);
