@@ -32,15 +32,15 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-xl-3 col-lg-3 col-form-label">First Name</label>
+                                <label for="first_name" class="col-xl-3 col-lg-3 col-form-label">First Name</label>
                                 <div class="col-lg-9 col-xl-6">
-                                    <input class="form-control" name="first_name" type="text" value="{{ $data->first_name }}">
+                                    <input class="form-control" id="first_name" name="first_name" type="text" value="{{ $data->first_name }}">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-xl-3 col-lg-3 col-form-label">Last Name</label>
+                                <label for="last_name" class="col-xl-3 col-lg-3 col-form-label">Last Name</label>
                                 <div class="col-lg-9 col-xl-6">
-                                    <input class="form-control" name="last_name" type="text" value="{{ $data->last_name }}">
+                                    <input class="form-control" id="last_name" name="last_name" type="text" value="{{ $data->last_name }}">
                                 </div>
                             </div>
                             {{-- <div class="form-group row">
@@ -56,20 +56,20 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-xl-3 col-lg-3 col-form-label">Contact Phone</label>
+                                <label for="phone" class="col-xl-3 col-lg-3 col-form-label">Contact Phone</label>
                                 <div class="col-lg-9 col-xl-6">
                                     <div class="input-group">
                                         <div class="input-group-prepend"><span class="input-group-text"><i class="la la-phone"></i></span></div>
-                                        <input type="text" name="phone" class="form-control" value="{{ $data->getOriginal('phone') }}" placeholder="Phone" aria-describedby="basic-addon1">
+                                        <input type="text" id="phone" name="phone" class="form-control" value="{{ $data->getOriginal('phone') }}" placeholder="Phone" aria-describedby="basic-addon1">
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-xl-3 col-lg-3 col-form-label">Contact Mobile</label>
+                                <label for="mobile" class="col-xl-3 col-lg-3 col-form-label">Contact Mobile</label>
                                 <div class="col-lg-9 col-xl-6">
                                     <div class="input-group">
                                         <div class="input-group-prepend"><span class="input-group-text"><i class="la la-mobile"></i></span></div>
-                                        <input type="text" name="mobile" class="form-control" value="{{ $data->getOriginal('mobile') }}" placeholder="Mobile" aria-describedby="basic-addon1">
+                                        <input type="text" id="mobile" name="mobile" class="form-control" value="{{ $data->getOriginal('mobile') }}" placeholder="Mobile" aria-describedby="basic-addon1">
                                     </div>
                                 </div>
                             </div>
@@ -90,33 +90,33 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-xl-3 col-lg-3 col-form-label">Address Line 1</label>
+                                <label for="address_line_1" class="col-xl-3 col-lg-3 col-form-label">Address Line 1</label>
                                 <div class="col-lg-9 col-xl-6">
-                                    <input class="form-control" name="address_line_1" type="text" value="{{ $data->address_line_1 }}">
+                                    <input class="form-control" id="address_line_1" name="address_line_1" type="text" value="{{ $data->address_line_1 }}">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-xl-3 col-lg-3 col-form-label">Address Line 2</label>
+                                <label for="address_line_2" class="col-xl-3 col-lg-3 col-form-label">Address Line 2</label>
                                 <div class="col-lg-9 col-xl-6">
-                                    <input class="form-control" name="address_line_2" type="text" value="{{ $data->address_line_2 }}">
+                                    <input class="form-control" id="address_line_2" name="address_line_2" type="text" value="{{ $data->address_line_2 }}">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-xl-3 col-lg-3 col-form-label">Postcode</label>
+                                <label for="postcode" class="col-xl-3 col-lg-3 col-form-label">Postcode</label>
                                 <div class="col-lg-9 col-xl-6">
-                                    <input class="form-control" name="postcode" type="text" value="{{ $data->postcode }}">
+                                    <input class="form-control" id="postcode" name="postcode" type="text" value="{{ $data->postcode }}">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-xl-3 col-lg-3 col-form-label">City</label>
+                                <label for="city" class="col-xl-3 col-lg-3 col-form-label">City</label>
                                 <div class="col-lg-9 col-xl-6">
-                                    <input class="form-control" name="city" type="text" value="{{ $data->getOriginal('city') }}">
+                                    <input class="form-control" id="city" name="city" type="text" value="{{ $data->getOriginal('city') }}">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-xl-3 col-lg-3 col-form-label">State</label>
+                                <label for="state" class="col-xl-3 col-lg-3 col-form-label">State</label>
                                 <div class="col-lg-9 col-xl-6">
-                                    <input class="form-control" name="state" type="text" value="{{ $data->state }}">
+                                    <input class="form-control" id="state" name="state" type="text" value="{{ $data->state }}">
                                 </div>
                             </div>
                         </div>
