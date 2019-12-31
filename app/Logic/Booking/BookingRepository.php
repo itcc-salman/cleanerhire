@@ -23,7 +23,7 @@ class BookingRepository
         // if commercial then check for properties with services
 
         // Send booking email notification
-        self::sendNewBookingEmail($user, $booking);
+        // self::sendNewBookingEmail($user, $booking);
     }
 
     /**

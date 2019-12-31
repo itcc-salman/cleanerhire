@@ -31,7 +31,7 @@ class BookingController extends Controller
     public function getAllBookings(Request $request)
     {
         $data = array();
-        $bookings = Booking::all();
+        $bookings = Booking::with('user')->get();
 
         $data['code'] = 200;
         $data['bookings'] = $bookings;
