@@ -46,6 +46,9 @@ Route::prefix('resources')->group(function () {
 // Bookings
 Route::get('bookings', 'BookingController@index')->name('backend.bookings');
 
+// Customers
+Route::get('customers', 'CustomerController@index')->name('backend.customers');
+
 Route::prefix('ajax')->group(function () {
     // Cleaners
     Route::get('cleaners', 'CleanerController@getAllCleaners')->name('backend.ajax.cleaners');
@@ -67,6 +70,9 @@ Route::prefix('ajax')->group(function () {
 
     // Bookings
     Route::get('bookings', 'BookingController@getAllBookings')->name('backend.ajax.bookings');
+
+    // Customers
+    Route::get('customers', 'CustomerController@getAllCustomers')->name('backend.ajax.customers');
 });
 
 Route::post('uploadfile','CleanerController@saveUploadedFile')->name('save_uploaded_file');
