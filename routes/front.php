@@ -21,9 +21,9 @@ Route::match(['GET', 'POST'], '/registercleaner', [
     'as'   =>  'front.register_cleaner'
 ]);
 
-Route::post('/get_services', 'BookingController@getServices')->name('front.get_services');
-Route::post('/add_booking', 'BookingController@addBooking')->name('front.add_booking');
-Route::post('/booking_confirm', 'BookingController@bookingConfirmed')->name('front.booking_confirm');
-Route::post('/booking_failed', 'BookingController@bookingFailed')->name('front.booking_failed');
+Route::post('/get-services', 'BookingController@getServices')->name('front.get_services');
+Route::post('/add-booking', 'BookingController@addBooking')->name('front.add_booking');
+Route::get('/booking-confirm', 'BookingController@bookingConfirmed')->name('front.booking_confirm');
+Route::get('/booking-failed', 'BookingController@bookingFailed')->name('front.booking_failed');
 
 Route::post('/registercustomer', 'CustomerController@registerCustomer')->name('front.register_customer');

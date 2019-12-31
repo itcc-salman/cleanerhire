@@ -431,18 +431,21 @@
                 else if (_val == 'company') {
                     $("#radio_tfn").prop("disabled", true);
                     $("#radio_tfn").parent().addClass('kt-radio--disabled');
-                    $("#radio_abn").prop("checked", true);
+                    if( $("#radio_tfn").is(':checked') ) {
+                        $("#radio_abn").prop("checked", true).trigger('change');
+                    }
                     $("#companyDetailsDiv").removeClass('d-none');
                 }
             });
 
             $('body').on('change', 'input[type=radio][name=tfn_or_abn]', function() {
-                if (this.value == 'abn') {
+                let _val = $("input[type=radio][name=tfn_or_abn]:checked").val();
+                if (_val == 'abn') {
                     $("#abn").removeClass('d-none');
                     $("#tfn").val('');
                     $("#tfn").addClass('d-none');
                 }
-                else if (this.value == 'tfn') {
+                else if (_val == 'tfn') {
                     $("#tfn").removeClass('d-none');
                     $("#abn").val('');
                     $("#abn").addClass('d-none');

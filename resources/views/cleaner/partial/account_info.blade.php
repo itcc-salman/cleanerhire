@@ -28,52 +28,50 @@
 
                             <div id="companyDetailsDiv" class="d-none">
                                 <div class="form-group">
-                                    <label>Company Name</label>
-                                    <input type="text" class="form-control" name="company_name" placeholder="Company Name" value="{{ $data->company_name ?? '' }}">
+                                    <label for="company_name">Company Name</label>
+                                    <input type="text" class="form-control" id="company_name" name="company_name" placeholder="Company Name" value="{{ $data->company_name ?? '' }}">
                                 </div>
                                 <div class="form-group">
-                                    <label>Director Name</label>
-                                    <input type="text" class="form-control" name="director_name" placeholder="Director Name" value="{{ $data->director_name ?? '' }}">
+                                    <label for="director_name">Director Name</label>
+                                    <input type="text" class="form-control" id="director_name" name="director_name" placeholder="Director Name" value="{{ $data->director_name ?? '' }}">
                                 </div>
                                 <div class="form-group">
-                                    <label>Company Address</label>
-                                    <input type="text" class="form-control" name="company_address" placeholder="Company Address" value="{{ $data->company_address ?? '' }}">
+                                    <label for="company_address">Company Address</label>
+                                    <input type="text" class="form-control" id="company_address" name="company_address" placeholder="Company Address" value="{{ $data->company_address ?? '' }}">
                                 </div>
                                 <div class="form-group">
-                                    <label>Company Email</label>
-                                    <input type="text" class="form-control" name="company_email" placeholder="Company Email" value="{{ $data->company_email ?? '' }}">
+                                    <label for="company_email">Company Email</label>
+                                    <input type="text" class="form-control" id="company_email" name="company_email" placeholder="Company Email" value="{{ $data->company_email ?? '' }}">
                                 </div>
                                 <div class="form-group">
-                                    <label>Company Phone</label>
-                                    <input type="text" class="form-control" name="company_phone" placeholder="Company Phone" value="{{ $data->company_phone ?? '' }}">
+                                    <label for="company_phone">Company Phone</label>
+                                    <input type="text" class="form-control" id="company_phone" name="company_phone" placeholder="Company Phone" value="{{ $data->company_phone ?? '' }}">
                                 </div>
                                 <div class="form-group">
-                                    <label>Company Mobile</label>
-                                    <input type="text" class="form-control" name="company_mobile" placeholder="Company Mobile" value="{{ $data->company_mobile ?? '' }}">
+                                    <label for="company_mobile">Company Mobile</label>
+                                    <input type="text" class="form-control" id="company_mobile" name="company_mobile" placeholder="Company Mobile" value="{{ $data->company_mobile ?? '' }}">
                                 </div>
                                 <div class="form-group">
-                                    <label>Insurance Details</label>
-                                    <input type="text" class="form-control" name="insurance_details" placeholder="Insurance Details" value="{{ $data->insurance_details ?? '' }}">
+                                    <label for="insurance_details">Insurance Details</label>
+                                    <input type="text" class="form-control" id="insurance_details" name="insurance_details" placeholder="Insurance Details" value="{{ $data->insurance_details ?? '' }}">
                                 </div>
                                 <div class="form-group">
-                                    <label>Workcover Details</label>
-                                    <input type="text" class="form-control" name="workcover_details" placeholder="Workcover Details" value="{{ $data->workcover_details ?? '' }}">
+                                    <label for="workcover_details">Workcover Details</label>
+                                    <input type="text" class="form-control" id="workcover_details" name="workcover_details" placeholder="Workcover Details" value="{{ $data->workcover_details ?? '' }}">
                                 </div>
                                 <div class="form-group">
-                                    <label>Registration Details</label>
-                                    <input type="text" class="form-control" name="registration_details" placeholder="Registration Details" value="{{ $data->registration_details ?? '' }}">
+                                    <label for="registration_details">Registration Details</label>
+                                    <input type="text" class="form-control" id="registration_details" name="registration_details" placeholder="Registration Details" value="{{ $data->registration_details ?? '' }}">
                                 </div>
                                 <div class="form-group">
-                                    <label>Years in Business ?</label>
-                                    <input type="text" class="form-control" name="business_years" placeholder="Years in Business ?" value="{{ $data->business_years ?? '' }}">
+                                    <label for="business_years">Years in Business ?</label>
+                                    <input type="text" class="form-control" id="business_years" name="business_years" placeholder="Years in Business ?" value="{{ $data->business_years ?? '' }}">
                                 </div>
                                 <div class="form-group">
-                                    <label>How many Employees ?</label>
-                                    <input type="text" class="form-control" name="number_of_employees" placeholder="How many Employees ?" value="{{ $data->number_of_employees ?? '' }}">
+                                    <label for="number_of_employees">How many Employees ?</label>
+                                    <input type="text" class="form-control" id="number_of_employees" name="number_of_employees" placeholder="How many Employees ?" value="{{ $data->number_of_employees ?? '' }}">
                                 </div>
                             </div>
-
-
 
                             <div class="row">
                                 <div class="form-group wd-100">
@@ -186,7 +184,7 @@
                             </div>
                             <div class="row">
                                 <div class="form-group">
-                                    <label>Your Date of Birth?</label>
+                                    <label for="kt_datepicker_1">Your Date of Birth?</label>
                                     <input type="text" class="form-control" id="kt_datepicker_1" value="{{ $data->date_of_birth }}" name="date_of_birth" readonly placeholder="Select date" />
                                 </div>
                             </div>
