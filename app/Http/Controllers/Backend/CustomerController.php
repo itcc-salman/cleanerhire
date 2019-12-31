@@ -31,7 +31,7 @@ class CustomerController extends Controller
     public function getAllCustomers(Request $request)
     {
         $data = array();
-        $customers = Customer::all();
+        $customers = Customer::with('user')->get();
 
         $data['code'] = 200;
         $data['customers'] = $customers;

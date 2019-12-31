@@ -100,7 +100,7 @@
 <script type="text/javascript">
 // Class definition
 
-var KTDatatableRemoteAjaxDemo = function() {
+var KTDatatableRemoteAjax = function() {
     // Private functions
 
     // basic demo
@@ -158,13 +158,13 @@ var KTDatatableRemoteAjaxDemo = function() {
                     selector: false,
                     textAlign: 'center',
                 }, {
-                    field: 'first_name',
+                    field: 'user.first_name',
                     title: 'First Name',
                 }, {
-                    field: 'last_name',
+                    field: 'user.last_name',
                     title: 'Last Name',
                 }, {
-                    field: 'email',
+                    field: 'user.email',
                     title: 'Email',
                 }, {
                     field: 'status',
@@ -172,8 +172,8 @@ var KTDatatableRemoteAjaxDemo = function() {
                     // callback function support for column rendering
                     template: function(row) {
                         var status = {
-                            0: {'title': 'Delivered', 'class': ' kt-badge--danger'},
-                            1: {'title': 'Pending', 'class': 'kt-badge--brand'}
+                            0: {'title': 'Deactive', 'class': ' kt-badge--danger'},
+                            1: {'title': 'Active', 'class': 'kt-badge--brand'}
                         };
                         return '<span class="kt-badge ' + status[row.status].class + ' kt-badge--inline kt-badge--pill">' + status[row.status].title + '</span>';
                     },
@@ -187,7 +187,7 @@ var KTDatatableRemoteAjaxDemo = function() {
                     template: function(row) {
                         console.log(row.id);
                         return '\
-                        <a href="/admin/booking/edit/'+ row.id +'" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="Edit details">\
+                        <a href="/admin/customer/edit/'+ row.id +'" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="Edit details">\
                             <i class="flaticon2-edit"></i>\
                         </a>\
                         <a href="javascript:;" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="Delete">\
@@ -220,7 +220,7 @@ var KTDatatableRemoteAjaxDemo = function() {
 }();
 
 jQuery(document).ready(function() {
-    KTDatatableRemoteAjaxDemo.init();
+    KTDatatableRemoteAjax.init();
 });
 </script>
 
