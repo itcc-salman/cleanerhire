@@ -56,8 +56,10 @@ class BookingController extends Controller
         if( $request->has('property_type') ){
             $cleaningServices = new CleaningServicesService;
             // check for properties in cleaner
+            $prop = $request->get('property_type');
+            $cleaners = $cleaningServices->getCleanersForProperties($prop);
             // get commercial services
-            $services = $cleaningServices->getCleaningServicesByType('commercial');
+            $services = $cleaningServices->getCleaningServicesByType('commercial', $cleaners);
             $view = view('frontend.partial.booking_services', compact('services'))->render();
             $data['where'] = 'services_list';
         }

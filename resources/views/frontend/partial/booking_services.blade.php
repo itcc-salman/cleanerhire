@@ -1,5 +1,5 @@
 <div class="book_form_tab">
-    @if( !is_null($services) )
+    @if( !$services->isEmpty() )
     <label>Which type of cleaning service do you need?</label>
     <div class="book_service">
         <ul>
@@ -17,6 +17,7 @@
     <h2>No Services Found.</h2>
     @endif
 </div>
+@if( !$services->isEmpty() )
 <div class="book_form_tab">
     <label>Where should we visit?</label>
     <input id="autocomplete" class="form-control" placeholder="Search Address" onFocus="geolocate()" type="text"/>
@@ -188,3 +189,4 @@
     <a href="javascript:void(0);" id="booking_submit_btn">Next</a>
 </div>
 <script src="https://maps.googleapis.com/maps/api/js?key={{ config('settings.googlePlacesAPIKey') }}&libraries=places&callback=initAutocomplete"></script>
+@endif
