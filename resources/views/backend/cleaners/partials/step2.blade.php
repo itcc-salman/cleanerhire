@@ -67,8 +67,31 @@
     <div class="form-group">
         <label>Service Area with kms?</label>
         <input id="autocomplete" class="form-control form-group col-md-12" placeholder="Search Suburb" type="text"/>
-        <div id="kt_repeater_service_areas"></div>
-        <input type="hidden" name="service_area_counter" id="service_area_counter" value="0">
+        @if(!isset($cleaner) || isset($cleaner) && $cleaner->serviceAreas->count() == 0)
+            <div id="kt_repeater_service_areas"></div>
+            <input type="hidden" name="service_area_counter" id="service_area_counter" value="0">
+        @else
+            <div id="kt_repeater_service_areas">
+                @foreach($cleaner->serviceAreas as $key => $csm)
+                    <div class="form-group" id="service_area_{{$key}}">
+                        <div class="row kt-margin-b-10">
+                            <div class="col-md-4">
+                                <input type="text" class="form-control form-control-danger" name="suburb_name_{{$key}}" value="{{$csm->suburb_name}}">
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control form-control-danger" name="area_in_km_{{$key}}" placeholder="Area Radius(kms)" value="{{$csm->area_in_km}}" required>
+                                <input type="hidden" name="latitude_{{$key}}" value="{{$csm->latitude}}">
+                                <input type="hidden" name="longitude_{{$key}}" value="{{$csm->longitude}}">
+                            </div>
+                            <div class="col-md-4">
+                                <a href="javascript:;" onclick="removeServiceArea({{$key}});" class="btn btn-danger btn-icon"><i class="la la-remove"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+            <input type="hidden" name="service_area_counter" id="service_area_counter" value="{{$cleaner->serviceAreas->count()}}">
+        @endif
     </div>
     <div class="form-group">
         <label>Are you an Australian / NZ Citizen or a Permanent Resident?</label>
