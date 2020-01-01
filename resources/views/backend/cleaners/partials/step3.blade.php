@@ -33,7 +33,6 @@
 
                         if(response.services.residential){
                             $.each(response.services.residential, function(index, el) {
-                                console.log(el.id);
                                 if($.inArray(el.id, cleanerServicesResidentialIds) !== -1){
                                     var tmp =  cleanerServices.filter(cleanerService => cleanerService.cleaning_service_id == el.id && cleanerService.service_for == 'residential').map(cleanerService => cleanerService.rate_per_hour);
                                     var checked = 'checked';
