@@ -68,6 +68,7 @@
         <label>Service Area with kms?</label>
         <input id="autocomplete" class="form-control form-group col-md-12" placeholder="Search Suburb" type="text"/>
         <div id="kt_repeater_service_areas"></div>
+        <input type="hidden" name="service_area_counter" id="service_area_counter" value="0">
     </div>
     <div class="form-group">
         <label>Are you an Australian / NZ Citizen or a Permanent Resident?</label>
@@ -226,10 +227,12 @@
         if(place.address_components[0].types[0] == 'locality'){
             var latitude = place.geometry.location.lat();
             var longitude = place.geometry.location.lng();
-            var divInnerHtml = '<div class="form-group" id="service_area_'+counter+'"><div class="row kt-margin-b-10"><div class="col-md-4"><input type="text" class="form-control form-control-danger" name="suburb_name_'+counter+'" value="'+place.address_components[0].long_name+'"></div><div class="col-md-4"><input type="text" class="form-control form-control-danger" name="area_in_km_'+counter+'" placeholder="Area Radius(kms)"><input type="hidden" name="latitude_'+counter+'" value="'+latitude+'"><input type="hidden" name="longitude_'+counter+'" value="'+longitude+'"></div><div class="col-md-4"><a href="javascript:;" onclick="removeServiceArea('+counter+');" class="btn btn-danger btn-icon"><i class="la la-remove"></i></a></div></div></div>'
+            var divInnerHtml = '<div class="form-group" id="service_area_'+counter+'"><div class="row kt-margin-b-10"><div class="col-md-4"><input type="text" class="form-control form-control-danger" name="suburb_name_'+counter+'" value="'+place.address_components[0].long_name+'"></div><div class="col-md-4"><input type="text" class="form-control form-control-danger" name="area_in_km_'+counter+'" placeholder="Area Radius(kms)" required><input type="hidden" name="latitude_'+counter+'" value="'+latitude+'"><input type="hidden" name="longitude_'+counter+'" value="'+longitude+'"></div><div class="col-md-4"><a href="javascript:;" onclick="removeServiceArea('+counter+');" class="btn btn-danger btn-icon"><i class="la la-remove"></i></a></div></div></div>'
             $("#kt_repeater_service_areas").append(divInnerHtml);
-            counter++;
             $("#autocomplete").val('');
+            $("#service_area_counter").val(counter);
+            counter++;
+
         }
     }
 

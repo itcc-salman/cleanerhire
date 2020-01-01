@@ -6,12 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Models\Cleaner;
 use App\Models\CleanerServiceMapping;
 use App\Models\CleanerTiming;
+use App\Models\ServiceArea;
 use App\Models\User;
+use App\Services\CommonService;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-use App\Services\CommonService;
 
 class CleanerController extends Controller
 {
@@ -215,6 +216,23 @@ class CleanerController extends Controller
                     $cleaner->doc_utility_bill =  $request->get('doc_utility_bill', $cleaner->doc_utility_bill);
                     $cleaner->doc_certifications =  $request->get('doc_certifications', $cleaner->doc_certifications);
                     $cleaner->doc_police_check =  $request->get('doc_police_check', $cleaner->doc_police_check);
+
+
+                    if($request->has('service_area_counter') && $request->get('service_area_counter') != 0 && $request->get('service_area_counter') > 0 ){
+                        $counter = $request->get('service_area_counter');
+                        for ($i=1; $i <= $counter; $i++) {
+                            if($request->has('suburb_name_'.$counter) && $request->has('area_in_km_'.$counter) && $request->has('latitude_'.$counter) && $request->has('longitude_'.$counter)){
+                                $csa = new ServiceArea();
+                                $csa->cleaner_id = $cleaner->id;
+                                $csa->suburb_name = $request->get('suburb_name_'.$counter);
+                                $csa->area_in_km = $request->get('area_in_km_'.$counter);
+                                $csa->latitude = $request->get('latitude_'.$counter);
+                                $csa->longitude = $request->get('longitude_'.$counter);
+                                $csa->save();
+                            }
+
+                        }
+                    }
 
                 }else if($last_step == 3){
                     $cleaner->cleanerServices()->delete();
