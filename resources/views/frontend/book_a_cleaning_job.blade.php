@@ -106,7 +106,7 @@
 
           // Avoid paying for data that you don't need by restricting the set of
           // place fields that are returned to just the address components.
-          autocomplete.setFields(['address_component']);
+          autocomplete.setFields(['address_component','geometry']);
 
           // When the user selects an address from the drop-down, populate the
           // address fields in the form.
@@ -116,6 +116,8 @@
         function fillInAddress() {
           // Get the place details from the autocomplete object.
           var place = autocomplete.getPlace();
+          var lat = place.geometry.location.lat();
+          var lng = place.geometry.location.lng();
 
           for (var component in componentForm) {
             document.getElementById(component).value = '';
@@ -131,6 +133,8 @@
               document.getElementById(addressType).value = val;
             }
           }
+          $("#latitude").val(lat);
+          $("#longitude").val(lng);
         }
 
         // Bias the autocomplete object to the user's geographical location,

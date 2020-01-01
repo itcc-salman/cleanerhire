@@ -20,6 +20,8 @@
 <div class="book_form_tab">
     <label>Where should we visit?</label>
     <input id="autocomplete" class="form-control" placeholder="Search Address" onFocus="geolocate()" type="text"/>
+    <input type="hidden" name="latitude" id="latitude" value="">
+    <input type="hidden" name="longitude" id="longitude" value="">
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
