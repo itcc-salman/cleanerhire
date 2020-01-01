@@ -26,6 +26,7 @@ Route::prefix('ajax')->group(function () {
     Route::post('profile/visa_documents','HomeController@visa_documents')->name('cleaner.ajax.profile.visa_documents');
     Route::post('profile/update_services', 'HomeController@update_services')->name('cleaner.ajax.profile.update_services');
     Route::post('profile/update_availability', 'HomeController@update_availability')->name('cleaner.ajax.profile.update_availability');
+    Route::post('profile/update_service_area', 'HomeController@update_service_area')->name('cleaner.ajax.profile.update_service_area');
 
     Route::get('resources/list', 'ResourceController@getAllResources')->name('cleaner.ajax.resources');
     Route::get('booking/list', 'BookingController@getAllBookings')->name('cleaner.ajax.bookings');

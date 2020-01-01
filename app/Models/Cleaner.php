@@ -127,7 +127,7 @@ class Cleaner extends Model
 
     public function serviceAreas()
     {
-        return $this->hasOne('App\Models\ServiceArea', 'cleaner_id');
+        return $this->hasMany('App\Models\ServiceArea', 'cleaner_id');
     }
 
 }

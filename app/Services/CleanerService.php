@@ -393,6 +393,28 @@ class CleanerService
         return true;
     }
 
+    public function updateCleanerServiceAreas($request)
+    {
+        $cleaner = $this->cleaner_model->where('user_id', Auth::id())->first();
+        ServiceArea::where('cleaner_id', $cleaner->id)->delete();
+        if($request->has('service_area_counter') && $request->get('service_area_counter') != 0 && $request->get('service_area_counter') > 0 ){
+            $counter = $request->get('service_area_counter');
+            for ($i=1; $i <= $counter; $i++) {
+                if($request->has('suburb_name_'.$i) && $request->has('area_in_km_'.$i) && $request->has('latitude_'.$i) && $request->has('longitude_'.$i)){
+                    $csa = new ServiceArea();
+                    $csa->cleaner_id = $cleaner->id;
+                    $csa->suburb_name = $request->get('suburb_name_'.$i);
+                    $csa->area_in_km = $request->get('area_in_km_'.$i);
+                    $csa->latitude = $request->get('latitude_'.$i);
+                    $csa->longitude = $request->get('longitude_'.$i);
+                    $csa->save();
+                }
+
+            }
+        }
+        return true;
+    }
+
     public function updateCleanerDocuments($data)
     {
         $cleaner = $this->cleaner_model->where('user_id', Auth::id())->first();

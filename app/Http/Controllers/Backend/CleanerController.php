@@ -217,17 +217,17 @@ class CleanerController extends Controller
                     $cleaner->doc_certifications =  $request->get('doc_certifications', $cleaner->doc_certifications);
                     $cleaner->doc_police_check =  $request->get('doc_police_check', $cleaner->doc_police_check);
 
-
+                    ServiceArea::where('cleaner_id', $cleaner->id)->delete();
                     if($request->has('service_area_counter') && $request->get('service_area_counter') != 0 && $request->get('service_area_counter') > 0 ){
                         $counter = $request->get('service_area_counter');
                         for ($i=1; $i <= $counter; $i++) {
-                            if($request->has('suburb_name_'.$counter) && $request->has('area_in_km_'.$counter) && $request->has('latitude_'.$counter) && $request->has('longitude_'.$counter)){
+                            if($request->has('suburb_name_'.$i) && $request->has('area_in_km_'.$i) && $request->has('latitude_'.$i) && $request->has('longitude_'.$i)){
                                 $csa = new ServiceArea();
                                 $csa->cleaner_id = $cleaner->id;
-                                $csa->suburb_name = $request->get('suburb_name_'.$counter);
-                                $csa->area_in_km = $request->get('area_in_km_'.$counter);
-                                $csa->latitude = $request->get('latitude_'.$counter);
-                                $csa->longitude = $request->get('longitude_'.$counter);
+                                $csa->suburb_name = $request->get('suburb_name_'.$i);
+                                $csa->area_in_km = $request->get('area_in_km_'.$i);
+                                $csa->latitude = $request->get('latitude_'.$i);
+                                $csa->longitude = $request->get('longitude_'.$i);
                                 $csa->save();
                             }
 

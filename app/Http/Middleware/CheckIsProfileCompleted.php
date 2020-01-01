@@ -31,6 +31,7 @@ class CheckIsProfileCompleted
             'cleaner.ajax.profile.visa_documents',
             'cleaner.ajax.profile.update_services',
             'cleaner.ajax.profile.update_availability',
+            'cleaner.ajax.profile.update_service_area',
             'logout',
         ];
 

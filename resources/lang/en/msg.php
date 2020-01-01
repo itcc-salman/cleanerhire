@@ -40,5 +40,6 @@ return [
     'clsAccInfoUpdated' => 'Cleaner Account Information Updated Successfully',
     'clsAccServicesUpdated' => 'Cleaner Services Updated Successfully',
     'clsAccAvailUpdated' => 'Cleaner Availability Updated Successfully',
+    'clsAccSerAreaUpdated' => 'Service Area Updated Successfully',
     'completeProfile' => 'Please Complete Your Profile First',
 ];

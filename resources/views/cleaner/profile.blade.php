@@ -515,12 +515,38 @@
                 }
             });
 
+            $(document).on('click', '#add_area', function(e) {
+                e.preventDefault();
+                const service_areas = $(this).attr('service_areas');
+                $('#service_area_div').append(`<div class="form-group row" id="row_`+service_areas+`">
+                                            <div class="col-lg-4">
+                                                <input type="text" class="form-control" name="service_area_`+service_areas+`" id="service_area_`+service_areas+`" placeholder="Suburb">
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <input type="text" class="form-control" name="radius_in_km_`+service_areas+`" id="radius_in_km_`+service_areas+`" placeholder="Radius in KM">
+                                                <input type="hidden" name="latitude_`+service_areas+`" id="latitude_`+service_areas+`" value="">
+                                                <input type="hidden" name="longitude_`+service_areas+`" id="longitude_`+service_areas+`" value="">
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <a href="javascript:;" class="btn btn-danger btn-icon remove_area" row_count="`+service_areas+`"><i class="la la-remove"></i></a>
+                                            </div>
+                                        </div>`);
+                const _count = parseInt(service_areas) + 1;
+                $('#add_area').attr('service_areas', _count );
+            });
+
+            $(document).on('click', '.remove_area', function(e) {
+                e.preventDefault();
+                const _row_count = $(this).attr('row_count');
+                $('#row_'+_row_count).remove();
+            });
+
             $(document).on('click', '.change_tab', function(e) {
                 e.preventDefault();
                 let _this = $(this);
                 let _partial_view_name = _this.attr('partial_view');
-                $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
                 $.ajax({
+                    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
                     url: '{{ route('cleaner.ajax.profile.partial') }}',
                     type: "POST",
                     dataType: "JSON",
@@ -572,8 +598,8 @@
                 e.preventDefault();
                 var btn = $('#update_personal_info');
                 KTApp.progress(btn);
-                $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
                 $.ajax({
+                    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
                     url: '{{ route('cleaner.ajax.profile.personal_info') }}',
                     type: "POST",
                     data: $(this).serialize(),
@@ -598,8 +624,8 @@
                 e.preventDefault();
                 var btn = $('#update_account_info');
                 KTApp.progress(btn);
-                $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
                 $.ajax({
+                    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
                     url: '{{ route('cleaner.ajax.profile.account_info') }}',
                     type: "POST",
                     data: $(this).serialize(),
@@ -624,8 +650,8 @@
                 e.preventDefault();
                 var btn = $('#update_services');
                 KTApp.progress(btn);
-                $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
                 $.ajax({
+                    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
                     url: '{{ route('cleaner.ajax.profile.update_services') }}',
                     type: "POST",
                     data: $(this).serialize(),
@@ -650,8 +676,8 @@
                 e.preventDefault();
                 var btn = $('#update_availability');
                 KTApp.progress(btn);
-                $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
                 $.ajax({
+                    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
                     url: '{{ route('cleaner.ajax.profile.update_availability') }}',
                     type: "POST",
                     data: $(this).serialize(),
@@ -671,6 +697,34 @@
                     }
                 }); // end ajax
             });
+
+            $(document).on('submit', '#service_area', function(e) {
+                e.preventDefault();
+                var btn = $('#update_service_area');
+                KTApp.progress(btn);
+                $.ajax({
+                    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                    url: '{{ route('cleaner.ajax.profile.update_service_area') }}',
+                    type: "POST",
+                    data: $(this).serialize(),
+                    success: function(res) {
+                        KTApp.unprogress(btn);
+                        showToast(res.msg, res.status);
+                    },
+                    error: function(err) {
+                        KTApp.unprogress(btn);
+                        if( err.status == 422 ) {
+                            // display errors on each form field
+                            $.each(err.responseJSON.errors, function (i, error) {
+                                showToast(error[0], 0);
+                                return;
+                            });
+                        }
+                    }
+                }); // end ajax
+            });
+
+
         });
     </script>
 @endpush

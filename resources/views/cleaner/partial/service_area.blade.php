@@ -12,40 +12,19 @@
                         <div class="kt-section__body">
                             <div class="row">
                                 <div class="form-group wd-100">
-                                    <label>Which Languages you speak?</label>
-                                    <div id="kt_repeater_3">
-                                        <div class="form-group">
-                                            <div data-repeater-list="language" class="">
-                                                <div data-repeater-item class="row kt-margin-b-10">
-                                                    <div class="col-lg-4">
-                                                        <input type="text" class="form-control form-control-danger" name="lname" placeholder="English">
-                                                    </div>
-                                                    <div class="col-lg-4">
-                                                        <input type="text" class="form-control form-control-danger" name="lfluency" placeholder="Fluency">
-                                                    </div>
-                                                    <div class="col-lg-4">
-                                                        <a href="javascript:;" data-repeater-delete="" class="btn btn-danger btn-icon"><i class="la la-remove"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <div data-repeater-create="" class="btn btn btn-primary">
-                                                    <span>
-                                                        <i class="la la-plus"></i>
-                                                        <span>Add</span>
-                                                    </span>
-                                                </div>
-                                            </div>
+                                    <label>Add Service areas with radius in kilometer</label>
+                                    <div class="form-group row">
+                                        <div class="col-lg-8">
+                                            <input type="text" name="suburb" id="suburb" class="form-control" placeholder="Search suburb">
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group">
-                                    <label for="kt_datepicker_1">Your Date of Birth?</label>
-                                    <input type="text" class="form-control" id="kt_datepicker_1" value="" name="date_of_birth" readonly placeholder="Select date" />
+                                    <div id="kt_repeater_service_areas">
+                                        @if( !$data->isEmpty() )
+                                        <div class="form-group" id="service_area_'+counter+'"><div class="row kt-margin-b-10"><div class="col-md-4"><input type="text" class="form-control form-control-danger" name="suburb_name_'+counter+'" value="'+place.address_components[0].long_name+'"></div><div class="col-md-4"><input type="text" class="form-control form-control-danger" name="area_in_km_'+counter+'" placeholder="Area Radius(kms)" required><input type="hidden" name="latitude_'+counter+'" value="'+latitude+'"><input type="hidden" name="longitude_'+counter+'" value="'+longitude+'"></div><div class="col-md-4"><a href="javascript:;" onclick="removeServiceArea('+counter+');" class="btn btn-danger btn-icon"><i class="la la-remove"></i></a></div></div></div>
+                                        @endif
+                                    </div>
+                                    <input type="hidden" name="service_area_counter" id="service_area_counter" value="0">
+
                                 </div>
                             </div>
 
@@ -56,7 +35,7 @@
                     <div class="kt-form__actions">
                         <div class="row">
                             <div class="col-lg-9 col-xl-9">
-                                <button type="submit" class="btn btn-success">Update</button>&nbsp;
+                                <button type="submit" id="update_service_area" class="btn btn-success">Update</button>&nbsp;
                                 {{-- <button type="reset" class="btn btn-secondary">Cancel</button> --}}
                             </div>
                         </div>
@@ -66,3 +45,43 @@
         </div>
     </div>
 </div>
+
+<script>
+    var placeSearch, autocomplete;
+    var componentForm = {
+        locality: 'long_name'
+    };
+    var counter = 1;
+
+    function initAutocomplete() {
+        var options = {
+            types: ['(cities)'],
+            componentRestrictions: {country: ['au', 'nz']}
+        };
+        autocomplete = new google.maps.places.Autocomplete(
+        document.getElementById('suburb'), options);
+        autocomplete.setFields(['address_component','geometry']);
+        autocomplete.addListener('place_changed', fillInAddress);
+    }
+
+    function fillInAddress() {
+        var place = autocomplete.getPlace();
+        console.log(place);
+        if(place.address_components[0].types[0] == 'locality'){
+            var latitude = place.geometry.location.lat();
+            var longitude = place.geometry.location.lng();
+            var divInnerHtml = '<div class="form-group" id="service_area_'+counter+'"><div class="row kt-margin-b-10"><div class="col-md-4"><input type="text" class="form-control form-control-danger" name="suburb_name_'+counter+'" value="'+place.address_components[0].long_name+'"></div><div class="col-md-4"><input type="text" class="form-control form-control-danger" name="area_in_km_'+counter+'" placeholder="Area Radius(kms)" required><input type="hidden" name="latitude_'+counter+'" value="'+latitude+'"><input type="hidden" name="longitude_'+counter+'" value="'+longitude+'"></div><div class="col-md-4"><a href="javascript:;" onclick="removeServiceArea('+counter+');" class="btn btn-danger btn-icon"><i class="la la-remove"></i></a></div></div></div>'
+            $("#kt_repeater_service_areas").append(divInnerHtml);
+            $("#service_area_counter").val(counter);
+            counter++;
+            $("#suburb").val('');
+        }
+    }
+
+    function removeServiceArea(id){
+        $('#service_area_' + id).remove();
+    }
+
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key={{ config('settings.googlePlacesAPIKey') }}&libraries=places&callback=initAutocomplete"></script>
+

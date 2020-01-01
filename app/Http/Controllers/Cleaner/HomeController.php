@@ -108,6 +108,18 @@ class HomeController extends Controller
         return response()->json($data);
     }
 
+    public function update_service_area(Request $request)
+    {
+        $cleaner = $this->cleanerService->updateCleanerServiceAreas($request);
+        $data['code'] = 200;
+        if( $cleaner ) {
+            $data = [ 'status' => true, 'msg' => trans('msg.clsAccSerAreaUpdated') ];
+        } else {
+            $data = [ 'status' => false, 'msg' => trans('msg.clsNotFound') ];
+        }
+        return response()->json($data);
+    }
+
     public function calendar()
     {
         return view('cleaner.calendar');
