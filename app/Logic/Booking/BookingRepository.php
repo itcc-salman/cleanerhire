@@ -19,6 +19,8 @@ class BookingRepository
     public function sendBookingEmail(Booking $booking)
     {
         // check booking email
+        // check booking type
+        // if commercial then check for properties with services
 
         // Send booking email notification
         // self::sendNewBookingEmail($user, $booking);

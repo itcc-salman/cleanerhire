@@ -24,13 +24,24 @@ class CleaningServicesService
         return $this->cleaningService_model->find($id);
     }
 
-    public function getCleaningServicesByType($type)
+    public function getCleaningServicesByType($type, $properties = NULL)
     {
         if( $type == 'residential' ) {
             return $this->cleaningService_model->where('residential', 1)->where('status', 1)->get();
         } else {
+            if( $properties ) {
+                $cleanerService = new CleanerServiceMapping;
+                $cleaning_services = $cleanerService->whereIn('cleaner_id', $properties)->distinct()->pluck('cleaning_service_id');
+                return $this->cleaningService_model->whereIn('id', $cleaning_services)->where('commercial', 1)->where('status', 1)->get();
+            }
             return $this->cleaningService_model->where('commercial', 1)->where('status', 1)->get();
         }
+    }
+
+    public function getCleanersForProperties($id)
+    {
+        // get cleaner ids who has this property id in them
+        return $this->cleaner_model->whereRaw('FIND_IN_SET('.$id.', cleaner_properties)')->pluck('id');
     }
 
     public function getLogedInRoleWiseCleaningServices()
