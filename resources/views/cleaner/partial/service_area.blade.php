@@ -19,11 +19,29 @@
                                         </div>
                                     </div>
                                     <div id="kt_repeater_service_areas">
+                                        @php $counter = 1 @endphp
                                         @if( !$data->isEmpty() )
-                                        <div class="form-group" id="service_area_'+counter+'"><div class="row kt-margin-b-10"><div class="col-md-4"><input type="text" class="form-control form-control-danger" name="suburb_name_'+counter+'" value="'+place.address_components[0].long_name+'"></div><div class="col-md-4"><input type="text" class="form-control form-control-danger" name="area_in_km_'+counter+'" placeholder="Area Radius(kms)" required><input type="hidden" name="latitude_'+counter+'" value="'+latitude+'"><input type="hidden" name="longitude_'+counter+'" value="'+longitude+'"></div><div class="col-md-4"><a href="javascript:;" onclick="removeServiceArea('+counter+');" class="btn btn-danger btn-icon"><i class="la la-remove"></i></a></div></div></div>
+                                            @foreach( $data as $d )
+                                            <div class="form-group" id="service_area_{{ $counter }}">
+                                                <div class="row kt-margin-b-10">
+                                                    <div class="col-md-4">
+                                                        <input type="text" class="form-control form-control-danger" name="suburb_name_{{ $counter }}" value="{{ $d->suburb_name }}">
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <input type="text" class="form-control form-control-danger" name="area_in_km_{{ $counter }}" value="{{ $d->area_in_km }}" placeholder="Area Radius(kms)" required>
+                                                        <input type="hidden" name="latitude_{{ $counter }}" value="{{ $d->latitude }}">
+                                                        <input type="hidden" name="longitude_{{ $counter }}" value="{{ $d->longitude }}">
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <a href="javascript:;" onclick="removeServiceArea('{{ $counter }}');" class="btn btn-danger btn-icon"><i class="la la-remove"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @php $counter++ @endphp
+                                            @endforeach
                                         @endif
                                     </div>
-                                    <input type="hidden" name="service_area_counter" id="service_area_counter" value="0">
+                                    <input type="hidden" name="service_area_counter" id="service_area_counter" value="{{ $counter }}">
 
                                 </div>
                             </div>
@@ -51,7 +69,7 @@
     var componentForm = {
         locality: 'long_name'
     };
-    var counter = 1;
+    var counter = {{ $counter }};
 
     function initAutocomplete() {
         var options = {
