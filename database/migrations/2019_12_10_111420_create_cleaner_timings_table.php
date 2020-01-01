@@ -15,7 +15,7 @@ class CreateCleanerTimingsTable extends Migration
     {
         Schema::create('cleaner_timings', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('cleaner_id')->unsigned();
+            $table->unsignedBigInteger('cleaner_id')->unsigned();
             $table->string('day');
             $table->string('start_hours');
             $table->string('end_hours')->nullable();

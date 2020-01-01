@@ -15,7 +15,7 @@ class CreateServiceAreasTable extends Migration
     {
         Schema::create('service_areas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('cleaner_id')->unsigned();
+            $table->unsignedBigInteger('cleaner_id')->unsigned();
             $table->string('suburb_name');
             $table->string('area_in_km')->default(0);
             $table->string('latitude')->nullable();

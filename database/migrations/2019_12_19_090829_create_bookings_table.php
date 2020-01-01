@@ -15,10 +15,10 @@ class CreateBookingsTable extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('user_id')->unsigned();
-            $table->integer('customer_id')->unsigned();
+            $table->unsignedBigInteger('user_id')->unsigned();
+            $table->unsignedBigInteger('customer_id')->unsigned();
             $table->enum('booking_type', ['residential','commercial']);
-            $table->integer('property_id')->unsigned()->nullable();
+            $table->unsignedBigInteger('property_id')->unsigned()->nullable();
             $table->string('services');
             $table->enum('visit_type', ['weekly','fortnight','once'])->default('weekly');
             $table->string('duration')->default('1');
