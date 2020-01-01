@@ -34,6 +34,8 @@ class CreateBookingsTable extends Migration
             $table->string('state')->nullable();
             $table->string('postcode')->nullable();
             $table->string('country')->nullable();
+            $table->string('latitude')->nullable();
+            $table->string('longitude')->nullable();
             $table->tinyInteger('status')->comment('Active - 1, Deactive - 0');
             $table->timestamps();
             $table->integer('created_by');

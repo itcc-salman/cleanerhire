@@ -53,6 +53,16 @@ class BookingService
         $booking->gender_pref       = $data->get('gender_pref');
         $booking->has_pet           = $data->get('has_pet');
         $booking->has_pet_optional  = $data->get('has_pet_optional', NULL);
+
+        $booking->address_line_1    = $data->get('address_line_1');
+        $booking->address_line_2    = $data->get('address_line_2');
+        $booking->city              = $data->get('city');
+        $booking->state             = $data->get('state');
+        $booking->postcode          = $data->get('postal_code');
+        $booking->country           = $data->get('country');
+        $booking->latitude          = $data->get('latitude');
+        $booking->longitude         = $data->get('longitude');
+
         $booking->status            = $data->get('status', 1);
         $booking->created_by        = Auth::Id();
         $booking->updated_by        = Auth::Id();
