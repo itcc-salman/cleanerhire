@@ -6,6 +6,7 @@ use App\Models\Cleaner;
 use App\Models\User;
 use App\Models\CleanerServiceMapping;
 use App\Models\CleanerTiming;
+use App\Models\ServiceArea;
 use App\Traits\CaptureIpTrait;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -72,12 +73,13 @@ class CleanerService
             $cleaner = $this->cleaner_model->find($cleaner_id);
         }
         // check what data is completed and not completed
-        // return [ 'personal_info' => true, 'account_info' => true, 'visa_documents' => true, 'services' => true, 'availability' => true, ];
+        // return [ 'personal_info' => true, 'account_info' => true, 'visa_documents' => true, 'services' => true, 'service_area' => true, 'availability' => true, ];
         $tasks = [
             'personal_info' => false,
             'account_info' => false,
             'visa_documents' => false,
             'services' => false,
+            'service_area' => false,
             'availability' => false,
         ];
         if( $cleaner ) {
@@ -87,6 +89,8 @@ class CleanerService
             $tasks['account_info'] = $this->checkAccountInfo($cleaner);
             // for services
             $tasks['services'] = $this->checkServices($cleaner);
+            // for service Areas
+            $tasks['service_area'] = false;
             // for visa_documents
             $tasks['visa_documents'] = $this->checkVisaDocuments($cleaner);
             // for availability
@@ -160,6 +164,16 @@ class CleanerService
         }
     }
 
+    public function getServiceAreas($cleaner_id = NULL)
+    {
+        if( $cleaner_id ) {
+            return ServiceArea::where('cleaner_id', $cleaner_id)->get();
+        } else {
+            $cleaner = $this->cleaner_model->where('user_id', Auth::id())->first();
+            return ServiceArea::where('cleaner_id', $cleaner->id)->get();
+        }
+    }
+
     public function getPartialViewData($view_name)
     {
         switch ($view_name) {
@@ -180,6 +194,9 @@ class CleanerService
                 $data['cleaner_services'] = $services->getLogedInCleanerServicesIds();
                 $data['cleaner_properties'] = $properties->getAllActiveProperty();
                 return $data;
+            break;
+            case 'service_area':
+                return $this->getServiceAreas();
             break;
             case 'availability':
                 $data = [];

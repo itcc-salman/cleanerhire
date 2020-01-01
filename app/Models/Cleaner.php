@@ -125,4 +125,9 @@ class Cleaner extends Model
         return $this->belongsTo('App\Models\User');
     }
 
+    public function serviceAreas()
+    {
+        return $this->hasOne('App\Models\ServiceArea', 'cleaner_id');
+    }
+
 }
