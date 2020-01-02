@@ -247,7 +247,7 @@
     function fillInAddress() {
         var place = autocomplete.getPlace();
         console.log(place);
-        if(place.address_components[0].types[0] == 'locality'){
+        if(place.address_components[0].types[0] == 'locality' || place.address_components[0].types[1] == 'locality'){
             var latitude = place.geometry.location.lat();
             var longitude = place.geometry.location.lng();
             var divInnerHtml = '<div class="form-group" id="service_area_'+counter+'"><div class="row kt-margin-b-10"><div class="col-md-4"><input type="text" class="form-control form-control-danger" name="suburb_name_'+counter+'" value="'+place.address_components[0].long_name+'"></div><div class="col-md-4"><input type="text" class="form-control form-control-danger" name="area_in_km_'+counter+'" placeholder="Area Radius(kms)" required><input type="hidden" name="latitude_'+counter+'" value="'+latitude+'"><input type="hidden" name="longitude_'+counter+'" value="'+longitude+'"></div><div class="col-md-4"><a href="javascript:;" onclick="removeServiceArea('+counter+');" class="btn btn-danger btn-icon"><i class="la la-remove"></i></a></div></div></div>'
