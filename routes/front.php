@@ -27,3 +27,5 @@ Route::get('/booking-confirm', 'BookingController@bookingConfirmed')->name('fron
 Route::get('/booking-failed', 'BookingController@bookingFailed')->name('front.booking_failed');
 
 Route::post('/registercustomer', 'CustomerController@registerCustomer')->name('front.register_customer');
+
+Route::get('/mytest', 'HomeController@test');

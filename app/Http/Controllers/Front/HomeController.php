@@ -7,6 +7,10 @@ use App\Http\Requests\UserStoreRequest;
 use App\Services\CleanerService;
 use App\Models\User;
 
+// for testing
+use App\Logic\Booking\BookingRepository;
+use App\Models\Booking;
+
 class HomeController extends Controller
 {
     /**
@@ -52,5 +56,13 @@ class HomeController extends Controller
             }
         }
         return view('frontend.register_cleaner');
+    }
+
+    public function test()
+    {
+        $booking = Booking::find(2);
+        // send notification to cleaner or company
+        $bookingRepostory = new BookingRepository();
+        $bookingRepostory->sendBookingEmail($booking);
     }
 }

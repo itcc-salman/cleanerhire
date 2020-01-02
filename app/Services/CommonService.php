@@ -30,4 +30,20 @@ class CommonService
         }
         return $data;
     }
+
+    public function getDistanceBetweenTwoPoints($lat1,$long1,$lat2,$long2)
+    {
+        $earthRadius = 6371;  // earth radius in km
+        $point1Lat = $lat1;
+        $point2Lat = $lat2;
+        $deltaLat = deg2rad($point2Lat - $point1Lat);
+        $point1Long = $long1;
+        $point2Long = $long2;
+        $deltaLong = deg2rad($point2Long - $point1Long);
+        $a = sin($deltaLat/2) * sin($deltaLat/2) + cos(deg2rad($point1Lat)) * cos(deg2rad($point2Lat)) * sin($deltaLong/2) * sin($deltaLong/2);
+        $c = 2 * atan2(sqrt($a), sqrt(1-$a));
+
+        $distance = $earthRadius * $c;
+        return $distance;    // in km
+    }
 }

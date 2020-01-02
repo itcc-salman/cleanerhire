@@ -90,7 +90,7 @@ class CleanerService
             // for services
             $tasks['services'] = $this->checkServices($cleaner);
             // for service Areas
-            $tasks['service_area'] = false;
+            $tasks['service_area'] = $this->checkServiceAreas($cleaner);
             // for visa_documents
             $tasks['visa_documents'] = $this->checkVisaDocuments($cleaner);
             // for availability
@@ -144,6 +144,13 @@ class CleanerService
         if( $cleaner->user->role == 'company' ) {
             if( empty($cleaner->cleaner_properties) ) { return false; }
         }
+        return true;
+    }
+
+    public function checkServiceAreas(Cleaner $cleaner)
+    {
+        $cleanerServiceAreas = ServiceArea::where('cleaner_id', $cleaner->id)->get();
+        if( $cleanerServiceAreas->isEmpty() ) { return false; }
         return true;
     }
 
