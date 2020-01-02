@@ -303,6 +303,7 @@ class CleanerController extends Controller
                     }
                 }else if($last_step == 5){
                     // session()->pull('backend');
+                    setflashmsg('Customer Updated Successfully..!','1');
                 }
 
                 $cleaner->updated_by =  Auth::Id();

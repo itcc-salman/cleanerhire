@@ -48,6 +48,9 @@ Route::get('bookings', 'BookingController@index')->name('backend.bookings');
 
 // Customers
 Route::get('customers', 'CustomerController@index')->name('backend.customers');
+Route::get('customer/edit/{id}', 'CustomerController@edit')->name('backend.customer.edit');
+Route::post('customer/update', 'CustomerController@postUpdate')->name('backend.customer.update');
+
 
 Route::prefix('ajax')->group(function () {
     // Cleaners
