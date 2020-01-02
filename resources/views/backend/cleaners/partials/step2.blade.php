@@ -73,18 +73,18 @@
         @else
             <div id="kt_repeater_service_areas">
                 @foreach($cleaner->serviceAreas as $key => $csm)
-                    <div class="form-group" id="service_area_{{$key}}">
+                    <div class="form-group" id="service_area_{{$key+1}}">
                         <div class="row kt-margin-b-10">
                             <div class="col-md-4">
-                                <input type="text" class="form-control form-control-danger" name="suburb_name_{{$key}}" value="{{$csm->suburb_name}}">
+                                <input type="text" class="form-control form-control-danger" name="suburb_name_{{$key+1}}" value="{{$csm->suburb_name}}">
                             </div>
                             <div class="col-md-4">
-                                <input type="text" class="form-control form-control-danger" name="area_in_km_{{$key}}" placeholder="Area Radius(kms)" value="{{$csm->area_in_km}}" required>
-                                <input type="hidden" name="latitude_{{$key}}" value="{{$csm->latitude}}">
-                                <input type="hidden" name="longitude_{{$key}}" value="{{$csm->longitude}}">
+                                <input type="text" class="form-control form-control-danger" name="area_in_km_{{$key+1}}" placeholder="Area Radius(kms)" value="{{$csm->area_in_km}}" required>
+                                <input type="hidden" name="latitude_{{$key+1}}" value="{{$csm->latitude}}">
+                                <input type="hidden" name="longitude_{{$key+1}}" value="{{$csm->longitude}}">
                             </div>
                             <div class="col-md-4">
-                                <a href="javascript:;" onclick="removeServiceArea({{$key}});" class="btn btn-danger btn-icon"><i class="la la-remove"></i></a>
+                                <a href="javascript:;" onclick="removeServiceArea({{$key+1}});" class="btn btn-danger btn-icon"><i class="la la-remove"></i></a>
                             </div>
                         </div>
                     </div>
@@ -231,7 +231,7 @@
     var componentForm = {
         locality: 'long_name'
     };
-    var counter = 1;
+    var counter = parseInt($("#service_area_counter").val()) + 1;
 
     function initAutocomplete() {
         var options = {
