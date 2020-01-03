@@ -20,20 +20,20 @@
                     <form id="booking" method="POST">
                         <div class="book_form_left">
                             <div class="book_form_tab">
-                                <label>What type of job is this?</label>
+                                <label class="bft_question">What type of job is this?</label>
                                 <div class="book_job">
                                     <ul>
                                         <li>
-                                            <label>
-                                                <input type="radio" class="service_type_input" id="type_residential" name="service_type" value="residential">
-                                                <i class="fa fa-home" aria-hidden="true"></i> <span>Residential</span>
-                                            </label>
+                                            <div class="md-radio md-radio-inline">
+                                                <input type="radio" id="type_residential" name="service_type" value="residential">
+                                                <label for="type_residential"><i class="fa fa-home" aria-hidden="true"></i> <span>Residential</span></label>
+                                            </div>
                                         </li>
                                         <li>
-                                            <label>
-                                                <input type="radio" class="service_type_input" id="type_commercial" name="service_type" value="commercial">
-                                                <i style="font-size:24px;" class="fa fa-industry" aria-hidden="true"></i> <span>Commercial</span>
-                                            </label>
+                                            <div class="md-radio md-radio-inline">
+                                                <input type="radio" id="type_commercial" name="service_type" value="commercial">
+                                                <label for="type_commercial"><i style="font-size:22px;" class="fa fa-industry" aria-hidden="true"></i> <span>Commercial</span></label>
+                                            </div>
                                         </li>
                                     </ul>
                                 </div>

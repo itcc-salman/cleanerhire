@@ -4,7 +4,7 @@
 
 .ll-skin-melon .ui-widget {
 	font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif;
-	background: #2e3641;
+	background: #021533;
 	border: none;
 	border-radius: 0;
 	-webkit-border-radius: 0;
@@ -80,7 +80,7 @@
 }
 
 .ll-skin-melon .ui-datepicker td {
-	background: #f97e76;
+	background: #2ea0cf;
 	border: none;
 	padding: 0;
 }
@@ -101,10 +101,10 @@
 }
 
 .ll-skin-melon .ui-state-disabled .ui-state-default {
-	color: #fba49e;
+	color: #035779;
 }
 
 .ll-skin-melon td .ui-state-active,
 .ll-skin-melon td .ui-state-hover {
-	background: #2e3641;
+	background: #38c8ff;
 }

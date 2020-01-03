@@ -347,10 +347,6 @@ button.switch-month:hover { color:#00adef; }
 .bac_visit_cate ul li a { background:#FFF; display:block; padding:10px 20px; border:1px solid #DDD; border-radius:6px; font-size:16px; color:#000; }
 .bac_visit_cate ul li a i { font-size:18px; color:#00adef; padding-left:10px; }
 
-.bac_offer_button { width:100%; border-top:1px solid #DDD; }
-.bac_offer_button a { font-size:16px; color:#000; display:inline-block; width:49%; text-align:center; padding:10px 0; }
-.bac_offer_button a.active { background:#00adef; color:#FFF; }
-
 .bac_comman_tab { width:100%; margin:25px 0; }
 .bac_comman_tab label { display:block; font-size:16px; font-weight:600; }
 .bac_comman_tab textarea { font-size:17px; width:100%; background:#FFF; border:1px solid #DDD; padding:10px 15px; border-radius:6px; height:100px; }
@@ -409,29 +405,63 @@ button.switch-month:hover { color:#00adef; }
 .book_form_left { padding:0 20px; }
 .book_form_right {}
 
-.book_form_tab { width:100%; margin:0 0 40px 0; transition:0.09s;   }
-.book_form_tab label { font-size:20px; font-weight:600; margin:0; }
-.book_service ul { margin:15px 0; }
-.book_service ul li { display:inline-block; list-style:none; margin:8px 1%; width:47%; }
-.book_service ul li a { display:block; border:1px solid #f2f2f2; background:#FFF; padding:10px 15px; border-radius:6px; }
-.book_service ul li i { font-size:20px; color:#999; padding-right:10px; }
-.book_service ul li span { font-size:16px; color:#000; }
-.book_service ul li:hover i { color:#00adef; }
+.book_form_tab { width:100%; margin:0 0 15px 0; transition:0.09s;   }
+.book_form_tab label { font-size:14px; font-weight:600; margin:0 0 3px 0; display: block; }
+.book_form_tab label.bft_question { font-size:18px; font-weight:600; margin:0; }
+.book_form_tab input[type='text'],
+.book_form_tab input[type='number'],
+.book_form_tab input[type='email'] { width: 100%; background: #f2f2f2; padding: 8px 15px; font-size: 14px; color: #000; border: 1px solid #ddd; border-radius: 6px; }
 
 .book_job { width:100%; margin:15px 0; }
+.book_job label { font-size:14px; font-weight:600; margin:0; }
+
 .book_job ul { margin:0; }
-.book_job ul li { width:30%; text-align:center; display:inline-block; list-style:none; margin-right:15px; vertical-align:top; }
 .book_job ul li a { background:#FFF; display:block; padding:24px 20px; border:1px solid #DDD; border-radius:6px; }
-.book_job ul li a i { font-size:26px; color:#949494; }
+.book_job ul li a i { font-size:26px; color:#949494; vertical-align: middle; }
 .book_job ul li a span { font-size:18px; color:#000; padding-left:10px; }
 .book_job ul li a:hover i, .book_job ul li a:hover span { color:#00adef; }
+.book_job ul li { width: 30%; display: inline-block; list-style: none; margin: 0 1%; vertical-align: top; }
+
+.md-radio { margin: 6px 0; }
+.md-radio.md-radio-inline { display: block; }
+.md-radio input[type="radio"] { display: none; }
+.md-radio label { display: block; min-height: 62px; position: relative; padding: 14px 22px; margin-bottom: 0; cursor: pointer; vertical-align: bottom; border: 2px solid #DDD; border-radius: 6px; }
+.md-radio label i { font-size: 26px; padding-right: 10px; vertical-align: middle; }
+.md-radio label span { vertical-align: middle; font-size: 16px; }
+.md-radio input[type="radio"]:checked + label {  border: 2px solid #337ab7; background: #f2f2f2; }
+.md-radio input[type="radio"]:checked + label i { vertical-align: middle; color:#337ab7; }
+
+@keyframes ripple {
+  0% {
+    box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0);
+  }
+  50% {
+    box-shadow: 0px 0px 0px 15px rgba(0, 0, 0, 0.1);
+  }
+  100% {
+    box-shadow: 0px 0px 0px 15px rgba(0, 0, 0, 0);
+  }
+}
+
+
+.book_service ul { margin:15px 0; }
+.book_service ul li { display:inline-block; list-style:none; margin:4px 1%; width:47%; }
+.book_service ul li a { display:block; border:1px solid #f2f2f2; background:#FFF; padding:10px 15px; border-radius:6px; }
+.book_service ul li span { font-size:16px; color:#000; font-weight: 500; }
+.book_service ul li:hover i { color:#00adef; }
+.book_service input[type="checkbox"] { display: none; }
+.book_service label { display: block; position: relative; padding: 6px 15px; margin-bottom: 0; cursor: pointer; vertical-align: bottom; }
+.book_service label i { font-size: 20px; padding-right: 5px; color:#333; }
+.book_service input[type="checkbox"]:checked + label i {  color:#337ab7; }
+
+.book_service input[type="radio"] { display: none; }
+.book_service input[type="radio"]:checked + label i {  color:#337ab7; }
 
 .quntity_number { margin:15px 0; }
 .quntity_number .minus, .quntity_number .plus { width:50px;display:inline-block; vertical-align:middle; text-align:center; cursor:pointer; }
 .quntity_number .minus i, .quntity_number .plus i { color:#ddd; font-size:28px; }
 .quntity_number .minus i:hover, .quntity_number .plus i:hover { color:#00adef; font-size:28px; }
 .quntity_number input { height:50px; width:90px; text-align:center; font-size:26px; border:1px solid #ddd; border-radius:4px; display:inline-block; vertical-align:middle;}
-
 
 .bac_offer_tabs { display:block; clear:both; margin:15px 0; }
 .bac_offer_tab { display:inline-block; border:1px solid #DDD; border-radius:6px; vertical-align:top; }
@@ -457,3 +487,29 @@ button.switch-month:hover { color:#00adef; }
 .m_check .checkmark:after { left:10px; top:6px; width:5px; height:10px; border:solid white; border-width:0 2px 2px 0; -webkit-transform:rotate(45deg); -ms-transform:rotate(45deg); transform:rotate(45deg); }
 
 input:checked + a { text-decoration:none; color:#00aeef; }
+
+
+.bac_offer_button { width:100%; border-top:1px solid #DDD; padding: 10px 15px; }
+.bac_offer_button a { font-size:16px; color:#000; display:inline-block; width:49%; text-align:center; padding:10px 0; }
+.bac_offer_button a.active { background:#00adef; color:#FFF; }
+
+.bac_button_tab { display: inline-block; }
+.bac_button_tab input[type="radio"] { display: none; }
+.bac_button_tab input[type="radio"]:checked + label:before { border-color: #337ab7; animation: ripple 0.2s linear forwards; }
+.bac_button_tab input[type="radio"]:checked + label:after { transform: scale(1); }
+.bac_button_tab label { display: inline-block; min-height: 20px; position: relative; padding: 0 30px; margin-bottom: 0; cursor: pointer; vertical-align: middle; }
+.bac_button_tab label:before, .bac_button_tab label:after { position: absolute; content: ''; border-radius: 50%; transition: all .3s ease; transition-property: transform, border-color; }
+.bac_button_tab label:before { left: 0; top: 3px; width: 20px; height: 20px; border: 2px solid rgba(0, 0, 0, 0.54); }
+.bac_button_tab label:after { top: 8px; left: 5px; width: 10px; height: 10px; transform: scale(0); background: #337ab7; }
+
+.book_duration_time { margin: 15px 0; }
+
+.book_dt_tab { display: inline-block; border: 1px solid #ddd; padding: 4px 10px; border-radius: 6px; }
+.book_dt_tab input[type="radio"] { display: none; }
+.book_dt_tab input[type="radio"]:checked + label:before { border-color: #337ab7; animation: ripple 0.2s linear forwards; }
+.book_dt_tab input[type="radio"]:checked + label:after { transform: scale(1); }
+.book_dt_tab label { display: inline-block; min-height: 20px; position: relative; padding:0 6px 0 25px; margin-bottom: 0; cursor: pointer; vertical-align: middle; }
+.book_dt_tab label:before, .book_dt_tab label:after { position: absolute; content: ''; border-radius: 50%; transition: all .3s ease; transition-property: transform, border-color; }
+.book_dt_tab label:before { left: 0; top: 3px; width: 20px; height: 20px; border: 2px solid rgba(0, 0, 0, 0.54); }
+.book_dt_tab label:after { top: 8px; left: 5px; width: 10px; height: 10px; transform: scale(0); background: #337ab7; }
+.book_dt_tab span, .book_dt_tab strong { font-size: 15px; font-weight: 400; } 
