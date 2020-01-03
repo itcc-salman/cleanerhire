@@ -12,18 +12,20 @@
 
                         <div class="banner_form">
                             <h3>Book Your Local, Trusted Cleaner</h3>
-                            <div class="row">
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <div class="bf_tab">
-                                        <input type="text" name="Name" value="" placeholder="Enter your post code">
+                            <form method="post">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="bf_tab">
+                                            <input type="text" name="postcode" value="" required placeholder="Enter your post code">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-12">
+                                        <div class="bf_tab">
+                                            <button type="submit">Find cleaner</button>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4 col-sm-4 col-xs-12">
-                                    <div class="bf_tab">
-                                        <button type="button">Find cleaner</button>
-                                    </div>
-                                </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>

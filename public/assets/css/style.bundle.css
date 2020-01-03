@@ -33252,6 +33252,10 @@ strong {
   width: 100%;
   border-top: 1px solid #ebedf2;
   margin-top: 2rem; }
+.kt-widget.kt-widget--user-profile-3 .kt-widget__bottom_cleaner {
+    border-top: none;
+    margin-top: 0px;
+}
   .kt-widget.kt-widget--user-profile-3 .kt-widget__bottom .kt-widget__item {
     display: -webkit-box;
     display: -ms-flexbox;
