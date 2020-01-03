@@ -49,12 +49,12 @@ if( !function_exists('getDuration') ) {
 if( !function_exists('getTime') ) {
     function getTime() {
         return [
-            "0" => [ "val" => "7:00", "show" => "7:00", "am_pm" => "AM" ],
-            "1" => [ "val" => "7:30", "show" => "7:30", "am_pm" => "AM" ],
-            "2" => [ "val" => "8:00", "show" => "8:00", "am_pm" => "AM" ],
-            "3" => [ "val" => "8:30", "show" => "8:30", "am_pm" => "AM" ],
-            "4" => [ "val" => "9:00", "show" => "9:00", "am_pm" => "AM" ],
-            "5" => [ "val" => "9:30", "show" => "9:30", "am_pm" => "AM" ],
+            "0" => [ "val" => "07:00", "show" => "7:00", "am_pm" => "AM" ],
+            "1" => [ "val" => "07:30", "show" => "7:30", "am_pm" => "AM" ],
+            "2" => [ "val" => "08:00", "show" => "8:00", "am_pm" => "AM" ],
+            "3" => [ "val" => "08:30", "show" => "8:30", "am_pm" => "AM" ],
+            "4" => [ "val" => "09:00", "show" => "9:00", "am_pm" => "AM" ],
+            "5" => [ "val" => "09:30", "show" => "9:30", "am_pm" => "AM" ],
             "6" => [ "val" => "10:00", "show" => "10:00", "am_pm" => "AM" ],
             "7" => [ "val" => "10:30", "show" => "10:30", "am_pm" => "AM" ],
             "8" => [ "val" => "11:00", "show" => "11:00", "am_pm" => "AM" ],
