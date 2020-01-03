@@ -1,14 +1,12 @@
 <div class="book_form_tab">
     @if( !$services->isEmpty() )
-    <label>Which type of cleaning service do you need?</label>
+    <label class="bft_question">Which type of cleaning service do you need?</label>
     <div class="book_service">
         <ul>
             @foreach( $services as $service )
                 <li>
-                    <label>
-                        <input type="checkbox" name="services[]" id="service_{{ $service->id }}" value="{{ $service->id }}">
-                        <i class="fa fa-check-circle"></i> <span>{{ $service->name }}</span>
-                    </label>
+                    <input type="checkbox" name="services[]" id="service_{{ $service->id }}" value="{{ $service->id }}">
+                    <label for="service_{{ $service->id }}"><i class="fa fa-check-circle"></i> <span>{{ $service->name }}</span></label>
                 </li>
             @endforeach
         </ul>
@@ -18,59 +16,64 @@
     @endif
 </div>
 @if( !$services->isEmpty() )
-<div class="book_form_tab">
-    <label>Where should we visit?</label>
-    <input id="autocomplete" class="form-control" placeholder="Search Address" onFocus="geolocate()" type="text"/>
-    <input type="hidden" name="latitude" id="latitude" value="">
-    <input type="hidden" name="longitude" id="longitude" value="">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="book_form_tab">
+                <label>Where should we visit?</label>
+                <input id="autocomplete" placeholder="Search Address" onFocus="geolocate()" type="text"/>
+                <input type="hidden" name="latitude" id="latitude" value="">
+                <input type="hidden" name="longitude" id="longitude" value="">
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-6">
-            <div class="form-group">
+            <div class="book_form_tab">
                 <label for="street_number">Address line 1<span class="text-danger">&nbsp;*</span></label>
-                <input class="form-control" id="street_number" name="address_line_1" placeholder="Address line 1" type="text" value="">
+                <input id="street_number" name="address_line_1" placeholder="Address line 1" type="text" value="">
             </div>
         </div>
         <div class="col-md-6">
-            <div class="form-group">
+            <div class="book_form_tab">
                 <label for="route">Address line 2<span class="text-danger">&nbsp;*</span></label>
-                <input class="form-control" id="route" name="address_line_2" placeholder="Address line 2" type="text" value="">
+                <input id="route" name="address_line_2" placeholder="Address line 2" type="text" value="">
             </div>
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-6">
-            <div class="form-group">
+            <div class="book_form_tab">
                 <label for="locality">City<span class="text-danger">&nbsp;*</span></label>
-                <input class="form-control" id="locality" name="city" placeholder="City" type="text" value="">
+                <input id="locality" name="city" placeholder="City" type="text" value="">
             </div>
         </div>
         <div class="col-md-6">
-            <div class="form-group">
+            <div class="book_form_tab">
                 <label for="administrative_area_level_1">State<span class="text-danger">&nbsp;*</span></label>
-                <input class="form-control" id="administrative_area_level_1" name="state" placeholder="State" type="text" value="">
+                <input id="administrative_area_level_1" name="state" placeholder="State" type="text" value="">
             </div>
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-6">
-            <div class="form-group">
+            <div class="book_form_tab">
                 <label for="country">Country<span class="text-danger">&nbsp;*</span></label>
-                <input class="form-control" id="country" name="country" placeholder="Country" type="text" value="">
+                <input id="country" name="country" placeholder="Country" type="text" value="">
             </div>
         </div>
         <div class="col-md-6">
-            <div class="form-group">
+            <div class="book_form_tab">
                 <label for="postal_code">Postal Code<span class="text-danger">&nbsp;*</span></label>
-                <input class="form-control" id="postal_code" name="postal_code" placeholder="Postal Code" type="text" value="">
+                <input id="postal_code" name="postal_code" placeholder="Postal Code" type="text" value="">
             </div>
         </div>
     </div>
     {{-- <input type="text" id="autocomplete" class="form-control" onFocus="geolocate()" name="address"> --}}
 </div>
 <div class="book_form_tab">
-    <label>How regularly should we visit?</label>
+    <label class="bft_question">How regularly should we visit?</label>
     <div class="bac_offer_tabs">
         <div class="bac_offer_tab offer_one">
             <h3>POPULAR!</h3>
@@ -84,8 +87,14 @@
                 <li><i class="fa fa-check" aria-hidden="true"></i><span>No minimum contract period – service only if you’re 100% happy!</span></li>
             </ul> --}}
             <div class="bac_offer_button">
-                <label class="active"><input type="radio" name="visit_type" value="weekly" checked>Weekly</label>
-                <label ><input type="radio" name="visit_type" value="forthnight">Fortnightly</label>
+                <div class="bac_button_tab">
+                    <input id="weekly" type="radio" name="visit_type" value="weekly">
+                    <label for="weekly">Weekly</label>
+                </div>
+                <div class="bac_button_tab">
+                    <input id="fortnightly" type="radio" name="visit_type" value="forthnight">
+                    <label for="fortnightly">Fortnightly</label>
+                </div>
             </div>
         </div>
         <div class="bac_offer_tab offer_two">
@@ -99,19 +108,22 @@
                 <li><i class="fa fa-check" aria-hidden="true"></i><span>All housekeepers on our platform are rated at least 4.2 stars</span></li>
             </ul> --}}
             <div class="bac_offer_button">
-                <label><input type="radio" name="visit_type" value="once">Just once</label>
+                <div class="bac_button_tab">
+                    <input id="justonce" type="radio" name="visit_type" value="once">
+                    <label for="justonce">Just once</label>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
 <div class="book_form_tab">
-    <label>How long should we visit (at $35 per hour)?</label>
-    <div id="duration_div">
+    <label class="bft_question">How long should we visit (at $35 per hour)?</label>
+    <div id="duration_div" class="book_duration_time">
         @foreach(getDuration() as $k => $duration)
-            <div>
-                <label>
-                    <input type="radio" name="duration" value="{{ $k }}">
+            <div class="book_dt_tab">
+                <input id="booking_{{ $k }}" type="radio" name="duration" value="{{ $k }}">
+                <label for="booking_{{ $k }}">
                     <span>{{ $duration }}</span>
                     <strong>hours</strong>
                 </label>
@@ -125,13 +137,14 @@
     <div id="datepicker" class="ll-skin-melon"></div>
     <input type="hidden" name="booking_date" id="booking_date">
 </div>
+
 <div class="book_form_tab">
     <label>And what time?</label>
-    <div id="time_div">
+    <div id="time_div" class="book_duration_time">
         @foreach(getTime() as $time)
-            <div>
-                <label>
-                    <input type="radio" name="booking_time" value="{{ $time['val'] }}">
+            <div class="book_dt_tab">
+                <input id="booking_time{{ $time['val'] }}" type="radio" name="booking_time" value="{{ $time['val'] }}">
+                <label for="booking_time{{ $time['val'] }}">
                     <span>{{ $time['show'] }}</span>
                     <strong>{{ $time['am_pm'] }}</strong>
                 </label>
