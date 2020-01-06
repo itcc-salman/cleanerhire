@@ -178,8 +178,8 @@ var KTDatatableRemoteAjaxDemo = function() {
                     // callback function support for column rendering
                     template: function(row) {
                         var status = {
-                            0: {'title': 'Delivered', 'class': ' kt-badge--danger'},
-                            1: {'title': 'Pending', 'class': 'kt-badge--brand'}
+                            0: {'title': 'Inactive', 'class': ' kt-badge--danger'},
+                            1: {'title': 'Active', 'class': 'kt-badge--brand'}
                         };
                         return '<span class="kt-badge ' + status[row.status].class + ' kt-badge--inline kt-badge--pill">' + status[row.status].title + '</span>';
                     },
