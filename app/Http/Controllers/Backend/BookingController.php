@@ -57,7 +57,7 @@ class BookingController extends Controller
                 $tmp->className = 'fc-event-light fc-event-solid-primary';
                 $formattedBookings[] = $tmp;
             }
-            catch(Exception $e){
+            catch(\Exception $e){
                 continue;
             }
         }

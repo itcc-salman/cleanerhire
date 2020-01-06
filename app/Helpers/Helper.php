@@ -74,3 +74,10 @@ if( !function_exists('getTime') ) {
         ];
     }
 }
+
+if( !function_exists('supported_upload_fileTypes') ) {
+    function supported_upload_fileTypes() {
+        return 'application/pdf,application/msword,
+  application/vnd.openxmlformats-officedocument.wordprocessingml.document,image/*';
+    }
+}

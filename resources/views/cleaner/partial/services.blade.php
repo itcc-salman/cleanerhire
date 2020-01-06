@@ -33,12 +33,7 @@
                                                         if( $value['cleaning_service_id'] == $service->id && $value['service_for'] == 'residential' ) { return true; }
                                                         return false;
                                                     }) ? '' : 'd-none' }}" id="service_{{ $service->id }}">
-                                                    @if( \Auth::user()->role == 'cleaner' )
-                                                    <div class="form-group">
-                                                        <label>Rate per hour</label>
-                                                        <input type="text" name="rate_per_hour_{{ $service->id }}" class="form-control" value="{{ $service->rate_per_hour }}" readonly>
-                                                    </div>
-                                                    @else
+                                                    @if( \Auth::user()->role == 'company' )
                                                     <div class="form-group">
                                                         <label>Rate per hour</label>
                                                         <?php $rate = $service->rate_per_hour;

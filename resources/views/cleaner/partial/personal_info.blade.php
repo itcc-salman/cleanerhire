@@ -6,7 +6,7 @@
                     <h3 class="kt-portlet__head-title">Personal Information <small>update your personal informaiton</small></h3>
                 </div>
             </div>
-            <form class="kt-form kt-form--label-right" id="personal_info">
+            <form class="kt-form kt-form--label-right" id="personal_info" enctype="multipart/form-data">
                 <div class="kt-portlet__body">
                     <div class="kt-section kt-section--first">
                         <div class="kt-section__body">
@@ -20,7 +20,7 @@
                                 <label class="col-xl-3 col-lg-3 col-form-label">Avatar</label>
                                 <div class="col-lg-9 col-xl-6">
                                     <div class="kt-avatar kt-avatar--outline" id="kt_user_avatar">
-                                        <div class="kt-avatar__holder" style="background-image: url({{ asset('assets/media/users/default.jpg') }})"></div>
+                                        <div class="kt-avatar__holder" style="background-image: url({{ asset('assets/media/users/'.$data->profile_avatar.'') }})"></div>
                                         <label class="kt-avatar__upload" data-toggle="kt-tooltip" title="" data-original-title="Change avatar">
                                             <i class="fa fa-pen"></i>
                                             <input type="file" name="profile_avatar" accept=".png, .jpg, .jpeg">
@@ -90,13 +90,13 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="address_line_1" class="col-xl-3 col-lg-3 col-form-label">Address Line 1</label>
+                                <label for="address_line_1" class="col-xl-3 col-lg-3 col-form-label">Street No</label>
                                 <div class="col-lg-9 col-xl-6">
                                     <input class="form-control" id="address_line_1" name="address_line_1" type="text" value="{{ $data->address_line_1 }}">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="address_line_2" class="col-xl-3 col-lg-3 col-form-label">Address Line 2</label>
+                                <label for="address_line_2" class="col-xl-3 col-lg-3 col-form-label">Street Name</label>
                                 <div class="col-lg-9 col-xl-6">
                                     <input class="form-control" id="address_line_2" name="address_line_2" type="text" value="{{ $data->address_line_2 }}">
                                 </div>
@@ -108,7 +108,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="city" class="col-xl-3 col-lg-3 col-form-label">City</label>
+                                <label for="city" class="col-xl-3 col-lg-3 col-form-label">Suburb</label>
                                 <div class="col-lg-9 col-xl-6">
                                     <input class="form-control" id="city" name="city" type="text" value="{{ $data->getOriginal('city') }}">
                                 </div>

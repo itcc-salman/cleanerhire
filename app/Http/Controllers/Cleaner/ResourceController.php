@@ -34,7 +34,11 @@ class ResourceController extends Controller
     {
         $data = array();
         $data['code'] = 200;
-        $data['resources'] = $this->resourceServices->getAllActive();
+        if( \Auth::user()->role == 'company' ) {
+            $data['resources'] = $this->resourceServices->getAllActiveForCompany();
+        } else {
+            $data['resources'] = $this->resourceServices->getAllActiveForCleaner();
+        }
         return response()->json($data);
     }
 

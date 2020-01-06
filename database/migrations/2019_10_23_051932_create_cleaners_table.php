@@ -87,6 +87,7 @@ class CreateCleanersTable extends Migration
             $table->string('cleaner_properties')->nullable();
 
             $table->text('comments')->nullable();
+            $table->string('profile_avatar', 255)->default('default.jpg');
             $table->tinyInteger('status')->comment('Active - 1, Deactive - 0');
 
             $table->integer('last_step');

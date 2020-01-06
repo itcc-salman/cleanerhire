@@ -24,6 +24,16 @@ class ResourceService
         return $this->resource_model->where('status', 1)->get();
     }
 
+    public function getAllActiveForCleaner()
+    {
+        return $this->resource_model->where('status', 1)->where('visible_to_cleaner', 1)->get();
+    }
+
+    public function getAllActiveForCompany()
+    {
+        return $this->resource_model->where('status', 1)->where('visible_to_company', 1)->get();
+    }
+
     public function getResourceById($id)
     {
         return $this->resource_model->findOrFail($id);
@@ -44,6 +54,8 @@ class ResourceService
             );
             $resource->document_name = $filename;
         }
+        $resource->visible_to_cleaner = $request->get('visible_to_cleaner', 0);
+        $resource->visible_to_company = $request->get('visible_to_company', 0);
         $resource->status = $request->get('status');
         $resource->created_by = \Auth::id();
         $resource->modified_by = \Auth::id();
@@ -66,6 +78,8 @@ class ResourceService
             );
             $resource->document_name = $filename;
         }
+        $resource->visible_to_cleaner = $request->get('visible_to_cleaner', 0);
+        $resource->visible_to_company = $request->get('visible_to_company', 0);
         $resource->status = $request->get('status');
         $resource->modified_by = \Auth::id();
         $resource->save();

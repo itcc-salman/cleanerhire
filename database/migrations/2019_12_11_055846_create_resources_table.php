@@ -18,6 +18,8 @@ class CreateResourcesTable extends Migration
             $table->string('document_for')->default('0')->comment('0 - all,1 - cleaner,2 - company');
             $table->string('name',255);
             $table->text('document_name');
+            $table->tinyInteger('visible_to_cleaner')->default(0);
+            $table->tinyInteger('visible_to_company')->default(0);
             $table->tinyInteger('status')->default('1')->comment('Active - 1, Deactive - 0');
             $table->integer('created_by');
             $table->integer('modified_by');

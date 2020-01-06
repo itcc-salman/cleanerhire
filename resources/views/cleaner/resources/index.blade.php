@@ -156,6 +156,13 @@ var KTDatatableRemoteAjaxDemo = function() {
                 }, {
                     field: 'name',
                     title: 'Name',
+                    template: function(row) {
+                        return '\
+                        <a href="{{ url('/') }}/backend/resources/'+row.document_name+'" target="_blank" class="btn btn-sm btn-clean btn-icon btn-icon-sm">\
+                            '+row.name+'\
+                        </a>\
+                    ';
+                    },
                 }, {
                     field: 'status',
                     title: 'Status',
@@ -176,7 +183,7 @@ var KTDatatableRemoteAjaxDemo = function() {
                     autoHide: false,
                     template: function(row) {
                         return '\
-                        <a href="{{ route('cleaner.resource.view') }}/'+row.id+'" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="View">\
+                        <a href="{{ url('/') }}/backend/resources/'+row.document_name+'" target="_blank" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="View">\
                             <i class="flaticon-eye"></i>\
                         </a>\
                     ';

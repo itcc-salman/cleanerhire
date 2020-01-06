@@ -88,12 +88,16 @@
                 <div class="kt-widget kt-widget--user-profile-1">
                     <div class="kt-widget__head">
                         <div class="kt-widget__media">
-                            <img src="{{ asset('assets/media/users/default.jpg') }}" alt="image">
+                            <img src="{{ asset('assets/media/users/'.$cleaner->profile_avatar.'') }}" alt="image">
                         </div>
                         <div class="kt-widget__content">
                             <div class="kt-widget__section">
                                 <a href="#" class="kt-widget__username">
+                                    @if( $cleaner->user->role == 'company' )
+                                    {{ ucfirst($cleaner->company_name) }}
+                                    @else
                                     {{ ucfirst($cleaner->first_name) }} {{ ucfirst($cleaner->last_name) }}
+                                    @endif
                                     <i class="flaticon2-correct kt-font-success"></i>
                                 </a>
                                 <span class="kt-widget__subtitle">
@@ -602,7 +606,11 @@
                     headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
                     url: '{{ route('cleaner.ajax.profile.personal_info') }}',
                     type: "POST",
-                    data: $(this).serialize(),
+                    // data: $(this).serialize(),
+                    data: new FormData(this),
+                    contentType: false,
+                    cache: false,
+                    processData:false,
                     success: function(res) {
                         KTApp.unprogress(btn);
                         showToast(res.msg, res.status);

@@ -14,6 +14,7 @@ use App\Traits\ActivationTrait;
 use App\Services\CleaningServicesService;
 use App\Services\PropertyService;
 use Auth;
+use Illuminate\Support\Facades\Storage;
 
 class CleanerService
 {
@@ -223,19 +224,30 @@ class CleanerService
         }
     }
 
-    public function updateCleanerPersonalInfo($data)
+    public function updateCleanerPersonalInfo($request)
     {
         $cleaner = $this->cleaner_model->where('user_id', Auth::id())->first();
         if( $cleaner ) {
-            $cleaner->first_name = $data->get('first_name');
-            $cleaner->last_name = $data->get('last_name');
-            $cleaner->phone = $data->get('phone');
-            $cleaner->mobile = $data->get('mobile');
-            $cleaner->address_line_1 = $data->get('address_line_1');
-            $cleaner->address_line_2 = $data->get('address_line_2');
-            $cleaner->city = $data->get('city');
-            $cleaner->state = $data->get('state');
-            $cleaner->postcode = $data->get('postcode');
+            if( $request->file('profile_avatar') ) {
+                $uploadedFile = $request->file('profile_avatar');
+                $filename = time()."_".$cleaner->id.".".$uploadedFile->getClientOriginalExtension();
+
+                Storage::disk('public_user_uploads')->putFileAs(
+                    config('uploadpath.user_profile'),
+                    $uploadedFile,
+                    $filename
+                );
+                $cleaner->profile_avatar = $filename;
+            }
+            $cleaner->first_name = $request->get('first_name');
+            $cleaner->last_name = $request->get('last_name');
+            $cleaner->phone = $request->get('phone');
+            $cleaner->mobile = $request->get('mobile');
+            $cleaner->address_line_1 = $request->get('address_line_1');
+            $cleaner->address_line_2 = $request->get('address_line_2');
+            $cleaner->city = $request->get('city');
+            $cleaner->state = $request->get('state');
+            $cleaner->postcode = $request->get('postcode');
             $cleaner->save();
             return true;
         }

@@ -29,14 +29,14 @@
     <div class="row">
         <div class="col-md-6">
             <div class="book_form_tab">
-                <label for="street_number">Address line 1<span class="text-danger">&nbsp;*</span></label>
-                <input id="street_number" name="address_line_1" placeholder="Address line 1" type="text" value="">
+                <label for="street_number">Street No<span class="text-danger">&nbsp;*</span></label>
+                <input id="street_number" name="address_line_1" placeholder="Street No" type="text" value="">
             </div>
         </div>
         <div class="col-md-6">
             <div class="book_form_tab">
-                <label for="route">Address line 2<span class="text-danger">&nbsp;*</span></label>
-                <input id="route" name="address_line_2" placeholder="Address line 2" type="text" value="">
+                <label for="route">Street Name<span class="text-danger">&nbsp;*</span></label>
+                <input id="route" name="address_line_2" placeholder="Street Name" type="text" value="">
             </div>
         </div>
     </div>
@@ -44,25 +44,20 @@
     <div class="row">
         <div class="col-md-6">
             <div class="book_form_tab">
-                <label for="locality">City<span class="text-danger">&nbsp;*</span></label>
-                <input id="locality" name="city" placeholder="City" type="text" value="">
+                <label for="locality">Suburb<span class="text-danger">&nbsp;*</span></label>
+                <input id="locality" name="city" placeholder="Suburb" type="text" value="">
             </div>
         </div>
         <div class="col-md-6">
             <div class="book_form_tab">
                 <label for="administrative_area_level_1">State<span class="text-danger">&nbsp;*</span></label>
                 <input id="administrative_area_level_1" name="state" placeholder="State" type="text" value="">
+                <input id="country" name="country" placeholder="Country" type="hidden" value="Australia">
             </div>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-md-6">
-            <div class="book_form_tab">
-                <label for="country">Country<span class="text-danger">&nbsp;*</span></label>
-                <input id="country" name="country" placeholder="Country" type="text" value="">
-            </div>
-        </div>
         <div class="col-md-6">
             <div class="book_form_tab">
                 <label for="postal_code">Postal Code<span class="text-danger">&nbsp;*</span></label>

@@ -39,6 +39,23 @@
                             @enderror
                         </div>
 
+                        <div class="form-group">
+                            <div class="kt-checkbox-list">
+                                <div class="d-block">
+                                    <label>Visible To</label>
+                                    <div class="kt-checkbox-inline">
+                                        <label class="kt-checkbox kt-checkbox--tick kt-checkbox--brand kt-margin-0">
+                                            <input name="visible_to_cleaner" value="1" {{ $resource->visible_to_cleaner ? 'checked' : '' }} type="checkbox">@lang('labels.cleSerIndividual')<span></span>
+                                        </label>
+                                        &nbsp;
+                                        <label class="kt-checkbox kt-checkbox--tick kt-checkbox--brand kt-margin-0">
+                                            <input name="visible_to_company" value="1" {{ $resource->visible_to_company ? 'checked' : '' }} type="checkbox">@lang('labels.cleSerCompany')<span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="form-group validated">
                             <label>Status</label>
                             <div class="kt-radio-inline">
