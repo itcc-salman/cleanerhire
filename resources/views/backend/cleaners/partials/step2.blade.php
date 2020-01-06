@@ -21,47 +21,47 @@
     <div id="companyDetailsDiv" class="d-none">
         <div class="form-group">
             <label>Company Name</label>
-            <input type="text" class="form-control" name="company_name" placeholder="Company Name" value="{{$cleaner->company_name ?? ''}}">
+            <input type="text" class="form-control" name="company_name"  value="{{$cleaner->company_name ?? ''}}">
         </div>
         <div class="form-group">
             <label>Director Name</label>
-            <input type="text" class="form-control" name="director_name" placeholder="Director Name" value="{{$cleaner->director_name ?? ''}}">
+            <input type="text" class="form-control" name="director_name" value="{{$cleaner->director_name ?? ''}}">
         </div>
         <div class="form-group">
             <label>Company Address</label>
-            <input type="text" class="form-control" name="company_address" placeholder="Company Address" value="{{$cleaner->company_address ?? ''}}">
+            <input type="text" class="form-control" name="company_address"  value="{{$cleaner->company_address ?? ''}}">
         </div>
         <div class="form-group">
             <label>Company Email</label>
-            <input type="text" class="form-control" name="company_email" placeholder="Company Email" value="{{$cleaner->company_email ?? ''}}">
+            <input type="text" class="form-control" name="company_email"  value="{{$cleaner->company_email ?? ''}}">
         </div>
         <div class="form-group">
             <label>Company Phone</label>
-            <input type="text" class="form-control" name="company_phone" placeholder="Company Phone" value="{{$cleaner->company_phone ?? ''}}">
+            <input type="text" class="form-control" name="company_phone"  value="{{$cleaner->company_phone ?? ''}}">
         </div>
         <div class="form-group">
             <label>Company Mobile</label>
-            <input type="text" class="form-control" name="company_mobile" placeholder="Company Mobile" value="{{$cleaner->company_mobile ?? ''}}">
+            <input type="text" class="form-control" name="company_mobile"  value="{{$cleaner->company_mobile ?? ''}}">
         </div>
         <div class="form-group">
             <label>Insurance Details</label>
-            <input type="text" class="form-control" name="insurance_details" placeholder="Insurance Details" value="{{$cleaner->insurance_details ?? ''}}">
+            <input type="text" class="form-control" name="insurance_details"  value="{{$cleaner->insurance_details ?? ''}}">
         </div>
         <div class="form-group">
             <label>Workcover Details</label>
-            <input type="text" class="form-control" name="workcover_details" placeholder="Workcover Details" value="{{$cleaner->workcover_details ?? ''}}">
+            <input type="text" class="form-control" name="workcover_details"  value="{{$cleaner->workcover_details ?? ''}}">
         </div>
         <div class="form-group">
             <label>Registration Details</label>
-            <input type="text" class="form-control" name="registration_details" placeholder="Registration Details" value="{{$cleaner->registration_details ?? ''}}">
+            <input type="text" class="form-control" name="registration_details"  value="{{$cleaner->registration_details ?? ''}}">
         </div>
         <div class="form-group">
             <label>Years in Business ?</label>
-            <input type="text" class="form-control" name="business_years" placeholder="Years in Business ?" value="{{$cleaner->business_years ?? ''}}">
+            <input type="text" class="form-control" name="business_years"  value="{{$cleaner->business_years ?? ''}}">
         </div>
         <div class="form-group">
             <label>How many Employees ?</label>
-            <input type="text" class="form-control" name="number_of_employees" placeholder="How many Employees ?" value="{{$cleaner->number_of_employees ?? ''}}">
+            <input type="text" class="form-control" name="number_of_employees"  value="{{$cleaner->number_of_employees ?? ''}}">
         </div>
     </div>
     <div class="form-group">
@@ -133,7 +133,7 @@
     </div>
     <div class="form-group">
         <label>Nationality</label>
-        <input type="text" class="form-control" name="nationality" placeholder="Nationality" value="{{$cleaner->nationality ?? ''}}">
+        <input type="text" class="form-control" name="nationality" value="{{$cleaner->nationality ?? ''}}">
     </div>
     <div class="form-group">
         <label>Which Languages you speak?</label>
@@ -175,7 +175,7 @@
     </div>
     <div class="form-group">
         <label>Your Date of Birth?</label>
-        <input type="text" class="form-control" id="kt_datepicker_1" name="date_of_birth" readonly placeholder="Select date" value="{{ $cleaner->date_of_birth ?? '' }}"/>
+        <input type="text" class="form-control" id="kt_datepicker_1" name="date_of_birth" value="{{ $cleaner->date_of_birth ?? '' }}"/>
     </div>
 
     <div>
