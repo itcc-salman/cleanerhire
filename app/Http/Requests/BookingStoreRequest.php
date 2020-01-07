@@ -25,7 +25,7 @@ class BookingStoreRequest extends FormRequest
     {
         return [
             'service_type'  => 'required',
-            'duration'      => 'required',
+            // 'duration'      => 'required',
             'booking_date'  => 'required',
             'booking_time'  => 'required',
             'gender_pref'   => 'required',

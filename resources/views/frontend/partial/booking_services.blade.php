@@ -67,52 +67,32 @@
     </div>
     {{-- <input type="text" id="autocomplete" class="form-control" onFocus="geolocate()" name="address"> --}}
 </div>
-<div class="book_form_tab">
-    <label class="bft_question">How regularly should we visit?</label>
-    <div class="bac_offer_tabs">
-        <div class="bac_offer_tab offer_one">
-            <h3>POPULAR!</h3>
-            <div class="bac_price">
-                <label>Regular</label>
-                <span>$35 <small>$/ph</small></span>
-            </div>
-            {{-- <ul>
-                <li><i class="fa fa-check" aria-hidden="true"></i><span>Same, fully vetted housekeeper each visit</span></li>
-                <li><i class="fa fa-check" aria-hidden="true"></i><span>Free cancellation up to 48h before each appointment</span></li>
-                <li><i class="fa fa-check" aria-hidden="true"></i><span>No minimum contract period – service only if you’re 100% happy!</span></li>
-            </ul> --}}
-            <div class="bac_offer_button">
-                <div class="bac_button_tab">
-                    <input id="weekly" type="radio" name="visit_type" value="weekly">
-                    <label for="weekly">Weekly</label>
-                </div>
-                <div class="bac_button_tab">
-                    <input id="fortnightly" type="radio" name="visit_type" value="forthnight">
-                    <label for="fortnightly">Fortnightly</label>
-                </div>
-            </div>
-        </div>
-        <div class="bac_offer_tab offer_two">
-            <h3></h3>
-            <div class="bac_price">
-                <label>Once-Off</label>
-                <span>$45 <small>$/ph</small></span>
-            </div>
-            {{-- <ul>
-                <li><i class="fa fa-check" aria-hidden="true"></i><span>One-off cleaning</span></li>
-                <li><i class="fa fa-check" aria-hidden="true"></i><span>All housekeepers on our platform are rated at least 4.2 stars</span></li>
-            </ul> --}}
-            <div class="bac_offer_button">
-                <div class="bac_button_tab">
-                    <input id="justonce" type="radio" name="visit_type" value="once">
-                    <label for="justonce">Just once</label>
-                </div>
-            </div>
+
+
+<div class="bac_footer_step">
+    <div class="bac_comman_tab">
+        <label>How regularly should we visit?</label>
+        <div class="check_main">
+            <label class="m_check">
+                <span>Weekly</span>
+                <input type="radio" name="visit_type" value="weekly">
+                <span class="checkmark"></span>
+            </label>
+            <label class="m_check">
+                <span>Fortnightly</span>
+                <input type="radio" name="visit_type" value="forthnight">
+                <span class="checkmark"></span>
+            </label>
+            <label class="m_check">
+                <span>Just once</span>
+                <input type="radio" name="visit_type" value="once">
+                <span class="checkmark"></span>
+            </label>
         </div>
     </div>
 </div>
 
-<div class="book_form_tab">
+{{-- <div class="book_form_tab">
     <label class="bft_question">How long should we visit (at $35 per hour)?</label>
     <div id="duration_div" class="book_duration_time">
         @foreach(getDuration() as $k => $duration)
@@ -125,7 +105,7 @@
             </div>
         @endforeach
     </div>
-</div>
+</div> --}}
 
 <div class="book_form_tab">
     <label>What date should we visit?</label>
