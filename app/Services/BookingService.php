@@ -47,7 +47,7 @@ class BookingService
         $booking->property_id       = $data->get('properties', NULL);
         $booking->services          = implode(',', $data->get('services'));
         $booking->visit_type        = $data->get('visit_type');
-        $booking->duration          = $data->get('duration');
+        // $booking->duration          = $data->get('duration');
         $booking->booking_date      = $data->get('booking_date');
         $booking->booking_time      = $data->get('booking_time');
         $booking->gender_pref       = $data->get('gender_pref');

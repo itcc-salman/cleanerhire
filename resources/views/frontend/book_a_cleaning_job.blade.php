@@ -154,16 +154,11 @@
         }
 
         function initBookingPage() {
-            $("#duration_div").owlCarousel({
-                items:5,
-                itemsDesktop:[1000,5],
-                itemsDesktopSmall:[979,5],
-                itemsTablet:[768,5],
-                // nav:true,
-                pagination:true,
-                autoPlay:false,
-                // navText : ['<i class="fa fa-angle-left" aria-hidden="true"></i>','<i class="fa fa-angle-right" aria-hidden="true"></i>']
-            });
+            /*$("#duration_div").owlCarousel({
+                items:5,itemsDesktop:[1000,5],
+                itemsDesktopSmall:[979,5],itemsTablet:[768,5],
+                pagination:true,autoPlay:false,
+            });*/
             $("#time_div").owlCarousel({
                 items:5,
                 itemsDesktop:[1000,5],
@@ -186,7 +181,7 @@
                         var formattedDate = date.getFullYear() + "-" +
                                             (date.getMonth() + 1) + "-" +
                                             date.getDate();
-                        // console.log(formattedDate);
+                        console.log(formattedDate);
                         $('#booking_date').val(formattedDate);
                     }
                 }
