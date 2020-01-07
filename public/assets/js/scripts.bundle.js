@@ -8108,16 +8108,20 @@ if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
 				delay(function() {
 					// get query parameters
 					var query = Plugin.getDataSourceQuery();
+                    console.log(query);
 
 					// search not by columns
 					if (typeof columns === 'undefined' && typeof value !== 'undefined') {
 						var key = Plugin.getGeneralSearchKey();
+                        console.log(key);
 						query[key] = value;
 					}
 
 					// search by columns, support multiple columns
 					if (typeof columns === 'object') {
 						$.each(columns, function(k, column) {
+                            console.log(k);
+                            console.log(column);
 							query[column] = value;
 						});
 						// remove empty element from arrays

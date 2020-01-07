@@ -37,7 +37,6 @@
 
     <script src="{{ asset('assets/plugins/custom/fullcalendar/fullcalendar.bundle.js') }}" type="text/javascript"></script>
     <script>
-        console.log('{!! ($bookingsData) !!}');
         var KTCalendarBasic = function() {
 
             return {
@@ -51,12 +50,12 @@
 
                     var calendarEl = document.getElementById('kt_calendar');
                     var calendar = new FullCalendar.Calendar(calendarEl, {
-                        plugins: [ 'dayGrid', 'timeGrid', 'list' ],
+                        plugins: [ 'dayGrid' ],
 
                         header: {
                             left: 'prev,next today',
                             center: 'title',
-                            right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                            right: ''
                         },
 
                         height: 800,
@@ -67,9 +66,7 @@
                         now: moment().format('YYYY-MM-DDTHH:mm:ss'),
 
                         views: {
-                            dayGridMonth: { buttonText: 'month' },
-                            timeGridWeek: { buttonText: 'week' },
-                            timeGridDay: { buttonText: 'day' }
+                            dayGridMonth: { buttonText: 'month' }
                         },
 
                         eventTimeFormat: {
@@ -84,22 +81,7 @@
                         editable: false,
                         eventLimit: true, // allow "more" link when too many events
                         navLinks: true,
-                        events: {!! ($bookingsData) !!},
-                        eventRender: function(info) {
-                            var element = $(info.el);
-
-                            if (info.event.extendedProps && info.event.extendedProps.description) {
-                                if (element.hasClass('fc-day-grid-event')) {
-                                    element.data('content', info.event.extendedProps.description);
-                                    element.data('placement', 'top');
-                                    KTApp.initPopover(element);
-                                } else if (element.hasClass('fc-time-grid-event')) {
-                                    element.find('.fc-title').append('<div class="fc-description">' + info.event.extendedProps.description + '</div>');
-                                } else if (element.find('.fc-list-item-title').lenght !== 0) {
-                                    element.find('.fc-list-item-title').append('<div class="fc-description">' + info.event.extendedProps.description + '</div>');
-                                }
-                            }
-                        }
+                        events: {!! ($bookingsData) !!}
                     });
                     calendar.render();
                 }
