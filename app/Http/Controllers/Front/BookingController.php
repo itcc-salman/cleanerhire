@@ -72,12 +72,17 @@ class BookingController extends Controller
         $bookingServices = $this->bookingServices->registerBooking($request);
         if( $bookingServices ) {
             setflashmsg(trans('msg.bookingCreated'),'1');
-            return response()->json(['status' => true, 'redirect' => route('front.booking_confirm') ]);
+            return response()->json(['status' => true, 'redirect' => route('front.booking_completed') ]);
         }
         setflashmsg(trans('msg.bookingFailed'),'0');
         return response()->json(['status' => false,
             'msg' => trans('msg.clsSerError'),
             'redirect' => route('front.booking_failed') ]);
+    }
+
+    public function bookingCompleted()
+    {
+        return view('frontend.booking_completed');
     }
 
     public function bookingConfirmed()
@@ -87,6 +92,6 @@ class BookingController extends Controller
 
     public function bookingFailed()
     {
-        dd('failed');
+        return view('frontend.booking_failed');
     }
 }
