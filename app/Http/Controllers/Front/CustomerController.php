@@ -32,12 +32,15 @@ class CustomerController extends Controller
 
     public function registerCustomer(CustomerStoreRequest $request)
     {
-        $user = $this->customerService->registerCustomerFront($request);
-        if( $user ) {
-            return response()->json(['status' => true, 'redirect' => route('activate') ]);
-        } else {
-            return response()->json(['status' => false, 'msg' => trans('msg.clsSerError') ]);
+        if( $request->method() == 'POST') {
+            $user = $this->customerService->registerCustomerFront($request);
+            if( $user ) {
+                return response()->json(['status' => true, 'redirect' => route('activate') ]);
+            } else {
+                return response()->json(['status' => false, 'msg' => trans('msg.clsSerError') ]);
+            }
         }
+        return view('frontend.register_customer');
     }
 }
 

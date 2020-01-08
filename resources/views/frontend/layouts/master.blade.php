@@ -185,33 +185,6 @@
             })
         });
 
-        $(document).on('submit', '#signup_customer', function(e) {
-            e.preventDefault();
-            // check for validation
-            $.ajax({
-                headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-                url: '{{ route('front.register_customer') }}',
-                type: "POST",
-                dataType: "JSON",
-                data: $(this).serialize(),
-                success: function(res) {
-                    if( res.status == true ) {
-                        location.href = res.redirect;
-                    } else {
-                        alert(res.msg);
-                    }
-                },
-                error: function(err) {
-                    if( err.status == 422 ) {
-                        // display errors on each form field
-                        $.each(err.responseJSON.errors, function (i, error) {
-                            alert(error[0]);
-                            return;
-                        });
-                    }
-                }
-            });
-        });
     });
     </script>
     @stack('scripts')

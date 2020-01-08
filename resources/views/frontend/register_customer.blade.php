@@ -1,13 +1,13 @@
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<!DOCTYPE html>
+<html lang="en">
 
     <!-- begin::Head -->
     <head>
         <base href="../../../">
         <meta charset="utf-8" />
         <title>{{ config('app.name', 'Cleaner Hire') }}</title>
-        <meta name="description" content="Login page">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <!--begin::Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700|Roboto:300,400,500,600,700">
@@ -73,8 +73,8 @@
 
                         <!--begin::Head-->
                         <div class="kt-login__head">
-                            <span class="kt-login__signup-label">Don't have an account.</span>&nbsp;&nbsp;
-                            <a href="{{ route('front.register_customer') }}" class="kt-link kt-login__signup-link">Sign Up!</a>
+                            <span class="kt-login__signup-label">Already have an account.</span>&nbsp;&nbsp;
+                            <a href="{{ route('login') }}" class="kt-link kt-login__signup-link">Sign In!</a>
                         </div>
 
                         <!--end::Head-->
@@ -85,40 +85,55 @@
                             <!--begin::Signin-->
                             <div class="kt-login__form">
                                 <div class="kt-login__title">
-                                    <h3>{{ __('Login') }}</h3>
+                                    <h3>Sign Up</h3>
                                 </div>
 
                                 <!--begin::Form-->
-                                <form class="kt-form" id="kt_login_form" method="POST" action="{{ route('login') }}">
+                                <form class="kt-form" id="signup_customer" method="POST">
                                     @csrf
                                     <div class="form-group validate is-invalid">
-                                        <input class="form-control" type="email" id="email" placeholder="Email" name="email" autocomplete="off" value="{{ old('email') }}" autofocus>
-                                        @error('email')
-                                            <div id="email-error" class="error invalid-feedback">{{ $message }}</div>
+                                        <input class="form-control" type="text" placeholder="First Name" name="first_name" value="{{ old('first_name') }}" autofocus>
+                                        @error('first_name')
+                                            <div id="username-error" class="error invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div class="form-group validate is-invalid">
-                                        <input id="password" class="form-control" type="password" placeholder="Password" name="password" autocomplete="current-password">
-                                        @error('password')
-                                            <div id="password-error" class="error invalid-feedback">{{ $message }}</div>
+                                        <input class="form-control" type="text" placeholder="Last Name" name="last_name" value="{{ old('last_name') }}">
+                                        @error('last_name')
+                                            <div id="username-error" class="error invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
-
-                                    <div class="row kt-login__actions">
-                                        <div class="col">
-                                            <label class="kt-checkbox">
-                                                <input id="remember" type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}>{{ __('Remember Me') }}
-                                                <span></span>
-                                            </label>
-                                        </div>
+                                    <div class="form-group validate is-invalid">
+                                        <input class="form-control" type="text" placeholder="Phone Number" name="phone_number" value="{{ old('phone_number') }}">
+                                        @error('phone_number')
+                                            <div id="username-error" class="error invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group validate is-invalid">
+                                        <input class="form-control" type="email" placeholder="Email" name="email" value="{{ old('email') }}">
+                                        @error('email')
+                                            <div id="username-error" class="error invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group validate is-invalid">
+                                        <input class="form-control" type="password" placeholder="Password" name="password" autocomplete="off">
+                                        @error('password')
+                                            <div id="username-error" class="error invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group validate is-invalid">
+                                        <input class="form-control" type="password" placeholder="Confirm Password" name="confirm_password" autocomplete="off">
+                                        @error('confirm_password')
+                                            <div id="username-error" class="error invalid-feedback">{{ $message }}</div>
+                                        @enderror
                                     </div>
 
                                     <!--begin::Action-->
                                     <div class="kt-login__actions">
-                                        @if (Route::has('password.request'))
-                                            <a href="{{ route('password.request') }}" id="kt_login_forgot" class="kt-link kt-login__link-forgot">{{ __('Forgot Your Password?') }}</a>
-                                        @endif
-                                        <button id="kt_login_signin_submit" type="submit" class="btn btn-primary btn-elevate kt-login__btn-primary">{{ __('Login') }}</button>
+                                        <a href="javascript:void(0)" class="kt-link kt-login__link-forgot">
+                                            {{-- Forgot Password ? --}}
+                                        </a>
+                                        <button id="kt_login_signin_submit" type="submit" class="btn btn-primary btn-elevate kt-login__btn-primary">Sign Up</button>
                                     </div>
 
                                     <!--end::Action-->
@@ -168,10 +183,41 @@
         </div>
 
         <!-- end:: Page -->
-
+        <script src="{{ asset('front/js/jquery.min.js') }}"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                // all js code will go here
+                $(document).on('submit', '#signup_customer', function(e) {
+                    e.preventDefault();
+                    // check for validation
+                    $.ajax({
+                        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                        url: '{{ route('front.register_customer') }}',
+                        type: "POST",
+                        dataType: "JSON",
+                        data: $(this).serialize(),
+                        success: function(res) {
+                            if( res.status == true ) {
+                                location.href = res.redirect;
+                            } else {
+                                alert(res.msg);
+                            }
+                        },
+                        error: function(err) {
+                            if( err.status == 422 ) {
+                                // display errors on each form field
+                                $.each(err.responseJSON.errors, function (i, error) {
+                                    alert(error[0]);
+                                    return false;
+                                });
+                            }
+                        }
+                    });
+                });
+            });
+        </script>
         <!--end::Page Scripts -->
     </body>
 
     <!-- end::Body -->
-
 </html>

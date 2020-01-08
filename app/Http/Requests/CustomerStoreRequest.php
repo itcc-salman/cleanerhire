@@ -23,13 +23,21 @@ class CustomerStoreRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'first_name'            => 'required',
-            'last_name'             => 'required',
-            'email'                 => 'required|email|max:255|unique:users',
-            'password'              => 'required|min:6|max:30',
-            'confirm_password'      => 'required|same:password',
-        ];
+
+        switch($this->method())
+        {
+            case 'GET': return []; break;
+            case 'POST':
+                return [
+                    'first_name'            => 'required',
+                    'last_name'             => 'required',
+                    'email'                 => 'required|email|max:255|unique:users',
+                    'password'              => 'required|min:6|max:30',
+                    'confirm_password'      => 'required|same:password',
+                ];
+            break;
+            default: break;
+        }
     }
 
     /**

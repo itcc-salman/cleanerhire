@@ -27,7 +27,7 @@ Route::get('/booking-completed', 'BookingController@bookingCompleted')->name('fr
 Route::get('/booking-confirm', 'BookingController@bookingConfirmed')->name('front.booking_confirm');
 Route::get('/booking-failed', 'BookingController@bookingFailed')->name('front.booking_failed');
 
-Route::post('/registercustomer', 'CustomerController@registerCustomer')->name('front.register_customer');
+Route::match(['GET','POST'], '/registercustomer', 'CustomerController@registerCustomer')->name('front.register_customer');
 
 Route::get('/mytest', 'HomeController@test');
 

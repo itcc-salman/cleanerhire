@@ -48,13 +48,77 @@
                                     <input type="hidden" name="doc_utility_bill" id="doc_utility_bill">
                                     <input type="hidden" name="doc_certifications" id="doc_certifications">
                                     <input type="hidden" name="doc_police_check" id="doc_police_check">
-                                    <p class="m-0 p-0"><span>1. Driving License</span><span id="doc_driving_licence_file_name">: {{$data->doc_driving_licence}}</span></p>
-                                    <p class="m-0 p-0"><span>2. Medical Card</span><span id="doc_medicare_card_file_name">: {{$data->doc_medicare_card}}</span></p>
-                                    <p class="m-0 p-0"><span>3. Passport</span><span id="doc_passport_file_name">: {{$data->doc_passport}}</span></p>
-                                    <p class="m-0 p-0"><span>4. Utility Bill</span><span id="doc_bank_statement_file_name">: {{$data->doc_bank_statement}}</span></p>
-                                    <p class="m-0 p-0"><span>5. Bank Statement</span><span id="doc_utility_bill_file_name">: {{$data->doc_utility_bill}}</span></p>
-                                    <p class="m-0 p-0"><span>6. Police Check</span><span id="doc_certifications_file_name">: {{$data->doc_certifications}}</span></p>
-                                    <p class="m-0 p-0"><span>7. Certifications</span><span id="doc_police_check_file_name">: {{$data->doc_police_check}}</span></p>
+                                    <p class="m-0 p-0">
+                                        <span>
+                                            @if( $data->doc_driving_licence )
+                                            <span class="kt-badge kt-badge--unified-success kt-badge--sm kt-badge--rounded kt-badge--bolder"><i class="fa fa-check"></i></span>
+                                            @else
+                                            <span class="kt-badge kt-badge--unified-danger kt-badge--sm kt-badge--rounded kt-badge--bolder"><i class="fa fa-times"></i></span>
+                                            @endif
+                                            Driving License
+                                        </span>
+                                        {{-- <span id="doc_driving_licence_file_name">: {{$data->doc_driving_licence}}</span> --}}
+                                    </p>
+                                    <p class="m-0 p-0">
+                                        <span>
+                                            @if( $data->doc_medicare_card )
+                                            <span class="kt-badge kt-badge--unified-success kt-badge--sm kt-badge--rounded kt-badge--bolder"><i class="fa fa-check"></i></span>
+                                            @else
+                                            <span class="kt-badge kt-badge--unified-danger kt-badge--sm kt-badge--rounded kt-badge--bolder"><i class="fa fa-times"></i></span>
+                                            @endif
+                                            Medical Card
+                                        </span>
+                                        {{-- <span id="doc_medicare_card_file_name">: {{$data->doc_medicare_card}}</span></p> --}}
+                                    <p class="m-0 p-0">
+                                        <span>
+                                            @if( $data->doc_passport )
+                                            <span class="kt-badge kt-badge--unified-success kt-badge--sm kt-badge--rounded kt-badge--bolder"><i class="fa fa-check"></i></span>
+                                            @else
+                                            <span class="kt-badge kt-badge--unified-danger kt-badge--sm kt-badge--rounded kt-badge--bolder"><i class="fa fa-times"></i></span>
+                                            @endif
+                                            Passport
+                                        </span>
+                                        {{-- <span id="doc_passport_file_name">: {{$data->doc_passport}}</span></p> --}}
+                                    <p class="m-0 p-0">
+                                        <span>
+                                            @if( $data->doc_utility_bill )
+                                            <span class="kt-badge kt-badge--unified-success kt-badge--sm kt-badge--rounded kt-badge--bolder"><i class="fa fa-check"></i></span>
+                                            @else
+                                            <span class="kt-badge kt-badge--unified-danger kt-badge--sm kt-badge--rounded kt-badge--bolder"><i class="fa fa-times"></i></span>
+                                            @endif
+                                            Utility Bill
+                                        </span>
+                                        {{-- <span id="doc_bank_statement_file_name">: {{$data->doc_bank_statement}}</span></p> --}}
+                                    <p class="m-0 p-0">
+                                        <span>
+                                            @if( $data->doc_bank_statement )
+                                            <span class="kt-badge kt-badge--unified-success kt-badge--sm kt-badge--rounded kt-badge--bolder"><i class="fa fa-check"></i></span>
+                                            @else
+                                            <span class="kt-badge kt-badge--unified-danger kt-badge--sm kt-badge--rounded kt-badge--bolder"><i class="fa fa-times"></i></span>
+                                            @endif
+                                            Bank Statement
+                                        </span>
+                                        {{-- <span id="doc_utility_bill_file_name">: {{$data->doc_utility_bill}}</span></p> --}}
+                                    <p class="m-0 p-0">
+                                        <span>
+                                            @if( $data->doc_police_check )
+                                            <span class="kt-badge kt-badge--unified-success kt-badge--sm kt-badge--rounded kt-badge--bolder"><i class="fa fa-check"></i></span>
+                                            @else
+                                            <span class="kt-badge kt-badge--unified-danger kt-badge--sm kt-badge--rounded kt-badge--bolder"><i class="fa fa-times"></i></span>
+                                            @endif
+                                            Police Check
+                                        </span>
+                                        {{-- <span id="doc_certifications_file_name">: {{$data->doc_certifications}}</span></p> --}}
+                                    <p class="m-0 p-0">
+                                        <span>
+                                            @if( $data->doc_certifications )
+                                            <span class="kt-badge kt-badge--unified-success kt-badge--sm kt-badge--rounded kt-badge--bolder"><i class="fa fa-check"></i></span>
+                                            @else
+                                            <span class="kt-badge kt-badge--unified-danger kt-badge--sm kt-badge--rounded kt-badge--bolder"><i class="fa fa-times"></i></span>
+                                            @endif
+                                            Certifications
+                                        </span>
+                                        {{-- <span id="doc_police_check_file_name">: {{$data->doc_police_check}}</span></p> --}}
                                 </div>
                             </div>
 

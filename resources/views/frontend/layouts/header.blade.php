@@ -20,7 +20,7 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     @if(!Auth::check())
-                        <li><a href="#hire_register" class="trigger-btn" data-toggle="modal">Sign up</a></li>
+                        <li><a href="{{ route('front.register_customer') }}" class="trigger-btn" data-toggle="modal">Sign up</a></li>
                         {{-- <li><a href="#hire_login" class="trigger-btn" data-toggle="modal">Log in</a></li> --}}
                         {{-- <li><a href="{{ route('front.register_cleaner') }}" class="trigger-btn">Sign up</a></li> --}}
                         <li><a href="{{ route('login') }}" class="trigger-btn" data-toggle="modal">Log in</a></li>
