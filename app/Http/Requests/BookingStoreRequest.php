@@ -23,14 +23,26 @@ class BookingStoreRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'service_type'  => 'required',
-            // 'duration'      => 'required',
-            'booking_date'  => 'required',
-            'booking_time'  => 'required',
-            'gender_pref'   => 'required',
-            'has_pet'       => 'required',
-        ];
+
+        switch($this->method())
+        {
+            case 'GET': return []; break;
+            case 'POST':
+            $rule = [
+                'service_type'  => 'required',
+                // 'duration'      => 'required',
+                'booking_date'  => 'required',
+                'booking_time'  => 'required',
+                'gender_pref'   => 'required',
+            ];
+            if( empty($this->input('has_pet_optional')) ) {
+                $rule['has_pet'] = 'required';
+            }
+
+            return $rule;
+            break;
+            default: break;
+        }
     }
 
     /**

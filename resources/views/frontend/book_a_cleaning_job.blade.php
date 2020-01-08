@@ -266,7 +266,7 @@
                             $.each(err.responseJSON.errors, function (i, error) {
                                 // showToast(error[0], 0);
                                 alert(error[0]);
-                                continue;
+                                return false;
                             });
                         }
                     }

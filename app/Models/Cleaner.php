@@ -11,6 +11,11 @@ class Cleaner extends Model
 {
     use SoftDeletes;
 
+    const STATUS_IN_PROGRESS            = 0;
+    const STATUS_WAITING_FOR_APPROVAL   = 1;
+    const STATUS_INACTIVE               = 2;
+    const STATUS_ACTIVE                 = 3;
+
     /**
      * The attributes that are mass assignable.
      *

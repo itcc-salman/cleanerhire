@@ -21,6 +21,11 @@ class BookingService
         return $this->booking_model->find($id);
     }
 
+    public function getBookingByIdWithUser($id)
+    {
+        return $this->booking_model->with('user')->find($id);
+    }
+
     public function getAllBooking()
     {
         return $this->booking_model->where('status', 1)->get();

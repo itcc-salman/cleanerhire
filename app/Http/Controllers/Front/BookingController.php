@@ -99,7 +99,12 @@ class BookingController extends Controller
     public function reviewAndConfirm($token)
     {
         $booking_emails = BookingCleanerEmails::where('token', $token)->first();
-        dd($booking_emails);
-        dd($token);
+        if( $booking_emails ) {
+            $booking = $this->bookingServices->getBookingByIdWithUser($booking_emails->booking_id);
+            // dd($booking);
+            return view('frontend.review_and_confirm', compact('booking'));
+        } else {
+            return view('frontend.booking_taken');
+        }
     }
 }
