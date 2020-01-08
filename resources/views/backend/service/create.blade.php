@@ -87,6 +87,14 @@
                         </div>
 
                         <div class="form-group validated">
+                            <label>Markup(Percent)</label>
+                            <input type="text" name="markup_percent" class="form-control @error('markup_percent') {{ 'is-invalid' }} @enderror" placeholder="$">
+                            @error('markup_percent')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group validated">
                             <label>Status</label>
                             <div class="kt-radio-inline">
                                 <label class="kt-radio kt-radio--tick kt-radio--brand"><input type="radio" value="1" name="status"> Active <span></span></label>

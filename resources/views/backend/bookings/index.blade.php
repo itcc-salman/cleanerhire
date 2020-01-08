@@ -127,7 +127,6 @@ var KTDatatableRemoteAjax = function() {
                 source: {
                     read: {
                         url: '{{ route('backend.ajax.bookings') }}',
-                        "friend_name": 'vicky',
                         method: 'GET',
 
                         // sample custom headers
@@ -223,6 +222,7 @@ var KTDatatableRemoteAjax = function() {
     });
 
     $('#from_booking,#to_booking').on('change', function() {
+        var x =
 
 
       datatable.search($('#from_booking').val().toLowerCase(), 'from');
