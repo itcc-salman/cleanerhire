@@ -30,3 +30,5 @@ Route::get('/booking-failed', 'BookingController@bookingFailed')->name('front.bo
 Route::post('/registercustomer', 'CustomerController@registerCustomer')->name('front.register_customer');
 
 Route::get('/mytest', 'HomeController@test');
+
+Route::get('review-and-confirm-booking/{token}', 'BookingController@reviewAndConfirm')->name('front.confirm_booking_cleaner');

@@ -9,6 +9,7 @@ use App\Services\CleaningServicesService;
 use App\Services\PropertyService;
 use App\Services\BookingService;
 use App\Models\User;
+use App\Models\BookingCleanerEmails;
 
 class BookingController extends Controller
 {
@@ -93,5 +94,12 @@ class BookingController extends Controller
     public function bookingFailed()
     {
         return view('frontend.booking_failed');
+    }
+
+    public function reviewAndConfirm($token)
+    {
+        $booking_emails = BookingCleanerEmails::where('token', $token)->first();
+        dd($booking_emails);
+        dd($token);
     }
 }

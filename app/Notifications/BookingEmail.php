@@ -8,21 +8,24 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use App\Models\User;
 use App\Models\Booking;
+use App\Models\BookingCleanerEmails;
 
 class BookingEmail extends Notification
 {
     use Queueable;
 
     protected $booking;
+    protected $booking_email;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(Booking $booking)
+    public function __construct(Booking $booking, BookingCleanerEmails $booking_email)
     {
         $this->booking = $booking;
+        $this->booking_email = $booking_email;
     }
 
     /**
@@ -45,8 +48,9 @@ class BookingEmail extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('Got New Booking')
-                    ->action('Notification Action', url('/'))
+                    ->line('New Booking for you')
+                    ->line('Please click on review and confirm button to review and confirm the booking')
+                    ->action('Review and confirm', route('front.confirm_booking_cleaner', $this->booking_email->token))
                     ->line('Thank you for using our application!');
     }
 

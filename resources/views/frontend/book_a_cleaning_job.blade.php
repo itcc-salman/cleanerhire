@@ -96,7 +96,7 @@
 
         function initAutocomplete() {
             var options = {
-             componentRestrictions: {country: ['au', 'nz']}
+             componentRestrictions: {country: ['au']}
              // types: ['geocode']
           };
           // Create the autocomplete object, restricting the search predictions to
@@ -266,7 +266,7 @@
                             $.each(err.responseJSON.errors, function (i, error) {
                                 // showToast(error[0], 0);
                                 alert(error[0]);
-                                return;
+                                continue;
                             });
                         }
                     }
