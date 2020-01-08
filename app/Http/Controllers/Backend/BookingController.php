@@ -32,10 +32,23 @@ class BookingController extends Controller
     public function getAllBookings(Request $request)
     {
         $data = array();
-        $bookings = Booking::with('user')->get();
+        $bookings = Booking::with('user');
+
+        if($request->has('query')){
+            $query = $request->get('query');
+            if($query && isset($query['general']) && $query['general'] != ''){
+
+            }
+        }
+        if($request->has('f') && $request->get('f') != ''){
+            $bookings->whereDate('booking_date', '>=', $request->f);
+        }
+        if($request->has('t') && $request->get('t') != ''){
+            $bookings->whereDate('booking_date', '<=', $request->t);
+        }
 
         $data['code'] = 200;
-        $data['bookings'] = $bookings;
+        $data['bookings'] = $bookings->get();
         return response()->json($data);
     }
 

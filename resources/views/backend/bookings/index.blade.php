@@ -38,41 +38,8 @@
                                 </span>
                             </div>
                         </div>
-                        <div class="col-md-4 kt-margin-b-20-tablet-and-mobile">
-                            <div class="kt-form__group kt-form__group--inline">
-                                <div class="kt-form__label">
-                                    <label>Status:</label>
-                                </div>
-                                <div class="kt-form__control">
-                                    <select class="form-control bootstrap-select" id="kt_form_status">
-                                        <option value="">All</option>
-                                        <option value="1">Pending</option>
-                                        <option value="2">Delivered</option>
-                                        <option value="3">Canceled</option>
-                                        <option value="4">Success</option>
-                                        <option value="5">Info</option>
-                                        <option value="6">Danger</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 kt-margin-b-20-tablet-and-mobile d-none">
-                            <div class="kt-form__group kt-form__group--inline">
-                                <div class="kt-form__label">
-                                    <label>Type:</label>
-                                </div>
-                                <div class="kt-form__control">
-                                    <select class="form-control bootstrap-select" id="kt_form_type">
-                                        <option value="">All</option>
-                                        <option value="1">Online</option>
-                                        <option value="2">Retail</option>
-                                        <option value="3">Direct</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
                         <div class="align-self-end kt-margin-b-20-tablet-and-mobile">
-                            <a href="#" class="btn kt-subheader__btn-daterange" id="kt_dashboard_daterangepicker" data-toggle="kt-tooltip" title="Select dashboard daterange" data-placement="left">
+                            <a href="javascript:;" class="btn kt-subheader__btn-daterange" id="kt_dashboard_daterangepicker">
                                 <span class="kt-subheader__btn-daterange-title" id="kt_dashboard_daterangepicker_title">Today</span>&nbsp;
                                 <span class="kt-subheader__btn-daterange-date" id="kt_dashboard_daterangepicker_date">Aug 16</span>
 
@@ -115,137 +82,117 @@
 
 // Class definition
 var KTDatatableRemoteAjax = function() {
-    // Private functions
 
-    // basic demo
-    var demo = function() {
+    var datatable = $('.kt-datatable').KTDatatable({
+        // datasource definition
+        data: {
+            saveState:{
+                cookie: false,
+                webstorage: false
+            },
+            type: 'remote',
+            source: {
+                read: {
+                    url: '{{ route('backend.ajax.bookings') }}',
+                    method: 'GET',
+                    params: {
+                        f: $('#from_booking').val(),
+                        t : $('#to_booking').val(),
+                    },
 
-        var datatable = $('.kt-datatable').KTDatatable({
-            // datasource definition
-            data: {
-                type: 'remote',
-                source: {
-                    read: {
-                        url: '{{ route('backend.ajax.bookings') }}',
-                        method: 'GET',
-
-                        // sample custom headers
-                        // headers: {'x-my-custom-header': 'some value', 'x-test-header': 'the value'},
-                        map: function(raw) {
-                            // sample data mapping
-                            var dataSet = raw;
-                            if (typeof raw.bookings !== 'undefined') {
-                                dataSet = raw.bookings;
-                            }
-                            return dataSet;
-                        },
+                    // sample custom headers
+                    // headers: {'x-my-custom-header': 'some value', 'x-test-header': 'the value'},
+                    map: function(raw) {
+                        // sample data mapping
+                        var dataSet = raw;
+                        if (typeof raw.bookings !== 'undefined') {
+                            dataSet = raw.bookings;
+                        }
+                        return dataSet;
                     },
                 },
-                pageSize: 10,
-                serverPaging: true,
-                serverFiltering: true,
-                serverSorting: true,
             },
-
-            // layout definition
-            layout: {
-                scroll: false,
-                footer: false,
-            },
-
-            // column sorting
-            sortable: true,
-
-            pagination: true,
-
-            search: {
-                input: $('#general'),
-            },
-
-            // columns definition
-            columns: [
-                {
-                    field: 'id',
-                    title: '#',
-                    sortable: 'asc',
-                    width: 30,
-                    type: 'number',
-                    selector: false,
-                    textAlign: 'center',
-                }, {
-                    field: 'user.first_name',
-                    title: 'First Name',
-                }, {
-                    field: 'user.last_name',
-                    title: 'Last Name',
-                }, {
-                    field: 'user.email',
-                    title: 'Email',
-                }, {
-                    field: 'status',
-                    title: 'Status',
-                    // callback function support for column rendering
-                    template: function(row) {
-                        var status = {
-                            0: {'title': 'Inactive', 'class': ' kt-badge--danger'},
-                            1: {'title': 'Active', 'class': 'kt-badge--brand'}
-                        };
-                        return '<span class="kt-badge ' + status[row.status].class + ' kt-badge--inline kt-badge--pill">' + status[row.status].title + '</span>';
-                    },
-                }, {
-                    field: 'Actions',
-                    title: 'Actions',
-                    sortable: false,
-                    width: 110,
-                    overflow: 'visible',
-                    autoHide: false,
-                    template: function(row) {
-                        return '\
-                        <a href="/admin/booking/edit/'+ row.id +'" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="Edit details">\
-                            <i class="flaticon2-edit"></i>\
-                        </a>\
-                        <a href="javascript:;" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="Delete">\
-                            <i class="flaticon2-trash"></i>\
-                        </a>\
-                    ';
-                    },
-                }],
-
-        });
-
-    $('#kt_form_status').on('change', function() {
-      datatable.search($(this).val().toLowerCase(), 'status');
-    });
-
-    $('#kt_form_type').on('change', function() {
-      datatable.search($(this).val().toLowerCase(), 'type');
-    });
-
-    $('#from_booking,#to_booking').on('change', function() {
-        var x =
-
-
-      datatable.search($('#from_booking').val().toLowerCase(), 'from');
-      datatable.search($('#to_booking').val().toLowerCase(), 'to');
-    });
-
-    // $('#to_booking').on('change', function() {
-    //     console.log($('#to_booking').val());
-    //   datatable.search($(this).val().toLowerCase(), 'to');
-    // });
-
-
-    $('#kt_form_status,#kt_form_type').selectpicker();
-
-    };
-
-    return {
-        // public functions
-        init: function() {
-            demo();
+            pageSize: 10,
+            serverPaging: true,
+            serverFiltering: true,
+            serverSorting: true,
         },
-    };
-}();
+
+        // layout definition
+        layout: {
+            scroll: false,
+            footer: false,
+        },
+
+        // column sorting
+        sortable: true,
+
+        pagination: true,
+
+        search: {
+            input: $('#general'),
+        },
+
+        // columns definition
+        columns: [
+            {
+                field: 'id',
+                title: '#',
+                sortable: 'asc',
+                width: 30,
+                type: 'number',
+                selector: false,
+                textAlign: 'center',
+            }, {
+                field: 'user.first_name',
+                title: 'First Name',
+            }, {
+                field: 'user.last_name',
+                title: 'Last Name',
+            }, {
+                field: 'user.email',
+                title: 'Email',
+            }, {
+                field: 'booking_date',
+                title: 'Date',
+            }, {
+                field: 'status',
+                title: 'Status',
+                // callback function support for column rendering
+                template: function(row) {
+                    var status = {
+                        0: {'title': 'Inactive', 'class': ' kt-badge--danger'},
+                        1: {'title': 'Active', 'class': 'kt-badge--brand'}
+                    };
+                    return '<span class="kt-badge ' + status[row.status].class + ' kt-badge--inline kt-badge--pill">' + status[row.status].title + '</span>';
+                },
+            }, {
+                field: 'Actions',
+                title: 'Actions',
+                sortable: false,
+                width: 110,
+                overflow: 'visible',
+                autoHide: false,
+                template: function(row) {
+                    return '\
+                    <a href="/admin/booking/edit/'+ row.id +'" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="Edit details">\
+                        <i class="flaticon2-edit"></i>\
+                    </a>\
+                    <a href="javascript:;" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="Delete">\
+                        <i class="flaticon2-trash"></i>\
+                    </a>\
+                ';
+                },
+            }],
+    });
+    $('#from_booking,#to_booking').on('change', function() {
+        datatable.setDataSourceParam('f', $('#from_booking').val());
+        datatable.setDataSourceParam('t', $('#to_booking').val());
+        datatable.load();
+    });
+    console.log(datatable);
+
+};
 
 // Daterangepicker Init
 var daterangepickerInit = function() {
@@ -263,16 +210,19 @@ var daterangepickerInit = function() {
 
         if ((end - start) < 100 || label == 'Today') {
             title = 'Today:';
-            range = start.format('MMM D');
+            range = start.format('MMM DD');
+        } else if (label == 'Tomorrow') {
+            title = 'Tomorrow:';
+            range = start.format('MMM DD');
         } else if (label == 'Yesterday') {
             title = 'Yesterday:';
-            range = start.format('MMM D');
+            range = start.format('MMM DD');
         } else {
-            range = start.format('MMM D') + ' - ' + end.format('MMM D');
+            range = start.format('MMM DD') + ' - ' + end.format('MMM DD');
         }
 
-        $("#from_booking").val(start.format('YYYY-MM-DD')).trigger('change');
-        $("#to_booking").val(end.format('YYYY-MM-DD'));
+        $("#from_booking").val(start.format('YYYY-MM-DD'));
+        $("#to_booking").val(end.format('YYYY-MM-DD')).trigger('change');
         $('#kt_dashboard_daterangepicker_date').html(range);
         $('#kt_dashboard_daterangepicker_title').html(title);
     }
@@ -284,6 +234,7 @@ var daterangepickerInit = function() {
         opens: 'left',
         ranges: {
             'Today': [moment(), moment()],
+            'Tomorrow': [moment().add(1, 'days'), moment().add(1, 'days')],
             'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
             'Last 7 Days': [moment().subtract(6, 'days'), moment()],
             'Last 30 Days': [moment().subtract(29, 'days'), moment()],
@@ -297,7 +248,15 @@ var daterangepickerInit = function() {
 
 jQuery(document).ready(function() {
     daterangepickerInit();
-    KTDatatableRemoteAjax.init();
+    var url = $(location).attr('href'),
+    parts = url.split("/v/");
+    if(parts.length == 2){
+        var dateString = moment.unix(parts[1]).format("YYYY-MM-DD");
+        $("#from_booking").val(dateString);
+        $("#to_booking").val(dateString).trigger('change');
+        $('#kt_dashboard_daterangepicker_date').html(moment.unix(parts[1]).format("MMM DD"));
+    }
+    KTDatatableRemoteAjax();
 });
 </script>
 
