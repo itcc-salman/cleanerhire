@@ -1,4 +1,5 @@
 @extends('cleaner.layouts.master')
+@section('title', 'My Profile')
 @push('css')
 
 @endpush

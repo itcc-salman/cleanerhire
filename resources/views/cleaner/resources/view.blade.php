@@ -1,4 +1,5 @@
 @extends('cleaner.layouts.master')
+@section('title', 'View Resource')
 @push('css')
 <style type="text/css">
     .pdfobject-container { height: 90rem; border: 1rem solid rgba(0,0,0,.1); }

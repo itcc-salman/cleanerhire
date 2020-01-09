@@ -1,4 +1,5 @@
 @extends('cleaner.layouts.master')
+@section('title', 'Booking Calendar')
 @push('css')
     <link href="{{ asset('assets/plugins/custom/fullcalendar/fullcalendar.bundle.css') }}" rel="stylesheet" type="text/css" />
 @endpush

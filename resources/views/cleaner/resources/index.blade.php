@@ -1,5 +1,5 @@
 @extends('cleaner.layouts.master')
-
+@section('title', 'Resources List')
 @section('content')
 <!--Begin::Dashboard 5-->
 <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
