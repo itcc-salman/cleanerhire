@@ -1,5 +1,5 @@
 @extends('backend.layouts.master')
-
+@section('title', 'Add Property')
 @section('content')
 <div class="row">
     <div class="col-md-12">
@@ -8,7 +8,7 @@
             <div class="kt-portlet__head">
                 <div class="kt-portlet__head-label">
                     <h3 class="kt-portlet__head-title">
-                        Create Property
+                        Add Property
                     </h3>
                 </div>
             </div>

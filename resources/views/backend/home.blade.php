@@ -1,5 +1,5 @@
 @extends('backend.layouts.master')
-
+@section('title', '')
 @section('content')
 <!--Begin::Dashboard 5-->
 

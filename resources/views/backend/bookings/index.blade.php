@@ -1,5 +1,5 @@
 @extends('backend.layouts.master')
-
+@section('title', 'Bookings')
 @section('content')
 <!--Begin::Dashboard 5-->
 <div class="kt-portlet kt-portlet--mobile">

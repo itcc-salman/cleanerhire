@@ -9,7 +9,7 @@
                     <span class="kt-subheader__breadcrumbs-separator"></span>
                     <a href="{{ route('backend.dashboard') }}" class="kt-subheader__breadcrumbs-link"> Dashboard </a>
                     <span class="kt-subheader__breadcrumbs-separator"></span>
-                    {{-- <a href="#" class="kt-subheader__breadcrumbs-link"> {{ $title ?? 'Here'}} </a> --}}
+                    <a href="javascript:;" class="kt-subheader__breadcrumbs-link">@yield('title')</a>
 
                     <span class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">{{$title ?? ''}}</span>
                 </div>

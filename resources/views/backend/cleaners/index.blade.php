@@ -1,5 +1,5 @@
 @extends('backend.layouts.master')
-
+@section('title', 'Cleaners')
 @section('content')
 <!--Begin:: Cleaners-->
 <div class="kt-portlet kt-portlet--mobile">

@@ -1,5 +1,5 @@
 @extends('backend.layouts.master')
-
+@section('title', 'Booking Calendar')
 @section('content')
 <!--Begin::Calender 5-->
 <div class="row">

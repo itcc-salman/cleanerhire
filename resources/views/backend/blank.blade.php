@@ -1,5 +1,5 @@
 @extends('backend.layouts.master')
-
+@section('title', 'Blank Page')
 @section('content')
 <!--Begin::Dashboard 5-->
 

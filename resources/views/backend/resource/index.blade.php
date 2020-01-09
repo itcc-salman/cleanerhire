@@ -1,5 +1,5 @@
 @extends('backend.layouts.master')
-
+@section('title', 'Resources')
 @section('content')
 <!--Begin::Dashboard 5-->
 <div class="kt-portlet kt-portlet--mobile">
@@ -9,7 +9,7 @@
                 <i class="kt-font-brand flaticon2-line-chart"></i>
             </span>
             <h3 class="kt-portlet__head-title">
-                Resources List
+                Resources
             </h3>
         </div>
         <div class="kt-portlet__head-toolbar">

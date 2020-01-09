@@ -1,5 +1,5 @@
 @extends('backend.layouts.master')
-
+@section('title', 'Customers')
 @section('content')
 <!--Begin::Customers 5-->
 <div class="kt-portlet kt-portlet--mobile">

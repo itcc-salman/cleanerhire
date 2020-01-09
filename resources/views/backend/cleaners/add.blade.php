@@ -1,4 +1,5 @@
 @extends('backend.layouts.master')
+@section('title', 'Add Cleaner')
 @push('css')
 <link href="{{ asset('assets/css/pages/wizard/wizard-1.css') }}" rel="stylesheet" type="text/css" />
 <style>
