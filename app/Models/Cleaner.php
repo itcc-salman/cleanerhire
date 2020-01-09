@@ -135,4 +135,25 @@ class Cleaner extends Model
         return $this->hasMany('App\Models\ServiceArea', 'cleaner_id');
     }
 
+    public function scopeInProgress($query)
+    {
+        return $query->where('status', 0);
+    }
+
+    public function scopeWaitingApproval($query)
+    {
+        return $query->where('status', 1);
+    }
+
+    public function scopeInactive($query)
+    {
+        return $query->where('status', 2);
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->where('status', 3);
+    }
+
+
 }

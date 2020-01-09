@@ -81,7 +81,7 @@ class CleanerController extends Controller
             $cleaner->last_step = $last_step;
             $cleaner->created_by =  Auth::Id();
             $cleaner->updated_by =  Auth::Id();
-            $cleaner->status = 1;
+            $cleaner->status = 3;
             $cleaner->save();
 
             // $request->session()->put('backend.last_step', $last_step);
@@ -343,25 +343,4 @@ class CleanerController extends Controller
         $data = $commonService->saveUploadedFile($request);
         return response()->json($data);
     }
-
-    public function getDistanceBetweenTwoPoints(Request $request) {
-
-        // array of lat-long i.e  $point1 = [lat,long]
-
-        $point1 = [20.3893, 72.9106];
-        $point2 = [23.0225, 72.5714];
-        $earthRadius = 6371;  // earth radius in km
-        $point1Lat = $point1[0];
-        $point2Lat =$point2[0];
-        $deltaLat = deg2rad($point2Lat - $point1Lat);
-        $point1Long =$point1[1];
-        $point2Long =$point2[1];
-        $deltaLong = deg2rad($point2Long - $point1Long);
-        $a = sin($deltaLat/2) * sin($deltaLat/2) + cos(deg2rad($point1Lat)) * cos(deg2rad($point2Lat)) * sin($deltaLong/2) * sin($deltaLong/2);
-        $c = 2 * atan2(sqrt($a), sqrt(1-$a));
-
-        $distance = $earthRadius * $c;
-        return $distance;    // in km
-    }
-
 }

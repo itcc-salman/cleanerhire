@@ -1,36 +1,34 @@
 @extends('backend.layouts.master')
 
 @section('content')
-<!--Begin::Dashboard 5-->
-<div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
-    <div class="row">
-        <div class="col-lg-12">
+<!--Begin::Calender 5-->
+<div class="row">
+    <div class="col-lg-12">
 
-            <!--begin::Portlet-->
-            <div class="kt-portlet" id="kt_portlet">
-                <div class="kt-portlet__head">
-                    <div class="kt-portlet__head-label">
-                        <span class="kt-portlet__head-icon">
-                            <i class="flaticon-map-location"></i>
-                        </span>
-                        <h3 class="kt-portlet__head-title">
-                            Booking Calendar
-                        </h3>
-                    </div>
-                    <div class="kt-portlet__head-toolbar">
-
-                    </div>
+        <!--begin::Portlet-->
+        <div class="kt-portlet" id="kt_portlet">
+            <div class="kt-portlet__head">
+                <div class="kt-portlet__head-label">
+                    <span class="kt-portlet__head-icon">
+                        <i class="flaticon-map-location"></i>
+                    </span>
+                    <h3 class="kt-portlet__head-title">
+                        Booking Calendar
+                    </h3>
                 </div>
-                <div class="kt-portlet__body">
-                    <div id="kt_calendar"></div>
+                <div class="kt-portlet__head-toolbar">
+
                 </div>
             </div>
-
-            <!--end::Portlet-->
+            <div class="kt-portlet__body">
+                <div id="kt_calendar"></div>
+            </div>
         </div>
+
+        <!--end::Portlet-->
     </div>
 </div>
-<!--End::Dashboard 5-->
+<!--End::Calender 5-->
 @endsection
 
 @push('scripts')

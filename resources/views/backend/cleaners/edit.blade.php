@@ -12,159 +12,157 @@
 @endpush
 
 @section('content')
-<!-- begin:: Content -->
-<div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
-    <div class="kt-portlet">
-        <div class="kt-portlet__body kt-portlet__body--fit">
-            <div class="kt-grid kt-wizard-v1 kt-wizard-v1--white" id="kt_wizard_v1" data-ktwizard-state="step-first">
-                <div class="kt-grid__item">
+<!-- begin:: Edit Cleaner -->
+<div class="kt-portlet">
+    <div class="kt-portlet__body kt-portlet__body--fit">
+        <div class="kt-grid kt-wizard-v1 kt-wizard-v1--white" id="kt_wizard_v1" data-ktwizard-state="step-first">
+            <div class="kt-grid__item">
 
-                    <!--begin: Form Wizard Nav -->
-                    <div class="kt-wizard-v1__nav">
+                <!--begin: Form Wizard Nav -->
+                <div class="kt-wizard-v1__nav">
 
-                        <!--doc: Remove "kt-wizard-v1__nav-items--clickable" class and also set 'clickableSteps: false' in the JS init to disable manually clicking step titles -->
-                        <div class="kt-wizard-v1__nav-items kt-wizard-v1__nav-items--clickable">
-                            <div class="kt-wizard-v1__nav-item" data-ktwizard-type="step" data-ktwizard-state="current">
-                                <div class="kt-wizard-v1__nav-body">
-                                    <div class="kt-wizard-v1__nav-icon">
-                                        <i class="flaticon-bus-stop"></i>
-                                    </div>
-                                    <div class="kt-wizard-v1__nav-label">
-                                        1. Personal Details
-                                    </div>
+                    <!--doc: Remove "kt-wizard-v1__nav-items--clickable" class and also set 'clickableSteps: false' in the JS init to disable manually clicking step titles -->
+                    <div class="kt-wizard-v1__nav-items kt-wizard-v1__nav-items--clickable">
+                        <div class="kt-wizard-v1__nav-item" data-ktwizard-type="step" data-ktwizard-state="current">
+                            <div class="kt-wizard-v1__nav-body">
+                                <div class="kt-wizard-v1__nav-icon">
+                                    <i class="flaticon-bus-stop"></i>
+                                </div>
+                                <div class="kt-wizard-v1__nav-label">
+                                    1. Personal Details
                                 </div>
                             </div>
-                            <div class="kt-wizard-v1__nav-item" data-ktwizard-type="step">
-                                <div class="kt-wizard-v1__nav-body">
-                                    <div class="kt-wizard-v1__nav-icon">
-                                        <i class="flaticon-list"></i>
-                                    </div>
-                                    <div class="kt-wizard-v1__nav-label">
-                                        2. Visa & Documents
-                                    </div>
+                        </div>
+                        <div class="kt-wizard-v1__nav-item" data-ktwizard-type="step">
+                            <div class="kt-wizard-v1__nav-body">
+                                <div class="kt-wizard-v1__nav-icon">
+                                    <i class="flaticon-list"></i>
+                                </div>
+                                <div class="kt-wizard-v1__nav-label">
+                                    2. Visa & Documents
                                 </div>
                             </div>
-                            <div class="kt-wizard-v1__nav-item" data-ktwizard-type="step">
-                                <div class="kt-wizard-v1__nav-body">
-                                    <div class="kt-wizard-v1__nav-icon">
-                                        <i class="flaticon-responsive"></i>
-                                    </div>
-                                    <div class="kt-wizard-v1__nav-label">
-                                        3. Services
-                                    </div>
+                        </div>
+                        <div class="kt-wizard-v1__nav-item" data-ktwizard-type="step">
+                            <div class="kt-wizard-v1__nav-body">
+                                <div class="kt-wizard-v1__nav-icon">
+                                    <i class="flaticon-responsive"></i>
+                                </div>
+                                <div class="kt-wizard-v1__nav-label">
+                                    3. Services
                                 </div>
                             </div>
-                            <div class="kt-wizard-v1__nav-item" data-ktwizard-type="step">
-                                <div class="kt-wizard-v1__nav-body">
-                                    <div class="kt-wizard-v1__nav-icon">
-                                        <i class="flaticon-truck"></i>
-                                    </div>
-                                    <div class="kt-wizard-v1__nav-label">
-                                        4. Availability
-                                    </div>
+                        </div>
+                        <div class="kt-wizard-v1__nav-item" data-ktwizard-type="step">
+                            <div class="kt-wizard-v1__nav-body">
+                                <div class="kt-wizard-v1__nav-icon">
+                                    <i class="flaticon-truck"></i>
+                                </div>
+                                <div class="kt-wizard-v1__nav-label">
+                                    4. Availability
                                 </div>
                             </div>
-                            <div class="kt-wizard-v1__nav-item" data-ktwizard-type="step">
-                                <div class="kt-wizard-v1__nav-body">
-                                    <div class="kt-wizard-v1__nav-icon">
-                                        <i class="flaticon-globe"></i>
-                                    </div>
-                                    <div class="kt-wizard-v1__nav-label">
-                                        5. Verify and Submit
-                                    </div>
+                        </div>
+                        <div class="kt-wizard-v1__nav-item" data-ktwizard-type="step">
+                            <div class="kt-wizard-v1__nav-body">
+                                <div class="kt-wizard-v1__nav-icon">
+                                    <i class="flaticon-globe"></i>
+                                </div>
+                                <div class="kt-wizard-v1__nav-label">
+                                    5. Verify and Submit
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <!--end: Form Wizard Nav -->
                 </div>
-                <div class="kt-grid__item kt-grid__item--fluid kt-wizard-v1__wrapper">
 
-                    <!--begin: Form Wizard Form-->
-                    <form class="kt-form kt-padding-t-0" id="kt_form">
-                        @csrf
-                        <input type="hidden" name="last_step" id="last_step" value="1">
-                        @if(isset($cleaner))
-                            <input type="hidden" name="id" id="cleaner_id" value="{{$cleaner->id}}">
-                        @else
-                            <input type="hidden" name="id" id="cleaner_id" value="">
-                        @endif
+                <!--end: Form Wizard Nav -->
+            </div>
+            <div class="kt-grid__item kt-grid__item--fluid kt-wizard-v1__wrapper">
 
-                        <!--begin: Form Wizard Step 1-->
-                        <div class="kt-wizard-v1__content" data-ktwizard-type="step-content" data-ktwizard-state="current">
-                            <div class="kt-heading kt-heading--md">Personal Details</div>
-                            <div class="kt-form__section kt-form__section--first">
-                                @include('backend.cleaners.partials.step1')
-                            </div>
+                <!--begin: Form Wizard Form-->
+                <form class="kt-form kt-padding-t-0" id="kt_form">
+                    @csrf
+                    <input type="hidden" name="last_step" id="last_step" value="1">
+                    @if(isset($cleaner))
+                        <input type="hidden" name="id" id="cleaner_id" value="{{$cleaner->id}}">
+                    @else
+                        <input type="hidden" name="id" id="cleaner_id" value="">
+                    @endif
+
+                    <!--begin: Form Wizard Step 1-->
+                    <div class="kt-wizard-v1__content" data-ktwizard-type="step-content" data-ktwizard-state="current">
+                        <div class="kt-heading kt-heading--md">Personal Details</div>
+                        <div class="kt-form__section kt-form__section--first">
+                            @include('backend.cleaners.partials.step1')
                         </div>
+                    </div>
 
-                        <!--end: Form Wizard Step 1-->
+                    <!--end: Form Wizard Step 1-->
 
-                        <!--begin: Form Wizard Step 2-->
-                        <div class="kt-wizard-v1__content" data-ktwizard-type="step-content">
-                            <div class="kt-heading kt-heading--md">Visa & Documents</div>
-                            <div class="kt-form__section kt-form__section--first">
-                                @include('backend.cleaners.partials.step2')
-                            </div>
+                    <!--begin: Form Wizard Step 2-->
+                    <div class="kt-wizard-v1__content" data-ktwizard-type="step-content">
+                        <div class="kt-heading kt-heading--md">Visa & Documents</div>
+                        <div class="kt-form__section kt-form__section--first">
+                            @include('backend.cleaners.partials.step2')
                         </div>
+                    </div>
 
-                        <!--end: Form Wizard Step 2-->
+                    <!--end: Form Wizard Step 2-->
 
-                        <!--begin: Form Wizard Step 3-->
-                        <div class="kt-wizard-v1__content" data-ktwizard-type="step-content">
-                            <div class="kt-heading kt-heading--md">Services</div>
-                            <div class="kt-form__section kt-form__section--first">
-                                @include('backend.cleaners.partials.step3')
-                            </div>
+                    <!--begin: Form Wizard Step 3-->
+                    <div class="kt-wizard-v1__content" data-ktwizard-type="step-content">
+                        <div class="kt-heading kt-heading--md">Services</div>
+                        <div class="kt-form__section kt-form__section--first">
+                            @include('backend.cleaners.partials.step3')
                         </div>
+                    </div>
 
-                        <!--end: Form Wizard Step 3-->
+                    <!--end: Form Wizard Step 3-->
 
-                        <!--begin: Form Wizard Step 4-->
-                        <div class="kt-wizard-v1__content" data-ktwizard-type="step-content">
-                            <div class="kt-heading kt-heading--md">Availability</div>
-                            <div class="kt-form__section kt-form__section--first">
-                                @include('backend.cleaners.partials.step4')
-                            </div>
+                    <!--begin: Form Wizard Step 4-->
+                    <div class="kt-wizard-v1__content" data-ktwizard-type="step-content">
+                        <div class="kt-heading kt-heading--md">Availability</div>
+                        <div class="kt-form__section kt-form__section--first">
+                            @include('backend.cleaners.partials.step4')
                         </div>
+                    </div>
 
-                        <!--end: Form Wizard Step 4-->
+                    <!--end: Form Wizard Step 4-->
 
-                        <!--begin: Form Wizard Step 5-->
-                        <div class="kt-wizard-v1__content" data-ktwizard-type="step-content">
-                            <div class="kt-heading kt-heading--md">Verify and Submit</div>
-                            <div class="kt-form__section kt-form__section--first" id="stepFiveWizardDiv">
-                                @include('backend.cleaners.partials.step5')
-                            </div>
+                    <!--begin: Form Wizard Step 5-->
+                    <div class="kt-wizard-v1__content" data-ktwizard-type="step-content">
+                        <div class="kt-heading kt-heading--md">Verify and Submit</div>
+                        <div class="kt-form__section kt-form__section--first" id="stepFiveWizardDiv">
+                            @include('backend.cleaners.partials.step5')
                         </div>
+                    </div>
 
-                        <!--end: Form Wizard Step 5-->
+                    <!--end: Form Wizard Step 5-->
 
-                        <!--begin: Form Actions -->
-                        <div class="kt-form__actions">
-                            <button class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u" data-ktwizard-type="action-prev">
-                                Previous
-                            </button>
-                            <button class="btn btn-brand btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u" data-ktwizard-type="action-next">
-                                Next Step
-                            </button>
-                            <button class="btn btn-success btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u" data-ktwizard-type="action-submit">
-                                Submit
-                            </button>
-                        </div>
+                    <!--begin: Form Actions -->
+                    <div class="kt-form__actions">
+                        <button class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u" data-ktwizard-type="action-prev">
+                            Previous
+                        </button>
+                        <button class="btn btn-brand btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u" data-ktwizard-type="action-next">
+                            Next Step
+                        </button>
+                        <button class="btn btn-success btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u" data-ktwizard-type="action-submit">
+                            Submit
+                        </button>
+                    </div>
 
-                        <!--end: Form Actions -->
-                    </form>
+                    <!--end: Form Actions -->
+                </form>
 
-                    <!--end: Form Wizard Form-->
-                </div>
+                <!--end: Form Wizard Form-->
             </div>
         </div>
     </div>
 </div>
 
-<!-- end:: Content -->
+<!-- end:: Edit Cleaner -->
 @endsection
 
 @push('scripts')

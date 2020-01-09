@@ -204,20 +204,20 @@
             </div>
             <div class="col-6 border-left-divider">
                 <label>List of Documents</label>
-                <input type="hidden" name="doc_driving_licence" id="doc_driving_licence">
-                <input type="hidden" name="doc_medicare_card" id="doc_medicare_card">
-                <input type="hidden" name="doc_passport" id="doc_passport">
-                <input type="hidden" name="doc_bank_statement" id="doc_bank_statement">
-                <input type="hidden" name="doc_utility_bill" id="doc_utility_bill">
-                <input type="hidden" name="doc_certifications" id="doc_certifications">
-                <input type="hidden" name="doc_police_check" id="doc_police_check">
-                <p class="m-0 p-0"><span>1. Driving License</span><span id="doc_driving_licence_file_name">{{$cleaner->doc_driving_licence ?? ''}}</span></p>
-                <p class="m-0 p-0"><span>2. Medical Card</span><span id="doc_medicare_card_file_name">{{$cleaner->doc_medicare_card ?? ''}}</span></p>
-                <p class="m-0 p-0"><span>3. Passport</span><span id="doc_passport_file_name">{{$cleaner->doc_passport ?? ''}}</span></p>
-                <p class="m-0 p-0"><span>4. Utility Bill</span><span id="doc_bank_statement_file_name">{{$cleaner->doc_bank_statement ?? ''}}</span></p>
-                <p class="m-0 p-0"><span>5. Bank Statement</span><span id="doc_utility_bill_file_name">{{$cleaner->doc_utility_bill ?? ''}}</span></p>
-                <p class="m-0 p-0"><span>6. Police Check</span><span id="doc_certifications_file_name">{{$cleaner->doc_certifications ?? ''}}</span></p>
-                <p class="m-0 p-0"><span>7. Certifications</span><span id="doc_police_check_file_name">{{$cleaner->doc_police_check ?? ''}}</span></p>
+                <input type="hidden" name="doc_driving_licence" id="doc_driving_licence" value="{{$cleaner->doc_driving_licence ?? ''}}">
+                <input type="hidden" name="doc_medicare_card" id="doc_medicare_card" value="{{$cleaner->doc_medicare_card ?? ''}}">
+                <input type="hidden" name="doc_passport" id="doc_passport" value="{{$cleaner->doc_passport ?? ''}}">
+                <input type="hidden" name="doc_bank_statement" id="doc_bank_statement" value="{{$cleaner->doc_bank_statement ?? ''}}">
+                <input type="hidden" name="doc_utility_bill" id="doc_utility_bill" value="{{$cleaner->doc_utility_bill ?? ''}}">
+                <input type="hidden" name="doc_certifications" id="doc_certifications" value="{{$cleaner->doc_certifications ?? ''}}">
+                <input type="hidden" name="doc_police_check" id="doc_police_check" value="{{$cleaner->doc_police_check ?? ''}}">
+                <p class="m-0 p-0"><span id="doc_driving_licence_file_name" class="kt-badge {{ (isset($cleaner) && $cleaner->doc_driving_licence != '' ) ? 'kt-badge--unified-success' : 'kt-badge--unified-danger' }} kt-badge--sm kt-badge--rounded kt-badge--bolder"><i class="fa {{ (isset($cleaner) && $cleaner->doc_driving_licence != '' ) ? 'fa-check' : 'fa-times' }}"></i></span><span>&nbsp;Driving License</span></p>
+                <p class="m-0 p-0"><span id="doc_medicare_card_file_name" class="kt-badge {{ (isset($cleaner) && $cleaner->doc_medicare_card != '' ) ? 'kt-badge--unified-success' : 'kt-badge--unified-danger' }} kt-badge--sm kt-badge--rounded kt-badge--bolder"><i class="fa {{ (isset($cleaner) && $cleaner->doc_medicare_card != '' ) ? 'fa-check' : 'fa-times' }}"></i></span><span>&nbsp;Medical Card</span></p>
+                <p class="m-0 p-0"><span id="doc_passport_file_name" class="kt-badge {{ (isset($cleaner) && $cleaner->doc_passport != '' ) ? 'kt-badge--unified-success' : 'kt-badge--unified-danger' }} kt-badge--sm kt-badge--rounded kt-badge--bolder"><i class="fa {{ (isset($cleaner) && $cleaner->doc_passport != '' ) ? 'fa-check' : 'fa-times' }}"></i></span><span>&nbsp;Passport</span></p>
+                <p class="m-0 p-0"><span id="doc_bank_statement_file_name" class="kt-badge {{ (isset($cleaner) && $cleaner->doc_bank_statement != '' ) ? 'kt-badge--unified-success' : 'kt-badge--unified-danger' }} kt-badge--sm kt-badge--rounded kt-badge--bolder"><i class="fa {{ (isset($cleaner) && $cleaner->doc_bank_statement != '' ) ? 'fa-check' : 'fa-times' }}"></i></span><span>&nbsp;Utility Bill</span></p>
+                <p class="m-0 p-0"><span id="doc_utility_bill_file_name" class="kt-badge {{ (isset($cleaner) && $cleaner->doc_utility_bill != '' ) ? 'kt-badge--unified-success' : 'kt-badge--unified-danger' }} kt-badge--sm kt-badge--rounded kt-badge--bolder"><i class="fa {{ (isset($cleaner) && $cleaner->doc_utility_bill != '' ) ? 'fa-check' : 'fa-times' }}"></i></span><span>&nbsp;Bank Statement</span></p>
+                <p class="m-0 p-0"><span id="doc_certifications_file_name" class="kt-badge {{ (isset($cleaner) && $cleaner->doc_certifications != '' ) ? 'kt-badge--unified-success' : 'kt-badge--unified-danger' }} kt-badge--sm kt-badge--rounded kt-badge--bolder"><i class="fa {{ (isset($cleaner) && $cleaner->doc_certifications != '' ) ? 'fa-check' : 'fa-times' }}"></i></span><span>&nbsp;Police Check</span></p>
+                <p class="m-0 p-0"><span id="doc_police_check_file_name" class="kt-badge {{ (isset($cleaner) && $cleaner->doc_police_check != '' ) ? 'kt-badge--unified-success' : 'kt-badge--unified-danger' }} kt-badge--sm kt-badge--rounded kt-badge--bolder"><i class="fa {{ (isset($cleaner) && $cleaner->doc_police_check != '' ) ? 'fa-check' : 'fa-times' }}"></i></span><span>&nbsp;Certifications</span></p>
             </div>
         </div>
     </div>
@@ -280,7 +280,11 @@
                 if(response.code == 200){
                     var selectedValue = '#'+$('#fileUploadSelect').val();
                     $(selectedValue).val(response.data);
-                    $(selectedValue+'_file_name').html(": "+response.data);
+                    if($(selectedValue+'_file_name').hasClass('kt-badge--unified-danger')){
+                        $(selectedValue+'_file_name').removeClass('kt-badge--unified-danger').addClass('kt-badge--unified-success');
+                        $(selectedValue+'_file_name i').removeClass('fa-times').addClass('fa-check');
+                    }
+                    // $(selectedValue+'_file_name').html(": "+response.data);
                     $('#file').val('');
                     $('.custom-file-label').removeClass("selected").html("Choose file");
                 }

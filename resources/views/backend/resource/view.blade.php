@@ -5,30 +5,28 @@
 </style>
 @endpush
 @section('content')
-<div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
-    <div class="row">
-        <div class="col-md-12">
-            <!--begin::Portlet-->
-            <div class="kt-portlet">
-                <div class="kt-portlet__head">
-                    <div class="kt-portlet__head-label">
-                        <h3 class="kt-portlet__head-title">
-                            {{ $resource->name }}
-                        </h3>
-                    </div>
+<div class="row">
+    <div class="col-md-12">
+        <!--begin::Portlet-->
+        <div class="kt-portlet">
+            <div class="kt-portlet__head">
+                <div class="kt-portlet__head-label">
+                    <h3 class="kt-portlet__head-title">
+                        {{ $resource->name }}
+                    </h3>
                 </div>
-
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div id="pdf_view">
-                        </div>
-                    </div>
-                </div>
-
             </div>
 
-            <!--end::Portlet-->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div id="pdf_view">
+                    </div>
+                </div>
+            </div>
+
         </div>
+
+        <!--end::Portlet-->
     </div>
 </div>
 @endsection
