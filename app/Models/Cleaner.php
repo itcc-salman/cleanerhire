@@ -11,11 +11,10 @@ class Cleaner extends Model
 {
     use SoftDeletes;
 
-    const STATUS_IN_PROGRESS            = 0;
-    const STATUS_WAITING_FOR_APPROVAL   = 1;
-    const STATUS_INACTIVE               = 2;
-    const STATUS_ACTIVE                 = 3;
-
+    const STATUS_CREATED            = 0;
+    const STATUS_PENDING            = 1;
+    const STATUS_INACTIVE           = 2;
+    const STATUS_ACTIVE             = 3;
     /**
      * The attributes that are mass assignable.
      *
@@ -135,12 +134,12 @@ class Cleaner extends Model
         return $this->hasMany('App\Models\ServiceArea', 'cleaner_id');
     }
 
-    public function scopeInProgress($query)
+    public function scopeCreated($query)
     {
         return $query->where('status', 0);
     }
 
-    public function scopeWaitingApproval($query)
+    public function scopePending($query)
     {
         return $query->where('status', 1);
     }
@@ -154,6 +153,5 @@ class Cleaner extends Model
     {
         return $query->where('status', 3);
     }
-
 
 }
