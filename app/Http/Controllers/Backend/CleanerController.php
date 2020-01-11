@@ -31,13 +31,6 @@ class CleanerController extends Controller
         return view('backend.cleaners.index');
     }
 
-    public function add(Request $request)
-    {
-        // session()->pull('backend');
-        // dd(session()->all());
-        return view('backend.cleaners.add');
-    }
-
     public function getAllCleaners(Request $request)
     {
         $data = array();
@@ -46,6 +39,57 @@ class CleanerController extends Controller
         $data['code'] = 200;
         $data['cleaners'] = $cleaners;
         return response()->json($data);
+    }
+
+    public function cleanerApplications(Request $request)
+    {
+        return view('backend.cleaners.applications');
+    }
+
+    public function getPendingCleaners(Request $request)
+    {
+        $data = array();
+        $cleaners = Cleaner::pending()->get();
+
+        $data['code'] = 200;
+        $data['cleaners'] = $cleaners;
+        return response()->json($data);
+    }
+
+    public function cleanerApplicationsPreview(Request $request)
+    {
+         if($request->id && $request->id != ''){
+            $cleaner = Cleaner::find($request->id);
+            if($cleaner){
+                $cleaner = Cleaner::find($request->id);
+            }else{
+                setflashmsg('Cleaner not Found..!','0');
+                return redirect()->route('backend.cleaners_applications');
+            }
+        }
+        return view('backend.cleaners.applications_preview')->with('cleaner', $cleaner);
+    }
+    public function cleanerApplicationsApprove(Request $request)
+    {
+        if($request->id && $request->id != ''){
+            $cleaner = Cleaner::find($request->id);
+            if($cleaner){
+                $cleaner->status = 3;
+                $cleaner->save();
+                setflashmsg('Cleaner Approved Successfully..!','1');
+            }else{
+                setflashmsg('Cleaner not Found..!','0');
+            }
+        }
+        return redirect()->route('backend.cleaners_applications');
+    }
+
+
+    public function add(Request $request)
+    {
+        // session()->pull('backend');
+        // dd(session()->all());
+        return view('backend.cleaners.add');
     }
 
     public function postCreate(Request $request)
@@ -81,7 +125,7 @@ class CleanerController extends Controller
             $cleaner->last_step = $last_step;
             $cleaner->created_by =  Auth::Id();
             $cleaner->updated_by =  Auth::Id();
-            $cleaner->status = 3;
+            $cleaner->status = 1;
             $cleaner->save();
 
             // $request->session()->put('backend.last_step', $last_step);
@@ -302,6 +346,8 @@ class CleanerController extends Controller
                         }
                     }
                 }else if($last_step == 5){
+                    $cleaner->status = 3;
+                    $cleaner->save();
                     // session()->pull('backend');
                     setflashmsg('Customer Updated Successfully..!','1');
                 }

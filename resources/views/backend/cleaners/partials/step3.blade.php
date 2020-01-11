@@ -16,7 +16,6 @@
             async: false,
             success: function(response){
                 if(response.code == 200){
-                    alert(1);
                     var xrole = $("input[type=radio][name=role]:checked").val();
                     var rate_per_hour_display = '';
                     if(xrole == 'cleaner'){

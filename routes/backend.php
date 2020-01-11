@@ -15,11 +15,13 @@ Route::get('/', 'HomeController@index')->name('backend.dashboard');
 
 // Cleaners
 Route::get('cleaners', 'CleanerController@index')->name('backend.cleaners');
-Route::get('cleaners11111', 'CleanerController@getDistanceBetweenTwoPoints');
 Route::get('cleaner/add', 'CleanerController@add')->name('backend.cleaner.add');
 Route::get('cleaner/edit/{id}', 'CleanerController@edit')->name('backend.cleaner.edit');
 Route::post('cleaner/create', 'CleanerController@postCreate')->name('backend.cleaner.create');
 Route::post('cleaner/update', 'CleanerController@postUpdate')->name('backend.cleaner.update');
+Route::get('cleaners/applications', 'CleanerController@cleanerApplications')->name('backend.cleaners_applications');
+Route::get('cleaners/applications/preview/{id}', 'CleanerController@cleanerApplicationsPreview')->name('backend.cleaners_applications.preview');
+Route::post('cleaners/applications/approve', 'CleanerController@cleanerApplicationsApprove')->name('backend.cleaners_applications.approve');
 
 // Services
 Route::prefix('services')->group(function () {
@@ -57,6 +59,7 @@ Route::post('customer/update', 'CustomerController@postUpdate')->name('backend.c
 Route::prefix('ajax')->group(function () {
     // Cleaners
     Route::get('cleaners', 'CleanerController@getAllCleaners')->name('backend.ajax.cleaners');
+    Route::get('cleaners/pending', 'CleanerController@getPendingCleaners')->name('backend.ajax.cleaners.pending');
     Route::get('cleaner/get-cleaner-by-id', 'CleanerController@getCleanerById')->name('backend.ajax.cleaner.get_cleaner_by_id');
 
     // Services

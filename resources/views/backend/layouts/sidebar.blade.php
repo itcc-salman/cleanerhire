@@ -73,12 +73,13 @@
                         <ul class="kt-menu__subnav">
                             <li class="kt-menu__item  kt-menu__item--parent" aria-haspopup="true"><span class="kt-menu__link"><span class="kt-menu__link-text">Cleaners</span></span></li>
                             <li class="kt-menu__item {{ request()->is('admin/cleaners') ? 'kt-menu__item--active' : '' }}" aria-haspopup="true"><a href="{{ route('backend.cleaners') }}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Registered Cleaners</span></a></li>
-                            <li class="kt-menu__item " aria-haspopup="true"><a href="javascript:;" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Application Requests</span></a></li>
+                            <li class="kt-menu__item {{ request()->is('admin/cleaners/applications') ? 'kt-menu__item--active' : '' }}" aria-haspopup="true"><a href="{{ route('backend.cleaners_applications') }}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Application Requests</span></a></li>
                             <li class="kt-menu__item " aria-haspopup="true"><a href="javascript:;" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Timesheets</span></a></li>
                             <li class="kt-menu__item " aria-haspopup="true"><a href="javascript:;" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Availability</span></a></li>
                         </ul>
                     </div>
                 </li>
+
                 <li class="kt-menu__item {{ request()->is('admin/customer*') ? 'kt-menu__item--active' : '' }}" aria-haspopup="true">
                     <a href="{{ route('backend.customers') }}" class="kt-menu__link ">
                         <span class="kt-menu__link-icon">
