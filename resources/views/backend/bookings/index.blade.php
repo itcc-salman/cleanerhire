@@ -40,8 +40,8 @@
                         </div>
                         <div class="align-self-end kt-margin-b-20-tablet-and-mobile">
                             <a href="javascript:;" class="btn kt-subheader__btn-daterange" id="kt_dashboard_daterangepicker">
-                                <span class="kt-subheader__btn-daterange-title" id="kt_dashboard_daterangepicker_title">Today</span>&nbsp;
-                                <span class="kt-subheader__btn-daterange-date" id="kt_dashboard_daterangepicker_date">Aug 16</span>
+                                <span class="kt-subheader__btn-daterange-title" id="kt_dashboard_daterangepicker_title"></span>&nbsp;
+                                <span class="kt-subheader__btn-daterange-date" id="kt_dashboard_daterangepicker_date"></span>
 
                                 <!--<i class="flaticon2-calendar-1"></i>-->
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon kt-svg-icon--sm">
@@ -201,14 +201,14 @@ var daterangepickerInit = function() {
     }
 
     var picker = $('#kt_dashboard_daterangepicker');
-    var start = moment();
-    var end = moment();
+    var start = moment().startOf('month');
+    var end = moment().endOf('month');
 
     function cb(start, end, label) {
         var title = '';
         var range = '';
 
-        if ((end - start) < 100 || label == 'Today') {
+        if (label == 'Today') {
             title = 'Today:';
             range = start.format('MMM DD');
         } else if (label == 'Tomorrow') {
