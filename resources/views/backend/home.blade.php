@@ -169,6 +169,7 @@
             <div class="kt-portlet__body">
                 <!--begin::Widget 11-->
                 <div class="kt-widget11">
+                    @if(count($data['upcoming_bookings']))
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
@@ -195,6 +196,17 @@
                             </tbody>
                         </table>
                     </div>
+                    @else
+                        <div class="alert alert-outline-info fade show" role="alert">
+                            <div class="alert-icon"><i class="flaticon2-exclamation"></i></div>
+                            <div class="alert-text">No Upcoming Bookings!</div>
+                            <div class="alert-close">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true"><i class="la la-close"></i></span>
+                                </button>
+                            </div>
+                        </div>
+                    @endif
                 </div>
                 <!--end::Widget 11-->
             </div>
