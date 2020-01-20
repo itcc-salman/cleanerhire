@@ -1,5 +1,8 @@
 @extends('backend.layouts.master')
 @section('title', 'Booking Calendar')
+@push('css')
+    <link href="{{ asset('assets/plugins/custom/fullcalendar/fullcalendar.bundle.css') }}" rel="stylesheet" type="text/css" />
+@endpush
 @section('content')
 <!--Begin::Calender 5-->
 <div class="row">

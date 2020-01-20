@@ -190,7 +190,7 @@
                                     <td><span class="kt-widget11__sub">{{ $booking->user->last_name }}</span></td>
                                     <td><span class="kt-widget11__sub">{{ $booking->user->email }}</span></td>
                                     <td><span class="kt-widget11__sub">{{ $booking->booking_date }}</span></td>
-                                    <td><span class="kt-widget11__sub">{{ $booking->status }}</span></td>
+                                    <td><span class="kt-widget11__sub">{{ $booking->formattedStatus }}</span></td>
                                 </tr>
                                 @endforeach
                             </tbody>

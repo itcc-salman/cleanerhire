@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Booking extends Model
 {
     use SoftDeletes;
+    protected $appends = ['formattedStatus'];
 
     const STATUS_CREATED            = 0;
     const STATUS_PENDING            = 1;
@@ -23,6 +24,25 @@ class Booking extends Model
     public function customer()
     {
         return $this->belongsTo('App\Models\Customer');
+    }
+
+    public function getFormattedStatusAttribute()
+    {
+        if($this->status == Self::STATUS_CREATED){
+            return 'Created';
+        }elseif ($this->status == Self::STATUS_PENDING) {
+            return 'Pending';
+        }elseif ($this->status == Self::STATUS_APPOINTED) {
+            return 'Appointed';
+        }elseif ($this->status == Self::STATUS_INPROGRESS) {
+            return 'In Progress';
+        }elseif ($this->status == Self::STATUS_COMPLETED) {
+            return 'Completed';
+        }elseif ($this->status == Self::STATUS_CANCELLED) {
+            return 'Cancelled';
+        }else{
+            return '---';
+        }
     }
 
     public function scopeCreated($query)
