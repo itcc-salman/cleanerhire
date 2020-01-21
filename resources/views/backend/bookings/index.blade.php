@@ -175,8 +175,8 @@ var KTDatatableRemoteAjax = function() {
                 autoHide: false,
                 template: function(row) {
                     return '\
-                    <a href="/admin/booking/edit/'+ row.id +'" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="Edit details">\
-                        <i class="flaticon2-edit"></i>\
+                    <a href="/admin/booking/view/'+ row.id +'" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="View details">\
+                        <i class="flaticon-eye"></i>\
                     </a>\
                     <a href="javascript:;" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="Delete">\
                         <i class="flaticon2-trash"></i>\

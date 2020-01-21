@@ -28,13 +28,13 @@ class BookingController extends Controller
     {
         return view('backend.bookings.index');
     }
-    public function edit(Request $request)
+    public function view(Request $request)
     {
         $booking = Booking::find($request->id);
         if(!$booking){
             return back();
         }
-       return view('backend.bookings.edit')->with('booking',$booking);
+       return view('backend.bookings.view')->with('booking',$booking);
     }
 
     public function getAllBookings(Request $request)

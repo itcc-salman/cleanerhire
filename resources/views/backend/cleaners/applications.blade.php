@@ -194,7 +194,7 @@ var KTDatatableRemoteAjaxDemo = function() {
                         console.log(row.id);
                         return '\
                         <a href="/admin/cleaners/applications/preview/'+ row.id +'" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="Preview">\
-                            <i class="flaticon2-arrow"></i>\
+                            <i class="flaticon-eye"></i>\
                         </a>\
                     ';
                     },

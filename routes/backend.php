@@ -47,7 +47,7 @@ Route::prefix('resources')->group(function () {
 
 // Bookings
 Route::get('bookings', 'BookingController@index')->name('backend.bookings');
-Route::get('booking/edit/{id}', 'BookingController@edit')->name('backend.booking.edit');
+Route::get('booking/view/{id}', 'BookingController@view')->name('backend.booking.view');
 Route::get('bookings/v/{date}', 'BookingController@bookingsByDate')->name('backend.bookings.bookings_by_date');
 Route::get('calender', 'BookingController@calendar')->name('backend.booking.calendar');
 
