@@ -6,10 +6,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\BookingStoreRequest;
 use App\Services\CleaningServicesService;
+use App\Services\CleanerService;
 use App\Services\PropertyService;
 use App\Services\BookingService;
 use App\Models\User;
 use App\Models\BookingCleanerEmails;
+use App\Logic\Booking\BookingRepository;
 
 class BookingController extends Controller
 {
@@ -73,12 +75,49 @@ class BookingController extends Controller
         $bookingServices = $this->bookingServices->registerBooking($request);
         if( $bookingServices ) {
             setflashmsg(trans('msg.bookingCreated'),'1');
-            return response()->json(['status' => true, 'redirect' => route('front.booking_completed') ]);
+            // return response()->json(['status' => true, 'redirect' => route('front.booking_completed') ]);
+            return response()->json(['status' => true, 'redirect' => route('front.assign_cleaners',$bookingServices->id) ]);
         }
         setflashmsg(trans('msg.bookingFailed'),'0');
         return response()->json(['status' => false,
             'msg' => trans('msg.clsSerError'),
             'redirect' => route('front.booking_failed') ]);
+    }
+
+    public function assignCleaners($booking_id)
+    {
+        $this->middleware('auth');
+        $booking = $this->bookingServices->getBookingById($booking_id);
+        // check if booking is for login customer only
+        if( $booking->user_id != \Auth::Id() ) {
+            return redirect()->route('front.not_authorized_booking');
+        }
+        // check if this booking is pending then only proceed
+        if( $booking->status > 1 ) {
+            // check the booking status and redirect as per that
+            return redirect()->route('front.not_authorized_booking');
+        }
+        // get cleaners list
+        // dd($booking);
+        $bookingRepostory = new BookingRepository();
+        $cleaner_ids = $bookingRepostory->getAvailableCleanerForBooking($booking);
+        $cleanerService = new CleanerService;
+        $cleaners = $cleanerService->getCleanersByIds($cleaner_ids);
+        dd($cleaners);
+        return view('frontend.assign_booking', compact('cleaners'));
+    }
+
+    public function sendNotificationToAllCleaner($booking_id)
+    {
+        $booking = $this->bookingServices->getBookingById($booking_id);
+        // send notification to cleaner or company
+        $bookingRepostory = new BookingRepository();
+        $bookingRepostory->sendBookingEmail($booking);
+    }
+
+    public function notAuthorizedBooking()
+    {
+        return view('frontend.not_authorized_booking');
     }
 
     public function bookingCompleted()

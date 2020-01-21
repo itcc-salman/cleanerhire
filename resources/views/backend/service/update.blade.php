@@ -77,12 +77,25 @@
                         @enderror
                     </div>
 
-                    <div class="form-group validated">
-                        <label>Rate Per Hour</label>
-                        <input type="text" name="rate_per_hour" value="{{ $cleaningService->rate_per_hour }}" class="form-control @error('rate_per_hour') {{ 'is-invalid' }} @enderror" placeholder="$">
-                        @error('rate_per_hour')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group validated">
+                                <label>Rate Per Hour Residential</label>
+                                <input type="text" name="rate_per_hour" value="{{ $cleaningService->rate_per_hour }}" class="form-control @error('rate_per_hour') {{ 'is-invalid' }} @enderror" placeholder="$">
+                                @error('rate_per_hour')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group validated">
+                                <label>Rate Per Hour Commercial</label>
+                                <input type="text" name="rate_per_hour_com" value="{{ $cleaningService->rate_per_hour_com }}" class="form-control @error('rate_per_hour_com') {{ 'is-invalid' }} @enderror" placeholder="$">
+                                @error('rate_per_hour_com')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-group validated">

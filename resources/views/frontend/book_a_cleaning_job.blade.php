@@ -57,10 +57,6 @@
                                 <span>N/A</span>
                             </div>
                             <div class="bac_bs_tab">
-                                <label>Visit length : </label>
-                                <span>N/A</span>
-                            </div>
-                            <div class="bac_bs_tab">
                                 <label>Address :</label>
                                 <span>N/A</span>
                             </div>

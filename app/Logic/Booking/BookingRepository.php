@@ -24,18 +24,7 @@ class BookingRepository
      */
     public function sendBookingEmail(Booking $booking)
     {
-        if( $booking->booking_type == 'commercial' ) {
-            // check for services provided by cleaner
-            $cleaningServices = new CleaningServicesService;
-            $cleaners = $cleaningServices->getCleanersForProperties($booking->property_id);
-            $booked_services = explode(',', $booking->services);
-            $cleaners_ids = CleanerServiceMapping::whereIn('cleaner_id', $cleaners)
-                                    ->where('service_for', 'commercial')->whereIn('cleaning_service_id', $booked_services)->distinct()->pluck('cleaner_id');
-            // dd($cleaners_ids);
-        } else {
-            $booked_services = explode(',', $booking->services);
-            $cleaners_ids = CleanerServiceMapping::where('service_for', 'residential')->whereIn('cleaning_service_id', $booked_services)->distinct()->pluck('cleaner_id');
-        }
+        $cleaners_ids = $this->getAvailableCleanerForBooking($booking);
         // check booking email
         // check booking type
         // if commercial then check for properties with services
@@ -56,7 +45,8 @@ class BookingRepository
                     if( $c ) {
                         $user = User::find($c->user_id);
                         $booking_email = new BookingCleanerEmails;
-                        $booking_email->user_id = $c->user_id;
+                        $booking_email->assigned_user_id = $c->user_id;
+                        $booking_email->assigned_cleaner_id = $c->id;
                         $booking_email->booking_id = $booking->id;
                         $booking_email->token = $booking->id."_".$c->user_id."_".str_random(64);
                         $booking_email->save();
@@ -69,6 +59,23 @@ class BookingRepository
         // XX_Pending_XX also check cleaner availability sun mon / timings / existing booking
         // Send booking email notification
         // self::sendNewBookingEmail($user, $booking);
+    }
+
+    public function getAvailableCleanerForBooking(Booking $booking)
+    {
+        if( $booking->booking_type == 'commercial' ) {
+            // check for services provided by cleaner
+            $cleaningServices = new CleaningServicesService;
+            $cleaners = $cleaningServices->getCleanersForProperties($booking->property_id);
+            $booked_services = explode(',', $booking->services);
+            $cleaners_ids = CleanerServiceMapping::whereIn('cleaner_id', $cleaners)
+                                    ->where('service_for', 'commercial')->whereIn('cleaning_service_id', $booked_services)->distinct()->pluck('cleaner_id');
+            // dd($cleaners_ids);
+        } else {
+            $booked_services = explode(',', $booking->services);
+            $cleaners_ids = CleanerServiceMapping::where('service_for', 'residential')->whereIn('cleaning_service_id', $booked_services)->distinct()->pluck('cleaner_id');
+        }
+        return $cleaners_ids;
     }
 
     /**

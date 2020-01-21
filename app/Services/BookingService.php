@@ -5,7 +5,6 @@ namespace App\Services;
 use Auth;
 use App\Models\Booking;
 use App\Models\User;
-use App\Logic\Booking\BookingRepository;
 
 class BookingService
 {
@@ -72,10 +71,6 @@ class BookingService
         $booking->created_by        = Auth::Id();
         $booking->updated_by        = Auth::Id();
         $booking->save();
-
-        // send notification to cleaner or company
-        $bookingRepostory = new BookingRepository();
-        $bookingRepostory->sendBookingEmail($booking);
 
         return $booking;
     }

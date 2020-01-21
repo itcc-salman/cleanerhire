@@ -166,9 +166,15 @@ var KTDatatableRemoteAjaxDemo = function() {
                     title: 'Name',
                 }, {
                     field: 'rate_per_hour',
-                    title: 'Rate Per Hour',
+                    title: 'Rate Per Hour Residential',
                     template: function(row) {
                         return '$ ' + row.rate_per_hour;
+                    },
+                }, {
+                    field: 'rate_per_hour_com',
+                    title: 'Rate Per Hour Commercial',
+                    template: function(row) {
+                        return '$ ' + row.rate_per_hour_com;
                     },
                 }, {
                     field: 'individual',

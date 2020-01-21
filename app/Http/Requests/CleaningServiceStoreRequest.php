@@ -27,11 +27,17 @@ class CleaningServiceStoreRequest extends FormRequest
         {
             case 'GET': return []; break;
             case 'POST':
-                return [
+                $rule = [
                     'name'          => 'required',
-                    'rate_per_hour' => 'required|regex:/^\d+(\.\d{1,2})?$/',
                     'status'        => 'required',
                 ];
+                if( !empty($this->input('residential')) ) {
+                    $rule['rate_per_hour'] = 'required|regex:/^\d+(\.\d{1,2})?$/';
+                }
+                if( !empty($this->input('commercial')) ) {
+                    $rule['rate_per_hour_com'] = 'required|regex:/^\d+(\.\d{1,2})?$/';
+                }
+                return $rule;
             break;
             default: break;
         }
@@ -45,10 +51,12 @@ class CleaningServiceStoreRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required'             => 'Name is required',
-            'rate_per_hour.required'    => 'Rate is required',
-            'rate_per_hour.regex'       => 'Please add proper rate',
-            'status.required'           => 'Status is required',
+            'name.required'                 => 'Name is required',
+            'rate_per_hour.required'        => 'Residential Rate is required',
+            'rate_per_hour.regex'           => 'Please add proper rate',
+            'rate_per_hour_com.required'    => 'Commercial Rate is required',
+            'rate_per_hour_com.regex'       => 'Please add proper rate',
+            'status.required'               => 'Status is required',
         ];
     }
 }

@@ -66,6 +66,11 @@ class CleanerService
         return $this->cleaner_model->with('user')->where('user_id', Auth::id())->first();
     }
 
+    public function getCleanersByIds($ids)
+    {
+        return $this->cleaner_model->whereIn('id', $ids)->get();
+    }
+
     public function checkCleanerProfileStatus($cleaner_id = NULL)
     {
         if( !$cleaner_id ) {
