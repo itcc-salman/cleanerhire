@@ -103,8 +103,9 @@ class BookingController extends Controller
         $cleaner_ids = $bookingRepostory->getAvailableCleanerForBooking($booking);
         $cleanerService = new CleanerService;
         $cleaners = $cleanerService->getCleanersByIds($cleaner_ids);
-        dd($cleaners);
-        return view('frontend.assign_booking', compact('cleaners'));
+        $booking_services = $bookingRepostory->getBookingServices($booking);
+        // dd($cleaners);
+        return view('frontend.assign_booking', compact('cleaners', 'booking', 'booking_services'));
     }
 
     public function sendNotificationToAllCleaner($booking_id)
@@ -113,6 +114,7 @@ class BookingController extends Controller
         // send notification to cleaner or company
         $bookingRepostory = new BookingRepository();
         $bookingRepostory->sendBookingEmail($booking);
+        return redirect()->route('front.booking_completed');
     }
 
     public function notAuthorizedBooking()

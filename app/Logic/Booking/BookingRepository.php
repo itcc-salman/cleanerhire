@@ -61,6 +61,12 @@ class BookingRepository
         // self::sendNewBookingEmail($user, $booking);
     }
 
+    public function getBookingServices(Booking $booking)
+    {
+        $cleaningServices = new CleaningServicesService;
+        return $cleaningServices->getServicesForBooking( explode(',', $booking->services) );
+    }
+
     public function getAvailableCleanerForBooking(Booking $booking)
     {
         if( $booking->booking_type == 'commercial' ) {

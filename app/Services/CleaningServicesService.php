@@ -44,6 +44,11 @@ class CleaningServicesService
         return $this->cleaner_model->whereRaw('FIND_IN_SET('.$id.', cleaner_properties)')->pluck('id');
     }
 
+    public function getServicesForBooking($services_ids)
+    {
+        return $this->cleaningService_model->whereIn('id', $services_ids)->get();
+    }
+
     public function getLogedInRoleWiseCleaningServices()
     {
         $user_type = Auth::user()->role;

@@ -68,7 +68,7 @@ class CleanerService
 
     public function getCleanersByIds($ids)
     {
-        return $this->cleaner_model->whereIn('id', $ids)->get();
+        return $this->cleaner_model->whereIn('id', $ids)->with('cleanerServices')->get();
     }
 
     public function checkCleanerProfileStatus($cleaner_id = NULL)

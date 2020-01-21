@@ -28,6 +28,7 @@ Route::get('/not-authorized-booking', 'BookingController@notAuthorizedBooking')-
 Route::get('/assign-cleaners/{id}', 'BookingController@assignCleaners')->name('front.assign_cleaners');
 Route::get('/booking-confirm', 'BookingController@bookingConfirmed')->name('front.booking_confirm');
 Route::get('/booking-failed', 'BookingController@bookingFailed')->name('front.booking_failed');
+Route::post('/send-notification-all/{id}', 'BookingController@sendNotificationToAllCleaner')->name('front.send_notification_all');
 
 Route::match(['GET','POST'], '/registercustomer', 'CustomerController@registerCustomer')->name('front.register_customer');
 
