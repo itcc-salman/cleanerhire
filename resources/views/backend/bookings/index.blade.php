@@ -161,8 +161,12 @@ var KTDatatableRemoteAjax = function() {
                 // callback function support for column rendering
                 template: function(row) {
                     var status = {
-                        0: {'title': 'Inactive', 'class': ' kt-badge--danger'},
-                        1: {'title': 'Active', 'class': 'kt-badge--brand'}
+                        0: {'title': 'Created', 'class': ' kt-badge--info'},
+                        1: {'title': 'Pending', 'class': ' kt-badge--info'},
+                        2: {'title': 'Appointed', 'class': ' kt-badge--brand'},
+                        3: {'title': 'Inprogress', 'class': ' kt-badge--brand'},
+                        4: {'title': 'Completed', 'class': ' kt-badge--success'},
+                        5: {'title': 'Cancelled', 'class': 'kt-badge--danger'}
                     };
                     return '<span class="kt-badge ' + status[row.status].class + ' kt-badge--inline kt-badge--pill">' + status[row.status].title + '</span>';
                 },
@@ -175,8 +179,8 @@ var KTDatatableRemoteAjax = function() {
                 autoHide: false,
                 template: function(row) {
                     return '\
-                    <a href="/admin/booking/edit/'+ row.id +'" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="Edit details">\
-                        <i class="flaticon2-edit"></i>\
+                    <a href="/admin/booking/view/'+ row.id +'" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="View details">\
+                        <i class="flaticon-eye"></i>\
                     </a>\
                     <a href="javascript:;" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="Delete">\
                         <i class="flaticon2-trash"></i>\

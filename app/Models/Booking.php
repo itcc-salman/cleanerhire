@@ -74,4 +74,14 @@ class Booking extends Model
     {
         return $query->where('status', 5);
     }
+
+    public function services()
+    {
+        $services = ($this->services != '' ) ? explode(',', $this->services) : [];
+        if($services){
+           return CleaningServices::whereIn('id',$services)->get();
+        }
+        return [];
+
+    }
 }
