@@ -85,25 +85,6 @@ class Cleaner extends Model
         return $this->hasMany('App\Models\CleanerServiceMapping');
     }
 
-    public function cleanerTimings()
-    {
-        return $this->hasMany('App\Models\CleanerTiming');
-    }
-
-    public function formattedCleanerTimings()
-    {
-        $data = [];
-        foreach (getDays() as $key => $day) {
-            $data[$day] = [];
-            foreach ($this->cleanerTimings->toArray() as $key => $value) {
-                if( $value['day'] == $day ) {
-                    array_push($data[$day], $value);
-                }
-            }
-        }
-        return $data;
-    }
-
     public function isServiceAvailable($serviceId)
     {
         $csm = CleanerServiceMapping::where('cleaner_id', $this->id)->where('cleaning_service_id',$serviceId)->first();
