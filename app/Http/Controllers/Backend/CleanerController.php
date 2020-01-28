@@ -159,7 +159,7 @@ class CleanerController extends Controller
         if(!$cleaner){
             return back();
         }
-       return view('backend.cleaners.edit')->with('cleaner',$cleaner);
+        return view('backend.cleaners.edit')->with('cleaner',$cleaner);
     }
 
     public function postUpdate(Request $request)

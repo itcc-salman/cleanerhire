@@ -25,33 +25,30 @@ class UsersTableSeeder extends Seeder
         ]);
 
         $cleaning_services = [
-            [ "name" => "Carpet Cleaning", "rate_per_hour" => 0 , "residential" => 1, "commercial" => 1, "once_off" => 0, "regular" => 1, "individual" => 1, "company" => 1 ],
-            [ "name" => "Wet Carpet Restoration", "rate_per_hour" => 0 , "residential" => 1, "commercial" => 1, "once_off" => 1, "regular" => 1, "individual" => 0, "company" => 1 ],
-            [ "name" => "Water Damage Restoration", "rate_per_hour" => 0 , "residential" => 1, "commercial" => 1, "once_off" => 0, "regular" => 1, "individual" => 1, "company" => 1 ],
-            [ "name" => "Flood Damage Restoration", "rate_per_hour" => 0 , "residential" => 1, "commercial" => 1, "once_off" => 0, "regular" => 1, "individual" => 1, "company" => 1 ],
-            [ "name" => "Carpet Repairs", "rate_per_hour" => 0 , "residential" => 1, "commercial" => 1, "once_off" => 0, "regular" => 1, "individual" => 1, "company" => 1 ],
-            [ "name" => "Timber Floor Drying", "rate_per_hour" => 0 , "residential" => 1, "commercial" => 1, "once_off" => 0, "regular" => 1, "individual" => 0, "company" => 1 ],
-            [ "name" => "Upholstery Cleaning", "rate_per_hour" => 0 , "residential" => 1, "commercial" => 1, "once_off" => 0, "regular" => 1, "individual" => 1, "company" => 1 ],
-            [ "name" => "Tile and Grout Cleaning", "rate_per_hour" => 0 , "residential" => 1, "commercial" => 1, "once_off" => 0, "regular" => 1, "individual" => 1, "company" => 1 ],
-            [ "name" => "Rug Cleaning", "rate_per_hour" => 0 , "residential" => 1, "commercial" => 1, "once_off" => 0, "regular" => 1, "individual" => 0, "company" => 1 ],
-            [ "name" => "Mould Removal", "rate_per_hour" => 0 , "residential" => 1, "commercial" => 1, "once_off" => 0, "regular" => 1, "individual" => 0, "company" => 1 ],
-            [ "name" => "Sewage Cleaning", "rate_per_hour" => 0 , "residential" => 1, "commercial" => 1, "once_off" => 0, "regular" => 1, "individual" => 1, "company" => 1 ],
-            [ "name" => "Fire Smoke Restoration", "rate_per_hour" => 0 , "residential" => 1, "commercial" => 1, "once_off" => 0, "regular" => 1, "individual" => 1, "company" => 1 ],
-            [ "name" => "Mattress Cleaning", "rate_per_hour" => 0 , "residential" => 1, "commercial" => 1, "once_off" => 0, "regular" => 1, "individual" => 1, "company" => 1 ],
-            [ "name" => "Structure Drying", "rate_per_hour" => 0 , "residential" => 1, "commercial" => 1, "once_off" => 0, "regular" => 1, "individual" => 1, "company" => 1 ],
-            [ "name" => "Odour Control", "rate_per_hour" => 0 , "residential" => 1, "commercial" => 1, "once_off" => 0, "regular" => 1, "individual" => 1, "company" => 1 ],
-            [ "name" => "Anti-Bacterial Treatment", "rate_per_hour" => 0 , "residential" => 1, "commercial" => 1, "once_off" => 0, "regular" => 1, "individual" => 1, "company" => 1 ]
+            [ "name" => "Regular", "rate_per_hour" => 25, "service_for" => "residential", "service_type" => "regular", "is_other_with_price" => 0, "price_calculation" => "direct", "minimum_service_hours" => 2 ],
+            [ "name" => "Once off", "rate_per_hour" => 30, "service_for" => "residential", "service_type" => "once_off", "is_other_with_price" => 0, "price_calculation" => "direct", "minimum_service_hours" => 3 ],
+            [ "name" => "End of Lease", "rate_per_hour" => 40, "service_for" => "residential", "service_type" => "end_of_lease", "is_other_with_price" => 0, "price_calculation" => "direct", "minimum_service_hours" => 3 ],
+            [ "name" => "Carpet Cleaning", "rate_per_hour" => 25, "service_for" => "residential", "service_type" => "other", "is_other_with_price" => 1, "price_calculation" => "room", "minimum_service_hours" => 1 ],
+            [ "name" => "Window Cleaning", "rate_per_hour" => 25, "service_for" => "residential", "service_type" => "other", "is_other_with_price" => 1, "price_calculation" => "panel", "minimum_service_hours" => 1 ],
+            [ "name" => "Tile & Grout Cleaning", "rate_per_hour" => 25, "service_for" => "residential", "service_type" => "other", "is_other_with_price" => 1, "price_calculation" => "sq", "minimum_service_hours" => 1 ],
+            [ "name" => "Water Damage Restoration", "rate_per_hour" => 0, "service_for" => "residential", "service_type" => NULL, "is_other_with_price" => 0, "price_calculation" => NULL, "minimum_service_hours" => 0 ],
+            [ "name" => "Flood Damage Restoration", "rate_per_hour" => 0, "service_for" => "residential", "service_type" => NULL, "is_other_with_price" => 0, "price_calculation" => NULL, "minimum_service_hours" => 0 ],
+            [ "name" => "Carpet Repairs", "rate_per_hour" => 0, "service_for" => "residential", "service_type" => NULL, "is_other_with_price" => 0, "price_calculation" => NULL, "minimum_service_hours" => 0 ],
+            [ "name" => "Upholstery Cleaning", "rate_per_hour" => 0, "service_for" => "residential", "service_type" => NULL, "is_other_with_price" => 0, "price_calculation" => NULL, "minimum_service_hours" => 0 ],
+            [ "name" => "Rug Cleaning", "rate_per_hour" => 0, "service_for" => "residential", "service_type" => NULL, "is_other_with_price" => 0, "price_calculation" => NULL, "minimum_service_hours" => 0 ],
+            [ "name" => "Mattress Cleaning", "rate_per_hour" => 0, "service_for" => "residential", "service_type" => NULL, "is_other_with_price" => 0, "price_calculation" => NULL, "minimum_service_hours" => 0 ],
+            [ "name" => "Mould Removal", "rate_per_hour" => 0, "service_for" => "residential", "service_type" => NULL, "is_other_with_price" => 0, "price_calculation" => NULL, "minimum_service_hours" => 0 ],
         ];
+
         foreach ($cleaning_services as $cs) {
             DB::table('cleaning_services')->insert([
                 'name' => $cs['name'],
                 'rate_per_hour' => $cs['rate_per_hour'],
-                'residential' => $cs['residential'],
-                'commercial' => $cs['commercial'],
-                'once_off' => $cs['once_off'],
-                'regular' => $cs['regular'],
-                'individual' => $cs['individual'],
-                'company' => $cs['company'],
+                'service_for' => $cs['service_for'],
+                'service_type' => $cs['service_type'],
+                'is_other_with_price' => $cs['is_other_with_price'],
+                'price_calculation' => $cs['price_calculation'],
+                'minimum_service_hours' => $cs['minimum_service_hours'],
                 'created_by' => 1,
                 'updated_by' => 1,
                 'status' => 1

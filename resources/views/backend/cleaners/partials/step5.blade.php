@@ -182,38 +182,4 @@
             </div>
         </div>
     </div>
-    <div class="kt-wizard-v1__review-item">
-        <div class="kt-wizard-v1__review-title">
-            Availability
-        </div>
-        <div class="kt-wizard-v1__review-content">
-            <div class="c_output_availability">
-                @foreach( getDays() as $day )
-                    <div class="c_output_availability_tab">
-                    @php $isClosed = true @endphp
-                        <div class="row">
-                            <div class="col-3">
-                            <label>{{$day}}</label>
-                            </div>
-                            <div class="col-9">
-                            @foreach($cleaner->cleanerTimings as $key => $timings)
-                                @if($timings->day == $day)
-                                    {{$isClosed = false}}
-                                    @if($timings->start_hours == '24' || $timings->end_hours == '24')
-                                        <span>24 hours</span>
-                                    @else
-                                        <span>{{$timings->start_hours}} - {{$timings->end_hours}}</span>
-                                    @endif
-                                @endif
-                            @endforeach
-                            @if($isClosed)
-                            <span>Closed</span>
-                            @endif
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    </div>
 </div>

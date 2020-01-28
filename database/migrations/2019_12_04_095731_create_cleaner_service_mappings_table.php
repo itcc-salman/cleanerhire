@@ -17,9 +17,6 @@ class CreateCleanerServiceMappingsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('cleaner_id')->unsigned();
             $table->unsignedBigInteger('cleaning_service_id')->unsigned();
-            $table->string('service_for');
-            $table->boolean('has_equipments')->default(0);
-            $table->string('rate_per_hour')->default(0);
             $table->timestamps();
 
             $table->foreign('cleaner_id')->references('id')->on('cleaners')->onDelete('cascade');

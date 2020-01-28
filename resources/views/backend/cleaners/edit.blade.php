@@ -57,20 +57,10 @@
                         <div class="kt-wizard-v1__nav-item" data-ktwizard-type="step">
                             <div class="kt-wizard-v1__nav-body">
                                 <div class="kt-wizard-v1__nav-icon">
-                                    <i class="flaticon-truck"></i>
-                                </div>
-                                <div class="kt-wizard-v1__nav-label">
-                                    4. Availability
-                                </div>
-                            </div>
-                        </div>
-                        <div class="kt-wizard-v1__nav-item" data-ktwizard-type="step">
-                            <div class="kt-wizard-v1__nav-body">
-                                <div class="kt-wizard-v1__nav-icon">
                                     <i class="flaticon-globe"></i>
                                 </div>
                                 <div class="kt-wizard-v1__nav-label">
-                                    5. Verify and Submit
+                                    4. Verify and Submit
                                 </div>
                             </div>
                         </div>
@@ -120,16 +110,6 @@
                     </div>
 
                     <!--end: Form Wizard Step 3-->
-
-                    <!--begin: Form Wizard Step 4-->
-                    <div class="kt-wizard-v1__content" data-ktwizard-type="step-content">
-                        <div class="kt-heading kt-heading--md">Availability</div>
-                        <div class="kt-form__section kt-form__section--first">
-                            @include('backend.cleaners.partials.step4')
-                        </div>
-                    </div>
-
-                    <!--end: Form Wizard Step 4-->
 
                     <!--begin: Form Wizard Step 5-->
                     <div class="kt-wizard-v1__content" data-ktwizard-type="step-content">
