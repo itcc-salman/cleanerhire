@@ -2,20 +2,48 @@
     @if( !$services->isEmpty() )
     <label class="bft_question">Which type of cleaning service do you need?</label>
     <div class="book_service">
-        <ul>
+        <div class="row">
             @foreach( $services as $service )
-                <li>
-                    <input type="checkbox" name="services[]" id="service_{{ $service->id }}" value="{{ $service->id }}">
-                    <label for="service_{{ $service->id }}"><i class="fa fa-check-circle"></i> <span>{{ $service->name }}</span></label>
-                </li>
+            @if( $service->service_type == 'regular' || $service->service_type == 'once_off' || $service->service_type == 'end_of_lease' )
+                <div class="col-md-3">
+                    <div class="book_service_tab">
+                        <input type="radio" name="service" id="service_{{ $service->id }}" value="{{ $service->id }}" service_type="{{ $service->service_type }}">
+                        <label for="service_{{ $service->id }}"><i class="fa fa-check-circle"></i> <span>{{ $service->name }}</span></label>
+                    </div>
+                </div>
+            @endif
             @endforeach
-        </ul>
+            <div class="col-md-3">
+                <div class="book_service_tab">
+                    <input type="radio" name="service" id="service_other" value="other" service_type="other">
+                    <label for="service_other"><i class="fa fa-check-circle"></i> <span>Other Services</span></label>
+                    <ul>
+                        @foreach( $services as $service )
+                        @if( $service->service_type == 'other' || is_null($service->service_type) )
+                            <li>
+                                <input type="checkbox" name="sub_services[]" id="sub_service_{{ $service->id }}" value="{{ $service->id }}" service_other="{{ $service->price_calculation }}">
+                                <label for="sub_service_{{ $service->id }}"><i class="fa fa-check-circle"></i> <span>{{ $service->name }}</span></label>
+                            </li>
+                        @endif
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
     @else
     <h2>No Services Found.</h2>
     @endif
 </div>
 @if( !$services->isEmpty() )
+    <div class="row hide" id="cleaning_hours_div">
+        <div class="col-md-12">
+            <div class="book_form_tab">
+                <label>How many hours will your cleaner be required?*</label>
+                <input type="text" name="cleaning_hours" id="cleaning_hours">
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-12">
             <div class="book_form_tab">

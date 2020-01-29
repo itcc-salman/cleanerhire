@@ -234,6 +234,16 @@
                 }); // end ajax
             });
 
+            $(document).on('click', "[name='service']", function(e) {
+                e.preventDefault();
+                let _val = $("[name='service']:checked").attr('service_type');
+                if( _val != 'other' ) {
+                    $('#cleaning_hours_div').removeClass('hide');
+                } else {
+                    $('#cleaning_hours_div').addClass('hide');
+                }
+            });
+
             $(document).on('focus', '#other_pet', function(e) {
                 // uncheck the radio button
                 $("[name='has_pet']").prop("checked", false);

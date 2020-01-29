@@ -27,14 +27,14 @@ class CleaningServicesService
     public function getCleaningServicesByType($type, $properties = NULL)
     {
         if( $type == 'residential' ) {
-            return $this->cleaningService_model->where('residential', 1)->where('status', 1)->get();
+            return $this->cleaningService_model->where('service_for', 'residential')->where('status', 1)->get();
         } else {
             if( $properties ) {
                 $cleanerService = new CleanerServiceMapping;
                 $cleaning_services = $cleanerService->whereIn('cleaner_id', $properties)->distinct()->pluck('cleaning_service_id');
-                return $this->cleaningService_model->whereIn('id', $cleaning_services)->where('commercial', 1)->where('status', 1)->get();
+                return $this->cleaningService_model->whereIn('id', $cleaning_services)->where('service_for', 'commercial')->where('status', 1)->get();
             }
-            return $this->cleaningService_model->where('commercial', 1)->where('status', 1)->get();
+            return $this->cleaningService_model->where('service_for', 'commercial')->where('status', 1)->get();
         }
     }
 
@@ -53,17 +53,10 @@ class CleaningServicesService
     {
         $user_type = Auth::user()->role;
         if( $user_type == 'cleaner' ) {
-            $services = [
-                'residential' => $this->cleaningService_model->where('individual', 1)->where('residential', 1)->get(),
-                'commercial' => NULL
-            ];
+            return $this->cleaningService_model->where('service_for', 'residential')->get();
         } else {
-            $services = [
-                'residential' => $this->cleaningService_model->where('company', 1)->where('residential', 1)->get(),
-                'commercial' => $this->cleaningService_model->where('company', 1)->where('commercial', 1)->get()
-            ];
+            return $this->cleaningService_model->where('service_for', 'commercial')->get();
         }
-        return $services;
     }
 
     public function getLogedInCleanerServices()
@@ -78,7 +71,7 @@ class CleaningServicesService
         $cleanerService = new CleanerServiceMapping;
         $cleaner = Cleaner::where('user_id', Auth::Id())->first();
         // return $cleaner;
-        return $cleanerService->where('cleaner_id', $cleaner->id )->get(['cleaning_service_id','service_for','rate_per_hour','has_equipments']);
+        return $cleanerService->where('cleaner_id', $cleaner->id )->get(['cleaning_service_id']);
     }
 
     public function registerCleaningServiceBackend($data)
