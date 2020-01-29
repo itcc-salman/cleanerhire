@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\BookingStoreRequest;
 use App\Services\CleaningServicesService;
 use App\Services\CleanerService;
+use App\Services\CustomerService;
 use App\Services\PropertyService;
 use App\Services\BookingService;
 use App\Models\User;
@@ -46,7 +47,9 @@ class BookingController extends Controller
             if( $request->get('service_type') == 'residential' ) {
                 // get resendial services
                 $services = $cleaningServices->getCleaningServicesByType('residential');
-                $view = view('frontend.partial.booking_services', compact('services'))->render();
+                $customerService = new CustomerService;
+                $customer = $customerService->getLoggedInCustomer();
+                $view = view('frontend.partial.booking_services', compact('services', 'customer'))->render();
                 $data['where'] = 'services_list';
             } else if( $request->get('service_type') == 'commercial' ) {
                 // first ask for propert type
@@ -61,9 +64,11 @@ class BookingController extends Controller
             // check for properties in cleaner
             $prop = $request->get('property_type');
             $cleaners = $cleaningServices->getCleanersForProperties($prop);
+            $customerService = new CustomerService;
+            $customer = $customerService->getLoggedInCustomer();
             // get commercial services
             $services = $cleaningServices->getCleaningServicesByType('commercial', $cleaners);
-            $view = view('frontend.partial.booking_services', compact('services'))->render();
+            $view = view('frontend.partial.booking_services', compact('services', 'customer'))->render();
             $data['where'] = 'services_list';
         }
         $data['html'] = $view;

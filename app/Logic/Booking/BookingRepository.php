@@ -75,11 +75,11 @@ class BookingRepository
             $cleaners = $cleaningServices->getCleanersForProperties($booking->property_id);
             $booked_services = explode(',', $booking->services);
             $cleaners_ids = CleanerServiceMapping::whereIn('cleaner_id', $cleaners)
-                                    ->where('service_for', 'commercial')->whereIn('cleaning_service_id', $booked_services)->distinct()->pluck('cleaner_id');
+                                    ->whereIn('cleaning_service_id', $booked_services)->distinct()->pluck('cleaner_id');
             // dd($cleaners_ids);
         } else {
             $booked_services = explode(',', $booking->services);
-            $cleaners_ids = CleanerServiceMapping::where('service_for', 'residential')->whereIn('cleaning_service_id', $booked_services)->distinct()->pluck('cleaner_id');
+            $cleaners_ids = CleanerServiceMapping::whereIn('cleaning_service_id', $booked_services)->distinct()->pluck('cleaner_id');
         }
         return $cleaners_ids;
     }

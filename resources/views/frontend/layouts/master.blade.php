@@ -13,8 +13,8 @@
     <link rel="stylesheet" href="{{ asset('front/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('front/css/aos.css') }}">
     <link rel="stylesheet" href="{{ asset('front/css/owl.carousel.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/plugins/jquery-datepicker/jquery-ui.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/plugins/jquery-datepicker/melon.datepicker.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap-clockpicker/bootstrap-clockpicker.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css') }}">
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&display=swap" rel="stylesheet">
     @stack('css')
@@ -130,7 +130,8 @@
 
     <script src="{{ asset('front/js/jquery.min.js') }}"></script>
     <script src="{{ asset('front/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/jquery-datepicker/jquery-ui.js') }}"></script>
+    <script src="{{ asset('assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/bootstrap-clockpicker/bootstrap-clockpicker.min.js') }}"></script>
     <script>
         $(window).on("scroll", function() {
             if($(window).scrollTop() > 42) {
@@ -153,6 +154,23 @@
     </script>
     <script src="{{ asset('front/js/owl.carousel.min.js') }}"></script>
     <script>
+        function isNumberKey(evt) {
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if (charCode > 31
+                && (charCode < 48 || charCode > 57))
+                return false;
+
+            return true;
+        }
+
+        function isNumberOrSpaceKey(evt) {
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if (charCode > 32
+                && (charCode < 48 || charCode > 57 ))
+                return false;
+
+            return true;
+        }
     $('.carousel').carousel({
       interval: 10000
     });

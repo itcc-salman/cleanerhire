@@ -150,38 +150,13 @@
         }
 
         function initBookingPage() {
-            /*$("#duration_div").owlCarousel({
-                items:5,itemsDesktop:[1000,5],
-                itemsDesktopSmall:[979,5],itemsTablet:[768,5],
-                pagination:true,autoPlay:false,
-            });*/
-            $("#time_div").owlCarousel({
-                items:5,
-                itemsDesktop:[1000,5],
-                itemsDesktopSmall:[979,5],
-                itemsTablet:[768,5],
-                pagination:true,
-                autoPlay:false
-            });
-
             $('#datepicker').datepicker({
-                format: 'dd/mm/yyyy',
-                inline: true,
-                showOtherMonths: true,
-                closeOnSelect:false,
-                minDate: 0,
-                autoclose : false,
-                onSelect: function() {
-                    var date = new Date($(this).val());
-                    if (date) {
-                        var formattedDate = date.getFullYear() + "-" +
-                                            (date.getMonth() + 1) + "-" +
-                                            date.getDate();
-                        console.log(formattedDate);
-                        $('#booking_date').val(formattedDate);
-                    }
-                }
+                clearBtn: true,
+                todayHighlight: true,
+                startDate: new Date(),
+                autoclose: true
             });
+            $('.clockpicker').clockpicker();
         }
         $(document).ready(function() {
 
@@ -238,9 +213,18 @@
                 e.preventDefault();
                 let _val = $("[name='service']:checked").attr('service_type');
                 if( _val != 'other' ) {
-                    $('#cleaning_hours_div').removeClass('hide');
+                    $('#normal_service').removeClass('hide');
                 } else {
-                    $('#cleaning_hours_div').addClass('hide');
+                    $('#normal_service').addClass('hide');
+                }
+            });
+
+            $(document).on('click', "[name='services_date_type']", function(e) {
+                let _val = $("[name='services_date_type']:checked").val();
+                if( _val == 'preferred' ) {
+                    $('#preferred_date_time_div').removeClass('hide');
+                } else {
+                    $('#preferred_date_time_div').addClass('hide');
                 }
             });
 

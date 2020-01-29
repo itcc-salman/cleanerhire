@@ -23,6 +23,14 @@ class CustomerService
         $this->user_model = new User;
     }
 
+    public function getLoggedInCustomer()
+    {
+        if( Auth::user()->role == 'customer' ) {
+            return $this->customer_model->where('user_id', Auth::id() )->first();
+        }
+        return false;
+    }
+
     public function registerCustomerFront($data)
     {
         $ipAddress = new CaptureIpTrait();

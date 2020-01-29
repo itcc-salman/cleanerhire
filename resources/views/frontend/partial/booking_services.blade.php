@@ -36,11 +36,87 @@
     @endif
 </div>
 @if( !$services->isEmpty() )
-    <div class="row hide" id="cleaning_hours_div">
+    <div class="hide" id="normal_service">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="book_form_tab">
+                    <label>How many hours will your cleaner be required?*</label>
+                    <input type="text" onkeypress="return isNumberKey(event)" name="cleaning_hours" id="cleaning_hours">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="book_form_tab">
+                    <label>Rooms to be cleaned?</label>
+                    <input type="text" onkeypress="return isNumberKey(event)" name="cleaning_rooms" id="cleaning_rooms">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="book_form_tab">
+                    <label>Bathrooms to be cleaned?</label>
+                    <input type="text" onkeypress="return isNumberKey(event)" name="cleaning_bathrooms" id="cleaning_bathrooms">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bac_footer_step">
+        <div class="bac_comman_tab">
+            <label>What date and time would you like your service?*</label>
+            <div class="check_main">
+                <label class="m_check">
+                    <span>ASAP</span>
+                    <input type="radio" name="services_date_type" id="services_date_type_asap" value="asap">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="m_check">
+                    <span>Choose preferred date and time</span>
+                    <input type="radio" name="services_date_type" id="services_date_type_preferred" value="preferred">
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="row hide" id="preferred_date_time_div">
+        <div class="col-md-6">
+            <label for="datepicker">Date</label>
+            <input type="text" class="form-control" id="datepicker" name="booking_date">
+        </div>
+        <div class="col-md-6">
+            <label for="booking_time">Time</label>
+            <input type="text" id="booking_time" class="form-control clockpicker" data-align="top" data-autoclose="true" name="booking_time">
+        </div>
+    </div>
+
+    <div class="row">
         <div class="col-md-12">
             <div class="book_form_tab">
-                <label>How many hours will your cleaner be required?*</label>
-                <input type="text" name="cleaning_hours" id="cleaning_hours">
+                <label>Please provide us more information about your preferred date and time</label>
+                <textarea class="form-control" name="preferred_date_and_time"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="customer_name">Name*</label>
+                <input type="text" class="form-control" name="customer_name" id="customer_name" value="{{ Auth::user()->first_name }}">
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="customer_email">Email*</label>
+                <input type="email" class="form-control" name="customer_email" id="customer_email" value="{{ Auth::user()->email }}">
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="customer_phone">Phone*</label>
+                <input type="text" class="form-control" onkeypress="return isNumberKey(event)" name="customer_phone" id="customer_phone" value="{{ $customer->phone }}">
             </div>
         </div>
     </div>
@@ -95,86 +171,11 @@
     </div>
     {{-- <input type="text" id="autocomplete" class="form-control" onFocus="geolocate()" name="address"> --}}
 </div>
-
-
-<div class="bac_footer_step">
-    <div class="bac_comman_tab">
-        <label>How regularly should we visit?</label>
-        <div class="check_main">
-            <label class="m_check">
-                <span>Weekly</span>
-                <input type="radio" name="visit_type" value="weekly">
-                <span class="checkmark"></span>
-            </label>
-            <label class="m_check">
-                <span>Fortnightly</span>
-                <input type="radio" name="visit_type" value="fortnight">
-                <span class="checkmark"></span>
-            </label>
-            <label class="m_check">
-                <span>Just once</span>
-                <input type="radio" name="visit_type" value="once">
-                <span class="checkmark"></span>
-            </label>
-        </div>
-    </div>
-</div>
-
-{{-- <div class="book_form_tab">
-    <label class="bft_question">How long should we visit (at $35 per hour)?</label>
-    <div id="duration_div" class="book_duration_time">
-        @foreach(getDuration() as $k => $duration)
-            <div class="book_dt_tab">
-                <input id="booking_{{ $k }}" type="radio" name="duration" value="{{ $k }}">
-                <label for="booking_{{ $k }}">
-                    <span>{{ $duration }}</span>
-                    <strong>hours</strong>
-                </label>
-            </div>
-        @endforeach
-    </div>
-</div> --}}
-
-<div class="book_form_tab">
-    <label>What date should we visit?</label>
-    <div id="datepicker" class="ll-skin-melon"></div>
-    <input type="hidden" name="booking_date" id="booking_date">
-</div>
-
-<div class="book_form_tab">
-    <label>And what time?</label>
-    <div id="time_div" class="book_duration_time">
-        @foreach(getTime() as $time)
-            <div class="book_dt_tab">
-                <input id="booking_time{{ $time['val'] }}" type="radio" name="booking_time" value="{{ $time['val'] }}">
-                <label for="booking_time{{ $time['val'] }}">
-                    <span>{{ $time['show'] }}</span>
-                    <strong>{{ $time['am_pm'] }}</strong>
-                </label>
-            </div>
-        @endforeach
-    </div>
-</div>
-
-<div class="bac_footer_step">
-    <div class="bac_comman_tab">
-        <label>Do you prefer a male or female butler?</label>
-        <div class="check_main">
-            <label class="m_check">
-                <span>Male</span>
-                <input type="radio" name="gender_pref" value="male">
-                <span class="checkmark"></span>
-            </label>
-            <label class="m_check">
-                <span>Female</span>
-                <input type="radio" name="gender_pref" value="female">
-                <span class="checkmark"></span>
-            </label>
-            <label class="m_check">
-                <span>No Preference</span>
-                <input type="radio" name="gender_pref" value="none">
-                <span class="checkmark"></span>
-            </label>
+<div class="row">
+    <div class="col-md-12">
+        <div class="book_form_tab">
+            <label>Any comments or questions?</label>
+            <textarea class="form-control" name="comment"></textarea>
         </div>
     </div>
 </div>
