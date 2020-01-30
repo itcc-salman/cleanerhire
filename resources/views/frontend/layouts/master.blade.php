@@ -147,7 +147,29 @@
         });
     </script>
     <script src="{{ asset('front/js/aos.js') }}"></script>
+    <script src="https://js.stripe.com/v3/"></script>
     <script>
+        var stripe = Stripe('pk_test_sOSCwMhV9CNSb8DLOqP9Sj4v00WYt54gV7');
+        var elements = stripe.elements();
+        // var card = elements.create('card');
+        var style = {
+              base: {
+                color: '#303238',
+                fontSize: '16px',
+                fontFamily: '"Open Sans", sans-serif',
+                fontSmoothing: 'antialiased',
+                '::placeholder': {
+                  color: '#CFD7DF',
+                },
+              },
+              invalid: {
+                color: '#e5424d',
+                ':focus': {
+                  color: '#303238',
+                },
+              },
+            };
+        var card = elements.create('card', {style: style});
         AOS.init({
             easing: 'ease-in-out-sine'
         });

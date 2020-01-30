@@ -7,7 +7,7 @@
             @if( $service->service_type == 'regular' || $service->service_type == 'once_off' || $service->service_type == 'end_of_lease' )
                 <div class="col-md-3">
                     <div class="book_service_tab">
-                        <input type="radio" name="service" id="service_{{ $service->id }}" value="{{ $service->id }}" service_type="{{ $service->service_type }}">
+                        <input type="radio" name="service" id="service_{{ $service->id }}" value="{{ $service->id }}" amount="{{ $service->rate_per_hour }}" min_hours="{{ $service->minimum_service_hours }}" service_type="{{ $service->service_type }}">
                         <label for="service_{{ $service->id }}"><i class="fa fa-check-circle"></i> <span>{{ $service->name }}</span></label>
                     </div>
                 </div>
@@ -21,7 +21,7 @@
                         @foreach( $services as $service )
                         @if( $service->service_type == 'other' || is_null($service->service_type) )
                             <li>
-                                <input type="checkbox" name="sub_services[]" id="sub_service_{{ $service->id }}" value="{{ $service->id }}" service_other="{{ $service->price_calculation }}">
+                                <input type="checkbox" name="sub_services[]" id="sub_service_{{ $service->id }}" value="{{ $service->id }}" amount="{{ $service->rate_per_hour }}" service_other="{{ $service->price_calculation }}">
                                 <label for="sub_service_{{ $service->id }}"><i class="fa fa-check-circle"></i> <span>{{ $service->name }}</span></label>
                             </li>
                         @endif
@@ -62,6 +62,40 @@
             </div>
         </div>
     </div>
+
+    <div class="hide" id="carpet_cleaning">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="book_form_tab">
+                    <label for="carpet_cleaning_rooms">Rooms to be cleaned?</label>
+                    <input type="text" onkeypress="return isNumberKey(event)" name="carpet_cleaning_rooms" id="carpet_cleaning_rooms" value="1">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="hide" id="window_cleaning">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="book_form_tab">
+                    <label for="window_panels">No of Panels to be cleaned?</label>
+                    <input type="text" onkeypress="return isNumberKey(event)" name="window_panels" id="window_panels" value="1">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="hide" id="tile_group_cleaning">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="book_form_tab">
+                    <label for="tile_sq_meter">How much Sq. Meter to be cleaned?</label>
+                    <input type="text" onkeypress="return isNumberKey(event)" name="tile_sq_meter" id="tile_sq_meter" value="1">
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <div class="bac_footer_step">
         <div class="bac_comman_tab">
@@ -201,6 +235,16 @@
             </label>
         </div>
         <input type="text" placeholder="Other (Please specify)" id="other_pet" name="has_pet_optional">
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <label for="card-element">Card</label>
+        <div id="card-element"></div>
+
+        <script>
+          card.mount('#card-element');
+        </script>
     </div>
 </div>
 
