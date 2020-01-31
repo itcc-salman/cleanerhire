@@ -10,12 +10,13 @@ class Booking extends Model
     use SoftDeletes;
     protected $appends = ['formattedStatus'];
 
-    const STATUS_CREATED            = 0;
-    const STATUS_PENDING            = 1;
-    const STATUS_APPOINTED          = 2;
-    const STATUS_INPROGRESS         = 3;
-    const STATUS_COMPLETED          = 4;
-    const STATUS_CANCELLED          = 5;
+    const STATUS_NEW                    = 0;
+    const STATUS_PENDING                = 1;
+    const STATUS_ASSIGNED               = 2;
+    const STATUS_INPROGRESS             = 3;
+    const STATUS_COMPLETED              = 4;
+    const STATUS_APPROVED               = 5;
+    const STATUS_CANCELLED              = 6;
 
     public function user()
     {
@@ -28,16 +29,18 @@ class Booking extends Model
 
     public function getFormattedStatusAttribute()
     {
-        if($this->status == Self::STATUS_CREATED){
-            return 'Created';
+        if($this->status == Self::STATUS_NEW){
+            return 'New';
         }elseif ($this->status == Self::STATUS_PENDING) {
             return 'Pending';
-        }elseif ($this->status == Self::STATUS_APPOINTED) {
-            return 'Appointed';
+        }elseif ($this->status == Self::STATUS_ASSIGNED) {
+            return 'Assigned';
         }elseif ($this->status == Self::STATUS_INPROGRESS) {
             return 'In Progress';
         }elseif ($this->status == Self::STATUS_COMPLETED) {
             return 'Completed';
+        }elseif ($this->status == Self::STATUS_APPROVED) {
+            return 'Approved';
         }elseif ($this->status == Self::STATUS_CANCELLED) {
             return 'Cancelled';
         }else{
@@ -45,7 +48,7 @@ class Booking extends Model
         }
     }
 
-    public function scopeCreated($query)
+    public function scopeNew($query)
     {
         return $query->where('status', 0);
     }
@@ -55,12 +58,12 @@ class Booking extends Model
         return $query->where('status', 1);
     }
 
-    public function scopeAppointed($query)
+    public function scopeAssigned($query)
     {
         return $query->where('status', 2);
     }
 
-    public function scopeInprogress($query)
+    public function scopeInProgress($query)
     {
         return $query->where('status', 3);
     }
@@ -70,9 +73,14 @@ class Booking extends Model
         return $query->where('status', 4);
     }
 
-    public function scopecancelled($query)
+    public function scopeApproved($query)
     {
         return $query->where('status', 5);
+    }
+
+    public function scopeCancelled($query)
+    {
+        return $query->where('status', 6);
     }
 
     public function services()

@@ -36,7 +36,15 @@ class CreateBookingsTable extends Migration
             $table->string('country')->nullable();
             $table->string('latitude')->nullable();
             $table->string('longitude')->nullable();
-            $table->tinyInteger('status')->comment('Active - 1, Deactive - 0');
+
+            $table->unsignedInteger('rooms')->nullable();
+            $table->unsignedInteger('bathrooms')->nullable();
+            $table->unsignedBigInteger('assigned_user_id')->nullable();
+            $table->unsignedBigInteger('assigned_cleaner_id')->nullable();
+            $table->enum('services_date_type', ['asap','datetime'])->default('asap');
+
+            $table->tinyInteger('status')->comment('New - 0, Pending - 1, Assigned - 2, In Progress - 3, Completed - 4, Approved - 5, Cancelled - 6')->default(0);
+
             $table->timestamps();
             $table->integer('created_by');
             $table->integer('updated_by');
@@ -47,6 +55,8 @@ class CreateBookingsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
             $table->foreign('property_id')->references('id')->on('properties')->onDelete('cascade');
+            $table->foreign('assigned_user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('assigned_cleaner_id')->references('id')->on('cleaners')->onDelete('cascade');
         });
     }
 

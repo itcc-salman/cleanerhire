@@ -35,3 +35,18 @@ Route::match(['GET','POST'], '/registercustomer', 'CustomerController@registerCu
 Route::get('/mytest', 'HomeController@test');
 
 Route::get('review-and-confirm-booking/{token}', 'BookingController@reviewAndConfirm')->name('front.confirm_booking_cleaner');
+
+Route::get('mailable1', function () {
+    $booking = App\Models\Booking::find(1);
+    $cleaner = App\Models\Cleaner::find(1);
+    return new App\Mail\NewBookingAvailable($booking,$cleaner);
+});
+Route::get('mailable2', function () {
+    $booking = App\Models\Booking::find(1);
+    return new App\Mail\BookingConfirmation($booking);
+});
+Route::get('mailable3', function () {
+    $booking = App\Models\Booking::find(1);
+
+    return new App\Mail\CleanerAssigned($booking);
+});
