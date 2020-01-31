@@ -313,11 +313,6 @@
                 calculateAmount();
             });
 
-            $(document).on('focus', '#other_pet', function(e) {
-                // uncheck the radio button
-                $("[name='has_pet']").prop("checked", false);
-            });
-
             // submit the form
             $(document).on('click' , '#booking_submit_btn', function(e) {
                 e.preventDefault();
@@ -340,7 +335,8 @@
                             // display errors on each form field
                             $.each(err.responseJSON.errors, function (i, error) {
                                 // showToast(error[0], 0);
-                                alert(error[0]);
+                                // alert(error[0]);
+                                notifyToast("error",error[0]);
                                 return false;
                             });
                         }

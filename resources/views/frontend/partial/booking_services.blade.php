@@ -168,13 +168,13 @@
         <div class="col-md-6">
             <div class="book_form_tab">
                 <label for="street_number">Street No<span class="text-danger">&nbsp;*</span></label>
-                <input id="street_number" name="address_line_1" readonly placeholder="Street No" type="text" value="">
+                <input id="street_number" autocomplete="new-password" name="address_line_1" placeholder="Street No" type="text" value="">
             </div>
         </div>
         <div class="col-md-6">
             <div class="book_form_tab">
                 <label for="route">Street Name<span class="text-danger">&nbsp;*</span></label>
-                <input id="route" name="address_line_2" readonly placeholder="Street Name" type="text" value="">
+                <input id="route" autocomplete="new-password" name="address_line_2" placeholder="Street Name" type="text" value="">
             </div>
         </div>
     </div>
@@ -214,42 +214,35 @@
     </div>
 </div>
 
-<div class="bac_footer_step">
-    <div class="bac_comman_tab">
-        <label>Do you have any pets?</label>
-        <div class="check_main">
-            <label class="m_check">
-                <span>Cat</span>
-                <input type="radio" name="has_pet" value="cat">
-                <span class="checkmark"></span>
-            </label>
-            <label class="m_check">
-                <span>Dog</span>
-                <input type="radio" name="has_pet" value="dog">
-                <span class="checkmark"></span>
-            </label>
-            <label class="m_check">
-                <span>None</span>
-                <input type="radio" name="has_pet" value="none">
-                <span class="checkmark"></span>
-            </label>
-        </div>
-        <input type="text" placeholder="Other (Please specify)" id="other_pet" name="has_pet_optional">
-    </div>
-</div>
 <div class="row">
     <div class="col-md-12">
         <label for="card-element">Card</label>
-        <div id="card-element"></div>
-
-        <script>
-          card.mount('#card-element');
-        </script>
+    </div>
+    <div class="col-md-12">
+        <label>Name on Card</label>
+        <input class="form-control" size="4" type="text">
+    </div>
+    <div class="col-md-12">
+        <label>Card Number</label>
+        <input autocomplete="off" class="form-control card-number" onkeypress="return isNumberKey(event)" size="20" type="text">
+    </div>
+    <div class="col-md-4">
+        <label for="cvc">CVC</label>
+        <input autocomplete="off" placeholder="ex. 311" onkeypress="return isNumberKey(event)" class="form-control card-cvc" size="4" type="text">
+    </div>
+    <div class="col-md-4">
+        <label for="expiry-month">Expiration Month</label>
+        <input autocomplete="off" placeholder="MM" onkeypress="return isNumberKey(event)" class="form-control card-expiry-month" size="2" type="text">
+    </div>
+    <div class="col-md-4">
+        <label for="cvc">Expiration Year</label>
+        <input placeholder="YYYY" onkeypress="return isNumberKey(event)" class="form-control card-expiry-year" size="4" type="text">
     </div>
 </div>
 
 <div class="bac_footer_step">
-    <a href="javascript:void(0);" id="booking_submit_btn">Next</a>
+    <a href="javascript:void(0);" id="booking_submit_btn">Book Now and pay later</a>
+    <a href="javascript:void(0);" class="hide" id="get_quote_btn">Get Quote</a>
 </div>
 <script src="https://maps.googleapis.com/maps/api/js?key={{ config('settings.googlePlacesAPIKey') }}&libraries=places&callback=initAutocomplete"></script>
 @endif

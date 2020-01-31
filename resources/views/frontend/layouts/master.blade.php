@@ -9,6 +9,7 @@
     <title>{{ config('app.name', 'Cleaner Hire') }}</title>
 
     <link rel="stylesheet" href="{{ asset('front/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/plugins/toastr/toastr.min.css') }}">
     <link rel="stylesheet" href="{{ asset('front/css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('front/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('front/css/aos.css') }}">
@@ -130,6 +131,7 @@
 
     <script src="{{ asset('front/js/jquery.min.js') }}"></script>
     <script src="{{ asset('front/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('front/plugins/toastr/toastr.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/bootstrap-clockpicker/bootstrap-clockpicker.min.js') }}"></script>
     <script>
@@ -193,9 +195,31 @@
 
             return true;
         }
-    $('.carousel').carousel({
-      interval: 10000
-    });
+        function notifyToast(type,msg) {
+            toastr.options = {
+              "closeButton": true,
+              "newestOnTop": false,
+              "progressBar": true,
+              // "positionClass": "toast-top-left",
+              // "positionClass": "toast-top-center",
+              "positionClass": "toast-bottom-center",
+              "preventDuplicates": false,
+              "showDuration": "300",
+              "hideDuration": "1000",
+              "timeOut": "5000",
+              "extendedTimeOut": "1000",
+              "showEasing": "swing",
+              "hideEasing": "linear",
+              "showMethod": "fadeIn",
+              "hideMethod": "fadeOut"
+            };
+            toastr[type](msg);
+        }
+
+        $('.carousel').carousel({
+          interval: 10000
+        });
+
     $(document).ready(function(){
         $("#testimonial-slider").owlCarousel({
             items:2,

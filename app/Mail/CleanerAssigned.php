@@ -29,6 +29,6 @@ class CleanerAssigned extends Mailable
      */
     public function build()
     {
-        return $this->view('email.cleaner_assigned');
+        return $this->view('emails.cleaner_assigned');
     }
 }

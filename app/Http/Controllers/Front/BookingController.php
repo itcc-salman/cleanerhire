@@ -13,6 +13,7 @@ use App\Services\BookingService;
 use App\Models\User;
 use App\Models\BookingCleanerEmails;
 use App\Logic\Booking\BookingRepository;
+use Stripe;
 
 class BookingController extends Controller
 {
