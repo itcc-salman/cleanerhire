@@ -53,21 +53,21 @@
                         <h3>Your Booking Summary</h3>
                         <div class="bac_bs_tabs">
                             <div class="bac_bs_tab">
-                                <label>First Visit : </label>
-                                <span>N/A</span>
+                                <label>Hours: </label>
+                                <span id="summary_hours">N/A</span>
                             </div>
                             <div class="bac_bs_tab">
-                                <label>Address :</label>
-                                <span>N/A</span>
+                                <label>Clean type:</label>
+                                <span id="summary_service_type">N/A</span>
                             </div>
                             <div class="bac_bs_tab">
-                                <label> Ongoing Frequency :</label>
-                                <span>Weekly</span>
+                                <label>Where:</label>
+                                <span id="summary_address">N/A</span>
                             </div>
                         </div>
                         <div class="bac_bs_total">
                             <label>TOTAL</label>
-                            <span>$0 <small>per visit</small></span>
+                            <span>$<amount>0</amount></span>
                         </div>
                     </div>
                 </div>
@@ -149,6 +149,65 @@
           }
         }
 
+        function showHideDivs() {
+            var sub_services = [];
+            $.each($("input[name='sub_services[]']:checked"), function(){
+                let _service_other = $(this).attr('service_other');
+                switch(_service_other) {
+                    case 'room': sub_services.push('room'); break;
+                    case 'panel': sub_services.push('panel'); break;
+                    case 'sq': sub_services.push('sq'); break;
+                    default: sub_services.push('other'); break;
+                }
+            });
+            if( $.inArray('other', sub_services ) !== -1 ) {
+                // hide all things and show button request a quote
+                $('#carpet_cleaning').addClass('hide');
+                $('#window_cleaning').addClass('hide');
+                $('#tile_group_cleaning').addClass('hide');
+            } else {
+                if( $.inArray('room', sub_services ) !== -1 ) {
+                    $('#carpet_cleaning').removeClass('hide');
+                } else {
+                    $('#carpet_cleaning').addClass('hide');
+                }
+                if( $.inArray('panel', sub_services ) !== -1 ) {
+                    $('#window_cleaning').removeClass('hide');
+                } else {
+                    $('#window_cleaning').addClass('hide');
+                }
+                if( $.inArray('sq', sub_services ) !== -1 ) {
+                    $('#tile_group_cleaning').removeClass('hide');
+                } else {
+                    $('#tile_group_cleaning').addClass('hide');
+                }
+            }
+        }
+
+        function calculateAmount() {
+            let _service_type = $("[name='service']:checked").attr('service_type');
+            let _min_hours = $("[name='service']:checked").attr('min_hours');
+            let _amount = $("[name='service']:checked").attr('amount');
+            if( _service_type == 'other' ) {
+                // logic for others
+                // get all checked other services
+                $.each($("input[name='sub_services[]']:checked"), function(){
+                    let _service_other = $(this).attr('service_other');
+                    if( _service_other == 'room' ) {
+                        // calculate price as per room
+                    }
+                });
+            } else {
+                let _customer_hours = $('#cleaning_hours').val();
+                if( _customer_hours >= _min_hours ) {
+                    $('#summary_hours').text(_customer_hours);
+                    $('#summary_service_type').text(_service_type);
+                    // summary_address
+                    $('amount').text(parseInt(_customer_hours) * parseFloat(_amount));
+                }
+            }
+        }
+
         function initBookingPage() {
             $('#datepicker').datepicker({
                 clearBtn: true,
@@ -210,13 +269,31 @@
             });
 
             $(document).on('click', "[name='service']", function(e) {
-                e.preventDefault();
                 let _val = $("[name='service']:checked").attr('service_type');
+                let _min_hours = $("[name='service']:checked").attr('min_hours');
+                console.log(_val);
                 if( _val != 'other' ) {
+                    $("input[name='sub_services[]']:checked").prop('checked', false);
                     $('#normal_service').removeClass('hide');
+                    $('#cleaning_hours').val(_min_hours);
                 } else {
                     $('#normal_service').addClass('hide');
+                    $('#cleaning_hours').val(0);
                 }
+                showHideDivs();
+                calculateAmount();
+            });
+
+            $(document).on('change', '#cleaning_hours', function(e) {
+                // get selected service amount
+                let _val = $("[name='service']:checked").attr('service_type');
+                if( _val != 'other' ) {
+                    let _min_hours = $("[name='service']:checked").attr('min_hours');
+                    if( $(this).val() < _min_hours ) {
+                        $(this).val(_min_hours);
+                    }
+                }
+                calculateAmount();
             });
 
             $(document).on('click', "[name='services_date_type']", function(e) {
@@ -226,6 +303,14 @@
                 } else {
                     $('#preferred_date_time_div').addClass('hide');
                 }
+            });
+
+            $(document).on('click', "[name='sub_services[]']", function(e) {
+                // select the other service
+                $('#service_other').prop('checked', true);
+                $('#service_other').trigger('click');
+                showHideDivs();
+                calculateAmount();
             });
 
             $(document).on('focus', '#other_pet', function(e) {
