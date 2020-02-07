@@ -53,7 +53,7 @@ class BookingRepository
                         $booking_email->token = $booking->id."_".$c->user_id."_".str_random(64);
                         $booking_email->save();
                         // self::sendNewBookingEmail($user, $booking, $booking_email);
-                        Mail::to($c->email)->send(new NewBookingAvailable($booking,$c));
+                        Mail::to($c->email)->send(new NewBookingAvailable($booking,$c, $booking_email));
                     }
                     continue;
                 }
