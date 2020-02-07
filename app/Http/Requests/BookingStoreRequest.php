@@ -32,17 +32,27 @@ class BookingStoreRequest extends FormRequest
             $rule = [
                 'service_type'  => 'required',
                 'service'       => 'required',
-                'booking_date'  => 'required',
-                'booking_time'  => 'required',
-                'gender_pref'   => 'required',
+                // 'booking_date'  => 'required',
+                // 'booking_time'  => 'required',
+                // 'gender_pref'   => 'required',
             ];
             $charges_service_ids = [1,2,3];
-            if( in_array($this->input('service'), $charges_service_ids ) {
+            if( in_array($this->input('service'), $charges_service_ids) ) {
                 // verify card details
-                $number = $this->input('service');
-                $exp_month = $this->input('service');
-                $exp_year = $this->input('service');
-                $cvc = $this->input('service');
+                // $number = $this->input('service');
+                // $exp_month = $this->input('service');
+                // $exp_year = $this->input('service');
+                // $cvc = $this->input('service');
+                Stripe\Stripe::setApiKey('sk_test_y3o7tq6J2K4UMHmQsqZB3Sgl00ep0pMIfN');
+                $token = Stripe\Token::create([
+                  'card' => [
+                    'number' => '4242424242424242',
+                    'exp_month' => 1,
+                    'exp_year' => 2021,
+                    'cvc' => '314',
+                  ],
+                ]);
+                \Log::debug($token);
             }
             /*
             if( empty($this->input('has_pet_optional')) ) {
