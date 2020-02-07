@@ -50,7 +50,9 @@ class BookingController extends Controller
                 $services = $cleaningServices->getCleaningServicesByType('residential');
                 $customerService = new CustomerService;
                 $customer = $customerService->getLoggedInCustomer();
-                $view = view('frontend.partial.booking_services', compact('services', 'customer'))->render();
+
+                $intent = $customer->user->createSetupIntent();
+                $view = view('frontend.partial.booking_services', compact('services', 'customer', 'intent'))->render();
                 $data['where'] = 'services_list';
             } else if( $request->get('service_type') == 'commercial' ) {
                 // first ask for propert type

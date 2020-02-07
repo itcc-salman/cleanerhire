@@ -216,27 +216,16 @@
 
 <div class="row">
     <div class="col-md-12">
-        <label for="card-element">Card</label>
-    </div>
-    <div class="col-md-12">
         <label>Name on Card</label>
-        <input class="form-control" size="4" type="text">
+        <input id="card-holder-name" class="form-control" type="text">
     </div>
     <div class="col-md-12">
-        <label>Card Number</label>
-        <input autocomplete="off" class="form-control card-number" onkeypress="return isNumberKey(event)" size="20" type="text">
-    </div>
-    <div class="col-md-4">
-        <label for="cvc">CVC</label>
-        <input autocomplete="off" placeholder="ex. 311" onkeypress="return isNumberKey(event)" class="form-control card-cvc" size="4" type="text">
-    </div>
-    <div class="col-md-4">
-        <label for="expiry-month">Expiration Month</label>
-        <input autocomplete="off" placeholder="MM" onkeypress="return isNumberKey(event)" class="form-control card-expiry-month" size="2" type="text">
-    </div>
-    <div class="col-md-4">
-        <label for="cvc">Expiration Year</label>
-        <input placeholder="YYYY" onkeypress="return isNumberKey(event)" class="form-control card-expiry-year" size="4" type="text">
+        <!-- Stripe Elements Placeholder -->
+        <div id="card-element"></div>
+
+        <button id="card-button" data-secret="{{ $intent->client_secret }}">
+            Update Payment Method
+        </button>
     </div>
 </div>
 
@@ -245,4 +234,14 @@
     <a href="javascript:void(0);" class="hide" id="get_quote_btn">Get Quote</a>
 </div>
 <script src="https://maps.googleapis.com/maps/api/js?key={{ config('settings.googlePlacesAPIKey') }}&libraries=places&callback=initAutocomplete"></script>
+<script src="https://js.stripe.com/v3/"></script>
+
+<script>
+    const stripe = Stripe('stripe-public-key');
+
+    const elements = stripe.elements();
+    const cardElement = elements.create('card');
+
+    cardElement.mount('#card-element');
+</script>
 @endif

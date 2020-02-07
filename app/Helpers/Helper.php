@@ -81,3 +81,9 @@ if( !function_exists('supported_upload_fileTypes') ) {
   application/vnd.openxmlformats-officedocument.wordprocessingml.document,image/*';
     }
 }
+
+if( !function_exists('convertDateToServer') ) {
+    function convertDateToServer($date) {
+        return date('Y-m-d', strtotime($date));
+    }
+}

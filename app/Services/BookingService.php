@@ -38,8 +38,9 @@ class BookingService
         return $this->booking_model->where('user_id', $cleanerId)->where('status', 1)->get();
     }
 
-    public function registerBooking($data)
+    public function registerBooking($request)
     {
+        // dd($request);
         if( Auth::user()->isCustomer() ) {
             $user = User::with('customer')->find(Auth::Id());
             $customer_id = $user->customer->id;
@@ -47,27 +48,36 @@ class BookingService
         $booking = $this->booking_model;
         $booking->user_id           = Auth::Id();
         $booking->customer_id       = $customer_id;
-        $booking->booking_type      = $data->get('service_type');
-        $booking->property_id       = $data->get('properties', NULL);
-        $booking->services          = implode(',', $data->get('services'));
-        $booking->visit_type        = $data->get('visit_type');
-        // $booking->duration          = $data->get('duration');
-        $booking->booking_date      = $data->get('booking_date');
-        $booking->booking_time      = $data->get('booking_time');
-        $booking->gender_pref       = $data->get('gender_pref');
-        $booking->has_pet           = $data->get('has_pet');
-        $booking->has_pet_optional  = $data->get('has_pet_optional', NULL);
+        $booking->booking_type      = $request->get('service_type');
+        $booking->property_id       = $request->get('properties', NULL);
+        $booking->services          = $request->get('service');
+        // $booking->visit_type        = $request->get('visit_type');
+        $booking->duration          = $request->get('cleaning_hours');
 
-        $booking->address_line_1    = $data->get('address_line_1');
-        $booking->address_line_2    = $data->get('address_line_2');
-        $booking->city              = $data->get('city');
-        $booking->state             = $data->get('state');
-        $booking->postcode          = $data->get('postal_code');
-        $booking->country           = $data->get('country');
-        $booking->latitude          = $data->get('latitude');
-        $booking->longitude         = $data->get('longitude');
+        $booking->services_date_type = $request->get('services_date_type');
+        $booking->rooms = $request->get('cleaning_rooms');
+        $booking->bathrooms = $request->get('cleaning_bathrooms');
 
-        $booking->status            = $data->get('status', 1);
+        if( $request->get('services_date_type') == 'preferred' ) {
+            $booking->booking_date = convertDateToServer($request->get('booking_date'));
+            $booking->booking_time = $request->get('booking_time');
+        }
+        $booking->preferred_date_and_time = $request->get('preferred_date_and_time');
+
+        $booking->address_line_1    = $request->get('address_line_1');
+        $booking->address_line_2    = $request->get('address_line_2');
+        $booking->city              = $request->get('city');
+        $booking->state             = $request->get('state');
+        $booking->postcode          = $request->get('postal_code');
+        // $booking->country           = $request->get('country');
+        $booking->latitude          = $request->get('latitude');
+        $booking->longitude         = $request->get('longitude');
+
+        $booking->customer_name = $request->get('customer_name');
+        $booking->customer_email = $request->get('customer_email');
+        $booking->customer_phone = $request->get('customer_phone');
+
+        $booking->status            = $request->get('status', 1);
         $booking->created_by        = Auth::Id();
         $booking->updated_by        = Auth::Id();
         $booking->save();
