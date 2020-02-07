@@ -10,6 +10,8 @@ use App\Notifications\PasswordReset;
 class User extends Authenticatable
 {
     use Notifiable;
+    use Billable;
+
 
     /**
      * The attributes that are mass assignable.
