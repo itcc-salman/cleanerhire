@@ -513,3 +513,5 @@ input:checked + a { text-decoration:none; color:#00aeef; }
 .book_dt_tab label:before { left: 0; top: 3px; width: 20px; height: 20px; border: 2px solid rgba(0, 0, 0, 0.54); }
 .book_dt_tab label:after { top: 8px; left: 5px; width: 10px; height: 10px; transform: scale(0); background: #337ab7; }
 .book_dt_tab span, .book_dt_tab strong { font-size: 15px; font-weight: 400; }
+
+#summary_service_type { text-transform: capitalize; }

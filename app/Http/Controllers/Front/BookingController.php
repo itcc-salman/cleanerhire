@@ -82,9 +82,10 @@ class BookingController extends Controller
     {
         $bookingServices = $this->bookingServices->registerBooking($request);
         if( $bookingServices ) {
+            $bookingRepostory = new BookingRepository();
+            $cleaner_ids = $bookingRepostory->sendBookingEmail($bookingServices);
             setflashmsg(trans('msg.bookingCreated'),'1');
-            // return response()->json(['status' => true, 'redirect' => route('front.booking_completed') ]);
-            return response()->json(['status' => true, 'redirect' => route('front.assign_cleaners',$bookingServices->id) ]);
+            return response()->json(['status' => true, 'redirect' => route('front.booking_completed') ]);
         }
         setflashmsg(trans('msg.bookingFailed'),'0');
         return response()->json(['status' => false,

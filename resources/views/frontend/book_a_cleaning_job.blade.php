@@ -129,6 +129,7 @@
               document.getElementById(addressType).value = val;
             }
           }
+          $('#summary_address').text($('#locality').val());
           $("#latitude").val(lat);
           $("#longitude").val(lng);
         }
@@ -201,7 +202,7 @@
                 let _customer_hours = $('#cleaning_hours').val();
                 if( _customer_hours >= _min_hours ) {
                     $('#summary_hours').text(_customer_hours);
-                    $('#summary_service_type').text(_service_type);
+                    $('#summary_service_type').text(_service_type.split('_').join(' '));
                     // summary_address
                     $('amount').text(parseInt(_customer_hours) * parseFloat(_amount));
                 }

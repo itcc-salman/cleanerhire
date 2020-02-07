@@ -12,6 +12,8 @@ use App\Services\CommonService;
 use App\Models\CleanerServiceMapping;
 use App\Models\ServiceArea;
 use App\Models\BookingCleanerEmails;
+use Mail;
+use App\Mail\NewBookingAvailable;
 
 class BookingRepository
 {
@@ -50,7 +52,8 @@ class BookingRepository
                         $booking_email->booking_id = $booking->id;
                         $booking_email->token = $booking->id."_".$c->user_id."_".str_random(64);
                         $booking_email->save();
-                        self::sendNewBookingEmail($user, $booking, $booking_email);
+                        // self::sendNewBookingEmail($user, $booking, $booking_email);
+                        Mail::to($c->email)->send(new NewBookingAvailable($booking,$c));
                     }
                     continue;
                 }
@@ -73,13 +76,13 @@ class BookingRepository
             // check for services provided by cleaner
             $cleaningServices = new CleaningServicesService;
             $cleaners = $cleaningServices->getCleanersForProperties($booking->property_id);
-            $booked_services = explode(',', $booking->services);
+            $booked_services = $booking->services;
             $cleaners_ids = CleanerServiceMapping::whereIn('cleaner_id', $cleaners)
-                                    ->whereIn('cleaning_service_id', $booked_services)->distinct()->pluck('cleaner_id');
+                                    ->where('cleaning_service_id', $booked_services)->pluck('cleaner_id');
             // dd($cleaners_ids);
         } else {
-            $booked_services = explode(',', $booking->services);
-            $cleaners_ids = CleanerServiceMapping::whereIn('cleaning_service_id', $booked_services)->distinct()->pluck('cleaner_id');
+            $booked_services = $booking->services;
+            $cleaners_ids = CleanerServiceMapping::where('cleaning_service_id', $booked_services)->pluck('cleaner_id');
         }
         return $cleaners_ids;
     }
