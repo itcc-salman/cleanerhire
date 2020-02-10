@@ -22,7 +22,7 @@ class BookingService
 
     public function getBookingByIdWithUser($id)
     {
-        return $this->booking_model->with('user')->find($id);
+        return $this->booking_model->with('user')->with('service')->find($id);
     }
 
     public function getAllBooking()
@@ -33,9 +33,9 @@ class BookingService
     public function getAllBookingOfCleaner($cleanerId = NULL)
     {
         if( is_null($cleanerId) ) {
-            return $this->booking_model->where('user_id', Auth::Id())->where('status', 1)->get();
+            return $this->booking_model->with('service')->where('assigned_user_id', Auth::Id())->get();
         }
-        return $this->booking_model->where('user_id', $cleanerId)->where('status', 1)->get();
+        return $this->booking_model->with('service')->where('assigned_user_id', $cleanerId)->get();
     }
 
     public function registerBooking($request)

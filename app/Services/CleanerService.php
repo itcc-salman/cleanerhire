@@ -128,6 +128,7 @@ class CleanerService
 
     public function checkVisaDocuments(Cleaner $cleaner)
     {
+        return true;
         if( empty($cleaner->doc_driving_licence ) ) { return false; }
         if( empty($cleaner->doc_medicare_card ) ) { return false; }
         if( empty($cleaner->doc_passport ) ) { return false; }

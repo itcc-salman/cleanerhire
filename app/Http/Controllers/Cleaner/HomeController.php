@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Cleaner;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CleanerPersonalInfoStoreRequest;
+use App\Http\Requests\CleanerAccountInfoStoreRequest;
 use App\Services\CleanerService;
 use App\Services\CommonService;
 use Illuminate\Http\Request;
@@ -60,7 +61,7 @@ class HomeController extends Controller
         return response()->json($data);
     }
 
-    public function account_info(Request $request)
+    public function account_info(CleanerAccountInfoStoreRequest $request)
     {
         $cleaner = $this->cleanerService->updateCleanerAccountInfo($request);
         $data['code'] = 200;

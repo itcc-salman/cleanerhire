@@ -80,13 +80,13 @@ class BookingController extends Controller
 
     public function addBooking(BookingStoreRequest $request)
     {
-        $user = User::find(2);
-        $user->addPaymentMethod('pm_1G9VjaAphIGyNXdOZIaMWb1d');
-        $user->addPaymentMethod('pm_1G9VkJAphIGyNXdO10e0BfcU');
-        $user->save();
+        // $user = User::find(2);
+        // $user->addPaymentMethod('pm_1G9VjaAphIGyNXdOZIaMWb1d');
+        // $user->addPaymentMethod('pm_1G9VkJAphIGyNXdO10e0BfcU');
+        // $user->save();
         // $user->addPaymentMethod('');
-        $paymentMethods = $user->paymentMethods();
-        dd($paymentMethods[0]);
+        // $paymentMethods = $user->paymentMethods();
+        // dd($paymentMethods[0]);
         $bookingServices = $this->bookingServices->registerBooking($request);
         if( $bookingServices ) {
             $bookingRepostory = new BookingRepository();
@@ -151,17 +151,5 @@ class BookingController extends Controller
     public function bookingFailed()
     {
         return view('frontend.booking_failed');
-    }
-
-    public function reviewAndConfirm($token)
-    {
-        $booking_emails = BookingCleanerEmails::where('token', $token)->first();
-        if( $booking_emails ) {
-            $booking = $this->bookingServices->getBookingByIdWithUser($booking_emails->booking_id);
-            // dd($booking);
-            return view('frontend.review_and_confirm', compact('booking'));
-        } else {
-            return view('frontend.booking_taken');
-        }
     }
 }

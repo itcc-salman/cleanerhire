@@ -18,6 +18,7 @@ Route::get('/resources', 'ResourceController@index')->name('cleaner.resources');
 Route::get('resource/view/{id?}', 'ResourceController@view')->name('cleaner.resource.view');
 Route::get('/bookings', 'BookingController@index')->name('cleaner.bookings');
 Route::get('booking/view/{id?}', 'BookingController@view')->name('cleaner.booking.view');
+Route::get('review-and-confirm-booking/{token}', 'BookingController@reviewAndConfirm')->name('front.confirm_booking_cleaner');
 
 Route::prefix('ajax')->group(function () {
     Route::post('profile/partial', 'HomeController@profile')->name('cleaner.ajax.profile.partial');

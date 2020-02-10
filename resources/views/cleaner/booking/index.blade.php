@@ -154,16 +154,24 @@ var KTDatatableRemoteAjaxDemo = function() {
                     selector: false,
                     textAlign: 'center',
                 }, {
-                    field: 'name',
-                    title: 'Name',
+                    field: 'service.name',
+                    title: 'Service',
+                }, {
+                    field: 'city',
+                    title: 'Suburb',
                 }, {
                     field: 'status',
                     title: 'Status',
                     // callback function support for column rendering
                     template: function(row) {
                         var status = {
-                            1: {'title': 'Active', 'class': 'kt-badge--brand'},
-                            0: {'title': 'Deactive', 'class': ' kt-badge--danger'},
+                            0: {'title': 'New', 'class': 'kt-badge--brand'},
+                            1: {'title': 'Pending', 'class': ' kt-badge--primary'},
+                            2: {'title': 'Assigned', 'class': ' kt-badge--danger'},
+                            3: {'title': 'In-progress', 'class': ' kt-badge--danger'},
+                            4: {'title': 'Completed', 'class': ' kt-badge--danger'},
+                            5: {'title': 'Approved', 'class': ' kt-badge--danger'},
+                            6: {'title': 'Cancelled', 'class': ' kt-badge--danger'},
                         };
                         return '<span class="kt-badge ' + status[row.status].class + ' kt-badge--inline kt-badge--pill">' + status[row.status].title + '</span>';
                     },

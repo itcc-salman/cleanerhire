@@ -24,7 +24,7 @@ class CreateBookingsTable extends Migration
             $table->string('services');
             // $table->enum('visit_type', ['weekly','fortnight','once'])->default('weekly');
             $table->string('duration')->default('1')->comment('cleaning hours');
-            $table->enum('services_date_type', ['asap','datetime'])->default('asap');
+            $table->enum('services_date_type', ['asap','preferred'])->default('asap');
             $table->unsignedInteger('rooms')->nullable();
             $table->unsignedInteger('bathrooms')->nullable();
             $table->date('booking_date')->nullable();

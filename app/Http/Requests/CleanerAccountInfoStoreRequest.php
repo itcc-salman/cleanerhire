@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Stripe;
 
-class BookingStoreRequest extends FormRequest
+class CleanerAccountInfoStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -29,21 +28,13 @@ class BookingStoreRequest extends FormRequest
             case 'GET': return []; break;
             case 'POST':
             $rule = [
-                'service_type'  => 'required',
-                'service'       => 'required',
-                // 'booking_date'  => 'required',
-                // 'booking_time'  => 'required',
-                // 'gender_pref'   => 'required',
+                'nationality'   => 'required',
+                'gender'        => 'required',
+                'language'      => 'required',
             ];
-            $charges_service_ids = [1,2,3];
-            if( in_array($this->input('service'), $charges_service_ids) ) {
-                // verify details
+            if( $this->input('role') == 'company' ) {
+                // validation for company here
             }
-            /*
-            if( empty($this->input('has_pet_optional')) ) {
-                $rule['has_pet'] = 'required';
-            }
-            */
 
             return $rule;
             break;
@@ -59,8 +50,9 @@ class BookingStoreRequest extends FormRequest
     public function messages()
     {
         return [
-            'service_type.required'     => 'Please select job type first',
-            'service.required'          => 'Please select service',
+            'nationality.required' => 'Please add your nationality',
+            'gender.required' => 'Gender is required',
+            'language.required' => 'Language is required',
         ];
     }
 }

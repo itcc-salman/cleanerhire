@@ -23,18 +23,26 @@
                                 <label class="bft_question">Booking Information</label>
                                 <div class="book_job">
                                     <p>Booking Type : {{ ucfirst($booking->booking_type) }}</p>
-                                    <p>Customer Name : {{ $booking->user->first_name }} {{ $booking->user->last_name }}</p>
+                                    <p>Customer Name : {{ $booking->customer_name }}</p>
+                                    <p>Customer Email : {{ $booking->customer_email }}</p>
+                                    <p>Customer Contact No : {{ $booking->customer_phone }}</p>
                                     <p>Booking Address : {{ $booking->address_line_1 }} {{ $booking->address_line_2 }},
                                         {{ $booking->city }}, {{ $booking->state }} - {{ $booking->postcode }}
                                     </p>
-                                    <p>Visit Type : {{ $booking->visit_type }}</p>
-                                    <p>Booking Date : {{ $booking->booking_date }}</p>
-                                    <p>Booking Time : {{ $booking->booking_time }}</p>
-                                    <p>Gender Preference : {{ $booking->gender_pref }}</p>
-                                    <p>Has Pet : {{ $booking->has_pet }}</p>
-                                    @if( is_null($booking->has_pet) )
-                                        <p>Pet Type  : {{ $booking->has_pet_optional }}</p>
+                                    <p>Service Requested : {{ $booking->service->name }}</p>
+                                    @if( $booking->booking_type == 'residential' && in_array($booking->service->id, directServiceResedintial()) )
+                                        <p>Service Hours : {{ $booking->duration }}</p>
+                                        <p>No Of Rooms : {{ $booking->rooms }}</p>
+                                        <p>No Of Bathrooms : {{ $booking->bathrooms }}</p>
                                     @endif
+                                    @if( $booking->services_date_type == 'preferred' )
+                                        <p>Booking Date : {{ $booking->booking_date }}</p>
+                                        <p>Booking Time : {{ $booking->booking_time }}</p>
+                                    @else
+                                        <p>Service Needed : <span class="badge bg-danger">ASAP</span></p>
+                                    @endif
+                                    <p>Preferred Date and Time Note : {{ $booking->preferred_date_and_time }}</p>
+                                    <p>Comment : {{ $booking->comment }}</p>
                                 </div>
                             </div>
 

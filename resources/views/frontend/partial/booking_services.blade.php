@@ -261,7 +261,7 @@
         } else {
             console.log(setupIntent.payment_method);
             // The card has been verified successfully...
-            // $("#booking_submit_btn").trigger('click');
+            $("#booking_submit_btn").trigger('click');
         }
     });
 </script>

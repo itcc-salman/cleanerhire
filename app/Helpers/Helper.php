@@ -87,3 +87,9 @@ if( !function_exists('convertDateToServer') ) {
         return date('Y-m-d', strtotime($date));
     }
 }
+
+if( !function_exists('directServiceResedintial') ) {
+    function directServiceResedintial() {
+        return [1,2,3];
+    }
+}
