@@ -235,7 +235,27 @@
 <script>
     const stripe = Stripe('{{ env('STRIPE_KEY') }}');
     const elements = stripe.elements();
-    const cardElement = elements.create('card');
+    var style = {
+        base: {
+            color: '#303238',
+            fontSize: '16px',
+            fontFamily: '"Open Sans", sans-serif',
+            fontSmoothing: 'antialiased',
+            '::placeholder': {
+                color: '#CFD7DF',
+            },
+        },
+        invalid: {
+            color: '#e5424d',
+                ':focus': {
+                    color: '#303238',
+            },
+        },
+    };
+    const cardElement = elements.create('card', {
+        hidePostalCode: true,
+        style: style
+    });
 
     cardElement.mount('#card-element');
 
@@ -255,10 +275,11 @@
         );
 
         if (error) {
+            console.log(error);
             // Display "error.message" to the user...
             notifyToast("error",'SomeThing Went Wrong..!');
             setTimeout(function() {
-                location.reload(true);
+                // location.reload(true);
             }, 2000);
         } else {
             // The card has been verified successfully...

@@ -167,7 +167,11 @@
                 $('#carpet_cleaning').addClass('hide');
                 $('#window_cleaning').addClass('hide');
                 $('#tile_group_cleaning').addClass('hide');
+                // add get a quote button
+                $('#get_quote_btn').removeClass('hide');
+                // hide payment details info & book now button
             } else {
+                $('#get_quote_btn').addClass('hide');
                 if( $.inArray('room', sub_services ) !== -1 ) {
                     $('#carpet_cleaning').removeClass('hide');
                 } else {
@@ -190,6 +194,7 @@
             let _service_type = $("[name='service']:checked").attr('service_type');
             let _min_hours = $("[name='service']:checked").attr('min_hours');
             let _amount = $("[name='service']:checked").attr('amount');
+            let _other_service_total = 0;
             if( _service_type == 'other' ) {
                 // logic for others
                 // get all checked other services
@@ -197,8 +202,28 @@
                     let _service_other = $(this).attr('service_other');
                     if( _service_other == 'room' ) {
                         // calculate price as per room
+                        let _rooms = $('#carpet_cleaning_rooms').val();
+                        let _thisamount = $(this).attr('amount');
+                        _other_service_total += parseInt(_rooms) * parseInt(_thisamount);
+                    }
+                    if( _service_other == 'panel' ) {
+                        // calculate price as per panel
+                        let _panels = $('#window_panels').val();
+                        let _thisamount = $(this).attr('amount');
+                        _other_service_total += parseInt(_panels) * parseInt(_thisamount);
+                    }
+                    if( _service_other == 'sq' ) {
+                        // calculate price as per panel
+                        let _sq = $('#tile_sq_meter').val();
+                        let _thisamount = $(this).attr('amount');
+                        _other_service_total += parseInt(_sq) * parseInt(_thisamount);
+                    }
+                    if( _service_other == '' ) {
+                        _other_service_total = 'N/A';
                     }
                 });
+                $('#summary_service_type').text('Other');
+                $('amount').text(_other_service_total);
             } else {
                 let _customer_hours = $('#cleaning_hours').val();
                 if( _customer_hours >= _min_hours ) {
@@ -297,6 +322,19 @@
                 }
                 calculateAmount();
             });
+            $(document).on('change', '#carpet_cleaning_rooms', function(e) {
+                if( $(this).val() < 1 ) { $(this).val(1); }
+                calculateAmount();
+            });
+            $(document).on('change', '#window_panels', function(e) {
+                if( $(this).val() < 1 ) { $(this).val(1); }
+                calculateAmount();
+            });
+            $(document).on('change', '#tile_sq_meter', function(e) {
+                if( $(this).val() < 1 ) { $(this).val(1); }
+                calculateAmount();
+            });
+
 
             $(document).on('click', "[name='services_date_type']", function(e) {
                 let _val = $("[name='services_date_type']:checked").val();
@@ -344,6 +382,12 @@
                         }
                     }
                 }); // end ajax
+            });
+
+            // get a quote button
+            $(document).on('click', '#get_quote_btn', function(e) {
+                e.preventDefault();
+                let _data = $('#booking').serialize();
             });
         });
     </script>

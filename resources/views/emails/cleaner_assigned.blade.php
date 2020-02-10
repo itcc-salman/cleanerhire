@@ -228,7 +228,7 @@
                                                         <p style="font-size: 14px; line-height: 1.5; text-align: left; word-break: break-word; mso-line-height-alt: 21px; margin: 0;">
                                                             <span style="color: #000000; font-size: 14px;">
                                                                 <strong>
-                                                                    Hi {{ $booking->customer->user->first_name }} {{ $booking->customer->user->last_name }},
+                                                                    Hi {{ $booking->customer_name }},
                                                                 </strong>
                                                             </span>
                                                             <br/>
@@ -279,7 +279,7 @@
                                                                 </strong>
                                                             </span>
                                                         </p>
-                                                        @foreach($booking->services() as $key => $service)
+                                                        @foreach($booking->service() as $key => $service)
                                                         <p style="font-size: 14px; line-height: 1.5; text-align: left; word-break: break-word; mso-line-height-alt: 21px; margin: 0;">
                                                             {{$service->name}}
                                                         </p>

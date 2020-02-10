@@ -46,6 +46,7 @@ class BookingService
             if($request->has('payment_method')){
                 $paymentMethod = $request->get('payment_method');
                 $user->addPaymentMethod($paymentMethod);
+                $user->save();
             }
             $customer_id = $user->customer->id;
         }
@@ -80,6 +81,7 @@ class BookingService
         $booking->customer_name = $request->get('customer_name');
         $booking->customer_email = $request->get('customer_email');
         $booking->customer_phone = $request->get('customer_phone');
+        $booking->comment = $request->get('comment');
 
         $booking->status            = $request->get('status', 1);
         $booking->created_by        = Auth::Id();

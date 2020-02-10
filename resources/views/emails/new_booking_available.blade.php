@@ -260,7 +260,7 @@
                                                                 </strong>
                                                             </span>
                                                         </p>
-                                                        @foreach($booking->services() as $key => $service)
+                                                        @foreach($booking->service() as $key => $service)
                                                         <p style="font-size: 14px; line-height: 1.5; text-align: left; word-break: break-word; mso-line-height-alt: 21px; margin: 0;">
                                                             {{$service->name}}
                                                         </p>

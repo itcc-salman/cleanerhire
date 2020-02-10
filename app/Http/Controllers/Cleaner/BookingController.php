@@ -8,6 +8,9 @@ use App\Models\Booking;
 use Illuminate\Http\Request;
 use App\Models\BookingCleanerEmails;
 use App\Services\CleanerService;
+use Mail;
+use App\Mail\CleanerAssigned;
+use App\Mail\BookingConfirmation;
 
 class BookingController extends Controller
 {
@@ -67,6 +70,8 @@ class BookingController extends Controller
                 $booking->status = Booking::STATUS_ASSIGNED;
                 $booking->save();
                 // send confirmation email to customer with cleaner details
+                Mail::to($booking->customer_email)->send(new CleanerAssigned($booking));
+                Mail::to($cleaner->email)->send(new BookingConfirmation($booking));
             } else {
                 // minus the lead from commercial login
             }
