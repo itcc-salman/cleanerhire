@@ -51,7 +51,7 @@
                         <div class="kt-widget__contact">
                             <h5>Service Requested : {{ $booking->service->name }}</h5>
                         </div>
-                        @if( $booking->booking_type == 'residential' && in_array($booking->service->id, directServiceResedintial()) )
+                        @if( $booking->booking_type == 'residential' && in_array($booking->service->id, directServiceResedential()) )
                         <div class="kt-widget__contact">
                             <h5>Service Hours : {{ $booking->duration }}</h5>
                         </div>

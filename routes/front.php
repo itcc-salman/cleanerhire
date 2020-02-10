@@ -23,6 +23,7 @@ Route::match(['GET', 'POST'], '/registercleaner', [
 
 Route::post('/get-services', 'BookingController@getServices')->name('front.get_services');
 Route::post('/add-booking', 'BookingController@addBooking')->name('front.add_booking');
+Route::post('/get-a-quote', 'BookingController@getAQuote')->name('front.get_a_quote');
 Route::get('/booking-completed', 'BookingController@bookingCompleted')->name('front.booking_completed');
 Route::get('/not-authorized-booking', 'BookingController@notAuthorizedBooking')->name('front.not_authorized_booking');
 Route::get('/assign-cleaners/{id}', 'BookingController@assignCleaners')->name('front.assign_cleaners');

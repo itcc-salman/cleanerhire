@@ -170,8 +170,12 @@
                 // add get a quote button
                 $('#get_quote_btn').removeClass('hide');
                 // hide payment details info & book now button
+                $('#payment_tab').addClass('hide');
+                $('#card-button').addClass('hide');
             } else {
                 $('#get_quote_btn').addClass('hide');
+                $('#payment_tab').removeClass('hide');
+                $('#card-button').removeClass('hide');
                 if( $.inArray('room', sub_services ) !== -1 ) {
                     $('#carpet_cleaning').removeClass('hide');
                 } else {
@@ -388,6 +392,31 @@
             $(document).on('click', '#get_quote_btn', function(e) {
                 e.preventDefault();
                 let _data = $('#booking').serialize();
+                $.ajax({
+                    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                    url: '{{ route('front.get_a_quote') }}',
+                    type: "POST",
+                    dataType: "JSON",
+                    data: _data,
+                    success: function(res) {
+                        if( res.status == true ) {
+                            location.href = res.redirect;
+                        } else {
+                            alert(res.msg);
+                        }
+                    },
+                    error: function(err) {
+                        if( err.status == 422 ) {
+                            // display errors on each form field
+                            $.each(err.responseJSON.errors, function (i, error) {
+                                // showToast(error[0], 0);
+                                // alert(error[0]);
+                                notifyToast("error",error[0]);
+                                return false;
+                            });
+                        }
+                    }
+                }); // end ajax
             });
         });
     </script>

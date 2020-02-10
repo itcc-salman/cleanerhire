@@ -214,7 +214,7 @@
     </div>
 </div>
 
-<div class="row">
+<div class="row" id="payment_tab">
     <div class="col-md-12">
         <label>Name on Card</label>
         <input id="card-holder-name" class="form-control" type="text">

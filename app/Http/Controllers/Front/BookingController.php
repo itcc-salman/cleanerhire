@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\BookingStoreRequest;
+use App\Http\Requests\QuoteStoreRequest;
 use App\Services\CleaningServicesService;
 use App\Services\CleanerService;
 use App\Services\CustomerService;
@@ -91,6 +92,11 @@ class BookingController extends Controller
         return response()->json(['status' => false,
             'msg' => trans('msg.clsSerError'),
             'redirect' => route('front.booking_failed') ]);
+    }
+
+    public function getAQuote(QuoteStoreRequest $request)
+    {
+        dd($request);
     }
 
     public function assignCleaners($booking_id)

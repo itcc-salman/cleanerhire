@@ -46,6 +46,7 @@ class CreateBookingsTable extends Migration
             $table->string('country')->nullable()->default('AU');
             $table->string('latitude')->nullable();
             $table->string('longitude')->nullable();
+            $table->float('booking_amount', 8, 2)->nullable();
 
             $table->text('comment')->nullable();
             $table->integer('is_quote')->default(0);

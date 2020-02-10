@@ -88,8 +88,14 @@ if( !function_exists('convertDateToServer') ) {
     }
 }
 
-if( !function_exists('directServiceResedintial') ) {
-    function directServiceResedintial() {
+if( !function_exists('directServiceResedential') ) {
+    function directServiceResedential() {
         return [1,2,3];
+    }
+}
+
+if( !function_exists('quoteServiceResedential') ) {
+    function quoteServiceResedential() {
+        return [7,8,9,10,11,12,13];
     }
 }

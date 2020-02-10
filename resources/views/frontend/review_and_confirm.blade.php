@@ -30,7 +30,7 @@
                                         {{ $booking->city }}, {{ $booking->state }} - {{ $booking->postcode }}
                                     </p>
                                     <p>Service Requested : {{ $booking->service->name }}</p>
-                                    @if( $booking->booking_type == 'residential' && in_array($booking->service->id, directServiceResedintial()) )
+                                    @if( $booking->booking_type == 'residential' && in_array($booking->service->id, directServiceResedential()) )
                                         <p>Service Hours : {{ $booking->duration }}</p>
                                         <p>No Of Rooms : {{ $booking->rooms }}</p>
                                         <p>No Of Bathrooms : {{ $booking->bathrooms }}</p>
