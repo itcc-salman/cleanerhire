@@ -223,25 +223,47 @@
         <!-- Stripe Elements Placeholder -->
         <div id="card-element"></div>
 
-        <button id="card-button" data-secret="{{ $intent->client_secret }}">
-            Update Payment Method
-        </button>
     </div>
 </div>
 
 <div class="bac_footer_step">
-    <a href="javascript:void(0);" id="booking_submit_btn">Book Now and pay later</a>
+    <button id="card-button" data-secret="{{ $intent->client_secret }}">Book Now and pay later</button>
+    <a href="javascript:void(0);" class="hide" id="booking_submit_btn" ></a>
     <a href="javascript:void(0);" class="hide" id="get_quote_btn">Get Quote</a>
 </div>
 <script src="https://maps.googleapis.com/maps/api/js?key={{ config('settings.googlePlacesAPIKey') }}&libraries=places&callback=initAutocomplete"></script>
-<script src="https://js.stripe.com/v3/"></script>
-
 <script>
-    const stripe = Stripe('stripe-public-key');
-
+    const stripe = Stripe('{{ env('STRIPE_KEY') }}');
     const elements = stripe.elements();
     const cardElement = elements.create('card');
 
     cardElement.mount('#card-element');
+
+    const cardHolderName = document.getElementById('card-holder-name');
+    const cardButton = document.getElementById('card-button');
+    const clientSecret = cardButton.dataset.secret;
+
+    cardButton.addEventListener('click', async (e) => {
+        e.preventDefault();
+        const { setupIntent, error } = await stripe.confirmCardSetup(
+            clientSecret, {
+                payment_method: {
+                    card: cardElement,
+                    billing_details: { name: cardHolderName.value }
+                }
+            }
+        );
+
+        if (error) {
+            // Display "error.message" to the user...
+            alert('error on card');
+            console.log(error);
+        } else {
+            console.log(setupIntent.payment_method);
+            // The card has been verified successfully...
+            // $("#booking_submit_btn").trigger('click');
+        }
+    });
 </script>
+
 @endif

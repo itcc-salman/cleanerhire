@@ -78,6 +78,7 @@
 <!--Web_Innerpage_Section-->
 @endsection
 @push('scripts')
+<script src="https://js.stripe.com/v3/"></script>
     <script>
         var placeSearch, autocomplete;
 
