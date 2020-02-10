@@ -43,6 +43,10 @@ class BookingService
         // dd($request);
         if( Auth::user()->isCustomer() ) {
             $user = User::with('customer')->find(Auth::Id());
+            if($request->has('payment_method')){
+                $paymentMethod = $request->get('payment_method');
+                $user->addPaymentMethod($paymentMethod);
+            }
             $customer_id = $user->customer->id;
         }
         $booking = $this->booking_model;

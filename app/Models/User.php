@@ -96,6 +96,7 @@ class User extends Authenticatable
         User::created(function ($model) {
             $token = app('auth.password.broker')->createToken($model);
             $model->notify(new PasswordReset($token));
+            $model->createAsStripeCustomer();
         });
     }
 

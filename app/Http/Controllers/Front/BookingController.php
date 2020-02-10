@@ -80,13 +80,6 @@ class BookingController extends Controller
 
     public function addBooking(BookingStoreRequest $request)
     {
-        // $user = User::find(2);
-        // $user->addPaymentMethod('pm_1G9VjaAphIGyNXdOZIaMWb1d');
-        // $user->addPaymentMethod('pm_1G9VkJAphIGyNXdO10e0BfcU');
-        // $user->save();
-        // $user->addPaymentMethod('');
-        // $paymentMethods = $user->paymentMethods();
-        // dd($paymentMethods[0]);
         $bookingServices = $this->bookingServices->registerBooking($request);
         if( $bookingServices ) {
             $bookingRepostory = new BookingRepository();

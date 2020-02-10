@@ -256,11 +256,13 @@
 
         if (error) {
             // Display "error.message" to the user...
-            alert('error on card');
-            console.log(error);
+            notifyToast("error",'SomeThing Went Wrong..!');
+            setTimeout(function() {
+                location.reload(true);
+            }, 2000);
         } else {
-            console.log(setupIntent.payment_method);
             // The card has been verified successfully...
+            $("#booking").append('<input type="hidden" name="payment_method" value="'+setupIntent.payment_method+'" />');
             $("#booking_submit_btn").trigger('click');
         }
     });
