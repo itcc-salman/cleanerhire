@@ -125,7 +125,7 @@
                     <div class="kt-wizard-v1__content" data-ktwizard-type="step-content">
                         <div class="kt-heading kt-heading--md">Availability</div>
                         <div class="kt-form__section kt-form__section--first">
-                            @include('backend.cleaners.partials.step4')
+                            {{-- @include('backend.cleaners.partials.step4') --}}
                         </div>
                     </div>
 
