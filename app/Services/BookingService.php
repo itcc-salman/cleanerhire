@@ -55,7 +55,11 @@ class BookingService
         $booking->customer_id       = $customer_id;
         $booking->booking_type      = $request->get('service_type');
         $booking->property_id       = $request->get('properties', NULL);
-        $booking->services          = $request->get('service');
+        if( $request->get('service') == 'other' ) {
+            $booking->services          = implode(',', $request->get('sub_services'));
+        } else {
+            $booking->services          = $request->get('service');
+        }
         // $booking->visit_type        = $request->get('visit_type');
         $booking->duration          = $request->get('cleaning_hours');
 

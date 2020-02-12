@@ -35,9 +35,14 @@ class BookingStoreRequest extends FormRequest
                 // 'booking_time'  => 'required',
                 // 'gender_pref'   => 'required',
             ];
-            $charges_service_ids = [1,2,3];
-            if( in_array($this->input('service'), $charges_service_ids) ) {
-                // verify details
+            if( !empty($this->input('service_type')) && $this->input('service_type') == 'residential' ) {
+                // check for service
+                if( $this->input('service') == 'other' ) {
+                    // check for sub services
+                    // if( in_array($this->input('sub_service'), $charges_service_ids) ) {
+                        // verify details
+                    // }
+                }
             }
             /*
             if( empty($this->input('has_pet_optional')) ) {
